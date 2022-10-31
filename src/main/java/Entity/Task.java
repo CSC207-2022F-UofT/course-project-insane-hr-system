@@ -1,20 +1,22 @@
 package Entity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public abstract class Task extends AbstractOrganization{
     private final Project project;
     private Object results;
 
-    public Task(String name,
-                int star,
-                User head,
-                List<User> members,
-                String creatTime,
-                String closeTime,
-                String description,
-                Project project) {
-        super(name, star, head, members, creatTime, closeTime, description);
+    // construct CLOSED task
+    public Task(int oid, String name, int star, User head, List<Integer> members, String description, LocalDateTime creatTime, LocalDateTime closeTime, Project project,
+                Object results) {
+        super(oid, name, star, head, members, description, creatTime, closeTime);
+        this.project = project;
+        this.results = results;
+    }
+    // construct OPEN task
+    public Task(int oid, String name, int star, User head, List<Integer> members, String description, LocalDateTime creatTime, Project project) {
+        super(oid, name, star, head, members, description, creatTime);
         this.project = project;
     }
 

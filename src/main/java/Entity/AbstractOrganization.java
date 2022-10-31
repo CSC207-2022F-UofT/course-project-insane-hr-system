@@ -1,41 +1,58 @@
 package Entity;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 import static Entity.Constants.CLOSED;
 import static Entity.Constants.OPEN;
 
 public abstract class AbstractOrganization {
-    String name;
-    int star;
-    User head;
-    List<User> members;
-    String creatTime;
-    String closeTime;
-    String description;
-    String state;
+    private final int oid;
+    private String name;
+    private int star;
+    private User head;
+    private List<Integer> members;
+    private String description;
+    private LocalDateTime creatTime;
+    private LocalDateTime closeTime;
+    private String state;
 
-    public AbstractOrganization(String name,
-                                int star,
-                                User head,
-                                List<User> members,
-                                String creatTime,
-                                String closeTime,
-                                String description) {
+    //construction a CLOSED organization
+    public AbstractOrganization(int oid, String name, int star,
+                                User head, List<Integer> members,
+                                String description,
+                                LocalDateTime creatTime, LocalDateTime closeTime) {
+        this.oid = oid;
         this.name = name;
         this.star = star;
         this.head = head;
         this.members = members;
+        this.description = description;
         this.creatTime = creatTime;
         this.closeTime = closeTime;
-        this.description = description;
-        this.state = OPEN;
+        this.state = CLOSED;
+    }
 
+    // construct an OPEN organization
+    public AbstractOrganization(int oid, String name, int star,
+                                User head, List<Integer> members,
+                                String description,
+                                LocalDateTime creatTime) {
+        this.oid = oid;
+        this.name = name;
+        this.star = star;
+        this.head = head;
+        this.members = members;
+        this.description = description;
+        this.creatTime = creatTime;
+        this.state = OPEN;
     }
 
     //opening and closing the Organization
     public void close() {
         this.state = CLOSED;
+        this.closeTime = LocalDateTime.now();
     }
 
     public void open() {
@@ -43,7 +60,22 @@ public abstract class AbstractOrganization {
     }
 
 
+    // add remove members. This method can only be accessed by Entity.
+
+    boolean addMember(Integer uid) {
+        return this.members.add(uid);
+    }
+
+    boolean removeMember(Integer uid) {
+        return this.members.remove(uid);
+    }
+
     // getters and setters
+
+    public int getOid() {
+        return oid;
+    }
+
     public String getName() {
         return name;
     }
@@ -68,28 +100,12 @@ public abstract class AbstractOrganization {
         this.head = head;
     }
 
-    public List<User> getMembers() {
+    public List<Integer> getMembers() {
         return members;
     }
 
-    public void setMembers(List<User> members) {
+    public void setMembers(List<Integer> members) {
         this.members = members;
-    }
-
-    public String getCreatTime() {
-        return creatTime;
-    }
-
-    public void setCreatTime(String creatTime) {
-        this.creatTime = creatTime;
-    }
-
-    public String getCloseTime() {
-        return closeTime;
-    }
-
-    public void setCloseTime(String closeTime) {
-        this.closeTime = closeTime;
     }
 
     public String getDescription() {
@@ -98,6 +114,22 @@ public abstract class AbstractOrganization {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public LocalDateTime getCreatTime() {
+        return creatTime;
+    }
+
+    public void setCreatTime(LocalDateTime creatTime) {
+        this.creatTime = creatTime;
+    }
+
+    public LocalDateTime getCloseTime() {
+        return closeTime;
+    }
+
+    public void setCloseTime(LocalDateTime closeTime) {
+        this.closeTime = closeTime;
     }
 
     public String getState() {

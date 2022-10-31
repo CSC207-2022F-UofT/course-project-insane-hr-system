@@ -1,42 +1,31 @@
 package Entity;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
+import java.util.Set;
 
 public abstract class Project extends AbstractOrganization{
     private Department dpt;
     private List<Task> tasks;
     private int funds;
 
-    public Project(String name,
-                   int star,
-                   User head,
-                   List<User> members,
-                   String creatTime,
-                   String closeTime,
-                   String description,
-                   Department dpt,
-                   List<Task> tasks,
-                   int funds) {
-        super(name, star, head, members, creatTime, closeTime, description);
+
+    public Project(int oid, String name, int star, User head, List<Integer> members, String description, LocalDateTime creatTime, LocalDateTime closeTime,
+                   Department dpt, List<Task> tasks, int funds) {
+        super(oid, name, star, head, members, description, creatTime, closeTime);
         this.dpt = dpt;
         this.tasks = tasks;
         this.funds = funds;
     }
 
-    public void addTask(Task task) {
-        this.tasks.add(task);
+    public Project(int oid, String name, int star, User head, List<Integer> members, String description, LocalDateTime creatTime,
+                   Department dpt, List<Task> tasks, int funds) {
+        super(oid, name, star, head, members, description, creatTime);
+        this.dpt = dpt;
+        this.tasks = tasks;
+        this.funds = funds;
     }
 
-    public boolean removeTask(String taskName) {
-        for (Task task : this.tasks) {
-            if (taskName.equals(task.name)) {
-                this.tasks.remove(task);
-                return true;
-            }
-        }
-        return false;
-    }
     public Department getDpt() {
         return dpt;
     }

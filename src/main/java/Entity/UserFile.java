@@ -1,34 +1,60 @@
 package Entity;
 
+import java.time.LocalDate;
 import java.util.List;
 
-public class UserFile {
+import static Entity.Constants.CLOSED;
+import static Entity.Constants.OPEN;
+
+class UserFile {
     private final int id;
     private String username;
     private String password;
-    private List<Project> currProjects;
-    private List<Task> currTasks;
+    private List<Project> projects;
+    private List<Task> tasks;
     private String position;
+    private LocalDate onboardDate;
+    private LocalDate departureDate;
+    private String status;
 
-
+    // construct the userFile for departed user.
     public UserFile(int id,
                     String username,
                     String password,
-                    List<Project> currProjects,
-                    List<Task> currTasks,
-                    String position) {
+                    List<Project> projects,
+                    List<Task> tasks,
+                    String position,
+                    LocalDate onboardDate,
+                    LocalDate departureDate) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.currProjects = currProjects;
-        this.currTasks = currTasks;
+        this.projects = projects;
+        this.tasks = tasks;
         this.position = position;
+        this.onboardDate = onboardDate;
+        this.departureDate = departureDate;
+        this.status = CLOSED;
+    }
+
+    // construct the userFile for onboard user
+    public UserFile(int id, String username, String password,
+                    List<Project> projects, List<Task> tasks,
+                    String position, LocalDate onboardDate) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.projects = projects;
+        this.tasks = tasks;
+        this.position = position;
+        this.onboardDate = onboardDate;
+        this.status = OPEN;
     }
 
     @Override
     public String toString() {
         return String.format("%s's File:\n ID: %d\n Position: %s\n Current Project: %s\n Current Tasks: %s\n ",
-                this.username, this.id, this.position, this.currProjects.toString(), this.currTasks.toString());
+                this.username, this.id, this.position, this.projects.toString(), this.tasks.toString());
     }
 
     public String getName() {
@@ -37,33 +63,23 @@ public class UserFile {
 
     // CurrProjects and CurrTasks adding and removing
     public void addCurrProject(Project project) {
-        this.currProjects.add(project);
+        this.projects.add(project);
     }
 
     public void addCurrTask(Task task) {
-        this.currTasks.add(task);
+        this.tasks.add(task);
     }
 
-    public boolean removeCurrTask(String taskName) {
-        for (Task task : this.currTasks) {
-            if (taskName.equals(task.name)) {
-                this.currTasks.remove(task);
-                return true;
-            }
-        }
-        return false;
+    public boolean removeCurrTask(Task task) {
+        return this.tasks.remove(task);
     }
 
-    public boolean removeCurrProject(String projectName) {
-        for (Project project : this.currProjects) {
-            if (projectName.equals(project.name)) {
-                this.currProjects.remove(project);
-                return true;
-            }
-        }
-        return false;
+    public boolean removeCurrProject(Project project) {
+        return this.tasks.remove(project);
     }
 
+
+    // getter and setter
     public int getId() {
         return id;
     }
@@ -84,20 +100,20 @@ public class UserFile {
         this.password = password;
     }
 
-    public List<Project> getCurrProjects() {
-        return currProjects;
+    public List<Project> getProjects() {
+        return projects;
     }
 
-    public void setCurrProjects(List<Project> currProjects) {
-        this.currProjects = currProjects;
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 
-    public List<Task> getCurrTasks() {
-        return currTasks;
+    public List<Task> getTasks() {
+        return tasks;
     }
 
-    public void setCurrTasks(List<Task> currTasks) {
-        this.currTasks = currTasks;
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public String getPosition() {
@@ -106,5 +122,29 @@ public class UserFile {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public LocalDate getOnboardDate() {
+        return onboardDate;
+    }
+
+    public void setOnboardDate(LocalDate onboardDate) {
+        this.onboardDate = onboardDate;
+    }
+
+    public LocalDate getDepartureDate() {
+        return departureDate;
+    }
+
+    public void setDepartureDate(LocalDate departureDate) {
+        this.departureDate = departureDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

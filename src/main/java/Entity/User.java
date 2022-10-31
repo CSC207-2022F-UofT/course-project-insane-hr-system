@@ -4,23 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class User {
-    final int uid;
-    String username;
-    List<String> roles;
-    Department dpt;
-    String bio;
-    String status;
-    UserFile userFile;
+    private final int uid;
+    private List<String> roles;
+    private Department dpt;
+    private String bio;
+    private String status;
+    private UserFile userFile;
 
     //constructors
-    //construct the initial uid
+    //construct only with the initial uid
     public User(int uid) {
         this.uid = uid;
     }
     // construct without UserFile
-    public User(int uid, String username, ArrayList<String> roles, Department dpt, String bio, String status) {
+    public User(int uid, List<String> roles, Department dpt, String bio, String status) {
         this.uid = uid;
-        this.username = username;
+        // TODO: add firstName and lastName (In commonUser class?)
         this.roles = roles;
         this.dpt = dpt;
         this.bio = bio;
@@ -28,9 +27,8 @@ public abstract class User {
     }
 
     //construct with UserFile
-    public User(int uid, String username, ArrayList<String> roles, Department dpt, String bio, String status, UserFile userFile) {
+    public User(int uid, ArrayList<String> roles, Department dpt, String bio, String status, UserFile userFile) {
         this.uid = uid;
-        this.username = username;
         this.roles = roles;
         this.dpt = dpt;
         this.bio = bio;
@@ -40,23 +38,25 @@ public abstract class User {
 
 
     // abstract methods
-    public abstract UserFile getUserFile();
 
     public abstract List<String> getAuthorityDomain();
 
-    public abstract UserFile getFile();
+
+    //add role
+    public void addRole(String role) {
+        this.roles.add(role);
+        //TODO: do some modification in RoleMap
+    }
+    public boolean removeRole(String role) {
+        return this.roles.remove(role);
+        // TODO: do some modification in RoleMap
+    }
 
     // getters and setters
+
+
     public int getUid() {
         return uid;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public List<String> getRoles() {
@@ -89,5 +89,12 @@ public abstract class User {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public UserFile getUserFile() {
+        return this.userFile;
+    }
+    public void setUserFile(UserFile userFile) {
+        this.userFile = userFile;
     }
 }
