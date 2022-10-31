@@ -26,6 +26,15 @@ public abstract class Project extends AbstractOrganization{
         this.funds = funds;
     }
 
+    // adding/removing task
+
+    public boolean addTask(Task task) {
+        return this.tasks.add(task);
+    }
+    public boolean removeTask(Task task) {
+        return this.tasks.remove(task);
+    }
+
     public Department getDpt() {
         return dpt;
     }
