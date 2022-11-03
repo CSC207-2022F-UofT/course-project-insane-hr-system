@@ -3,7 +3,7 @@
 
 # User-specific stuff
 .idea/**/workspace.xml
-.idea/**/commonTasks.xml
+.idea/**/tasks.xml
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
@@ -46,7 +46,7 @@ cmake-build-*/
 # Mongo Explorer plugin
 .idea/**/mongoSettings.xml
 
-# File-based commonProject format
+# File-based project format
 *.iws
 
 # IntelliJ
@@ -90,12 +90,12 @@ gradle-app.setting
 # Avoid ignore Gradle wrappper properties
 !gradle-wrapper.properties
 
-# Cache of commonProject
+# Cache of project
 .gradletasknamecache
 
 # Eclipse Gradle plugin generated files
 # Eclipse Core
-.commonProject
+.project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 
