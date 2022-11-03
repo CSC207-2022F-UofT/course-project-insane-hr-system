@@ -1,15 +1,17 @@
 package Entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
 import static Entity.Constants.CLOSED;
 import static Entity.Constants.OPEN;
 
-class UserFile {
+class UserFile implements Serializable {
     private final int id;
     private String username;
     private String password;
+    private List<String> roles;
     private List<Project> projects;
     private List<Task> tasks;
     private String position;
@@ -21,7 +23,7 @@ class UserFile {
     public UserFile(int id,
                     String username,
                     String password,
-                    List<Project> projects,
+                    List<String> roles, List<Project> projects,
                     List<Task> tasks,
                     String position,
                     LocalDate onboardDate,
@@ -29,6 +31,7 @@ class UserFile {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.roles = roles;
         this.projects = projects;
         this.tasks = tasks;
         this.position = position;
@@ -39,11 +42,12 @@ class UserFile {
 
     // construct the userFile for onboard user
     public UserFile(int id, String username, String password,
-                    List<Project> projects, List<Task> tasks,
+                    List<String> roles, List<Project> projects, List<Task> tasks,
                     String position, LocalDate onboardDate) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.roles = roles;
         this.projects = projects;
         this.tasks = tasks;
         this.position = position;
@@ -75,12 +79,12 @@ class UserFile {
     }
 
     public boolean removeCurrProject(Project project) {
-        return this.tasks.remove(project);
+        return this.projects.remove(project);
     }
 
 
     // getter and setter
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -146,5 +150,21 @@ class UserFile {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
+
+    public boolean addRole(String role) {
+        return this.roles.add(role);
+    }
+
+    public boolean removeRole(String role) {
+        return this.roles.remove(role);
     }
 }

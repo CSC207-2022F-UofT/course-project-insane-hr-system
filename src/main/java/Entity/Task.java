@@ -1,34 +1,12 @@
 package Entity;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import jdk.jshell.spi.ExecutionControl;
 
-public abstract class Task extends AbstractOrganization{
-    private final Project project;
-    private Object results;
+public interface Task extends Organization {
+    Project getProject();
 
-    // construct CLOSED task
-    public Task(int oid, String name, int star, User head, List<Integer> members, String description, LocalDateTime creatTime, LocalDateTime closeTime, Project project,
-                Object results) {
-        super(oid, name, star, head, members, description, creatTime, closeTime);
-        this.project = project;
-        this.results = results;
-    }
-    // construct OPEN task
-    public Task(int oid, String name, int star, User head, List<Integer> members, String description, LocalDateTime creatTime, Project project) {
-        super(oid, name, star, head, members, description, creatTime);
-        this.project = project;
-    }
+    Object getResults();
 
-    public Project getProject() {
-        return project;
-    }
+    void setResults(Object results) throws ExecutionControl.NotImplementedException;
 
-    public Object getResults() {
-        return results;
-    }
-
-    public void setResults(Object results) {
-        this.results = results;
-    }
 }

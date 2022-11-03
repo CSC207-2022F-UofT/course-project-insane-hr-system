@@ -1,31 +1,28 @@
 package Entity;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
 
 import static Entity.Constants.CLOSED;
 import static Entity.Constants.OPEN;
 
-public abstract class AbstractOrganization {
+public class CommonOrganization implements Organization {
     private final int oid;
     private String name;
-    private int star;
-    private User head;
-    private List<Integer> members;
+    private Integer head;
+    private Set<Integer> members;
     private String description;
-    private LocalDateTime creatTime;
+    private final LocalDateTime creatTime;
     private LocalDateTime closeTime;
     private String state;
 
     //construction a CLOSED organization
-    public AbstractOrganization(int oid, String name, int star,
-                                User head, List<Integer> members,
-                                String description,
-                                LocalDateTime creatTime, LocalDateTime closeTime) {
+    public CommonOrganization(int oid, String name,
+                              Integer head, Set<Integer> members,
+                              String description,
+                              LocalDateTime creatTime, LocalDateTime closeTime) {
         this.oid = oid;
         this.name = name;
-        this.star = star;
         this.head = head;
         this.members = members;
         this.description = description;
@@ -35,13 +32,12 @@ public abstract class AbstractOrganization {
     }
 
     // construct an OPEN organization
-    public AbstractOrganization(int oid, String name, int star,
-                                User head, List<Integer> members,
-                                String description,
-                                LocalDateTime creatTime) {
+    public CommonOrganization(int oid, String name,
+                              Integer head, Set<Integer> members,
+                              String description,
+                              LocalDateTime creatTime) {
         this.oid = oid;
         this.name = name;
-        this.star = star;
         this.head = head;
         this.members = members;
         this.description = description;
@@ -50,92 +46,98 @@ public abstract class AbstractOrganization {
     }
 
     //opening and closing the Organization
+    @Override
     public void close() {
         this.state = CLOSED;
         this.closeTime = LocalDateTime.now();
     }
 
+    @Override
     public void open() {
         this.state = OPEN;
+        this.closeTime = null;
     }
 
 
-    // add remove members. This method can only be accessed by Entity.
-
-    boolean addMember(Integer uid) {
+    // add remove members.
+    @Override
+    public boolean addMember(Integer uid) {
         return this.members.add(uid);
     }
 
-    boolean removeMember(Integer uid) {
+    @Override
+    public boolean removeMember(Integer uid) {
         return this.members.remove(uid);
     }
 
     // getters and setters
 
+    @Override
     public int getOid() {
         return oid;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public void setName(String name) {
         this.name = name;
     }
 
-    public int getStar() {
-        return star;
-    }
-
-    public void setStar(int star) {
-        this.star = star;
-    }
-
-    public User getHead() {
+    @Override
+    public Integer getHead() {
         return head;
     }
 
-    public void setHead(User head) {
+    @Override
+    public void setHead(Integer head) {
         this.head = head;
     }
 
-    public List<Integer> getMembers() {
+    @Override
+    public Set<Integer> getMembers() {
         return members;
     }
 
-    public void setMembers(List<Integer> members) {
+    @Override
+    public void setMembers(Set<Integer> members) {
         this.members = members;
     }
 
+    @Override
     public String getDescription() {
         return description;
     }
 
+    @Override
     public void setDescription(String description) {
         this.description = description;
     }
 
+    @Override
     public LocalDateTime getCreatTime() {
         return creatTime;
     }
 
-    public void setCreatTime(LocalDateTime creatTime) {
-        this.creatTime = creatTime;
-    }
-
+    @Override
     public LocalDateTime getCloseTime() {
         return closeTime;
     }
 
+    @Override
     public void setCloseTime(LocalDateTime closeTime) {
         this.closeTime = closeTime;
     }
 
+    @Override
     public String getState() {
         return state;
     }
 
+    @Override
     public void setState(String state) {
         this.state = state;
     }
