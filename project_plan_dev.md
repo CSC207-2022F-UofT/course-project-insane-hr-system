@@ -3,7 +3,7 @@
 In this course project, you are expected to use Github to manage your code. This document describes the workflow for using Github when you are developing the course project. Please read it carefully and follow the instructions. **Try to work through the steps with the help of your team first, but please ask for help if your team gets stuck on any of the steps or needs something clarified.**
 
 ## Create a New Github Project
-[Github Projects](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects) (*Yes, the name of this product is called "Github Projects", do not confuse it with the course project*) is a lightweight project management tool that is integrated to Github. You can use it to track issues, pull requests, visualize tasks status, and track responsibilities. **TAs will mark you project implementation plan and track your progression using the Github project.**
+[Github Projects](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects) (*Yes, the name of this product is called "Github Projects", do not confuse it with the course project*) is a lightweight project management tool that is integrated to Github. You can use it to track issues, pull requests, visualize commonTasks status, and track responsibilities. **TAs will mark you project implementation plan and track your progression using the Github project.**
 
 1. Navigate to **Projects** Page on [CSC207 organization page](https://github.com/orgs/CSC207-2022F-UofT/projects)
 
@@ -89,7 +89,7 @@ must be reviewed and approved by other team members before merging.** :warning: 
 
 ## More Project Management and Other Resoruces (Optional)
 
-- Use issues to keep track of bugs, tasks and other things that need to be done by selecting the appropriate labels.
+- Use issues to keep track of bugs, commonTasks and other things that need to be done by selecting the appropriate labels.
 
 - Use milestones to group issues into a set of deliverables. To create milestones, navigate to the **Milestones** tab and click **New milestone**.
 
