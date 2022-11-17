@@ -1,4 +1,4 @@
-package project_manager_task_init_use_case;
+package Controller;
 
 public class PMTaskAssignmentController {
 }

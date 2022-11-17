@@ -1,6 +1,16 @@
 package project_manager_task_init_use_case;
 
+import Presenter.PMTaskInitPresenter;
+
 public class PMTaskInitInteractor implements PMTaskInitInputBoundary{
 
-    final PMTaskInitPresenter PMTaskInitPresenter;
+    final PMTaskInitOutputBoundary presenter;
+
+    public PMTaskInitInteractor(PMTaskInitOutputBoundary presenter) {
+        this.presenter = presenter;
+    }
+
+    public PMTaskInitResponseModel createTask(PMTaskInitRequestModel requestModel) {
+        return null;
+    }
 }

@@ -4,5 +4,4 @@ public interface PMTaskInitOutputBoundary {
 
     PMTaskInitResponseModel prepareSuccessView(PMTaskInitResponseModel responseModel);
 
-    PMTaskInitResponseModel prepareFailView(String error);
 }
