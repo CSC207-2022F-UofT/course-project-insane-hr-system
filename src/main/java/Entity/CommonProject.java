@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
-public class CommonProject extends CommonOrganization implements Project {
+public class CommonProject extends CommonOrganization implements RealProject{
     private Department dpt;
     private List<Task> tasks;
     private int funds;
