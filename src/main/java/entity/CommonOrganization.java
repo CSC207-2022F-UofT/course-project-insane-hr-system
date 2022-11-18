@@ -1,16 +1,17 @@
-package Entity;
+package entity;
 
 import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.UUID;
 
-import static Entity.Constants.CLOSED;
-import static Entity.Constants.OPEN;
+import static entity.Constants.CLOSED;
+import static entity.Constants.OPEN;
 
 public class CommonOrganization implements Organization {
     private final int oid;
     private String name;
     private Integer head;
-    private Set<Integer> members;
+    private Set<UUID> members;
     private String description;
     private final LocalDateTime creatTime;
     private LocalDateTime closeTime;
@@ -18,7 +19,7 @@ public class CommonOrganization implements Organization {
 
     //construction a CLOSED organization
     public CommonOrganization(int oid, String name,
-                              Integer head, Set<Integer> members,
+                              Integer head, Set<UUID> members,
                               String description,
                               LocalDateTime creatTime, LocalDateTime closeTime) {
         this.oid = oid;
@@ -33,7 +34,7 @@ public class CommonOrganization implements Organization {
 
     // construct an OPEN organization
     public CommonOrganization(int oid, String name,
-                              Integer head, Set<Integer> members,
+                              Integer head, Set<UUID> members,
                               String description,
                               LocalDateTime creatTime) {
         this.oid = oid;
@@ -61,12 +62,12 @@ public class CommonOrganization implements Organization {
 
     // add remove members.
     @Override
-    public boolean addMember(Integer uid) {
+    public boolean addMember(UUID uid) {
         return this.members.add(uid);
     }
 
     @Override
-    public boolean removeMember(Integer uid) {
+    public boolean removeMember(UUID uid) {
         return this.members.remove(uid);
     }
 
@@ -98,12 +99,12 @@ public class CommonOrganization implements Organization {
     }
 
     @Override
-    public Set<Integer> getMembers() {
+    public Set<UUID> getMembers() {
         return members;
     }
 
     @Override
-    public void setMembers(Set<Integer> members) {
+    public void setMembers(Set<UUID> members) {
         this.members = members;
     }
 

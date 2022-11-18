@@ -1,6 +1,7 @@
-package Entity;
+package entity;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 public interface UserFace extends Serializable {
     void setName(String name);
@@ -16,5 +17,5 @@ public interface UserFace extends Serializable {
     void setBio(String bio);
 
     // getter and setter for Fields in the UserFile
-    Integer getId();
+    UUID getId();
 }

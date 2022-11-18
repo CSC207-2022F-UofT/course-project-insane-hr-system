@@ -1,8 +1,9 @@
-package Entity;
+package entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.UUID;
 
 public interface Organization extends Serializable {
     //opening and closing the Organization
@@ -11,9 +12,9 @@ public interface Organization extends Serializable {
     void open();
 
     // add remove members.
-    boolean addMember(Integer uid);
+    boolean addMember(UUID uid);
 
-    boolean removeMember(Integer uid);
+    boolean removeMember(UUID uid);
 
     int getOid();
 
@@ -25,9 +26,9 @@ public interface Organization extends Serializable {
 
     void setHead(Integer head);
 
-    Set<Integer> getMembers();
+    Set<UUID> getMembers();
 
-    void setMembers(Set<Integer> members);
+    void setMembers(Set<UUID> members);
 
     String getDescription();
 
