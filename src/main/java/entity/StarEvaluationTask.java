@@ -11,13 +11,13 @@ public class StarEvaluationTask extends CommonOrganization implements Task {
     private final Project project;
     private Integer results;
 
-    public StarEvaluationTask(int oid, String name, Integer head, Set<UUID> members, String description, LocalDateTime creatTime, LocalDateTime closeTime, Organization evaluatedOrganization, Project project) {
+    public StarEvaluationTask(UUID oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime creatTime, LocalDateTime closeTime, Organization evaluatedOrganization, Project project) {
         super(oid, name, head, members, description, creatTime, closeTime);
         this.evaluatedOrganization = evaluatedOrganization;
         this.project = project;
     }
 
-    public StarEvaluationTask(int oid, String name, Integer head, Set<UUID> members, String description, LocalDateTime creatTime, Organization evaluatedOrganization, Project project) {
+    public StarEvaluationTask(UUID oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime creatTime, Organization evaluatedOrganization, Project project) {
         super(oid, name, head, members, description, creatTime);
         this.evaluatedOrganization = evaluatedOrganization;
         this.project = project;
