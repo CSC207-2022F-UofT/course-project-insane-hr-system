@@ -3,13 +3,12 @@ package entity;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 import static entity.Constants.CLOSED;
 import static entity.Constants.OPEN;
 
 class UserFile implements Serializable {
-    private final UUID id;
+    private final int id;
     private String username;
     private String password;
     private List<String> roles;
@@ -21,7 +20,7 @@ class UserFile implements Serializable {
     private String status;
 
     // construct the userFile for departed user.
-    public UserFile(UUID id,
+    public UserFile(int id,
                     String username,
                     String password,
                     List<String> roles, List<Project> projects,
@@ -42,7 +41,7 @@ class UserFile implements Serializable {
     }
 
     // construct the userFile for onboard user
-    public UserFile(UUID id, String username, String password,
+    public UserFile(int id, String username, String password,
                     List<String> roles, List<Project> projects, List<Task> tasks,
                     String position, LocalDate onboardDate) {
         this.id = id;
@@ -85,7 +84,7 @@ class UserFile implements Serializable {
 
 
     // getter and setter
-    public UUID getId() {
+    public int getId() {
         return id;
     }
 
