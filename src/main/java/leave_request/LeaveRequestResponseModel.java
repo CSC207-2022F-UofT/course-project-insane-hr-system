@@ -1,14 +1,14 @@
-package LeaveRequest;
+package leave_request;
 
 public class LeaveRequestResponseModel {
     private String leaveType;
     private int leaveDays;
-    private String creationTime;
+    private String createTime;
 
-    public LeaveRequestResponseModel(String leaveType, int leaveDays, String creationTime) {
+    public LeaveRequestResponseModel(String leaveType, int leaveDays, String createTime) {
         this.leaveType = leaveType;
         this.leaveDays = leaveDays;
-        this.creationTime = creationTime;
+        this.createTime = createTime;
     }
 
     public String getLeaveType() {
@@ -27,11 +27,11 @@ public class LeaveRequestResponseModel {
         this.leaveDays = leaveDays;
     }
 
-    public String getCreationTime() {
-        return creationTime;
+    public String getCreateTime() {
+        return createTime;
     }
 
-    public void setCreationTime(String creationTime) {
-        this.creationTime = creationTime;
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 }

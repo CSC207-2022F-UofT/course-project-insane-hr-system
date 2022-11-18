@@ -1,13 +1,15 @@
-package Entity;
+package entity;
 
 import java.time.LocalDateTime;
 import java.util.Set;
-import static Entity.Constants.CLOSED;
+import java.util.UUID;
+
+import static entity.Constants.CLOSED;
 
 public class LeaveRequestProject extends AutoProject {
     private int numResponses = 0;
 
-    public LeaveRequestProject(int oid, String name, Integer head, Set<Integer> members, String description,
+    public LeaveRequestProject(UUID oid, String name, Integer head, Set<Integer> members, String description,
                                LocalDateTime createTime) {
         super(oid, name, head, members, description, createTime);
     }

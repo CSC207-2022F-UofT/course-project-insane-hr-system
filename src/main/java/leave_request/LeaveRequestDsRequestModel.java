@@ -1,6 +1,6 @@
-package LeaveRequest;
+package leave_request;
 
-import Entity.LeaveRequestProject;
+import entity.LeaveRequestProject;
 
 public class LeaveRequestDsRequestModel {
     private LeaveRequestProject project;

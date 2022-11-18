@@ -1,16 +1,18 @@
-package Entity;
+package entity;
 
 import jdk.jshell.spi.ExecutionControl;
 
 import java.time.LocalDateTime;
 import java.util.Set;
-import static Entity.Constants.CLOSED;
+import java.util.UUID;
+
+import static entity.Constants.CLOSED;
 
 public class LeaveRequestTask extends CommonOrganization implements Task {
     private final LeaveRequestProject project;
     private boolean results;
 
-    public LeaveRequestTask(int oid, String name, Integer head, Set<Integer> members, String description,
+    public LeaveRequestTask(UUID oid, String name, Integer head, Set<Integer> members, String description,
                             LocalDateTime creatTime, LeaveRequestProject project) {
         super(oid, name, head, members, description, creatTime);
         this.project = project;

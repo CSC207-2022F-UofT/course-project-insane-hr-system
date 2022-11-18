@@ -1,6 +1,6 @@
-package LeaveRequest;
+package leave_request;
 
-import Entity.User;
+import entity.User;
 
 public class LeaveRequestRequestModel {
     private User user;
