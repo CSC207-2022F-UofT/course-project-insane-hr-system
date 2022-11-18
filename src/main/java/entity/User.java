@@ -1,6 +1,5 @@
-package Entity;
+package entity;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 

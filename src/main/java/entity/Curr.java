@@ -1,4 +1,4 @@
-package Entity;
+package entity;
 
 public class Curr {
     private static User user;

@@ -1,8 +1,9 @@
-package Entity;
+package entity;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 public class CommonProject extends CommonOrganization implements RealProject{
     private Department dpt;
@@ -11,7 +12,7 @@ public class CommonProject extends CommonOrganization implements RealProject{
     private int star;
 
 
-    public CommonProject(int oid, String name, int star, Integer head, Set<Integer> members, String description, LocalDateTime creatTime, LocalDateTime closeTime,
+    public CommonProject(int oid, String name, int star, Integer head, Set<UUID> members, String description, LocalDateTime creatTime, LocalDateTime closeTime,
                          Department dpt, List<Task> tasks, int funds) {
         super(oid, name, head, members, description, creatTime, closeTime);
         this.dpt = dpt;
@@ -20,7 +21,7 @@ public class CommonProject extends CommonOrganization implements RealProject{
         this.star = star;
     }
 
-    public CommonProject(int oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime creatTime,
+    public CommonProject(int oid, String name, Integer head, Set<UUID> members, String description, LocalDateTime creatTime,
                          Department dpt, List<Task> tasks, int funds) {
         super(oid, name, head, members, description, creatTime);
         this.dpt = dpt;
