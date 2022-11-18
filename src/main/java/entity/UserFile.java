@@ -1,14 +1,15 @@
-package Entity;
+package entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
-import static Entity.Constants.CLOSED;
-import static Entity.Constants.OPEN;
+import static entity.Constants.CLOSED;
+import static entity.Constants.OPEN;
 
 class UserFile implements Serializable {
-    private final int id;
+    private final UUID id;
     private String username;
     private String password;
     private List<String> roles;
@@ -20,7 +21,7 @@ class UserFile implements Serializable {
     private String status;
 
     // construct the userFile for departed user.
-    public UserFile(int id,
+    public UserFile(UUID id,
                     String username,
                     String password,
                     List<String> roles, List<Project> projects,
@@ -41,7 +42,7 @@ class UserFile implements Serializable {
     }
 
     // construct the userFile for onboard user
-    public UserFile(int id, String username, String password,
+    public UserFile(UUID id, String username, String password,
                     List<String> roles, List<Project> projects, List<Task> tasks,
                     String position, LocalDate onboardDate) {
         this.id = id;
@@ -57,8 +58,8 @@ class UserFile implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("%s's File:\n ID: %d\n Position: %s\n Current Project: %s\n Current Tasks: %s\n ",
-                this.username, this.id, this.position, this.projects.toString(), this.tasks.toString());
+        return String.format("%s's File:\n Position: %s\n Current Project: %s\n Current Tasks: %s\n ",
+                this.username, this.position, this.projects.toString(), this.tasks.toString());
     }
 
     public String getName() {
@@ -84,7 +85,7 @@ class UserFile implements Serializable {
 
 
     // getter and setter
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
 
