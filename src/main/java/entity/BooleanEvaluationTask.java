@@ -11,13 +11,13 @@ public class BooleanEvaluationTask extends CommonOrganization implements Task {
     private final Project project;
     private Boolean results;
 
-    public BooleanEvaluationTask(int oid, String name, Integer head, Set<UUID> members, String description, LocalDateTime creatTime, LocalDateTime closeTime, Task evaluatedTask, Project project) {
+    public BooleanEvaluationTask(UUID oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime creatTime, LocalDateTime closeTime, Task evaluatedTask, Project project) {
         super(oid, name, head, members, description, creatTime, closeTime);
         this.evaluatedTask = evaluatedTask;
         this.project = project;
     }
 
-    public BooleanEvaluationTask(int oid, String name, Integer head, Set<UUID> members, String description, LocalDateTime creatTime, Task evaluatedTask, Project project) {
+    public BooleanEvaluationTask(UUID oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime creatTime, Task evaluatedTask, Project project) {
         super(oid, name, head, members, description, creatTime);
         this.evaluatedTask = evaluatedTask;
         this.project = project;

@@ -12,11 +12,11 @@ public interface Organization extends Serializable {
     void open();
 
     // add remove members.
-    boolean addMember(UUID uid);
+    boolean addMember(Integer uid);
 
-    boolean removeMember(UUID uid);
+    boolean removeMember(Integer uid);
 
-    int getOid();
+    UUID getOid();
 
     String getName();
 
@@ -26,9 +26,9 @@ public interface Organization extends Serializable {
 
     void setHead(Integer head);
 
-    Set<UUID> getMembers();
+    Set<Integer> getMembers();
 
-    void setMembers(Set<UUID> members);
+    void setMembers(Set<Integer> members);
 
     String getDescription();
 

@@ -2,24 +2,23 @@ package entity;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 public class CommonUser extends CommonUserFace implements User {
     private UserFile userFile;
 
     //constructors
     //construct only with the initial uid
-    public CommonUser(UUID uid) {
+    public CommonUser(int uid) {
         super(uid);
     }
 
     // construct without UserFile
-    public CommonUser(UUID uid, Department dpt, String bio, String name) {
+    public CommonUser(int uid, Department dpt, String bio, String name) {
         super(uid, dpt, bio, name);
     }
 
     //construct with UserFile
-    public CommonUser(UUID uid, Department dpt, String bio, UserFile userFile) {
+    public CommonUser(int uid, Department dpt, String bio, UserFile userFile) {
         super(uid);
         this.dpt = dpt;
         this.bio = bio;

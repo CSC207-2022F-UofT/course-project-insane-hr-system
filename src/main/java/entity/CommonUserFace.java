@@ -1,18 +1,16 @@
 package entity;
 
-import java.util.UUID;
-
 public class CommonUserFace implements UserFace {
-    protected final UUID uid;
+    protected final int uid;
     protected Department dpt;
     protected String bio;
     protected String name;
 
-    public CommonUserFace(UUID uid) {
+    public CommonUserFace(int uid) {
         this.uid = uid;
     }
 
-    public CommonUserFace(UUID uid, Department dpt, String bio, String name) {
+    public CommonUserFace(int uid, Department dpt, String bio, String name) {
         this.uid = uid;
         this.dpt = dpt;
         this.bio = bio;
@@ -51,7 +49,7 @@ public class CommonUserFace implements UserFace {
 
     // getter and setter for Fields in the UserFile
     @Override
-    public UUID getId() {
+    public int getId() {
         return this.uid;
     }
 }
