@@ -8,6 +8,7 @@ import java.time.LocalDate;
 public class SalaryCalculatorInteractor implements SalaryCalculatorInputBoundary{
     private SalaryCalculatorGateway gateway;
     private SalaryCalculateRules rules;
+    private SalaryCalculatorOutputBoundary outputBoundary;
 
     @Override
     public SalaryResponseModel requestSalary(SalaryRequestModel input) throws IllegalArgumentException {
@@ -27,6 +28,7 @@ public class SalaryCalculatorInteractor implements SalaryCalculatorInputBoundary
             target = gateway.getUserInPeriod(targetID, startDate, startDate);
         }
 
+        // TODO
         return null;
     }
 
