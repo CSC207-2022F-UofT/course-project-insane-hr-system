@@ -160,6 +160,14 @@ public class CommonUser extends CommonUserFace implements User {
         this.userFile.setRoles(roles);
     }
 
+    @Override
+    public int getVacationDays() {
+        return this.userFile.getVacationDays();
+    }
 
+    @Override
+    public void setVacationDays(int vacationDays) {
+        this.userFile.setVacationDays(vacationDays);
+    }
 
 }
