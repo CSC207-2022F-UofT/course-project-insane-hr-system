@@ -1,29 +1,27 @@
 package salary_calculator;
 
-import entity.Curr;
-
 import java.time.LocalDate;
 
 public class SalaryRequestModel {
-    private final Curr curr;
     private final Integer targetID;
     private LocalDate startDate;
     private LocalDate endDate;
 
-    public SalaryRequestModel(Curr curr, Integer targetID, LocalDate startDate, LocalDate endDate) {
-        this.curr = curr;
+    public SalaryRequestModel(Integer targetID, LocalDate startDate, LocalDate endDate) {
         this.targetID = targetID;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    public SalaryRequestModel(Curr curr, Integer targetID) {
-        this.curr = curr;
+    // construct without the endDate, this will construct a RequestModel with one month period.
+    public SalaryRequestModel(Integer targetID, LocalDate startDate) {
         this.targetID = targetID;
+        this.startDate = startDate;
+        this.endDate = startDate.plusMonths(1);
     }
 
-    public Curr getCurr() {
-        return curr;
+    public SalaryRequestModel(Integer targetID) {
+        this.targetID = targetID;
     }
 
     public Integer getTargetID() {

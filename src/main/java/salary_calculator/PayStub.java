@@ -2,22 +2,24 @@ package salary_calculator;
 
 import java.time.LocalDate;
 
-public class PayStub {
-    private LocalDate paymentDate;
+class PayStub {
+    private LocalDate startDate;
     private Integer uid;
     private String username;
     private String name;
     private Integer bonusSalary;
     private Integer hourSalary;
     private Integer totalSalary;
+    private Integer balance;
 
-    public PayStub(LocalDate paymentDate, Integer uid, String username, String name, Integer bonusSalary, Integer hourSalary) {
-        this.paymentDate = paymentDate;
+    public PayStub(LocalDate paymentDate, Integer uid, String username, String name, Integer bonusSalary, Integer hourSalary, Integer balance) {
+        this.startDate = paymentDate;
         this.uid = uid;
         this.username = username;
         this.name = name;
         this.bonusSalary = bonusSalary;
         this.hourSalary = hourSalary;
+        this.balance = balance;
         this.totalSalary = this.bonusSalary + this.hourSalary;
     }
 
@@ -28,16 +30,25 @@ public class PayStub {
     public String toString() {
         return String.format("Date: %s  uID: %s  username: %s  name: %s  " +
                         "BonusSalary: %d HourSalary: %d  TotalSalary: %d",
-                this.paymentDate, this.uid, this.username, this.name,
+                this.startDate, this.uid, this.username, this.name,
                 this.bonusSalary, this.hourSalary, this.totalSalary);
     }
 
-    public LocalDate getPaymentDate() {
-        return paymentDate;
+    public Integer getBalance() {
+        return balance;
     }
 
-    public void setPaymentDate(LocalDate paymentDate) {
-        this.paymentDate = paymentDate;
+    public void setBalance(Integer balance) {
+        this.balance = balance;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
     public Integer getUid() {
