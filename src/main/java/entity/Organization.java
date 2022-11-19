@@ -34,7 +34,7 @@ public interface Organization extends Serializable {
 
     void setDescription(String description);
 
-    LocalDateTime getCreatTime();
+    LocalDateTime getCreateTime();
 
     LocalDateTime getCloseTime();
 

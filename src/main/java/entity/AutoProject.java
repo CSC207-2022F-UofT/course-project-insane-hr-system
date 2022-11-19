@@ -8,8 +8,8 @@ import java.util.UUID;
 public class AutoProject extends CommonOrganization implements Project  {
     private List<Task> tasks;
 
-    public AutoProject(UUID oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime creatTime) {
-        super(oid, name, head, members, description, creatTime);
+    public AutoProject(UUID oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime createTime) {
+        super(oid, name, head, members, description, createTime);
     }
 
     @Override
@@ -26,8 +26,8 @@ public class AutoProject extends CommonOrganization implements Project  {
         return tasks;
     }
 
-    public void setTasks(List<Task> commonTasks) {
-        this.tasks = commonTasks;
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
 }

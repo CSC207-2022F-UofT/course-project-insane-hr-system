@@ -13,8 +13,8 @@ public class LeaveRequestTask extends CommonOrganization implements Task {
     private boolean results;
 
     public LeaveRequestTask(UUID oid, String name, Integer head, Set<Integer> members, String description,
-                            LocalDateTime creatTime, LeaveRequestProject project) {
-        super(oid, name, head, members, description, creatTime);
+                            LocalDateTime createTime, LeaveRequestProject project) {
+        super(oid, name, head, members, description, createTime);
         this.project = project;
     }
 
