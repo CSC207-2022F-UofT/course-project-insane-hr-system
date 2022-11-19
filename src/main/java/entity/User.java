@@ -60,5 +60,7 @@ public interface User extends UserFace {
 
     void setRoles(List<String> roles);
 
+    int getVacationDays();
 
+    void setVacationDays(int vacationDays);
 }
