@@ -1,4 +1,4 @@
-package Entity;
+package entity;
 
 import jdk.jshell.spi.ExecutionControl;
 

@@ -1,6 +1,5 @@
-package Entity;
+package entity;
 
-import jdk.jshell.spi.ExecutionControl;
 import jdk.jshell.spi.ExecutionControl.NotImplementedException;
 
 import java.time.LocalDateTime;

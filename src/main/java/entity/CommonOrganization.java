@@ -1,10 +1,10 @@
-package Entity;
+package entity;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import static Entity.Constants.CLOSED;
-import static Entity.Constants.OPEN;
+import static entity.Constants.CLOSED;
+import static entity.Constants.OPEN;
 
 public class CommonOrganization implements Organization {
     private final int oid;

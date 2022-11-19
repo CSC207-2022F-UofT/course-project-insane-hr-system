@@ -1,11 +1,11 @@
-package Entity;
+package entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-import static Entity.Constants.CLOSED;
-import static Entity.Constants.OPEN;
+import static entity.Constants.CLOSED;
+import static entity.Constants.OPEN;
 
 class UserFile implements Serializable {
     private final int id;

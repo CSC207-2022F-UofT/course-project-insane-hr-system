@@ -1,4 +1,4 @@
-package Entity;
+package entity;
 
 public class CommonUserFace implements UserFace {
     protected final int uid;

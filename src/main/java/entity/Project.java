@@ -1,4 +1,4 @@
-package Entity;
+package entity;
 
 public interface Project extends Organization{
     boolean addTask(Task task);
