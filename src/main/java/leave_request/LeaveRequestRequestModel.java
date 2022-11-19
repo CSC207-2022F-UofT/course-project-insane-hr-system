@@ -1,18 +1,25 @@
 package leave_request;
 
 import entity.User;
+import entity.LeaveType;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class LeaveRequestRequestModel {
     private User user;
     private String message;
-    private String leaveType;  // "sick", "vacation", or "paternal"
-    private int leaveDays;
+    private LeaveType leaveType;  // "sick", "vacation", or "paternal"
+    private LocalDate startDate;
+    private LocalDate returnDate;  // the day the user returns to work
 
-    public LeaveRequestRequestModel(User user, String message, String leaveType, int leaveDays) {
+    public LeaveRequestRequestModel(User user, String message, LeaveType leaveType,
+                                    LocalDate startDate, LocalDate returnDate) {
         this.user = user;
         this.message = message;
         this.leaveType = leaveType;
-        this.leaveDays = leaveDays;
+        this.startDate = startDate;
+        this.returnDate = returnDate;
     }
 
     public User getUser() {
@@ -31,19 +38,31 @@ public class LeaveRequestRequestModel {
         this.message = message;
     }
 
-    public String getLeaveType() {
+    public LeaveType getLeaveType() {
         return leaveType;
     }
 
-    public void setLeaveType(String leaveType) {
+    public void setLeaveType(LeaveType leaveType) {
         this.leaveType = leaveType;
     }
 
-    public int getLeaveDays() {
-        return leaveDays;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void setLeaveDays(int leaveDays) {
-        this.leaveDays = leaveDays;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getReturnDate() {
+        return returnDate;
+    }
+
+    public void setReturnDate(LocalDate returnDate) {
+        this.returnDate = returnDate;
+    }
+
+    public int getLeaveDays() {
+        return (int) startDate.until(returnDate, ChronoUnit.DAYS);
     }
 }
