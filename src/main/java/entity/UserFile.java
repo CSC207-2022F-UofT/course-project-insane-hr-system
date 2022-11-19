@@ -18,7 +18,7 @@ class UserFile implements Serializable {
     private LocalDate onboardDate;
     private LocalDate departureDate;
     private String status;
-    private int vacationDays;
+    private int vacationDays = 14;
 
     // construct the userFile for departed user.
     public UserFile(int id,
@@ -28,8 +28,7 @@ class UserFile implements Serializable {
                     List<Task> tasks,
                     String position,
                     LocalDate onboardDate,
-                    LocalDate departureDate,
-                    int vacationDays) {
+                    LocalDate departureDate) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -39,14 +38,13 @@ class UserFile implements Serializable {
         this.position = position;
         this.onboardDate = onboardDate;
         this.departureDate = departureDate;
-        this.vacationDays = vacationDays;
         this.status = CLOSED;
     }
 
     // construct the userFile for onboard user
     public UserFile(int id, String username, String password,
                     List<String> roles, List<Project> projects, List<Task> tasks,
-                    String position, LocalDate onboardDate, int vacationDays) {
+                    String position, LocalDate onboardDate) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -55,7 +53,6 @@ class UserFile implements Serializable {
         this.tasks = tasks;
         this.position = position;
         this.onboardDate = onboardDate;
-        this.vacationDays = vacationDays;
         this.status = OPEN;
     }
 
