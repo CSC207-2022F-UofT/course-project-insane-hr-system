@@ -3,11 +3,12 @@ package entity;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 public class AutoProject extends CommonOrganization implements Project  {
     private List<Task> tasks;
 
-    public AutoProject(int oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime creatTime) {
+    public AutoProject(UUID oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime creatTime) {
         super(oid, name, head, members, description, creatTime);
     }
 

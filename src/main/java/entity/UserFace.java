@@ -16,5 +16,5 @@ public interface UserFace extends Serializable {
     void setBio(String bio);
 
     // getter and setter for Fields in the UserFile
-    Integer getId();
+    int getId();
 }

@@ -2,12 +2,13 @@ package entity;
 
 import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.UUID;
 
 import static entity.Constants.CLOSED;
 import static entity.Constants.OPEN;
 
 public class CommonOrganization implements Organization {
-    private final int oid;
+    private final UUID oid;
     private String name;
     private Integer head;
     private Set<Integer> members;
@@ -17,7 +18,7 @@ public class CommonOrganization implements Organization {
     private String state;
 
     //construction a CLOSED organization
-    public CommonOrganization(int oid, String name,
+    public CommonOrganization(UUID oid, String name,
                               Integer head, Set<Integer> members,
                               String description,
                               LocalDateTime creatTime, LocalDateTime closeTime) {
@@ -32,7 +33,7 @@ public class CommonOrganization implements Organization {
     }
 
     // construct an OPEN organization
-    public CommonOrganization(int oid, String name,
+    public CommonOrganization(UUID oid, String name,
                               Integer head, Set<Integer> members,
                               String description,
                               LocalDateTime creatTime) {
@@ -73,7 +74,7 @@ public class CommonOrganization implements Organization {
     // getters and setters
 
     @Override
-    public int getOid() {
+    public UUID getOid() {
         return oid;
     }
 

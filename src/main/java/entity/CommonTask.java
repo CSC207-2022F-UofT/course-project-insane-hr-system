@@ -2,14 +2,15 @@ package entity;
 
 import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.UUID;
 
-public abstract class CommonTask extends CommonOrganization implements Task {
+public class CommonTask extends CommonOrganization implements Task {
     private final CommonProject commonProject;
     private Object results;
     private Integer star;
 
     // construct CLOSED task
-    public CommonTask(int oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime creatTime, LocalDateTime closeTime, CommonProject commonProject,
+    public CommonTask(UUID oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime creatTime, LocalDateTime closeTime, CommonProject commonProject,
                       Object results, int star) {
         super(oid, name, head, members, description, creatTime, closeTime);
         this.commonProject = commonProject;
@@ -17,7 +18,7 @@ public abstract class CommonTask extends CommonOrganization implements Task {
         this.star = star;
     }
     // construct OPEN task
-    public CommonTask(int oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime creatTime, CommonProject commonProject) {
+    public CommonTask(UUID oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime creatTime, CommonProject commonProject) {
         super(oid, name, head, members, description, creatTime);
         this.commonProject = commonProject;
     }

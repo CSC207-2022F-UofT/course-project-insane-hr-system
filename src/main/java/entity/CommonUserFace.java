@@ -49,7 +49,7 @@ public class CommonUserFace implements UserFace {
 
     // getter and setter for Fields in the UserFile
     @Override
-    public Integer getId() {
+    public int getId() {
         return this.uid;
     }
 }
