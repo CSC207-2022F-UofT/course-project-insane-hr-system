@@ -18,8 +18,7 @@ public class CommonPayStubBuilder implements PayStubBuilder{
         payStub.setUsername(user.getUsername());
         payStub.setBonusSalary(calculator.getBonusSalary(user));
         payStub.setHourSalary(calculator.getHourSalary(user));
-
-        // TODO
+        payStub.setTotalSalary(calculator.getTotalSalary(user));
         return payStub;
     }
 }
