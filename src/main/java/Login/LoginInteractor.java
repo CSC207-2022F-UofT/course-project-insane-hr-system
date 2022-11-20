@@ -1,7 +1,7 @@
 package Login;
 
 import Entity.User;
-import Presenter.LoginResponsePresenter;
+import presenter.LoginResponsePresenter;
 
 
 public class LoginInteractor {

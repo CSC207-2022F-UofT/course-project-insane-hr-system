@@ -13,8 +13,6 @@ public class PMTaskInitRequestModel {
 
     private CommonProject project;
 
-    private
-
     public PMTaskInitRequestModel(String taskName, String taskDescription, CommonUser employee, CommonProject project) {
         this.taskName = taskName;
         this.taskDescription = taskDescription;
