@@ -5,8 +5,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-public class CommonTaskFactory {
+public class CommonTaskFactory implements CommonTaskFactoryInterface{
 
+    @Override
     public CommonTask createTask(String taskName, String description, CommonUser employee, CommonProject project) {
         UUID newid = UUID.randomUUID();
         int head = Curr.getUser().getId();
