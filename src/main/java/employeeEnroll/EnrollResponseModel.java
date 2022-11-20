@@ -1,15 +1,17 @@
 package employeeEnroll;
 
+import java.time.LocalDate;
+
 public class EnrollResponseModel {
     private String name;
     private int id;
     private String username;
     private String password;
 
-    String creationTime;
+    private LocalDate creationTime;
 
 
-    public EnrollResponseModel(String name, int id, String username, String password, String creationTime) {
+    public EnrollResponseModel(String name, int id, String username, String password, LocalDate creationTime) {
         this.name = name;
         this.id = id;
         this.username = username;
@@ -52,11 +54,11 @@ public class EnrollResponseModel {
 
 
 
-    public String getCreationTime() {
+    public LocalDate getCreationTime() {
         return creationTime;
     }
 
-    public void setCreationTime(String creationTime) {
-        this.creationTime = creationTime;
+    public void setCreationTime(LocalDate date) {
+        this.creationTime = date;
     }
 }
