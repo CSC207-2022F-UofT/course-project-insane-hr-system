@@ -25,11 +25,12 @@ public class LeaveRequestProjectBuilder implements ProjectBuilder {
                 createTime);
 
         // crate a task for every member of the project
+        TaskFactory taskFactory = new LeaveRequestTaskFactory(project);
         for (Integer m : members) {
             Set<Integer> member = new HashSet<>();
             member.add(m);
             String taskName = "Review " + projectName;
-            Task task = new LeaveRequestTask(UUID.randomUUID(), taskName, userId, member, description, createTime, project);
+            Task task = taskFactory.createOpenTask(taskName, member, description, createTime);
             project.addTask(task);
         }
 
