@@ -1,4 +1,5 @@
 package complete_task;
 
-public class CompleteTaskInteractor {
+public class CompleteTaskInteractor implements CompleteTaskInputBoundary{
+
 }
