@@ -1,15 +1,9 @@
 package salary_calculator;
 
-import entity.CommonUser;
-import entity.Curr;
-import entity.User;
-import jdk.jshell.spi.ExecutionControl;
-import org.w3c.dom.ls.LSInput;
+import entity.*;
 
-import javax.sound.sampled.FloatControl;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 class SalaryCalculatorInteractor implements SalaryCalculatorInputBoundary{
@@ -35,14 +29,13 @@ class SalaryCalculatorInteractor implements SalaryCalculatorInputBoundary{
 
         User summaUser;
         try {
-            summaUser = gateway.getUserInPeriod(input.getTargetID(), startDate, endDate);
+            summaUser = gateway.getUserInPeriod(targetID, startDate, endDate);
         }catch (Exception IllegalArgumentException) {
             throw new IllegalArgumentException();
         }
 
-
-        List<User> userFlow = separateSummaUser(summaUser);
         List<LocalDate> dateFlow = separateSummaDate(startDate, endDate);
+        List<User> userFlow = separateSummaUser(summaUser, dateFlow);
 
         SalaryCalculator calculator = new SalaryCalculateRules();
 
@@ -51,9 +44,6 @@ class SalaryCalculatorInteractor implements SalaryCalculatorInputBoundary{
             for (int i=0; i < userFlow.size(); i++) {
                 results.addPayStub(payStubBuilder.buildPayStubByUser(userFlow.get(i), dateFlow.get(i)));
             }
-
-
-
         return results;
     }
 
@@ -63,21 +53,28 @@ class SalaryCalculatorInteractor implements SalaryCalculatorInputBoundary{
     }
 
 
-    private List<LocalDate> separateSummaDate(LocalDate startDate, LocalDate endDate) {
-        // TODO
+    public List<LocalDate> separateSummaDate(LocalDate startDate, LocalDate endDate) {
         List<LocalDate> result = new ArrayList<>();
-        result.add(LocalDate.now());
+        LocalDate date = startDate;
+        while (date.compareTo(endDate) < 0) {
+            result.add(date);
+            date = date.plusMonths(1);
+        }
         return result;
     }
 
-    private List<User> separateSummaUser(User summaUser) {
-        // TODO
+    public List<User> separateSummaUser(User summaUser, List<LocalDate> dateFlow) {
         List<User> results = new ArrayList<>();
-        results.add(new CommonUser(1));
+        UserFactory factory = new CommonUserFactory();
+
+        for (LocalDate date : dateFlow) {
+            results.add(factory.createUserInPeriod(summaUser, date, date.plusMonths(1)));
+        }
         return results;
     }
 
-    private LocalDate getFormedEndDate(LocalDate givenEndDate) {
+
+    public LocalDate getFormedEndDate(LocalDate givenEndDate) {
         LocalDate endDate;
         if (givenEndDate.getDayOfMonth() < rules.resetDate) {
             LocalDate tempDate = givenEndDate.plusMonths(-1);
@@ -88,7 +85,7 @@ class SalaryCalculatorInteractor implements SalaryCalculatorInputBoundary{
         return endDate;
     }
 
-    private LocalDate getFormedStartDate(LocalDate givenStartDate) {
+    public LocalDate getFormedStartDate(LocalDate givenStartDate) {
         LocalDate startDate;
         if (givenStartDate.getDayOfMonth() > rules.resetDate) {
             startDate = givenStartDate.plusMonths(1)
