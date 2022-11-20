@@ -111,12 +111,12 @@ public class CommonUser extends CommonUserFace implements User {
     }
 
     @Override
-    public String getPosition() {
+    public Position getPosition() {
         return this.userFile.getPosition();
     }
 
     @Override
-    public void setPosition(String position) {
+    public void setPosition(Position position) {
         this.userFile.setPosition(position);
     }
 
