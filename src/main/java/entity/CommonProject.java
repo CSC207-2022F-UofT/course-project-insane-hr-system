@@ -12,18 +12,18 @@ public class CommonProject extends CommonOrganization implements RealProject{
     private int star;
 
 
-    public CommonProject(UUID oid, String name, int star, Integer head, Set<Integer> members, String description, LocalDateTime creatTime, LocalDateTime closeTime,
+    public CommonProject(UUID oid, String name, int star, Integer head, Set<Integer> members, String description, LocalDateTime createTime, LocalDateTime closeTime,
                          Department dpt, List<Task> tasks, int funds) {
-        super(oid, name, head, members, description, creatTime, closeTime);
+        super(oid, name, head, members, description, createTime, closeTime);
         this.dpt = dpt;
         this.tasks = tasks;
         this.funds = funds;
         this.star = star;
     }
 
-    public CommonProject(UUID oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime creatTime,
+    public CommonProject(UUID oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime createTime,
                          Department dpt, List<Task> tasks, int funds) {
-        super(oid, name, head, members, description, creatTime);
+        super(oid, name, head, members, description, createTime);
         this.dpt = dpt;
         this.tasks = tasks;
         this.funds = funds;
