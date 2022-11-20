@@ -23,6 +23,7 @@ public class LeaveRequestProjectBuilder implements ProjectBuilder {
 
         LeaveRequestProject project = new LeaveRequestProject(UUID.randomUUID(), projectName, userId, members, description,
                 createTime);
+        user.addCurrProject(project);
 
         // crate a task for every member of the project
         TaskFactory taskFactory = new LeaveRequestTaskFactory(project);
