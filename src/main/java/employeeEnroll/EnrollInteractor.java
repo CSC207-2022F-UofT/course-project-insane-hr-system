@@ -22,9 +22,9 @@ public class EnrollInteractor implements EnrollInputBoundary{
     public EnrollResponseModel create(EnrollRequestModel requestModel){
         int id = enrolldsGateway.generateId();
         String name = requestModel.getName();
-        Department dpt = null; ///////
+        Department dpt = requestModel.getDpt();
         String username = enrolldsGateway.generateUsername(name);
-        String password = "="+"user"+ LocalDate.now().getYear();
+        String password = "="+"user"+ LocalDate.now().getYear(); //default password: "=user2022"
         List<String> roles = new ArrayList<String>();
         List<Project> projects = new ArrayList<Project>();
         List<Task> tasks = new ArrayList<Task>();

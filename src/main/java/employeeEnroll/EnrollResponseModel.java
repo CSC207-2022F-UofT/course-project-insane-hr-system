@@ -1,5 +1,7 @@
 package employeeEnroll;
 
+import entity.Department;
+
 import java.time.LocalDate;
 
 public class EnrollResponseModel {
@@ -9,6 +11,7 @@ public class EnrollResponseModel {
     private String password;
 
     private LocalDate creationTime;
+
 
 
     public EnrollResponseModel(String name, int id, String username, String password, LocalDate creationTime) {

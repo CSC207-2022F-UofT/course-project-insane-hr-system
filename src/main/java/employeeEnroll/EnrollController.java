@@ -1,5 +1,7 @@
 package employeeEnroll;
 
+import entity.Department;
+
 public class EnrollController {
     final EnrollInputBoundary enrollInput;
 
@@ -7,8 +9,8 @@ public class EnrollController {
         this.enrollInput = enrollInput;
     }
 
-    EnrollResponseModel create(String name){
-        EnrollRequestModel requestModel = new EnrollRequestModel(name);
+    EnrollResponseModel create(String name, Department dpt){
+        EnrollRequestModel requestModel = new EnrollRequestModel(name,dpt);
         return enrollInput.create(requestModel);
     }
 }
