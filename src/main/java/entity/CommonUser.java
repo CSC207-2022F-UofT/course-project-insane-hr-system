@@ -61,7 +61,7 @@ public class CommonUser extends CommonUserFace implements User {
     }
 
     @Override
-    public boolean addRole(String role) {
+    public boolean addRole(Role role) {
         return this.userFile.getRoles().add(role);
     }
 
@@ -151,12 +151,12 @@ public class CommonUser extends CommonUserFace implements User {
     }
 
     @Override
-    public List<String> getRoles() {
+    public List<Role> getRoles() {
         return this.userFile.getRoles();
     }
 
     @Override
-    public void setRoles(List<String> roles) {
+    public void setRoles(List<Role> roles) {
         this.userFile.setRoles(roles);
     }
 

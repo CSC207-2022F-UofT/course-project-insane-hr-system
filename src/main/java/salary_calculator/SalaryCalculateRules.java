@@ -43,7 +43,8 @@ public class SalaryCalculateRules implements SalaryCalculator{
 
     @Override
     public Integer getHourSalary(User user) {
-        Integer salaryPerHour = SalaryPositionMap.getHourSalaryByPosition(user.getPosition());
+        // TODO: this is not the highest position.
+        Integer salaryPerHour = SalaryPositionMap.getHourSalaryByPosition(user.getRoles().get(0));
 
         return salaryPerHour;
     }

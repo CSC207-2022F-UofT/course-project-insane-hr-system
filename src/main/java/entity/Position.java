@@ -5,5 +5,4 @@ public enum Position {
     DEPARTMENT_HEAD,
     PROJECT_HEAD,
     MEMBER
-
 }
