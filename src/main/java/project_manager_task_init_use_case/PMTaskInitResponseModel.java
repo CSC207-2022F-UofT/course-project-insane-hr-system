@@ -4,18 +4,19 @@ public class PMTaskInitResponseModel {
 
     String taskName;
     String taskDescription;
-    String nameEmployee;
 
-    public PMTaskInitResponseModel(String taskName, String taskDescription, String nameEmployee) {
+    int employeeId;
+
+    public PMTaskInitResponseModel(String taskName, String taskDescription, int emmployeeId) {
         this.taskName = taskName;
         this.taskDescription = taskDescription;
-        this.nameEmployee = nameEmployee;
+        this.employeeId = emmployeeId;
     }
 
     public String getTaskName() { return this.taskName; }
 
     public String getTaskDescription() { return this.taskDescription; }
 
-    public String getNameEmployee() { return this.nameEmployee; }
+    public int getEmployeeId() { return this.employeeId; }
 
 }

@@ -3,16 +3,21 @@ package project_manager_task_init_use_case;
 import entity.CommonTask;
 import entity.CommonTaskFactory;
 import entity.CommonTaskFactoryInterface;
+import entity.Task;
+
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 public class PMTaskInitInteractor implements PMTaskInitInputBoundary{
 
     final PMTaskInitOutputBoundary presenter;
 
-    final CommonTaskFactoryInterface commonTaskFactory;
+    final CommonTaskFactory commonTaskFactory;
 
     final PMTaskInitGateway taskInitGateway;
 
-    public PMTaskInitInteractor(PMTaskInitOutputBoundary presenter, CommonTaskFactoryInterface commonTaskFactory, PMTaskInitGateway gateway) {
+    public PMTaskInitInteractor(PMTaskInitOutputBoundary presenter, CommonTaskFactory commonTaskFactory, PMTaskInitGateway gateway) {
         this.presenter = presenter;
         this.commonTaskFactory = commonTaskFactory;
         this.taskInitGateway = gateway;
@@ -20,10 +25,13 @@ public class PMTaskInitInteractor implements PMTaskInitInputBoundary{
 
     public PMTaskInitResponseModel createTask(PMTaskInitRequestModel requestModel) {
 
-        CommonTask task = commonTaskFactory.createTask(requestModel.getTaskName(), requestModel.getTaskDescription(), requestModel.getEmployee(), requestModel.getProject());
+        Set<Integer> members = new HashSet<>();
+        members.add(requestModel.getEmployeeId());
+        LocalDateTime createTime = LocalDateTime.now();
+        Task task = commonTaskFactory.createOpenTask(requestModel.getTaskName(), members, requestModel.getTaskDescription(), createTime);
         taskInitGateway.saveTask(requestModel);
 
-        //TODO: return response model
-        return null;
+        PMTaskInitResponseModel responseModel = new PMTaskInitResponseModel(requestModel.getTaskName(), requestModel.getTaskDescription(), requestModel.getEmployeeId());
+        return presenter.prepareSuccessView(responseModel);
     }
 }

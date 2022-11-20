@@ -9,14 +9,14 @@ public class PMTaskInitRequestModel {
 
     private String taskDescription;
 
-    private CommonUser employee;
+    private int employeeId;
 
     private CommonProject project;
 
-    public PMTaskInitRequestModel(String taskName, String taskDescription, CommonUser employee, CommonProject project) {
+    public PMTaskInitRequestModel(String taskName, String taskDescription, int employeeId, CommonProject project) {
         this.taskName = taskName;
         this.taskDescription = taskDescription;
-        this.employee = employee;
+        this.employeeId = employeeId;
         this.project = project;
     }
 
@@ -24,7 +24,7 @@ public class PMTaskInitRequestModel {
 
     public String getTaskDescription() { return this.taskDescription; }
 
-    public CommonUser getEmployee() { return this.employee; }
+    public int getEmployeeId() { return this.employeeId; }
 
     public CommonProject getProject() { return this.project; }
 
