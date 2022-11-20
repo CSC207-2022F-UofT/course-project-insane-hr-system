@@ -1,21 +1,21 @@
 package leave_request;
 
-import entity.LeaveRequestProject;
+import entity.Project;
 
 // save the project and all its tasks
 // update all members + head
 public class LeaveRequestDsRequestModel {
-    private LeaveRequestProject project;
+    private Project project;
 
-    public LeaveRequestDsRequestModel(LeaveRequestProject project) {
+    public LeaveRequestDsRequestModel(Project project) {
         this.project = project;
     }
 
-    public LeaveRequestProject getProject() {
+    public Project getProject() {
         return project;
     }
 
-    void setProject(LeaveRequestProject project) {
+    void setProject(Project project) {
         this.project = project;
     }
 }
