@@ -2,6 +2,8 @@ package leave_request;
 
 import entity.LeaveRequestProject;
 
+// save the project and all its tasks
+// update all members + head
 public class LeaveRequestDsRequestModel {
     private LeaveRequestProject project;
 
