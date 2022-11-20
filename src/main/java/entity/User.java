@@ -40,9 +40,9 @@ public interface User extends UserFace {
 
     void setTasks(List<Task> tasks);
 
-    String getPosition();
+    Position getPosition();
 
-    void setPosition(String position);
+    void setPosition(Position position);
 
     LocalDate getOnboardDate();
 

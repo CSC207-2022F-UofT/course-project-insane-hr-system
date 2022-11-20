@@ -1,6 +1,11 @@
 package salary_calculator;
 
+import entity.CommonTask;
+import entity.Task;
 import entity.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SalaryCalculateRules implements SalaryCalculator{
     public Integer salaryPerTask = 10;
@@ -21,12 +26,26 @@ public class SalaryCalculateRules implements SalaryCalculator{
     @Override
     public Integer getBonusSalary(User user) {
 
-        return null;
+        List<CommonTask> commonTasks = new ArrayList<>();
+
+        for (Task task : user.getTasks()) {
+            if (task instanceof CommonTask) {
+                commonTasks.add(((CommonTask) task));
+            }
+        }
+
+        int result = 0;
+        for (CommonTask commonTask : commonTasks) {
+            result = result + 10 + commonTask.getStar() * this.salaryPerStar;
+        }
+        return result;
     }
 
     @Override
     public Integer getHourSalary(User user) {
-        return null;
+        Integer salaryPerHour = SalaryPositionMap.getHourSalaryByPosition(user.getPosition());
+
+        return salaryPerHour;
     }
 
     @Override

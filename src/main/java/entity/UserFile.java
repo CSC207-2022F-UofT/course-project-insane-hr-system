@@ -14,7 +14,7 @@ class UserFile implements Serializable {
     private List<String> roles;
     private List<Project> projects;
     private List<Task> tasks;
-    private String position;
+    private Position position;
     private LocalDate onboardDate;
     private LocalDate departureDate;
     private String status;
@@ -26,7 +26,7 @@ class UserFile implements Serializable {
                     String password,
                     List<String> roles, List<Project> projects,
                     List<Task> tasks,
-                    String position,
+                    Position position,
                     LocalDate onboardDate,
                     LocalDate departureDate) {
         this.id = id;
@@ -44,7 +44,7 @@ class UserFile implements Serializable {
     // construct the userFile for onboard user
     public UserFile(int id, String username, String password,
                     List<String> roles, List<Project> projects, List<Task> tasks,
-                    String position, LocalDate onboardDate) {
+                    Position position, LocalDate onboardDate) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -121,11 +121,11 @@ class UserFile implements Serializable {
         this.tasks = tasks;
     }
 
-    public String getPosition() {
+    public Position getPosition() {
         return position;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(Position position) {
         this.position = position;
     }
 
