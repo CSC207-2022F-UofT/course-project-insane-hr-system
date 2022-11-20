@@ -21,7 +21,7 @@ public class PMTaskInitInteractor implements PMTaskInitInputBoundary{
     public PMTaskInitResponseModel createTask(PMTaskInitRequestModel requestModel) {
 
         CommonTask task = commonTaskFactory.createTask(requestModel.getTaskName(), requestModel.getTaskDescription(), requestModel.getEmployee(), requestModel.getProject());
-        taskInitGateway.save(requestModel);
+        taskInitGateway.saveTask(requestModel);
 
         //TODO: return response model
         return null;
