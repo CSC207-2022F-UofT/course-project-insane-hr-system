@@ -2,8 +2,8 @@ package entity;
 
 public enum Position {
     CEO,
-    DepartmentHead,
-    ProjectHead,
-    Member
+    DEPARTMENT_HEAD,
+    PROJECT_HEAD,
+    MEMBER
 
 }
