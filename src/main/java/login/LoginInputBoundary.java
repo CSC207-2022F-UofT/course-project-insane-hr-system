@@ -1,6 +1,6 @@
-package Login;
+package login;
 
-import Entity.User;
+import entity.User;
 
 public interface LoginInputBoundary {
 

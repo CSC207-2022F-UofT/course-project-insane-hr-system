@@ -1,6 +1,6 @@
-package Login;
+package login;
 
-import Entity.User;
+import entity.User;
 import Presenter.LoginResponsePresenter;
 
 
@@ -22,5 +22,6 @@ public class LoginInteractor {
     public static User getUser(LoginRequestModel logReqMod) {
         // User user = gateway.getUser(LoginRequestModel)
         // LoginResponsePresenter.displayUser(User)
+        return null;
     }
 }

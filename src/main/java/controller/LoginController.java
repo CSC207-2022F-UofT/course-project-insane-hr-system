@@ -1,9 +1,7 @@
-package Controller;
+package controller;
 
-import Entity.User;
-import Login.LoginInteractor;
-import Login.LoginRequestModel;
-import Presenter.LoginResponsePresenter;
+import login.LoginInteractor;
+import login.LoginRequestModel;
 
 public class LoginController{
 

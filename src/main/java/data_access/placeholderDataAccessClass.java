@@ -1,4 +1,4 @@
-package DataAccess;
+package data_access;
 
 public class placeholderDataAccessClass {
 }
