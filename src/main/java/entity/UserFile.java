@@ -165,7 +165,7 @@ class UserFile implements Serializable {
         return this.roles.add(role);
     }
 
-    public boolean removeRole(String role) {
+    public boolean removeRole(Role role) {
         return this.roles.remove(role);
     }
 

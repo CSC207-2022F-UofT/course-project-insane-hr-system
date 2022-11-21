@@ -14,4 +14,6 @@ public interface SalaryCalculatorGateway {
      * Throw IllegalArgumentException iff targetID is not in the domain.
      */
     User getUserInPeriod(Integer targetID, LocalDate startDate, LocalDate endDate) throws IllegalArgumentException;
+
+    User getUserByUserID(Integer targetID);
 }
