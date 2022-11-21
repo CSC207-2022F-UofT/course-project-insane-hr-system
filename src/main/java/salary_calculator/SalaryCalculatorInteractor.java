@@ -14,11 +14,21 @@ class SalaryCalculatorInteractor implements SalaryCalculatorInputBoundary{
     @Override
     public SalaryResponseModel requestSalary(SalaryRequestModel input) throws IllegalArgumentException {
 
+        // Change data into what I want.
         SalaryResponseModel results = new SalaryResponseModel();
         User requester = Curr.getUser();
         Integer targetID = input.getTargetID();
         LocalDate givenStartDate = input.getStartDate();
         LocalDate givenEndDate = input.getEndDate();
+
+        // decide whether this request is valid.
+        List<Role> roles = requester.getRoles();
+        User targetUser = gateway.getUserByUserID(targetID);
+        List<Role> targetRoles = targetUser.getRoles();
+
+        if (RoleAllowed.isHeadOf(roles, targetRoles)) {
+            return outputBoundary.prepareFailedPage("You are not authorized to check" + targetUser.getName() + "'s salary!");
+        }
 
         LocalDate startDate = getFormedStartDate(givenStartDate);
         LocalDate endDate = getFormedEndDate(givenEndDate);
@@ -27,13 +37,15 @@ class SalaryCalculatorInteractor implements SalaryCalculatorInputBoundary{
             endDate =startDate;
         }
 
+
         User summaUser;
         try {
             summaUser = gateway.getUserInPeriod(targetID, startDate, endDate);
-        }catch (Exception IllegalArgumentException) {
-            throw new IllegalArgumentException();
+        }catch (Exception DataAccessException) {
+            throw new DataAccessException("Data could not be accessed!");
         }
 
+        // Get the user we want.
         List<LocalDate> dateFlow = separateSummaDate(startDate, endDate);
         List<User> userFlow = separateSummaUser(summaUser, dateFlow);
 
@@ -44,8 +56,11 @@ class SalaryCalculatorInteractor implements SalaryCalculatorInputBoundary{
             for (int i=0; i < userFlow.size(); i++) {
                 results.addPayStub(payStubBuilder.buildPayStubByUser(userFlow.get(i), dateFlow.get(i)));
             }
-        return results;
+
+        return outputBoundary.prepareSucceedPage(results);
     }
+
+
 
     @Override
     public SalaryResponseModel paySalary(PaySalaryRequestModel paySalaryRequestModel) {
