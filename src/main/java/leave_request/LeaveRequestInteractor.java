@@ -20,7 +20,7 @@ public class LeaveRequestInteractor implements LeaveRequestInputBoundary {
     @Override
     public LeaveRequestResponseModel create(LeaveRequestRequestModel requestModel) {
         // get current user and relevant data
-        User user = Curr.getUser();
+        User user = requestModel.getUser();
         int vacationDays = user.getVacationDays();
         int leaveDays = requestModel.getLeaveDays();
         String leaveType = requestModel.getLeaveType().toString();
