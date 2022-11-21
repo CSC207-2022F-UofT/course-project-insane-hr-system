@@ -1,6 +1,11 @@
 package delete_employee;
 
+import entity.Curr;
+import entity.User;
+
+import java.util.List;
+
 public interface DeleteDsGateway {
-    boolean existsById(int id);
-    boolean delete(int id); //search for the id and delete the employee.
+    List<User> getEmployees(Curr curr); // return a list containing all the employees under the current department Head or CEO.
+    boolean delete(User user); //search for the id and delete the employee.
 }

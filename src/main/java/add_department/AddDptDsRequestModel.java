@@ -1,11 +1,12 @@
 package add_department;
 
 import entity.Department;
+import entity.Organization;
 
 public class AddDptDsRequestModel {
-    private Department department;
+    private Organization department;
 
-    public AddDptDsRequestModel(Department department) {
+    public AddDptDsRequestModel(Organization department) {
         this.department = department;
     }
 }

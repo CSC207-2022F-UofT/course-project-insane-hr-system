@@ -12,7 +12,7 @@ public class EnrollResponseFormatter implements EnrollPresenter{
     }
 
     @Override
-    public EnrollResponseModel prepareFailView(String error) throws UserCreationFailed {
+    public EnrollResponseModel prepareFailView(String error){
         throw new UserCreationFailed(error);
     }
 }

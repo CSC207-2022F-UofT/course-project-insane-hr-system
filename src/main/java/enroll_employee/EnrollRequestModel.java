@@ -7,9 +7,9 @@ import entity.Position;
 public class EnrollRequestModel {
     private String name;
     private Department dpt;
-    private String position;
+    private Position position;
 
-    public EnrollRequestModel(String name, Department dpt, String position) {
+    public EnrollRequestModel(String name, Department dpt, Position position) {
         this.name = name;
         this.dpt = dpt;
         this.position = position;
@@ -31,11 +31,11 @@ public class EnrollRequestModel {
         this.dpt = dpt;
     }
 
-    public String getPosition() {
+    public Position getPosition() {
         return position;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(Position position) {
         this.position = position;
     }
 }

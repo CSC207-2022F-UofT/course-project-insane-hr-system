@@ -18,7 +18,7 @@ public interface User extends UserFace {
 
     boolean removeCurrProject(Project project);
 
-    boolean addRole(String role);
+    boolean addRole(Role role);
 
     boolean removeRole(String role);
 
@@ -40,9 +40,9 @@ public interface User extends UserFace {
 
     void setTasks(List<Task> tasks);
 
-    String getPosition();
+    Position getPosition();
 
-    void setPosition(String position);
+    void setPosition(Position position);
 
     LocalDate getOnboardDate();
 
@@ -56,9 +56,9 @@ public interface User extends UserFace {
 
     void setStatus(String status);
 
-    List<String> getRoles();
+    List<Role> getRoles();
 
-    void setRoles(List<String> roles);
+    void setRoles(List<Role> roles);
 
     int getVacationDays();
 

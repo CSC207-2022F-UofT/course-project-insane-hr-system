@@ -1,4 +1,5 @@
 package delete_employee;
 
-public class DeletePresentor {
+public interface DeletePresentor {
+    DeleteResponseModel prepareSuccessView(DeleteResponseModel responseModel);
 }

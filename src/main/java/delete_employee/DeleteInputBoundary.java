@@ -1,5 +1,7 @@
 package delete_employee;
 
+import entity.User;
+
 public interface DeleteInputBoundary {
-    DeleteResponseModel create(int id);
+    DeleteResponseModel create(DeleteRequestModel requestModel);
 }
