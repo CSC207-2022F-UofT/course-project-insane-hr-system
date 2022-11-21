@@ -1,35 +1,48 @@
 package ui;
 
+import controller.LoginController;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 // Frameworks/Drivers layer
 
-public class LoginScreen extends JFrame implements ActionListener {
+public class LoginScreen extends JPanel implements ActionListener {
 
-    /**
-     * A window with a title and a JButton.
-     */
-    public LoginScreen() {
+    JTextField username = new JTextField(15);
+
+    JPasswordField password = new JPasswordField(15);
+
+    LoginController loginController;
+
+    public LoginScreen(LoginController loginController) {
+
+        this.loginController = loginController;
 
         JLabel title = new JLabel("Login Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JButton logIn = new JButton("Log in");
+        LabelTextPanel usernameInfo = new LabelTextPanel(
+                new JLabel("Username"), username);
+        LabelTextPanel passwordInfo = new LabelTextPanel(
+                new JLabel("Password"), password);
+
+        JButton signUp = new JButton("Login");
 
         JPanel buttons = new JPanel();
-        buttons.add(logIn);
+        buttons.add(signUp);
 
-        logIn.addActionListener(this);
+        signUp.addActionListener(this);
 
-        JPanel main = new JPanel();
-        main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
+        // this.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        main.add(title);
-        main.add(buttons);
-        this.setContentPane(main);
-        this.pack();
+        this.add(title);
+        this.add(usernameInfo);
+        this.add(passwordInfo);
+        this.add(buttons);
     }
 
     /**
@@ -37,5 +50,8 @@ public class LoginScreen extends JFrame implements ActionListener {
      */
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());
+
+        this.loginController.login(username.getText(),
+                String.valueOf(password.getPassword()));
     }
 }

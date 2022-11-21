@@ -7,8 +7,8 @@ import login.LoginResponseModel;
 
 public interface LoginPresenter {
 
-    void prepareSuccessView(User user, LoginResponseModel loginResponseModel);
+    LoginResponseModel prepareSuccessView(User user, LoginResponseModel loginResponseModel);
 
-    void prepareFailView(LoginResponseModel logFailRepMod);
+    LoginResponseModel prepareFailView(LoginResponseModel logFailRepMod);
 
 }

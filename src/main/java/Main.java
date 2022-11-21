@@ -1,18 +1,17 @@
 import controller.LoginController;
 import entity.Curr;
-import login.LoginInputBoundary;
-import login.LoginInteractor;
 import presenter.LoginPresenter;
+import presenter.LoginResponseFormatter;
 import ui.LoginScreen;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Main {
 
     public static void main(String[] args) {
+
+
 
         Curr currentUser = new Curr();
 
@@ -21,9 +20,10 @@ public class Main {
         JPanel screens = new JPanel(cardLayout);
         application.add(screens);
 
-        LoginPresenter loginScreen = new LoginReponseFormatter();
-        LoginInputBoundary interactor = new LoginInteractor(currentUser, loginScreen);
-        LoginController loginController = new LoginController(interactor);
+        LoginPresenter loginPresenter = new LoginResponseFormatter();
+        // LoginInputBoundary interactor = new LoginInteractor(loginPresenter, currentUser);
+        // LoginController loginController = new LoginController(interactor);
+        LoginController loginController = new LoginController();
 
         // TODO intialize data access
 
@@ -32,7 +32,7 @@ public class Main {
         // TODO initialize feature interactors, controllers
 
         // Build the GUI, plugging in the parts
-        LoginScreen loginScreen = new LoginScreen(userRegisterController);
+        JPanel loginScreen = new LoginScreen(loginController);
         screens.add(loginScreen, "welcome");
         cardLayout.show(screens, "login");
         application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
