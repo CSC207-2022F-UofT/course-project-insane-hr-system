@@ -42,9 +42,10 @@ public class LeaveRequestInteractor implements LeaveRequestInputBoundary {
         // get all superiors of user
         Set<Integer> members = new HashSet<>();
         for (Project p : user.getProjects()) {
-            Integer head = p.getHead();
-            if (RoleAllowed.isHeadOf(gateway.getRoles(head), user.getRoles())) {
-                members.add(head);
+            Integer h = p.getHead();
+            User head = gateway.getUser(h);
+            if (RoleAllowed.isHeadOf(head.getRoles(), user.getRoles())) {
+                members.add(h);
             }
         }
 
