@@ -1,11 +1,9 @@
 package PositionMgt;
 
-import Entity.User;
+import entity.User;
 
 public interface PositionMgtInputBoundary {
-    PositionMgtRequestModel create(PositionMgtRequestModel requestModel);
-
-    PositionMgtResponseModel create(PositionMgtResponseModel responseModel);
+    PositionMgtResponseModel create(PositionMgtRequestModel requestModel);
 
     void promoteUser(User user);
 

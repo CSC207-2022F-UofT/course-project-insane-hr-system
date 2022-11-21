@@ -1,15 +1,10 @@
 package PositionMgt;
 
-import Entity.User;
+import entity.User;
 
 public class PositionMgtInteractor implements PositionMgtInputBoundary {
 
-    public PositionMgtRequestModel create(PositionMgtRequestModel requestModel) {
-        //TODO
-        return null;
-    }
-
-    public PositionMgtResponseModel create(PositionMgtResponseModel responseModel) {
+    public PositionMgtResponseModel create(PositionMgtRequestModel requestModel) {
         //TODO
         return null;
     }
