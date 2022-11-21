@@ -33,5 +33,34 @@ public class RoleAllowed {
         return false;
     }
 
+    public static boolean isInSameOrg(List<Role> roles, List<Role> targetRoles) {
+        for (Role role : targetRoles) {
+            if (role instanceof SuperRole) {
+                return true;
+            }
+        }
+        for (Role role : roles) {
+            if (role instanceof SuperRole) {
+                return true;
+            }
+        }
+        for (Role role : roles) {
+            if (role instanceof CommonRole) {
+                CommonRole commonRole = ((CommonRole) role);
+                for (Role targetRole : targetRoles) {
+                    if (targetRole instanceof CommonRole) {
+                        CommonRole targetCommonRole = ((CommonRole) targetRole);
+                        if (commonRole.getOid() == targetCommonRole.getOid()) {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+        }
+
+        return false;
+    }
+
 
 }
