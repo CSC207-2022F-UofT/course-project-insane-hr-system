@@ -14,4 +14,12 @@ public class SalaryResponseModel {
     void addPayStub(PayStub payStub) {
         this.payStubs.add(payStub);
     }
+
+    public List<PayStub> getPayStubs() {
+        return payStubs;
+    }
+
+    public void setPayStubs(List<PayStub> payStubs) {
+        this.payStubs = payStubs;
+    }
 }
