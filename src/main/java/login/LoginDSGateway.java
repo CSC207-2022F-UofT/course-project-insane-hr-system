@@ -1,8 +1,10 @@
-package Login;
+package login;
+
+import entity.User;
 
 public interface LoginDSGateway {
 
-    void login(LoginRequestModel logReqMod);
+    User getUser(LoginRequestModel logReqMod);
     boolean userExists(LoginRequestModel logReqMod);
 
 }

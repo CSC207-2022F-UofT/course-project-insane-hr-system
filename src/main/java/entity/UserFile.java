@@ -18,6 +18,7 @@ class UserFile implements Serializable {
     private LocalDate onboardDate;
     private LocalDate departureDate;
     private String status;
+    private int vacationDays = 14;
 
     // construct the userFile for departed user.
     public UserFile(int id,
@@ -166,5 +167,13 @@ class UserFile implements Serializable {
 
     public boolean removeRole(String role) {
         return this.roles.remove(role);
+    }
+
+    public int getVacationDays() {
+        return vacationDays;
+    }
+
+    public void setVacationDays(int vacationDays) {
+        this.vacationDays = vacationDays;
     }
 }

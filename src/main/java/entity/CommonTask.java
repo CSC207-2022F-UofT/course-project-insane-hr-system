@@ -10,16 +10,16 @@ public class CommonTask extends CommonOrganization implements Task {
     private Integer star;
 
     // construct CLOSED task
-    public CommonTask(UUID oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime creatTime, LocalDateTime closeTime, CommonProject commonProject,
+    public CommonTask(UUID oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime createTime, LocalDateTime closeTime, CommonProject commonProject,
                       Object results, int star) {
-        super(oid, name, head, members, description, creatTime, closeTime);
+        super(oid, name, head, members, description, createTime, closeTime);
         this.commonProject = commonProject;
         this.results = results;
         this.star = star;
     }
     // construct OPEN task
-    public CommonTask(UUID oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime creatTime, CommonProject commonProject) {
-        super(oid, name, head, members, description, creatTime);
+    public CommonTask(UUID oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime createTime, CommonProject commonProject) {
+        super(oid, name, head, members, description, createTime);
         this.commonProject = commonProject;
     }
 
