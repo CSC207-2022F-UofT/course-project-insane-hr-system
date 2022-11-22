@@ -7,19 +7,10 @@ import java.util.UUID;
 
 public class LeaveRequestProjectBuilder implements ProjectBuilder {
     @Override
-    public Project createProject(String projectName, String description) {
+    public Project createProject(String projectName, String description, Set<Integer> members) {
         User user = Curr.getUser();
         Integer userId = user.getId();
         LocalDateTime createTime = LocalDateTime.now();
-
-        // retrieve all managers of user
-        Set<Integer> members = new HashSet<>();
-        for (Project p : user.getProjects()) {
-            Integer head = p.getHead();
-            if (!head.equals(userId)) {
-                members.add(head);
-            }
-        }
 
         LeaveRequestProject project = new LeaveRequestProject(UUID.randomUUID(), projectName, userId, members, description,
                 createTime);
