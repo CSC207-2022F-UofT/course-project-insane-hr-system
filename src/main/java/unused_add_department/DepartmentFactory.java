@@ -1,8 +1,9 @@
-package entity;
+package unused_add_department;
+
+import entity.Department;
 
 import java.time.LocalDateTime;
 import java.util.Set;
-import java.util.UUID;
 
 public interface DepartmentFactory{
 

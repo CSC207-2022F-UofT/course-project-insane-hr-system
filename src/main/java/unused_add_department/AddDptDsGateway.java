@@ -1,4 +1,4 @@
-package add_department;
+package unused_add_department;
 
 public interface AddDptDsGateway {
     void save(AddDptDsRequestModel requestModel); //requestModel contains a Department entity

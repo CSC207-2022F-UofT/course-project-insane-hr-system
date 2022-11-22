@@ -1,6 +1,5 @@
-package add_department;
+package unused_add_department;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class AddDptResponseModel {

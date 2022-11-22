@@ -1,7 +1,7 @@
 package enroll_employee;
 
-import entity.Department;
-import entity.Position;
+
+import java.util.List;
 
 
 public class EnrollController {
@@ -11,8 +11,12 @@ public class EnrollController {
         this.enrollInput = enrollInput;
     }
 
-    EnrollResponseModel create(String name, Department dpt, String position){
+    EnrollResponseModel create(String name, String dpt, String position){
         EnrollRequestModel requestModel = new EnrollRequestModel(name,dpt,position);
         return enrollInput.create(requestModel);
+    }
+
+    List<String> getDpts(){
+        return enrollInput.getAllDpts();
     }
 }

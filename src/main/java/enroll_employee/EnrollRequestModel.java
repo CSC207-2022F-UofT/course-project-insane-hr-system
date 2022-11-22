@@ -1,15 +1,13 @@
 package enroll_employee;
 
-import entity.Department;
-import entity.Position;
 
 
 public class EnrollRequestModel {
     private String name;
-    private Department dpt;
-    private Position position;
+    private String dpt;
+    private String position;
 
-    public EnrollRequestModel(String name, Department dpt, Position position) {
+    public EnrollRequestModel(String name, String dpt, String position) {
         this.name = name;
         this.dpt = dpt;
         this.position = position;
@@ -23,19 +21,19 @@ public class EnrollRequestModel {
         this.name = name;
     }
 
-    public Department getDpt() {
+    public String getDpt() {
         return dpt;
     }
 
-    public void setDpt(Department dpt) {
+    public void setDpt(String dpt) {
         this.dpt = dpt;
     }
 
-    public Position getPosition() {
+    public String getPosition() {
         return position;
     }
 
-    public void setPosition(Position position) {
+    public void setPosition(String position) {
         this.position = position;
     }
 }

@@ -1,6 +1,5 @@
-package add_department;
+package unused_add_department;
 
-import entity.Department;
 import entity.Organization;
 
 public class AddDptDsRequestModel {
