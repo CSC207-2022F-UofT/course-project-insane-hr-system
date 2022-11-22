@@ -1,12 +1,20 @@
 package ui;
 
 import com.github.lgooddatepicker.components.DatePicker;
+import controller.LeaveRequestController;
+import entity.Curr;
+import entity.LeaveRequestProjectBuilder;
 import entity.LeaveType;
+import entity.ProjectBuilder;
+import leave_request.*;
+import presenter.LeaveRequestPresenter;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class LeaveRequestUI extends JFrame {
+public class LeaveRequestUI extends JFrame implements ActionListener {
     private JPanel mainPanel;
     JComboBox<LeaveType> leaveTypeComboBox = new JComboBox<>(LeaveType.values());
     JTextArea messageArea = new JTextArea();
@@ -17,17 +25,44 @@ public class LeaveRequestUI extends JFrame {
     JLabel messageLabel = new JLabel("Message:");
     DatePicker startDatePicker = new DatePicker();
     DatePicker returnDatePicker = new DatePicker();
+    LeaveRequestController controller;
 
     public LeaveRequestUI() {
+//        this.controller = controller;
         initComponents();
+        sendRequestButton.addActionListener(this);
     }
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Leave Request");
+
+//        LeaveRequestDsGateway gateway;
+//        LeaveRequestOutputBoundary outputBoundary = new LeaveRequestPresenter();
+//        ProjectBuilder projectBuilder = new LeaveRequestProjectBuilder();
+//        LeaveRequestInputBoundary interactor = new LeaveRequestInteractor(gateway, outputBoundary, projectBuilder);
+//        LeaveRequestController controller = new LeaveRequestController(interactor);
+
         frame.setContentPane(new LeaveRequestUI().mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent evt) {
+        System.out.println("Click " + evt.getActionCommand());
+
+        try {
+//            LeaveRequestResponseModel response = controller.create(Curr.getUser(), messageArea.getText(), (LeaveType) leaveTypeComboBox.getSelectedItem(),
+//                    startDatePicker.getDate(), returnDatePicker.getDate());
+            JOptionPane.showMessageDialog(this, " Request sent.", "SENT REQUEST", JOptionPane.PLAIN_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }
+
+    private JPanel getPanel() {
+        return mainPanel;
     }
 
     private void initComponents() {
