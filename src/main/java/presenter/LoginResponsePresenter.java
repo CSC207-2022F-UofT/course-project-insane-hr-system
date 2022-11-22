@@ -1,6 +1,6 @@
 package Presenter;
 
-import Entity.User;
+import entity.User;
 
 // Use case layer
 
