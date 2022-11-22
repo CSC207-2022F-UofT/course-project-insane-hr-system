@@ -1,9 +1,13 @@
-package enroll_employee;
+package presenter;
+
+import enroll_employee.EnrollOutputBoundary;
+import enroll_employee.EnrollResponseModel;
+import enroll_employee.UserCreationFailed;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class EnrollResponseFormatter implements EnrollPresenter{
+public class EnrollPresenter implements EnrollOutputBoundary {
     @Override
     public EnrollResponseModel prepareSuccessView(EnrollResponseModel responseModel) {
         LocalDateTime responseTime = LocalDateTime.now();

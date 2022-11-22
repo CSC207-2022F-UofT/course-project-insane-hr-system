@@ -1,8 +1,12 @@
-package enroll_employee;
+package ui;
 
 
+import controller.EnrollController;
+import data_access.EnrollDataAccess;
+import enroll_employee.*;
 import entity.CommonUserFactory;
 import entity.UserFactory;
+import presenter.EnrollPresenter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -69,9 +73,9 @@ public class EnrollScreen {
 
     public static void main(String[] args) {
         EnrollDsGateway dsGateway = new EnrollDataAccess();
-        EnrollPresenter enrollPresenter = new EnrollResponseFormatter();
+        EnrollOutputBoundary enrollOutputBoundary = new EnrollPresenter();
         UserFactory userFactory = new CommonUserFactory();
-        EnrollInputBoundary interactor = new EnrollInteractor(dsGateway,enrollPresenter,userFactory);
+        EnrollInputBoundary interactor = new EnrollInteractor(dsGateway, enrollOutputBoundary,userFactory);
         EnrollController enrollController = new EnrollController(interactor);
 
         // Build GUI

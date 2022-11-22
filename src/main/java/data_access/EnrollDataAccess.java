@@ -1,5 +1,7 @@
-package enroll_employee;
+package data_access;
 
+import enroll_employee.EnrollDsGateway;
+import enroll_employee.EnrollDsRequestModel;
 import entity.Department;
 
 import java.time.LocalDateTime;

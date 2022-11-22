@@ -1,17 +1,21 @@
-package enroll_employee;
+package controller;
 
+
+import enroll_employee.EnrollInputBoundary;
+import enroll_employee.EnrollRequestModel;
+import enroll_employee.EnrollResponseModel;
 
 import java.util.List;
 
 
 public class EnrollController {
-    final EnrollInputBoundary enrollInput;
+    public final EnrollInputBoundary enrollInput;
 
     public EnrollController(EnrollInputBoundary enrollInput) {
         this.enrollInput = enrollInput;
     }
 
-    EnrollResponseModel create(String name, String dpt, String position){
+    public EnrollResponseModel create(String name, String dpt, String position){
         EnrollRequestModel requestModel = new EnrollRequestModel(name,dpt,position);
         return enrollInput.create(requestModel);
     }

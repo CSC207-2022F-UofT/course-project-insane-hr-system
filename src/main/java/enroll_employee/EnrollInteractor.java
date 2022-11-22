@@ -8,13 +8,13 @@ import java.util.List;
 
 public class EnrollInteractor implements EnrollInputBoundary{
     final EnrollDsGateway enrolldsGateway;
-    final EnrollPresenter enrollPresenter;
+    final EnrollOutputBoundary enrollOutputBoundary;
     final UserFactory userFactory;
 
 
-    public EnrollInteractor(EnrollDsGateway enrolldsGateway, EnrollPresenter enrollPresenter, UserFactory userFactory) {
+    public EnrollInteractor(EnrollDsGateway enrolldsGateway, EnrollOutputBoundary enrollOutputBoundary, UserFactory userFactory) {
         this.enrolldsGateway = enrolldsGateway;
-        this.enrollPresenter = enrollPresenter;
+        this.enrollOutputBoundary = enrollOutputBoundary;
         this.userFactory = userFactory;
     }
 
@@ -36,7 +36,7 @@ public class EnrollInteractor implements EnrollInputBoundary{
         enrolldsGateway.updateDepartment(dpt);
 
         EnrollResponseModel responseModel = new EnrollResponseModel(user.getName(), user.getId(), user.getUsername(), user.getPassword(), user.getOnboardDate());
-        return enrollPresenter.prepareSuccessView(responseModel);
+        return enrollOutputBoundary.prepareSuccessView(responseModel);
 
     }
 
