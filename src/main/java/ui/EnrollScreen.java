@@ -42,12 +42,9 @@ public class EnrollScreen {
         JFrame frame2 = new JFrame("New Employee");
         frame2.setMinimumSize(new Dimension(450, 300));
         NewEmployeeScreen newEmployeeScreen = new NewEmployeeScreen();
-
         newEmployeeScreen.setEnrollResponseModel(enrollResponseModel);
         newEmployeeScreen.setInfo();
-
         newEmployeeScreen.showScreen(newEmployeeScreen,frame2);
-
         frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame2.pack();
         frame2.setVisible(true);
@@ -89,11 +86,8 @@ public class EnrollScreen {
         EnrollScreen.setPositionCom();
         EnrollScreen.showScreen(EnrollScreen,frame);
 
-
-
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-
     }
 }

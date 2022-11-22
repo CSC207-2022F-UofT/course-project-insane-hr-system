@@ -5,6 +5,7 @@ import entity.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class EnrollInteractor implements EnrollInputBoundary{
     final EnrollDsGateway enrolldsGateway;
@@ -21,9 +22,12 @@ public class EnrollInteractor implements EnrollInputBoundary{
     public EnrollResponseModel create(EnrollRequestModel requestModel){
         int id = enrolldsGateway.generateId();
         String name = requestModel.getName();
+        if (Objects.equals(name, "")){
+            return enrollOutputBoundary.prepareFailView("You have to input the name of the new employee!");
+        }
         Department dpt = enrolldsGateway.findDptByName(requestModel.getDpt());
         String username = enrolldsGateway.generateUsername(name);
-        String password = "="+"user"+ LocalDate.now().getYear(); //default password: "=user2022"
+        String password = username; //By default, the password is the same as username
         List<Role> roles = new ArrayList<Role>();
         List<Project> projects = new ArrayList<Project>();
         List<Task> tasks = new ArrayList<Task>();
@@ -49,8 +53,5 @@ public class EnrollInteractor implements EnrollInputBoundary{
         }
         return dptNames;
     }
-
-
-
 
 }
