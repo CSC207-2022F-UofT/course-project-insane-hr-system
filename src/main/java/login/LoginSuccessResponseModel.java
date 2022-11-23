@@ -1,8 +1,8 @@
-package login;
-
-public class LoginResponseModel {
-
-    String user;
-
-
-}
+//package login;
+//
+//public class LoginResponseModel {
+//
+//    String user;
+//
+//
+//}
