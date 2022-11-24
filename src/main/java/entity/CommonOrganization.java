@@ -13,7 +13,7 @@ public class CommonOrganization implements Organization {
     private Integer head;
     private Set<Integer> members;
     private String description;
-    private final LocalDateTime creatTime;
+    private final LocalDateTime createTime;
     private LocalDateTime closeTime;
     private String state;
 
@@ -21,13 +21,13 @@ public class CommonOrganization implements Organization {
     public CommonOrganization(UUID oid, String name,
                               Integer head, Set<Integer> members,
                               String description,
-                              LocalDateTime creatTime, LocalDateTime closeTime) {
+                              LocalDateTime createTime, LocalDateTime closeTime) {
         this.oid = oid;
         this.name = name;
         this.head = head;
         this.members = members;
         this.description = description;
-        this.creatTime = creatTime;
+        this.createTime = createTime;
         this.closeTime = closeTime;
         this.state = CLOSED;
     }
@@ -36,13 +36,13 @@ public class CommonOrganization implements Organization {
     public CommonOrganization(UUID oid, String name,
                               Integer head, Set<Integer> members,
                               String description,
-                              LocalDateTime creatTime) {
+                              LocalDateTime createTime) {
         this.oid = oid;
         this.name = name;
         this.head = head;
         this.members = members;
         this.description = description;
-        this.creatTime = creatTime;
+        this.createTime = createTime;
         this.state = OPEN;
     }
 
@@ -119,8 +119,8 @@ public class CommonOrganization implements Organization {
     }
 
     @Override
-    public LocalDateTime getCreatTime() {
-        return creatTime;
+    public LocalDateTime getCreateTime() {
+        return createTime;
     }
 
     @Override
