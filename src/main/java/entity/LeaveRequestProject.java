@@ -26,10 +26,12 @@ public class LeaveRequestProject extends CommonOrganization implements Project {
         return this.tasks.remove(task);
     }
 
+    @Override
     public List<Task> getTasks() {
         return tasks;
     }
 
+    @Override
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
     }

@@ -1,27 +1,35 @@
 package login;
 
+import entity.Curr;
+import presenter.LoginPresenter;
 import entity.User;
-import presenter.LoginResponsePresenter;
 
 
-public class LoginInteractor {
+public class LoginInteractor<LoginReponseModel> implements LoginInputBoundary{
 
     final LoginDSGateway loginDsGateway;
-    final LoginResponsePresenter userPresenter;
+    final LoginPresenter userPresenter;
+    final Curr currentUser;
 
-    public static void login(LoginRequestModel logReqMod){
-        // if not gateway.userExists(logreqMod){
-        // LoginFailureResponseModel(
-    }
-
-    public LoginInteractor(LoginDSGateway loginDsGateway, LoginResponsePresenter userPresenter){
+    public LoginInteractor(LoginDSGateway loginDsGateway, LoginPresenter userPresenter, Curr currentUser){
         this.loginDsGateway = loginDsGateway;
         this.userPresenter = userPresenter;
+        this.currentUser = currentUser;
     }
 
-    public static User getUser(LoginRequestModel logReqMod) {
-        // User user = gateway.getUser(LoginRequestModel)
-        // LoginResponsePresenter.displayUser(User)
-        return null;
+    public void login(LoginRequestModel logReqMod) {
+        if (loginDsGateway.userExists(logReqMod)){
+            User user = loginDsGateway.getUser(logReqMod);
+            LoginResponseModel loginResponseModel = new LoginResponseModel(true);
+            userPresenter.prepareSuccessView(user, loginResponseModel);
+        }
+        else {
+            LoginResponseModel loginResponseModel = new LoginResponseModel(false);
+            userPresenter.prepareFailView(loginResponseModel);
+        }
+    }
+
+    public void setCurrUser(Curr currentUser, User user){
+
     }
 }

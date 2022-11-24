@@ -15,7 +15,7 @@ public class LeaveRequestController {
         this.userInput = userInput;
     }
 
-    LeaveRequestResponseModel create(User user, String message, LeaveType leaveType,
+    LeaveRequestResponseModel create(User user, java.lang.String message, LeaveType leaveType,
                                      LocalDate startDate, LocalDate returnDate) {
         LeaveRequestRequestModel requestModel = new LeaveRequestRequestModel(user, message, leaveType, startDate, returnDate);
         return userInput.create(requestModel);
