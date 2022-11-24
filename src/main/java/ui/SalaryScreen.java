@@ -1,14 +1,10 @@
 package ui;
 
-import presenter.SalaryModel;
+import presenter.DataFormatter;
 import salary_calculator.SalaryResponseModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class SalaryScreen extends JFrame {
@@ -26,7 +22,7 @@ public class SalaryScreen extends JFrame {
     }
 
     public JTable getTable(SalaryResponseModel results) {
-        Object[][] objects = SalaryModel.tableFormatter(results);
+        Object[][] objects = DataFormatter.tableFormatter(results);
         Object[] columnNameObj = objects[0];
         String[] columnName = new String[columnNameObj.length];
         for (int i=0;i<columnNameObj.length; i++) {

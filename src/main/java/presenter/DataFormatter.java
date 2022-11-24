@@ -7,7 +7,7 @@ import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.util.List;
 
-public class SalaryModel {
+public class DataFormatter {
 
     public static Object[][] tableFormatter(SalaryResponseModel salaryResponseModel) {
         Field[] fields = PayStub.class.getDeclaredFields();

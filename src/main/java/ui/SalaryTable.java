@@ -1,6 +1,6 @@
 package ui;
 
-import presenter.SalaryModel;
+import presenter.DataFormatter;
 import salary_calculator.PayStub;
 import salary_calculator.SalaryResponseModel;
 
@@ -67,7 +67,7 @@ public class SalaryTable {
     }
 
     public JTable getTableByResponseModel(SalaryResponseModel results) {
-        Object[][] objects = SalaryModel.tableFormatter(results);
+        Object[][] objects = DataFormatter.tableFormatter(results);
         Object[] columnNameObj = objects[0];
         String[] columnName = new String[columnNameObj.length];
         for (int i=0;i<columnNameObj.length; i++) {

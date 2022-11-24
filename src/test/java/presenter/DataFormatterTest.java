@@ -9,14 +9,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class SalaryModelTest {
+class DataFormatterTest {
 
     SalaryResponseModel responseModel;
     @Test
     void tableFormatter() {
-        Object[][] result = SalaryModel.tableFormatter(responseModel);
+        Object[][] result = DataFormatter.tableFormatter(responseModel);
 
     }
 

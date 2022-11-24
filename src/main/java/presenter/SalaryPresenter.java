@@ -35,7 +35,7 @@ public class SalaryPresenter implements SalaryCalculatorOutputBoundary {
 //            }
 //            }
 //        return objects;
-            view.succeedPage(SalaryModel.tableFormatter(salaryResponseModel));
+            view.succeedPage(DataFormatter.tableFormatter(salaryResponseModel));
 
             return salaryResponseModel;
         }
