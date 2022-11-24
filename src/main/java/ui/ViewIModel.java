@@ -5,6 +5,11 @@ import java.util.List;
 
 public interface ViewIModel {
 
+    JList<String> getLeftList();
+    void setLeftList(JList<String> leftList);
+    JList<String> getRightList();
+    void setRightList(JList<String> rightList);
+
     List<DynamicView> getViews();
 
     void setViews(List<DynamicView> views);

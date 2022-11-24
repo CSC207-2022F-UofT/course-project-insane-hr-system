@@ -6,10 +6,29 @@ import java.util.List;
 public class ViewModel implements ViewIModel {
     private List<DynamicView> views;
     private String frameName;
-    private String Title;
+    private String title;
     private String intro;
+    private JList<String> leftList;
+    private JList<String> rightList;
     private JPanel leftPanel;
     private JPanel rightPanel;
+
+    @Override
+    public JList<String> getLeftList() {
+        return leftList;
+    }
+    @Override
+    public void setLeftList(JList<String> leftList) {
+        this.leftList = leftList;
+    }
+    @Override
+    public JList<String> getRightList() {
+        return rightList;
+    }
+    @Override
+    public void setRightList(JList<String> rightList) {
+        this.rightList = rightList;
+    }
 
     @Override
     public List<DynamicView> getViews() {
@@ -33,12 +52,12 @@ public class ViewModel implements ViewIModel {
 
     @Override
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     @Override
     public void setTitle(String title) {
-        Title = title;
+        this.title = title;
     }
 
     @Override

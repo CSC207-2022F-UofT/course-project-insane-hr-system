@@ -1,6 +1,7 @@
 package ui;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class Integration {
     private JPanel rootPanel;
@@ -9,13 +10,27 @@ public class Integration {
     private JPanel rightPanel;
     private JLabel nameLabel;
     private JLabel detailLabel;
+    private JTable leftTable;
+    private JTable rightTable;
+    private JPanel leftCustomizedPanel;
+    private JPanel rightCustomizedPanel;
+
 
     public Integration() {
     }
 
-    public Integration(JPanel leftPanel, JPanel rightPanel, String name, String detail) {
-        this.leftPanel = leftPanel;
-        this.rightPanel = rightPanel;
+    public Integration(String name, String detail, String[] leftColumn, Object[][] leftData, String[] rightColumn, Object[][] rightData, JPanel leftCustomizePanel, JPanel rightCustomizedPanel) {
+        this.nameLabel.setText(name);
+        this.detailLabel.setText(detail);
+        this.leftTable.setModel(new DefaultTableModel(leftData, leftColumn));
+        this.rightTable.setModel(new DefaultTableModel(rightData, rightColumn));
+        this.leftCustomizedPanel.add(leftCustomizePanel);
+        this.rightCustomizedPanel.add(rightCustomizedPanel);
+    }
+
+    public Integration(String name, String detail,JPanel leftCustomizedPanel, JPanel rightCustomizedPanel) {
+        this.leftCustomizedPanel.add(leftCustomizedPanel);
+        this.rightCustomizedPanel.add(rightCustomizedPanel);
         this.nameLabel.setText(name);
         this.detailLabel.setText(detail);
     }
@@ -32,16 +47,13 @@ public class Integration {
         return InfoPanel;
     }
 
-    public void setInfoPanel(JPanel infoPanel) {
-        InfoPanel = infoPanel;
-    }
-
     public JPanel getLeftPanel() {
         return leftPanel;
     }
 
     public void setLeftPanel(JPanel leftPanel) {
-        this.leftPanel = leftPanel;
+        this.leftPanel.removeAll();
+        this.leftPanel.add(leftPanel);
     }
 
     public JPanel getRightPanel() {
@@ -49,24 +61,18 @@ public class Integration {
     }
 
     public void setRightPanel(JPanel rightPanel) {
-        this.rightPanel = rightPanel;
+        this.rightPanel.removeAll();
+        this.rightPanel.add(rightPanel);
     }
 
     public JLabel getNameLabel() {
         return nameLabel;
     }
 
-    public void setNameLabel(JLabel nameLabel) {
-        this.nameLabel = nameLabel;
-    }
-
     public JLabel getDetailLabel() {
         return detailLabel;
     }
 
-    public void setDetailLabel(JLabel detailLabel) {
-        this.detailLabel = detailLabel;
-    }
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Integration");
