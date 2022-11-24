@@ -17,4 +17,5 @@ public class LoginRequestModel {
     public String getPassword(){
         return this.password;
     }
+
 }
