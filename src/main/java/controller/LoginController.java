@@ -1,12 +1,22 @@
 package controller;
 
-import login.LoginInteractor;
+import login.LoginInputBoundary;
 import login.LoginRequestModel;
+
 
 public class LoginController{
 
-    public static void Login(String username, String password) {
-        LoginRequestModel logReqMod = new LoginRequestModel(username, password);
-        LoginInteractor.getUser(logReqMod);
+    LoginInputBoundary interactor = null;
+
+    public LoginController(LoginInputBoundary interactor) {
+        this.interactor = interactor;
     }
+
+    public LoginController(){}
+
+    public void login(String username, String password) {
+        LoginRequestModel logReqMod = new LoginRequestModel(username, password);
+        interactor.login(logReqMod);
+    }
+
 }
