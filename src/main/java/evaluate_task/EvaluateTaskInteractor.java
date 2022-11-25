@@ -2,7 +2,6 @@ package evaluate_task;
 
 import entity.*;
 
-import complete_task.CompleteTaskRequestModel;
 
 public class EvaluateTaskInteractor implements EvaluateTaskInputBoundary{
     private final EvaluateTaskDsGateway evaluateGateway;
@@ -16,13 +15,19 @@ public class EvaluateTaskInteractor implements EvaluateTaskInputBoundary{
     }
 
     @Override
-    public EvaluateTaskResponseModel create(CompleteTaskRequestModel requestModel) {
-        Task task = requestModel.getTask();
+    public EvaluateTaskResponseModel create(EvaluateTaskRequestModel requestModel) {
         User employee = requestModel.getUser();
+        CommonTask commontask = requestModel.getCommonTask();
+        int star = requestModel.getStar();
 
+        if (star < 0) {
+            return evaluateOutputBoundary.prepareFailureView("Star cannot be less than 0");
+        }
+        commontask.setStar(star);
 
-        EvaluateTaskResponseModel evaluateResponseModel = new EvaluateTaskResponseModel(employee,
-                "Evaluated successfully!");
+        EvaluateTaskResponseModel evaluateResponseModel = new EvaluateTaskResponseModel(star, employee,
+                "Evaluated Successfully!");
         return evaluateOutputBoundary.prepareSuccessView(evaluateResponseModel);
     }
+
 }

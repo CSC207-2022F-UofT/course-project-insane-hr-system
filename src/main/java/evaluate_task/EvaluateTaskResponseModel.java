@@ -4,11 +4,20 @@ import entity.*;
 
 public class EvaluateTaskResponseModel {
 
+    private Integer star;
     private User employee;
     private String response;
 
-    public EvaluateTaskResponseModel(User employee, String response) {
+    public EvaluateTaskResponseModel(int star, User employee, String response) {
+        this.star = star;
+        this.employee = employee;
         this.response = response;
+    }
+    public int getStar() {
+        return star;
+    }
+    public void setStar(Integer star) {
+        this.star = star;
     }
 
     public String getResponse() {

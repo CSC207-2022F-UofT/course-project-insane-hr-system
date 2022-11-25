@@ -30,7 +30,7 @@ public class StarEvaluationTask extends CommonOrganization implements Task {
     }
 
     @Override
-    public Object getResults() {
+    public Integer getResults() {
         return results;
     }
 
