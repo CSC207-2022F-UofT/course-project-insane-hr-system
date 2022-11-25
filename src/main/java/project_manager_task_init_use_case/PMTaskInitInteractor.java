@@ -10,7 +10,7 @@ public class PMTaskInitInteractor implements PMTaskInitInputBoundary{
 
     final PMTaskInitOutputBoundary presenter;
 
-    final TaskFactory commonTaskFactory;
+    TaskFactory commonTaskFactory;
 
     final PMTaskInitGateway taskInitGateway;
 

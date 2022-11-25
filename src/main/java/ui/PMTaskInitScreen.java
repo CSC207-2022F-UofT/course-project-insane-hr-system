@@ -4,8 +4,10 @@ import controller.PMTaskInitController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class PMTaskInitScreen {
+public class PMTaskInitScreen extends JPanel implements ActionListener {
 
     JTextField taskName = new JTextField(50);
     JTextField taskDescription = new JTextField(50);
@@ -34,6 +36,25 @@ public class PMTaskInitScreen {
         employeeIdPanel.add(employeeIdInfo);
         employeeIdPanel.add(employeeId);
 
+        JButton createNewTask = new JButton("Create");
 
+        JPanel buttons = new JPanel();
+        buttons.add(createNewTask);
+
+        createNewTask.addActionListener(this);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(title);
+        this.add(taskNameInfo);
+        this.add(taskDescriptionInfo);
+        this.add(employeeIdInfo);
+        this.add(buttons);
+
+    }
+
+    public void actionPerformed(ActionEvent evt) {
+        System.out.println("Click " + evt.getActionCommand());
+        //taskInitController.create(taskName.getText(), taskDescription.getText(), Integer.parseInt(employeeId.getText()), project);
+    //TODO: Figure out how to get the project to save the new task to
+        JOptionPane.showMessageDialog(this, "Task created");
     }
 }
