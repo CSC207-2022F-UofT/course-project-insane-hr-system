@@ -98,7 +98,6 @@ public abstract class IntegrationBuilder {
     }
 
     protected void customizeRightButton(){
-        Object[][] table = getRightSelectedColumns();
         int[] nums = view.getRightTable().getSelectedRows();
         for (int num : nums){
             String name = (String) dataModel.getRightTable().getData()[num][0];
