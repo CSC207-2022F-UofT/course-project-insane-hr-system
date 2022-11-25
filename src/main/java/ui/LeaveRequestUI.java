@@ -27,6 +27,10 @@ public class LeaveRequestUI extends JFrame implements ActionListener {
     DatePicker returnDatePicker = new DatePicker();
     LeaveRequestController controller;
 
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
+
     public LeaveRequestUI() {
 //        this.controller = controller;
         initComponents();

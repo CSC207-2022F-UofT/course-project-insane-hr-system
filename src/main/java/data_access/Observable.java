@@ -2,7 +2,7 @@ package data_access;
 
 import java.util.List;
 
-public interface Observable<K, T> {
+public interface Observable<K> {
     void addObserver(K observer);
 
     void removeObserver(K observer);
