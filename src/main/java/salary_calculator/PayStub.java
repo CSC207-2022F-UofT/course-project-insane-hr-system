@@ -1,9 +1,8 @@
 package salary_calculator;
 
-import java.lang.reflect.Method;
 import java.time.LocalDate;
 
-public class PayStub {
+class PayStub {
     private LocalDate startDate;
     private Integer uid;
     private String username;
@@ -99,5 +98,4 @@ public class PayStub {
     public void setTotalSalary(Integer totalSalary) {
         this.totalSalary = totalSalary;
     }
-
 }

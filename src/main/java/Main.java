@@ -1,4 +1,5 @@
 import controller.LoginController;
+import entity.Curr;
 import presenter.LoginPresenter;
 import presenter.LoginResponseFormatter;
 import ui.LoginScreen;
@@ -10,6 +11,9 @@ public class Main {
 
     public static void main(String[] args) {
 
+
+
+        Curr currentUser = new Curr();
 
         JFrame application = new JFrame("Application");
         CardLayout cardLayout = new CardLayout();

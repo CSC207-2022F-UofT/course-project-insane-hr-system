@@ -26,7 +26,7 @@ class SalaryCalculatorInteractor implements SalaryCalculatorInputBoundary{
         User targetUser = gateway.getUserByUserID(targetID);
         List<Role> targetRoles = targetUser.getRoles();
 
-        if (!RoleAllowed.isHeadOf(roles, targetRoles)) {
+        if (RoleAllowed.isHeadOf(roles, targetRoles)) {
             return outputBoundary.prepareFailedPage("You are not authorized to check" + targetUser.getName() + "'s salary!");
         }
 
