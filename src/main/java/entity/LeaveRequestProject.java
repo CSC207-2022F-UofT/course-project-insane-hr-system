@@ -48,7 +48,6 @@ public class LeaveRequestProject extends CommonOrganization implements Project {
     public void close() {
         this.setState(CLOSED);
         this.setCloseTime(LocalDateTime.now());
-        // TODO: get userFile from head/uid, update user status
     }
 
     public void update() {
