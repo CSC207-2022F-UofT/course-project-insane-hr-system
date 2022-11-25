@@ -4,11 +4,11 @@ import entity.Task;
 
 public class ReviewRequestRequestModel {
     private Task task;
-    private boolean result;
+    private boolean approval;
 
-    public ReviewRequestRequestModel(Task task, boolean result) {
+    public ReviewRequestRequestModel(Task task, boolean approval) {
         this.task = task;
-        this.result = result;
+        this.approval = approval;
     }
 
     public Task getTask() {
@@ -19,11 +19,11 @@ public class ReviewRequestRequestModel {
         this.task = task;
     }
 
-    public boolean getResult() {
-        return result;
+    public boolean getApproval() {
+        return approval;
     }
 
-    public void setResult(boolean result) {
-        this.result = result;
+    public void setApproval(boolean approval) {
+        this.approval = approval;
     }
 }

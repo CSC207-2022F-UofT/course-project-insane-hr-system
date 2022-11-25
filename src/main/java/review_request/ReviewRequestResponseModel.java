@@ -1,17 +1,17 @@
 package review_request;
 
 public class ReviewRequestResponseModel {
-    private boolean result;
+    private String result;
 
-    public ReviewRequestResponseModel(boolean result) {
+    public ReviewRequestResponseModel(String result) {
         this.result = result;
     }
 
-    public boolean getResult() {
+    public String getResult() {
         return result;
     }
 
-    public void setResult(boolean result) {
+    public void setResult(String result) {
         this.result = result;
     }
 }
