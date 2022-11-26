@@ -10,10 +10,8 @@ import javax.swing.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class UserScreenForDptHeadBuilder extends ScreenBuilder {
-    private final UIDataModel dataModel;
     public UserScreenForDptHeadBuilder(UIDataModel dataModel) {
         super(dataModel);
-        this.dataModel = dataModel;
     }
 
 
@@ -100,10 +98,6 @@ public class UserScreenForDptHeadBuilder extends ScreenBuilder {
     @Override
     protected JPanel customizeLeftPanel() {
         return super.customizeLeftPanel();
-    }
-    @Override
-    public UIDataModel getDataModel() {
-        return dataModel;
     }
     public static void main(String[] args) {
         IUIGateway gateway = new UIGateway();

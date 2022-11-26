@@ -10,11 +10,8 @@ import javax.swing.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class EmployeeScreenBuilder extends ScreenBuilder {
-    private final UIDataModel dataModel;
-
     public EmployeeScreenBuilder(UIDataModel dataModel) {
         super(dataModel);
-        this.dataModel = dataModel;
     }
 
     @Override
@@ -32,27 +29,27 @@ public class EmployeeScreenBuilder extends ScreenBuilder {
 
     @Override
     protected String setIntro() {
-        return dataModel.getIntro();
+        return super.getDataModel().getIntro();
     }
 
     @Override
     protected String setInfoTitle() {
-        return dataModel.getInfoTitle();
+        return super.getDataModel().getInfoTitle();
     }
 
     @Override
     protected String setFrameName() {
-        return dataModel.getFrameName();
+        return super.getDataModel().getFrameName();
     }
 
     @Override
     protected Table setLeftTable() {
-        return dataModel.getLeftTable();
+        return super.getDataModel().getLeftTable();
     }
 
     @Override
     protected Table setRightTable() {
-        return dataModel.getRightTable();
+        return super.getDataModel().getRightTable();
     }
 
     @Override
