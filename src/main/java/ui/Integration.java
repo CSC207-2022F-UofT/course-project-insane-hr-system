@@ -1,5 +1,8 @@
 package ui;
 
+import ViewModel.Table;
+import ViewModel.UIDataModel;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.beans.PropertyChangeEvent;
