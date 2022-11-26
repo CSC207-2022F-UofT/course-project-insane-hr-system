@@ -18,6 +18,10 @@ public class LeaveRequestUI extends JFrame {
     DatePicker startDatePicker = new DatePicker();
     DatePicker returnDatePicker = new DatePicker();
 
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
+
     public LeaveRequestUI() {
         initComponents();
     }
