@@ -7,13 +7,14 @@ import java.util.UUID;
 
 public class LeaveRequestProjectBuilder implements ProjectBuilder {
     @Override
-    public Project createProject(String projectName, String description, Set<Integer> members) {
+    public Project createProject(String projectName, String description, Set<Integer> members, int vacationDays,
+                                 LeaveType leaveType) {
         User user = Curr.getUser();
         Integer userId = user.getId();
         LocalDateTime createTime = LocalDateTime.now();
 
         LeaveRequestProject project = new LeaveRequestProject(UUID.randomUUID(), projectName, userId, members, description,
-                createTime);
+                createTime, vacationDays, leaveType);
         user.addCurrProject(project);
 
         // crate a task for every member of the project
