@@ -32,7 +32,7 @@ public class ReviewRequestInteractor implements ReviewRequestInputBoundary {
         // if project has been closed
         if (project.getState().equals(CLOSED)) {
             user.removeCurrProject(project);
-            if (checkResults(project)) { // all managers have approved leave request
+            if (isAllApprovals(project)) { // all managers have approved leave request
                 String status = "On Leave";
                 dsRequestModel.setStatus(status);
             }
@@ -44,7 +44,7 @@ public class ReviewRequestInteractor implements ReviewRequestInputBoundary {
         return outputBoundary.prepareSuccessView(responseModel);
     }
 
-    private boolean checkResults(Project project) {
+    private boolean isAllApprovals(Project project) {
         for (Task t: project.getTasks()) {
             boolean approval = (boolean) t.getResults();
             if (!approval) {
