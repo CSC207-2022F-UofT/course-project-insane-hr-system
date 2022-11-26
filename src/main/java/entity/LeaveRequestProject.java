@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import static entity.Constants.CLOSED;
-
 public class LeaveRequestProject extends CommonOrganization implements Project {
     private List<Task> tasks;
     private int numResponses = 0;
@@ -62,12 +60,6 @@ public class LeaveRequestProject extends CommonOrganization implements Project {
 
     public void setVacationDays(int vacationDays) {
         this.vacationDays = vacationDays;
-    }
-
-    @Override
-    public void close() {
-        this.setState(CLOSED);
-        this.setCloseTime(LocalDateTime.now());
     }
 
     public void update() {
