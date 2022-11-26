@@ -1,7 +1,5 @@
 package entity;
 
-import jdk.jshell.spi.ExecutionControl;
-
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
@@ -29,12 +27,8 @@ public class LeaveRequestTask extends CommonOrganization implements Task {
     }
 
     @Override
-    public void setResults(Object results) throws ExecutionControl.NotImplementedException {
-        if (results instanceof Boolean) {
-            this.results = ((Boolean) results);
-        } else {
-            throw new ExecutionControl.NotImplementedException("Input should be Boolean");
-        }
+    public void setResults(Object results) {
+        this.results = (boolean) results;
     }
 
     @Override
