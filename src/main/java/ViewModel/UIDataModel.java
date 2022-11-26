@@ -1,4 +1,4 @@
-package ui;
+package ViewModel;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

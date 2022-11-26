@@ -1,19 +1,18 @@
 package ui;
 
+import ViewModel.Table;
+import ViewModel.UIDataModel;
 import data_access.IUIGateway;
 import data_access.UIGateway;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-
-import java.io.File;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-public class EmployeeBuilder extends IntegrationBuilder{
+public class EmployeeScreenBuilder extends ScreenBuilder {
     private final UIDataModel dataModel;
 
-    public EmployeeBuilder(UIDataModel dataModel) {
+    public EmployeeScreenBuilder(UIDataModel dataModel) {
         super(dataModel);
         this.dataModel = dataModel;
     }
@@ -56,10 +55,15 @@ public class EmployeeBuilder extends IntegrationBuilder{
         return dataModel.getRightTable();
     }
 
+    @Override
+    protected JPanel customizeLeftPanel() {
+        return super.customizeLeftPanel();
+    }
+
     public static void main(String[] args) {
         IUIGateway gateway = new UIGateway();
         UIDataModel model = gateway.getUIDataModel(1234);
-        EmployeeBuilder builder = new EmployeeBuilder(model);
+        ScreenBuilder builder = new EmployeeScreenBuilder(model);
         JFrame application = builder.getView();
         application.setDefaultCloseOperation(EXIT_ON_CLOSE);
         application.pack();

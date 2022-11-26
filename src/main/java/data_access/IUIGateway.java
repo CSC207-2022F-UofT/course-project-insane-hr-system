@@ -1,6 +1,6 @@
 package data_access;
 
-import ui.UIDataModel;
+import ViewModel.UIDataModel;
 
 import java.util.UUID;
 
