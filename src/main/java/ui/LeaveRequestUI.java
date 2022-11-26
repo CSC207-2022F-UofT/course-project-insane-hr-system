@@ -14,7 +14,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LeaveRequestUI extends JFrame implements ActionListener {
+public class LeaveRequestUI extends JDialog implements ActionListener {
     private JPanel mainPanel;
     JComboBox<LeaveType> leaveTypeComboBox = new JComboBox<>(LeaveType.values());
     JTextArea messageArea = new JTextArea();
@@ -26,27 +26,36 @@ public class LeaveRequestUI extends JFrame implements ActionListener {
     DatePicker startDatePicker = new DatePicker();
     DatePicker returnDatePicker = new DatePicker();
     LeaveRequestController controller;
+    JFrame frame;
 
     public JPanel getMainPanel() {
         return mainPanel;
     }
 
-    public LeaveRequestUI() {
-//        this.controller = controller;
-        initComponents();
-        sendRequestButton.addActionListener(this);
-    }
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Leave Request");
-
-//        LeaveRequestDsGateway gateway;
+    public LeaveRequestUI(JFrame frame) {
+        super(frame, "Leave Request");
+//        LeaveRequestDsGateway gateway = new DataAccess();
 //        LeaveRequestOutputBoundary outputBoundary = new LeaveRequestPresenter();
 //        ProjectBuilder projectBuilder = new LeaveRequestProjectBuilder();
 //        LeaveRequestInputBoundary interactor = new LeaveRequestInteractor(gateway, outputBoundary, projectBuilder);
-//        LeaveRequestController controller = new LeaveRequestController(interactor);
+//        this.controller = new LeaveRequestController(interactor);
+        this.frame = frame;
+        initComponents();
+        this.setContentPane(mainPanel);
+        this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        this.pack();
+    }
 
-        frame.setContentPane(new LeaveRequestUI().mainPanel);
+    public static void main(String[] args) {
+        JFrame frame = new JFrame();
+        JPanel panel = new JPanel();
+        JButton button = new JButton("Test");
+        panel.add(button);
+        button.addActionListener(e -> {
+            LeaveRequestUI ui = new LeaveRequestUI(frame);
+            ui.setVisible(true);
+        });
+        frame.setContentPane(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -59,14 +68,12 @@ public class LeaveRequestUI extends JFrame implements ActionListener {
         try {
 //            LeaveRequestResponseModel response = controller.create(Curr.getUser(), messageArea.getText(), (LeaveType) leaveTypeComboBox.getSelectedItem(),
 //                    startDatePicker.getDate(), returnDatePicker.getDate());
-            JOptionPane.showMessageDialog(this, " Request sent.", "SENT REQUEST", JOptionPane.PLAIN_MESSAGE);
+//            String message = "Your " + response.getLeaveType() + "leave request from " + response.getStartDate() + "to "
+//                    + response.getReturnDate() + "has been sent on " + response.getCreateTime() + ".";
+            JOptionPane.showMessageDialog(this.frame, " Request sent.", "SENT REQUEST", JOptionPane.PLAIN_MESSAGE);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            JOptionPane.showMessageDialog(this.frame, e.getMessage());
         }
-    }
-
-    private JPanel getPanel() {
-        return mainPanel;
     }
 
     private void initComponents() {
@@ -118,5 +125,6 @@ public class LeaveRequestUI extends JFrame implements ActionListener {
         c.weighty = 0;
         c.ipady = 0;
         mainPanel.add(sendRequestButton, c);
+        sendRequestButton.addActionListener(this);
     }
 }
