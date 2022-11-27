@@ -1,14 +1,14 @@
-package ui;
+package screen_builder;
 
-import ViewModel.UIDataModel;
+import view_model.OrgDataModel;
+import view_model.UIDataModel;
+import screen_builder.ScreenBuilder;
 
-public class TaskScreenBuilder extends ScreenBuilder{
-    public TaskScreenBuilder(UIDataModel dataModel) {
+public class ProjectScreenBuilder extends OrgScreenBuilder {
+    public ProjectScreenBuilder(OrgDataModel dataModel) {
         super(dataModel);
     }
-
-
-    // Implement all these methods to create our different frame.
+// Implement all these methods to create our different frame.
     // there are some help function in super class, like getLeftRows, getRightRows,
     // we could add more helper function if you think it will be used in other frame.
 

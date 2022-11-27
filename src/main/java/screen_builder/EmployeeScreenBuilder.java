@@ -1,16 +1,17 @@
-package ui;
+package screen_builder;
 
-import ViewModel.Table;
-import ViewModel.UIDataModel;
-import data_access.IUIGateway;
+import view_model.Table;
+import view_model.UIDataModel;
 import data_access.UIGateway;
+import view_model.UserDataModel;
+import view_model.UserType;
 
 import javax.swing.*;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-public class EmployeeScreenBuilder extends ScreenBuilder {
-    public EmployeeScreenBuilder(UIDataModel dataModel) {
+public class EmployeeScreenBuilder extends UserScreenBuilder {
+    public EmployeeScreenBuilder(UserDataModel dataModel) {
         super(dataModel);
     }
 
@@ -59,9 +60,9 @@ public class EmployeeScreenBuilder extends ScreenBuilder {
 
     public static void main(String[] args) {
         IUIGateway gateway = new UIGateway();
-        UIDataModel model = gateway.getUIDataModel(1234);
+        UserDataModel model = gateway.getFakeDataModel(1234, UserType.EMPLOYEE);
         ScreenBuilder builder = new EmployeeScreenBuilder(model);
-        JFrame application = builder.getView();
+        JFrame application = builder.getIntroOnly();
         application.setDefaultCloseOperation(EXIT_ON_CLOSE);
         application.pack();
         application.setVisible(true);

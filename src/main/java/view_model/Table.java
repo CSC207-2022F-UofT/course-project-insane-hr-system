@@ -1,7 +1,4 @@
-package ViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
+package view_model;
 
 public class Table {
     private String[] columnName;

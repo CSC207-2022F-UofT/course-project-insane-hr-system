@@ -1,7 +1,8 @@
-package ui;
+package screen_builder;
 
-import ViewModel.Table;
-import ViewModel.UIDataModel;
+import view_model.Table;
+import view_model.UIDataModel;
+import ui.Integration;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -125,6 +126,7 @@ public abstract class ScreenBuilder {
         view.getRightTable().setModel(new DefaultTableModel(table.getData(), table.getColumnName()));
     }
 
+
     /**
      * get the frame after build.
      * @return Integration frame
@@ -166,9 +168,66 @@ public abstract class ScreenBuilder {
         });
 
         // Plug in customized Panels
-        view.setLeftPanel(customizeLeftPanel());
-        view.setRightPanel(customizeRightPanel());
+        view.setLeftControllerPanel(customizeLeftPanel());
+        view.setRightControllerPanel(customizeRightPanel());
         return view;
+    }
+
+    public Integration getIntroOnly(){
+        initialization();
+        view.setTitle(setFrameName());
+        view.setNameLabel(setInfoTitle());
+        view.getDetailLabel().setText(setIntro());
+
+        removeDataPanels();
+        removeButtons();
+        removeControllerPanels();
+
+        view.validate();
+
+        return view;
+    }
+
+    public Integration getIntroAndTable(){
+        initialization();
+        view.setTitle(setFrameName());
+        view.setNameLabel(setInfoTitle());
+        view.getDetailLabel().setText(setIntro());
+
+        removeButtons();
+        removeControllerPanels();
+
+        view.validate();
+
+        return view;
+    }
+    public Integration getIntroTableAndButton(){
+        initialization();
+        view.setTitle(setFrameName());
+        view.setNameLabel(setInfoTitle());
+        view.getDetailLabel().setText(setIntro());
+
+        removeControllerPanels();
+
+        view.validate();
+
+        return view;
+    }
+    void removeButtons() {
+        view.getLeftPanel().remove(view.getLeftButton());
+        view.getRightPanel().remove(view.getRightPanel());
+        view.getLeftPanel().invalidate();
+        view.getRightPanel().invalidate();
+    }
+    void removeDataPanels() {
+        view.getRootPanel().remove(view.getLeftPanel());
+        view.getRootPanel().remove(view.getRightPanel());
+        view.getRootPanel().invalidate();
+    }
+    void removeControllerPanels() {
+        view.getRootPanel().remove(view.getLeftCustomizedPanel());
+        view.getRootPanel().remove(view.getRightCustomizedPanel());
+        view.getRootPanel().invalidate();
     }
 
     public UIDataModel getDataModel() {
