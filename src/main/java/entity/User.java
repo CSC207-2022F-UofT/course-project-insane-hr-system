@@ -20,7 +20,7 @@ public interface User extends UserFace {
 
     boolean addRole(Role role);
 
-    boolean removeRole(String role);
+    boolean removeRole(Role role);
 
     // getter and setter for Fields in the UserFile
 
