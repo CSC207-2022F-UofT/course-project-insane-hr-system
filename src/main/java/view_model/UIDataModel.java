@@ -10,6 +10,8 @@ public abstract class UIDataModel implements PropertyChangeListener {
     private String intro;
     private Table leftTable;
     private Table rightTable;
+    private ScreenType screenType;
+    private int visualLevel;
 
 
 
@@ -141,4 +143,19 @@ public abstract class UIDataModel implements PropertyChangeListener {
 
     }
 
+    public ScreenType getScreenType() {
+        return screenType;
+    }
+
+    public void setScreenType(ScreenType screenType) {
+        this.screenType = screenType;
+    }
+
+    public int getVisualLevel() {
+        return visualLevel;
+    }
+
+    public void setVisualLevel(int visualLevel) {
+        this.visualLevel = visualLevel;
+    }
 }
