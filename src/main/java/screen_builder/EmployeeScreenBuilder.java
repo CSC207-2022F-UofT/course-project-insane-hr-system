@@ -1,21 +1,18 @@
-package ui;
+package screen_builder;
 
-import data_access.IUIGateway;
+import view_model.Table;
+import view_model.UIDataModel;
 import data_access.UIGateway;
+import view_model.UserDataModel;
+import view_model.UserType;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-
-import java.io.File;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-public class EmployeeBuilder extends IntegrationBuilder{
-    private final UIDataModel dataModel;
-
-    public EmployeeBuilder(UIDataModel dataModel) {
+public class EmployeeScreenBuilder extends UserScreenBuilder {
+    public EmployeeScreenBuilder(UserDataModel dataModel) {
         super(dataModel);
-        this.dataModel = dataModel;
     }
 
     @Override
@@ -33,34 +30,39 @@ public class EmployeeBuilder extends IntegrationBuilder{
 
     @Override
     protected String setIntro() {
-        return dataModel.getIntro();
+        return super.getDataModel().getIntro();
     }
 
     @Override
     protected String setInfoTitle() {
-        return dataModel.getInfoTitle();
+        return super.getDataModel().getInfoTitle();
     }
 
     @Override
     protected String setFrameName() {
-        return dataModel.getFrameName();
+        return super.getDataModel().getFrameName();
     }
 
     @Override
     protected Table setLeftTable() {
-        return dataModel.getLeftTable();
+        return super.getDataModel().getLeftTable();
     }
 
     @Override
     protected Table setRightTable() {
-        return dataModel.getRightTable();
+        return super.getDataModel().getRightTable();
+    }
+
+    @Override
+    protected JPanel customizeLeftPanel() {
+        return super.customizeLeftPanel();
     }
 
     public static void main(String[] args) {
         IUIGateway gateway = new UIGateway();
-        UIDataModel model = gateway.getUIDataModel(1234);
-        EmployeeBuilder builder = new EmployeeBuilder(model);
-        JFrame application = builder.getView();
+        UserDataModel model = gateway.getFakeDataModel(1234, UserType.EMPLOYEE);
+        ScreenBuilder builder = new EmployeeScreenBuilder(model);
+        JFrame application = builder.getIntroOnly();
         application.setDefaultCloseOperation(EXIT_ON_CLOSE);
         application.pack();
         application.setVisible(true);
