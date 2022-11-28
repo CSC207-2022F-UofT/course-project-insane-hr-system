@@ -2,10 +2,14 @@ package ui;
 
 import controller.LoginController;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 // Frameworks/Drivers layer
 
@@ -17,12 +21,9 @@ public class LoginScreen extends JPanel implements ActionListener {
 
     LoginController loginController;
 
-    public LoginScreen(LoginController loginController) {
+    public LoginScreen(LoginController loginController) throws IOException {
 
         this.loginController = loginController;
-
-        JLabel title = new JLabel("Login Screen");
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         LabelTextPanel usernameInfo = new LabelTextPanel(
                 new JLabel("Username"), username);
@@ -31,6 +32,10 @@ public class LoginScreen extends JPanel implements ActionListener {
 
         JButton signUp = new JButton("Login");
 
+        BufferedImage logo = ImageIO.read(new File("ui/logo.png"));
+        Image scaledLogo = logo.getScaledInstance(150,75,Image.SCALE_SMOOTH);
+        JLabel logoLabel = new JLabel(new ImageIcon(scaledLogo));
+
         JPanel buttons = new JPanel();
         buttons.add(signUp);
 
@@ -38,8 +43,7 @@ public class LoginScreen extends JPanel implements ActionListener {
 
         // this.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
-        this.add(title);
+        this.add(logoLabel);
         this.add(usernameInfo);
         this.add(passwordInfo);
         this.add(buttons);
