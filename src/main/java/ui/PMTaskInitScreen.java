@@ -53,8 +53,8 @@ public class PMTaskInitScreen extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());
-        //taskInitController.create(taskName.getText(), taskDescription.getText(), Integer.parseInt(employeeId.getText()), project);
-    //TODO: Figure out how to get the project to save the new task to
+        taskInitController.create(taskName.getText(), taskDescription.getText(), Integer.parseInt(employeeId.getText()));
+
         JOptionPane.showMessageDialog(this, "Task created");
     }
 }

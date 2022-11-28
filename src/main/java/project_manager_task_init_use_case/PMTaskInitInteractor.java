@@ -14,9 +14,15 @@ public class PMTaskInitInteractor implements PMTaskInitInputBoundary{
 
     final PMTaskInitGateway taskInitGateway;
 
-    public PMTaskInitInteractor(PMTaskInitOutputBoundary presenter, TaskFactory commonTaskFactory, PMTaskInitGateway gateway) {
+
+
+    public PMTaskInitInteractor(PMTaskInitOutputBoundary presenter, PMTaskInitGateway gateway) {
         this.presenter = presenter;
-        this.commonTaskFactory = commonTaskFactory;
+        for (Project subproject : Curr.getUser().getProjects()) {
+            if (subproject.getHead() == Curr.getUser().getId()){
+                this.commonTaskFactory = new CommonTaskFactory((CommonProject)subproject);
+            }
+        }
         this.taskInitGateway = gateway;
     }
 

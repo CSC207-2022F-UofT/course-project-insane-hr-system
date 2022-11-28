@@ -13,8 +13,8 @@ public class PMTaskInitController {
         this.userInput = userInput;
     }
 
-    public PMTaskInitResponseModel create(String taskName, String taskDescription, int employeeId, CommonProject project) {
-        PMTaskInitRequestModel requestModel = new PMTaskInitRequestModel(taskName, taskDescription, employeeId, project);
+    public PMTaskInitResponseModel create(String taskName, String taskDescription, int employeeId) {
+        PMTaskInitRequestModel requestModel = new PMTaskInitRequestModel(taskName, taskDescription, employeeId);
         return userInput.createTask(requestModel);
     }
 }
