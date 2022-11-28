@@ -29,14 +29,14 @@ public class SalaryCalculateRules implements SalaryCalculator{
         List<CommonTask> commonTasks = new ArrayList<>();
 
         for (Task task : user.getTasks()) {
-            if (task instanceof CommonTask) {
+            if (task instanceof CommonTask && ((CommonTask) task).getStar() != null) {
                 commonTasks.add(((CommonTask) task));
             }
         }
 
         int result = 0;
         for (CommonTask commonTask : commonTasks) {
-            result = result + 10 + commonTask.getStar() * this.salaryPerStar;
+            result = result + this.salaryPerTask + commonTask.getStar() * this.salaryPerStar;
         }
         return result;
     }
