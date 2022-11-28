@@ -1,7 +1,6 @@
 package entity;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CommonUser extends CommonUserFace implements User {
@@ -67,7 +66,7 @@ public class CommonUser extends CommonUserFace implements User {
     }
 
     @Override
-    public boolean removeRole(Role role) {
+    public boolean removeRole(String role) {
         return this.userFile.getRoles().remove(role);
     }
 
@@ -171,7 +170,4 @@ public class CommonUser extends CommonUserFace implements User {
         this.userFile.setVacationDays(vacationDays);
     }
 
-    public static void main(String[] args) {
-
-    }
 }

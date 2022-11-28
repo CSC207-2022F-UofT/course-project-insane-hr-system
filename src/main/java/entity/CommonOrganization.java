@@ -1,7 +1,5 @@
 package entity;
 
-import jdk.jshell.spi.ExecutionControl;
-
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
@@ -9,7 +7,7 @@ import java.util.UUID;
 import static entity.Constants.CLOSED;
 import static entity.Constants.OPEN;
 
-public abstract class CommonOrganization implements Organization {
+public class CommonOrganization implements Organization {
     private final UUID oid;
     private String name;
     private Integer head;
@@ -144,5 +142,4 @@ public abstract class CommonOrganization implements Organization {
     public void setState(String state) {
         this.state = state;
     }
-
 }

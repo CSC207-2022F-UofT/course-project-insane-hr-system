@@ -1,8 +1,5 @@
 package ui;
 
-import view_model.Table;
-import view_model.UIDataModel;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.beans.PropertyChangeEvent;
@@ -62,24 +59,12 @@ public class Integration extends JFrame implements PropertyChangeListener {
         this.detailLabel.setText(detail);
     }
 
-    public JPanel getRootPanel() {
-        return rootPanel;
+    public void setLeftPanel(JPanel leftPanel) {
+        this.leftControllerPanel.add(leftPanel);
     }
 
-    public void setLeftControllerPanel(JPanel leftControllerPanel) {
-        this.leftControllerPanel.add(leftControllerPanel);
-    }
-
-    public void setRightControllerPanel(JPanel rightControllerPanel) {
-        this.rightControllerPanel.add(rightControllerPanel);
-    }
-
-    public JPanel getLeftPanel() {
-        return leftPanel;
-    }
-
-    public JPanel getRightPanel() {
-        return rightPanel;
+    public void setRightPanel(JPanel rightPanel) {
+        this.rightControllerPanel.add(rightPanel);
     }
 
     public JLabel getNameLabel() {

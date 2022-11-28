@@ -55,18 +55,4 @@ public class CommonUserFace implements UserFace {
         return this.uid;
     }
 
-    /**
-     * @param obj any object.
-     * @return true if the uid are equal.
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof UserFace) {
-            return this.getId() == ((UserFace) obj).getId();
-        } else if (obj instanceof UserFile) {
-            return this.getId() == ((UserFile) obj).getId();
-        }
-        return false;
-    }
-
 }

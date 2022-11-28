@@ -1,33 +1,30 @@
-package view_model;
+package ui;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public abstract class UIDataModel implements PropertyChangeListener {
+public class UIDataModel implements PropertyChangeListener {
     private String frameName;
     private String infoTitle;
     private String intro;
     private Table leftTable;
     private Table rightTable;
-    private ScreenType screenType;
-    private int visualLevel;
+
 
 
 
     private final PropertyChangeSupport observable;
 
 
-    public UIDataModel(String frameName, String infoTitle, String intro, Table leftTable, Table rightTable) {
+    public UIDataModel(String frameName, String infoTitle, String intro) {
         this.frameName = frameName;
         this.infoTitle = infoTitle;
         this.intro = intro;
-        this.leftTable = leftTable;
-        this.rightTable = rightTable;
         this.observable = new PropertyChangeSupport(this);
     }
 
-    public UIDataModel(Integer uid, String frameName, String infoTitle, String intro, Table leftTable, Table rightTable) {
+    public UIDataModel(String frameName, String infoTitle, String intro, Table leftTable, Table rightTable) {
         this.frameName = frameName;
         this.infoTitle = infoTitle;
         this.intro = intro;
@@ -74,15 +71,6 @@ public abstract class UIDataModel implements PropertyChangeListener {
         Table oldRightTable = this.rightTable;
         this.rightTable = newRightTable;
         observable.firePropertyChange("RightTableChange", oldRightTable, newRightTable);
-    }
-    public void updateAll(UIDataModel newDataModel) {
-        UIDataModel oldDataModel = this;
-        this.updateIntro(newDataModel.getIntro());
-        this.updateFrameName(newDataModel.getFrameName());
-        this.updateInfoTitle(newDataModel.getInfoTitle());
-        this.updateLeftTable(newDataModel.getLeftTable());
-        this.updateRightTable(newDataModel.getRightTable());
-        observable.firePropertyChange("DataModelChange", oldDataModel, newDataModel);
     }
     public PropertyChangeSupport getObservable() {
         return observable;
@@ -143,19 +131,4 @@ public abstract class UIDataModel implements PropertyChangeListener {
 
     }
 
-    public ScreenType getScreenType() {
-        return screenType;
-    }
-
-    public void setScreenType(ScreenType screenType) {
-        this.screenType = screenType;
-    }
-
-    public int getVisualLevel() {
-        return visualLevel;
-    }
-
-    public void setVisualLevel(int visualLevel) {
-        this.visualLevel = visualLevel;
-    }
 }

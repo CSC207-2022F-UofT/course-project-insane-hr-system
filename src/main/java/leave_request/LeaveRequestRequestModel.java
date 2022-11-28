@@ -30,7 +30,7 @@ public class LeaveRequestRequestModel {
         this.user = user;
     }
 
-    public java.lang.String getMessage() {
+    public String getMessage() {
         return message;
     }
 

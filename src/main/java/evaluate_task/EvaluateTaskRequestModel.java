@@ -2,24 +2,24 @@ package evaluate_task;
 import entity.*;
 
 public class EvaluateTaskRequestModel {
-    private CommonTask commontask;
+    private Task task;
     private User user;
-    private Integer star;
+    private int star;
     private String message;
 
-    public EvaluateTaskRequestModel(CommonTask commontask, User user, Integer star, String message) {
-        this.commontask = commontask;
+    public EvaluateTaskRequestModel(Task task, User user, int star, String message) {
+        this.task = task;
         this.user = user;
         this.star = star;
         this.message = message;
     }
 
-    public CommonTask getCommonTask() {
-        return commontask;
+    public Task getTask() {
+        return task;
     }
 
-    public void setCommontask(CommonTask commontask) {
-        this.commontask = commontask;
+    public void setTask(Task task) {
+        this.task = task;
     }
 
     public User getUser() {

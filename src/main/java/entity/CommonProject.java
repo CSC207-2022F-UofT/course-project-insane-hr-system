@@ -79,6 +79,4 @@ public class CommonProject extends CommonOrganization implements RealProject{
     public void setFunds(int funds) {
         this.funds = funds;
     }
-
-
 }
