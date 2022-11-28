@@ -6,6 +6,8 @@ import data_access.UIGateway;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
@@ -16,6 +18,18 @@ public class EmployeeBuilder extends IntegrationBuilder{
     public EmployeeBuilder(UIDataModel dataModel) {
         super(dataModel);
         this.dataModel = dataModel;
+    }
+
+    @Override
+    public JPanel customizeLeftPanel() {
+        JPanel panel = new JPanel();
+        JButton requestButton = new JButton("Leave Request");
+        panel.add(requestButton);
+        requestButton.addActionListener(e -> {
+            LeaveRequestUI ui = new LeaveRequestUI(getView());
+            ui.setVisible(true);
+        });
+        return panel;
     }
 
     @Override
