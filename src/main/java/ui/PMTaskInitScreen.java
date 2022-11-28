@@ -1,6 +1,11 @@
 package ui;
 
 import controller.PMTaskInitController;
+import data_access.placeholderDataAccessClass;
+import presenter.PMTaskInitPresenter;
+import project_manager_task_init_use_case.PMTaskInitDsRequestModel;
+import project_manager_task_init_use_case.PMTaskInitGateway;
+import project_manager_task_init_use_case.PMTaskInitInteractor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -56,5 +61,21 @@ public class PMTaskInitScreen extends JPanel implements ActionListener {
         taskInitController.create(taskName.getText(), taskDescription.getText(), Integer.parseInt(employeeId.getText()));
 
         JOptionPane.showMessageDialog(this, "Task created");
+    }
+
+    public static void main(String[] args) {
+        //PMTaskInitGateway gateway = new placeholderDataAccessClass();
+        //PMTaskInitPresenter presenter = new PMTaskInitPresenter();
+        //PMTaskInitInteractor interactor = new PMTaskInitInteractor(gateway, presenter);
+        //PMTaskInitController controller = new PMTaskInitController(interactor);
+
+        //PMTaskInitScreen taskInitScreen = new PMTaskInitScreen(controller);
+
+        //JFrame frame = new JFrame("Initialize New Task");
+        //frame.setContentPane(taskInitScreen);
+        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.pack();
+        //frame.setVisible(true);
+
     }
 }
