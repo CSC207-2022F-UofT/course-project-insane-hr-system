@@ -5,15 +5,17 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import static entity.Constants.CLOSED;
-
 public class LeaveRequestProject extends CommonOrganization implements Project {
     private List<Task> tasks;
     private int numResponses = 0;
+    private int vacationDays;
+    private LeaveType leaveType;
 
     public LeaveRequestProject(UUID oid, String name, Integer head, Set<Integer> members, String description,
-                               LocalDateTime createTime) {
+                               LocalDateTime createTime, int vacationDays, LeaveType leaveType) {
         super(oid, name, head, members, description, createTime);
+        this.vacationDays = vacationDays;
+        this.leaveType = leaveType;
     }
 
     @Override
@@ -44,11 +46,20 @@ public class LeaveRequestProject extends CommonOrganization implements Project {
         this.numResponses = numResponses;
     }
 
-    @Override
-    public void close() {
-        this.setState(CLOSED);
-        this.setCloseTime(LocalDateTime.now());
-        // TODO: get userFile from head/uid, update user status
+    public LeaveType getLeaveType() {
+        return leaveType;
+    }
+
+    public void setLeaveType(LeaveType leaveType) {
+        this.leaveType = leaveType;
+    }
+
+    public int getVacationDays() {
+        return vacationDays;
+    }
+
+    public void setVacationDays(int vacationDays) {
+        this.vacationDays = vacationDays;
     }
 
     public void update() {
