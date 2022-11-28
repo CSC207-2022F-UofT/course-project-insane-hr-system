@@ -1,20 +1,18 @@
-package ui;
+package screen_builder;
 
-import ViewModel.Table;
-import ViewModel.UIDataModel;
-import data_access.IUIGateway;
+import view_model.Table;
+import view_model.UIDataModel;
 import data_access.UIGateway;
+import view_model.UserDataModel;
+import view_model.UserType;
 
 import javax.swing.*;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-public class EmployeeScreenBuilder extends ScreenBuilder {
-    private final UIDataModel dataModel;
-
-    public EmployeeScreenBuilder(UIDataModel dataModel) {
+public class EmployeeScreenBuilder extends UserScreenBuilder {
+    public EmployeeScreenBuilder(UserDataModel dataModel) {
         super(dataModel);
-        this.dataModel = dataModel;
     }
 
     @Override
@@ -32,27 +30,27 @@ public class EmployeeScreenBuilder extends ScreenBuilder {
 
     @Override
     protected String setIntro() {
-        return dataModel.getIntro();
+        return super.getDataModel().getIntro();
     }
 
     @Override
     protected String setInfoTitle() {
-        return dataModel.getInfoTitle();
+        return super.getDataModel().getInfoTitle();
     }
 
     @Override
     protected String setFrameName() {
-        return dataModel.getFrameName();
+        return super.getDataModel().getFrameName();
     }
 
     @Override
     protected Table setLeftTable() {
-        return dataModel.getLeftTable();
+        return super.getDataModel().getLeftTable();
     }
 
     @Override
     protected Table setRightTable() {
-        return dataModel.getRightTable();
+        return super.getDataModel().getRightTable();
     }
 
     @Override
@@ -62,9 +60,9 @@ public class EmployeeScreenBuilder extends ScreenBuilder {
 
     public static void main(String[] args) {
         IUIGateway gateway = new UIGateway();
-        UIDataModel model = gateway.getUIDataModel(1234);
+        UserDataModel model = gateway.getFakeDataModel(1234, UserType.EMPLOYEE);
         ScreenBuilder builder = new EmployeeScreenBuilder(model);
-        JFrame application = builder.getView();
+        JFrame application = builder.getIntroOnly();
         application.setDefaultCloseOperation(EXIT_ON_CLOSE);
         application.pack();
         application.setVisible(true);

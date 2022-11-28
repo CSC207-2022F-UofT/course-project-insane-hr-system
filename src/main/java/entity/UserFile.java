@@ -176,4 +176,18 @@ class UserFile implements Serializable {
     public void setVacationDays(int vacationDays) {
         this.vacationDays = vacationDays;
     }
+
+    /**
+     * @param obj any object.
+     * @return true if the uid are equal.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof UserFace) {
+            return this.getId() == ((UserFace) obj).getId();
+        } else if (obj instanceof UserFile) {
+            return this.getId() == ((UserFile) obj).getId();
+        }
+        return false;
+    }
 }

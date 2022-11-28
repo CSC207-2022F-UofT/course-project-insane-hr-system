@@ -4,7 +4,7 @@ import salary_calculator.SalaryCalculatorOutputBoundary;
 import salary_calculator.SalaryResponseModel;
 
 public class SalaryPresenter implements SalaryCalculatorOutputBoundary {
-    private SalaryIView view;
+    private final SalaryIView view;
 
     public SalaryPresenter(SalaryIView view) {
         this.view = view;

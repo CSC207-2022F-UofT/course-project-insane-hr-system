@@ -1,19 +1,17 @@
-package ui;
+package screen_builder;
 
-import ViewModel.Table;
-import ViewModel.UIDataModel;
-import data_access.IUIGateway;
+import view_model.Table;
 import data_access.UIGateway;
+import view_model.UserDataModel;
+import view_model.UserType;
 
 import javax.swing.*;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-public class UserScreenForDptHeadBuilder extends ScreenBuilder {
-    private final UIDataModel dataModel;
-    public UserScreenForDptHeadBuilder(UIDataModel dataModel) {
+public class UserScreenBuilder extends ScreenBuilder {
+    public UserScreenBuilder(UserDataModel dataModel) {
         super(dataModel);
-        this.dataModel = dataModel;
     }
 
 
@@ -101,14 +99,10 @@ public class UserScreenForDptHeadBuilder extends ScreenBuilder {
     protected JPanel customizeLeftPanel() {
         return super.customizeLeftPanel();
     }
-    @Override
-    public UIDataModel getDataModel() {
-        return dataModel;
-    }
     public static void main(String[] args) {
         IUIGateway gateway = new UIGateway();
-        UIDataModel model = gateway.getUIDataModel(1234);
-        ScreenBuilder builder = new UserScreenForDptHeadBuilder(model);
+        UserDataModel model = gateway.getFakeDataModel(1, UserType.EMPLOYEE);
+        ScreenBuilder builder = new UserScreenBuilder(model);
         JFrame application = builder.getView();
         application.setDefaultCloseOperation(EXIT_ON_CLOSE);
         application.pack();

@@ -1,21 +1,19 @@
-package ui;
+package screen_builder;
 
-import ViewModel.Table;
-import ViewModel.UIDataModel;
-import data_access.IUIGateway;
+import view_model.Table;
+import view_model.UIDataModel;
 import data_access.UIGateway;
+import view_model.UserDataModel;
+import view_model.UserType;
 
 import javax.swing.*;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-public class DptHeadScreenBuilder extends ScreenBuilder{
-    private final UIDataModel dataModel;
-    public DptHeadScreenBuilder(UIDataModel dataModel) {
+public class DptHeadScreenBuilder extends UserScreenBuilder{
+    public DptHeadScreenBuilder(UserDataModel dataModel) {
         super(dataModel);
-        this.dataModel = dataModel;
     }
-
 
     // Implement all these methods to create our different frame.
     // there are some help function in super class, like getLeftRows, getRightRows,
@@ -101,16 +99,10 @@ public class DptHeadScreenBuilder extends ScreenBuilder{
     protected JPanel customizeLeftPanel() {
         return super.customizeLeftPanel();
     }
-
-    @Override
-    public UIDataModel getDataModel() {
-        return dataModel;
-    }
-
     public static void main(String[] args) {
         IUIGateway gateway = new UIGateway();
-        UIDataModel model = gateway.getUIDataModel(1234);
-        ScreenBuilder builder = new DptHeadScreenBuilder(model);
+        UserDataModel model = gateway.getFakeDataModel(1234, UserType.DPT_HEAD);
+        ScreenBuilder builder = new EmployeeScreenBuilder(model);
         JFrame application = builder.getView();
         application.setDefaultCloseOperation(EXIT_ON_CLOSE);
         application.pack();
