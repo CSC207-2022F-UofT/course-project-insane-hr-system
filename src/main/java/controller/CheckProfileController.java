@@ -1,6 +1,7 @@
 package controller;
 
 import check_profile_validation.*;
+import presenter.CheckProfilePresenter;
 import view_model.Table;
 
 import java.beans.PropertyChangeEvent;
@@ -10,10 +11,9 @@ import java.util.UUID;
 public class CheckProfileController implements PropertyChangeListener {
     private final CheckProfileInputBoundary interactor;
 
-    public CheckProfileController(CheckProfileInputBoundary interactor) {
-        this.interactor = interactor;
+    public CheckProfileController(CheckProfileGateway gateway, CheckProfileOutputBoundary presenter) {
+        this.interactor = new CheckProfileInteractor(gateway, presenter);
     }
-
 
     public void create(Integer requester, Integer target){
         CheckUserFileRequestModel requestModel = new CheckUserFileRequestModel(requester, target);
@@ -24,9 +24,6 @@ public class CheckProfileController implements PropertyChangeListener {
 
         CheckOrgFileRequestModel requestModel = new CheckOrgFileRequestModel(requester, target);
         interactor.checkOrgProfile(requestModel);
-    }
-    public void update(){
-
     }
     /**
      * @param evt A PropertyChangeEvent object describing the event source

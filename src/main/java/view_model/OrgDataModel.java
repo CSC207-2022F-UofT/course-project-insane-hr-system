@@ -1,22 +1,27 @@
 package view_model;
 
+import presenter.OrgIViewModel;
+
 import java.util.UUID;
 
-public class OrgDataModel extends UIDataModel{
-    private final UUID oid;
-    private final OrgType orgType;
+public class OrgDataModel extends UIDataModel implements OrgIViewModel {
+    private UUID oid;
 
-    public OrgDataModel(UUID oid, OrgType orgType, String frameName, String infoTitle, String intro, Table leftTable, Table rightTable) {
+    public OrgDataModel(UUID oid) {
+        this.oid = oid;
+    }
+
+    public OrgDataModel(UUID oid, String frameName, String infoTitle, String intro, Table leftTable, Table rightTable) {
         super(frameName, infoTitle, intro, leftTable, rightTable);
         this.oid = oid;
-        this.orgType = orgType;
     }
 
     public UUID getOid() {
         return oid;
     }
 
-    public OrgType getOrganizationType() {
-        return orgType;
+    public void setOid(UUID oid) {
+
     }
+
 }

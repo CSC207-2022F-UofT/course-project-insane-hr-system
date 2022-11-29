@@ -1,5 +1,6 @@
 package screen_builder;
 
+import ui.EmployeeBuilder;
 import view_model.Table;
 import view_model.UIDataModel;
 import data_access.UIGateway;
@@ -102,7 +103,7 @@ public class DptHeadScreenBuilder extends UserScreenBuilder{
     public static void main(String[] args) {
         IUIGateway gateway = new UIGateway();
         UserDataModel model = gateway.getFakeDataModel(1234, UserType.DPT_HEAD);
-        ScreenBuilder builder = new EmployeeScreenBuilder(model);
+        ScreenBuilder builder = new EmployeeBuilder(model);
         JFrame application = builder.getView();
         application.setDefaultCloseOperation(EXIT_ON_CLOSE);
         application.pack();

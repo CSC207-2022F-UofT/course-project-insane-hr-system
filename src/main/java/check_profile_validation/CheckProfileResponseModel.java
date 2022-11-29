@@ -2,6 +2,7 @@ package check_profile_validation;
 
 import entity.RelativeRelation;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -10,13 +11,16 @@ public class CheckProfileResponseModel {
     private String fileType;
     private int visualLevel;
     private String name;
-    private List<Object> list1;
+    private List<Object> list1 = new ArrayList<>();
+    private Object[] reference1;
     private String list1Name;
-    private List<Object> list2;
+    private List<Object> list2 = new ArrayList<>();
+    private Object[] reference2;
     private String list2Name;
     private Integer uid;
     private UUID oid;
-    private Integer relation;
+    private RelativeRelation relation;
+    private String bio;
 
     public CheckProfileResponseModel(CheckProfileGateway gateway) {
         this.gateway = gateway;
@@ -98,11 +102,35 @@ public class CheckProfileResponseModel {
         return gateway;
     }
 
-    public Integer getRelation() {
+    public RelativeRelation getRelation() {
         return relation;
     }
 
-    public void setRelation(Integer relation) {
+    public void setRelation(RelativeRelation relation) {
         this.relation = relation;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public Object[] getReference1() {
+        return reference1;
+    }
+
+    public void setReference1(Object[] reference1) {
+        this.reference1 = reference1;
+    }
+
+    public Object[] getReference2() {
+        return reference2;
+    }
+
+    public void setReference2(Object[] reference2) {
+        this.reference2 = reference2;
     }
 }

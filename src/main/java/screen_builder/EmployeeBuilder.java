@@ -1,18 +1,18 @@
 package ui;
 
-import data_access.IUIGateway;
+import check_profile_validation.FileType;
 import data_access.UIGateway;
+import screen_builder.IUIGateway;
+import screen_builder.ScreenBuilder;
+import view_model.Table;
+import view_model.UIDataModel;
+import view_model.UserType;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-public class EmployeeBuilder extends IntegrationBuilder{
+public class EmployeeBuilder extends ScreenBuilder {
     private final UIDataModel dataModel;
 
     public EmployeeBuilder(UIDataModel dataModel) {
@@ -72,7 +72,7 @@ public class EmployeeBuilder extends IntegrationBuilder{
 
     public static void main(String[] args) {
         IUIGateway gateway = new UIGateway();
-        UIDataModel model = gateway.getUIDataModel(1234);
+        UIDataModel model = gateway.getFakeDataModel(1234, UserType.EMPLOYEE);
         EmployeeBuilder builder = new EmployeeBuilder(model);
         JFrame application = builder.getView();
         application.setDefaultCloseOperation(EXIT_ON_CLOSE);

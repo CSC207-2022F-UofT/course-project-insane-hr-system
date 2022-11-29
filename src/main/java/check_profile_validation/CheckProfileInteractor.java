@@ -2,7 +2,6 @@ package check_profile_validation;
 
 import entity.*;
 
-import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -28,7 +27,7 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
         responseModel.setFileType(FileType.USER_FILE);
 
         responseModel.setVisualLevel(visualLevel);
-        responseModel.setName("User File");
+        responseModel.setName(target.getName() + " File");
         responseModel.setRelation(RoleAllowed.getRelation(requester, target));
 
         if (visualLevel == VisualLevel.INVISIBLE) {
@@ -50,17 +49,28 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
         responseModel.setList2Name("Projects");
 
         if (requester.equals(target)) {
-            responseModel.setName("Main");
+            responseModel.setName(target.getName());
             List<Organization> orgs3 = new ArrayList<>(target.getTasks());
+
             List<Object> results3= getVisibleOrganizations(requester, getUncommonOrgnizations(orgs3));
             responseModel.getList1().addAll(results3);
+            responseModel.setReference1(getOReference(target.getTasks().toArray(new Organization[0])));
             List<Organization> orgs4 = new ArrayList<>(target.getProjects());
             List<Object> results4= getVisibleOrganizations(requester, getUncommonOrgnizations(orgs4));
             responseModel.getList1().addAll(results4);
+            responseModel.setReference1(getOReference(target.getProjects().toArray(new Organization[0])));
         }
 
         outputBoundary.prepareUserFrame(responseModel);
         return responseModel;
+    }
+
+    private Object[] getOReference(Organization[] orgs) {
+        Object[] results = new Object[orgs.length];
+        for (int i = 0; i < orgs.length; i ++) {
+            results[i] = orgs[i].getOid();
+        }
+        return results;
     }
 
 
@@ -100,7 +110,7 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
         setRelativeRelation(requester, responseModel, target.getOid(), target);
 
 
-        responseModel.setName("Department File");
+        responseModel.setName(target.getName() + " Department File");
         if (visualLevel == VisualLevel.INVISIBLE) {
             return responseModel;
         }
@@ -112,6 +122,7 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
 
         responseModel.setList1(getOrgVisibleMembers(requester, target));
         responseModel.setList1Name("Members");
+        responseModel.setReference1(target.getMembers().toArray(new Integer[0]));
         responseModel.setList2(getDptVisibleProject(requester, target));
         responseModel.setList2Name("Projects");
 
@@ -129,7 +140,7 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
         setRelativeRelation(requester, responseModel, target.getOid(), target);
 
 
-        responseModel.setName("Project File");
+        responseModel.setName(responseModel.getName() + " Project File");
         if (visualLevel == VisualLevel.INVISIBLE) {
             return responseModel;
         }
@@ -156,7 +167,7 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
         setRelativeRelation(requester, responseModel, target.getOid(), target);
 
 
-        responseModel.setName("Task File");
+        responseModel.setName(responseModel.getName() + " Task File");
         if (visualLevel == VisualLevel.INVISIBLE) {
             return responseModel;
         }

@@ -1,20 +1,26 @@
 package view_model;
 
-public class UserDataModel extends UIDataModel{
-    private final Integer uid;
-    private final UserType userType;
+import presenter.UserIViewModel;
 
-    public UserDataModel(Integer uid, UserType userType, String frameName, String infoTitle, String intro, Table leftTable, Table rightTable) {
-        super(uid, frameName, infoTitle, intro, leftTable, rightTable);
+public class UserDataModel extends UIDataModel implements UserIViewModel {
+    private Integer uid;
+
+    public UserDataModel(Integer uid, String frameName, String infoTitle, String intro, Table leftTable, Table rightTable ) {
+        super(frameName, infoTitle, intro, leftTable, rightTable);
         this.uid = uid;
-        this.userType = userType;
+    }
+
+    public UserDataModel(Integer uid) {
+        this.uid = uid;
     }
 
     public Integer getUid() {
         return uid;
     }
 
-    public UserType getUserType() {
-        return userType;
+    @Override
+    public void setUid(Integer uid) {
+
     }
+
 }

@@ -22,7 +22,7 @@ public class UIGateway implements IUIGateway {
         Table left = new Table(new String[]{"Employee Name"}, new Object[][]{new Object[]{"Bob"}, new Object[]{"john"}}, new Object[]{"11","22"});
         Table right = new Table(new String[]{"Head12 Name"}, new Object[][]{new Object[]{"Leon"}, new Object[]{"Alice"}}, new Object[]{"10","20"});
         String intro = String.format("Introduction:\nUid:\t%s\n", uid);
-        return new UserDataModel(uid, userType, "FrameName", "User Name", intro, left, right);
+        return new UserDataModel(uid, "FrameName", "User Name", intro, left, right);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class UIGateway implements IUIGateway {
         Table left = new Table(new String[]{"Member Name"}, new Object[][]{new Object[]{"Bob"}, new Object[]{"john"}}, new Object[]{"11","22"});
         Table right = new Table(new String[]{"Task Name"}, new Object[][]{new Object[]{"Leon"}, new Object[]{"Alice"}}, new Object[]{"10","20"});
         String intro = String.format("Introduction:\nUid:\t%s\n", oid);
-        return new OrgDataModel(oid, orgType, "FrameName", "User Name", intro, left, right);
+        return new OrgDataModel(oid, "FrameName", "User Name", intro, left, right);
     }
 
     @Override
