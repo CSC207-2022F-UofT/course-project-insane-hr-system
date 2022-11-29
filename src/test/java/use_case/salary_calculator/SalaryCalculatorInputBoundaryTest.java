@@ -1,4 +1,4 @@
-package salary_calculator;
+package use_case.salary_calculator;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
