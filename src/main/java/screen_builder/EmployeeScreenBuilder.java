@@ -1,18 +1,35 @@
-package screen_builder;
+package ui;
 
-import view_model.Table;
-import view_model.UIDataModel;
+import data_access.IUIGateway;
 import data_access.UIGateway;
-import view_model.UserDataModel;
-import view_model.UserType;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-public class EmployeeScreenBuilder extends UserScreenBuilder {
-    public EmployeeScreenBuilder(UserDataModel dataModel) {
+public class EmployeeBuilder extends IntegrationBuilder{
+    private final UIDataModel dataModel;
+
+    public EmployeeBuilder(UIDataModel dataModel) {
         super(dataModel);
+        this.dataModel = dataModel;
+    }
+
+    @Override
+    public JPanel customizeLeftPanel() {
+        JPanel panel = new JPanel();
+        JButton requestButton = new JButton("Leave Request");
+        panel.add(requestButton);
+        requestButton.addActionListener(e -> {
+            LeaveRequestUI ui = new LeaveRequestUI(getView());
+            ui.setVisible(true);
+        });
+        return panel;
     }
 
     @Override
@@ -30,39 +47,34 @@ public class EmployeeScreenBuilder extends UserScreenBuilder {
 
     @Override
     protected String setIntro() {
-        return super.getDataModel().getIntro();
+        return dataModel.getIntro();
     }
 
     @Override
     protected String setInfoTitle() {
-        return super.getDataModel().getInfoTitle();
+        return dataModel.getInfoTitle();
     }
 
     @Override
     protected String setFrameName() {
-        return super.getDataModel().getFrameName();
+        return dataModel.getFrameName();
     }
 
     @Override
     protected Table setLeftTable() {
-        return super.getDataModel().getLeftTable();
+        return dataModel.getLeftTable();
     }
 
     @Override
     protected Table setRightTable() {
-        return super.getDataModel().getRightTable();
-    }
-
-    @Override
-    protected JPanel customizeLeftPanel() {
-        return super.customizeLeftPanel();
+        return dataModel.getRightTable();
     }
 
     public static void main(String[] args) {
         IUIGateway gateway = new UIGateway();
-        UserDataModel model = gateway.getFakeDataModel(1234, UserType.EMPLOYEE);
-        ScreenBuilder builder = new EmployeeScreenBuilder(model);
-        JFrame application = builder.getIntroOnly();
+        UIDataModel model = gateway.getUIDataModel(1234);
+        EmployeeBuilder builder = new EmployeeBuilder(model);
+        JFrame application = builder.getView();
         application.setDefaultCloseOperation(EXIT_ON_CLOSE);
         application.pack();
         application.setVisible(true);
