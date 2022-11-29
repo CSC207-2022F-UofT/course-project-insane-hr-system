@@ -3,5 +3,5 @@ package entity;
 public enum Position {
     CEO,
     HEAD,
-    MEMBER
+    SAMEPROJECT, SAMEORG, HEADOF, HASOVERLAPORG, MEMBER
 }
