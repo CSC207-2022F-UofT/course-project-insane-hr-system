@@ -27,6 +27,11 @@ public class LeaveRequestScreen extends JDialog implements ActionListener {
         return mainPanel;
     }
 
+    /**
+     * Creates a dialog for sending leave requests.
+     * @param frame the JFrame the dialog will be displayed on.
+     *
+     */
     public LeaveRequestScreen(JFrame frame) {
         super(frame, "Leave Request");
 //        LeaveRequestDsGateway gateway = new DataAccess();

@@ -17,6 +17,12 @@ public class LeaveRequestInteractor implements LeaveRequestInputBoundary {
         this.projectBuilder = projectBuilder;
     }
 
+    /**
+     * This method takes in the request model and creates a leave request which is saved to the database.
+     * @param requestModel a LeaveRequestRequestModel
+     *
+     * @return LeaveRequestResponseModel
+     */
     @Override
     public LeaveRequestResponseModel create(LeaveRequestRequestModel requestModel) {
         // get current user and relevant data
@@ -56,6 +62,7 @@ public class LeaveRequestInteractor implements LeaveRequestInputBoundary {
         LeaveRequestDsRequestModel dsRequestModel = new LeaveRequestDsRequestModel(project);
         gateway.save(dsRequestModel);
 
+        // generate ResponseModel and return
         LeaveRequestResponseModel responseModel = new LeaveRequestResponseModel(leaveType.toString(), startDate, returnDate,
                 project.getCreateTime().toString());
         return outputBoundary.prepareSuccessView(responseModel);
