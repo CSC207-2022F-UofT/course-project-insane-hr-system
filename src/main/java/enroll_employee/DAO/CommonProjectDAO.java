@@ -203,9 +203,9 @@ public class CommonProjectDAO {
 
     public CommonProject getProject(UUID id){
         List<CommonProject> projects = getAllCommonProjects();
-        for(int i = 0; i<projects.size(); i++){
-            if (projects.get(i).getOid().equals(id)){
-                return projects.get(i);
+        for (CommonProject project : projects) {
+            if (project.getOid().equals(id)) {
+                return project;
             }
         }
         return null;

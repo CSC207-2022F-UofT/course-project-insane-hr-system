@@ -13,8 +13,6 @@ import java.util.UUID;
 public interface CheckProfileIGateway {
     List<Role> getUserRolesByUid(Integer requester);
 
-    List<Project> getUserCurrentProjectByUid(Integer requester);
-
     User getUserByUid(Integer requester);
 
     PropertyChangeSupport getObservable();

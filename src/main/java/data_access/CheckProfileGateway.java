@@ -2,7 +2,6 @@ package data_access;
 
 import check_profile_validation.CheckProfileIGateway;
 import entity.Organization;
-import entity.Project;
 import entity.Role;
 import entity.User;
 
@@ -23,11 +22,6 @@ public class CheckProfileGateway implements CheckProfileIGateway {
 
     @Override
     public List<Role> getUserRolesByUid(Integer requester) {
-        return null;
-    }
-
-    @Override
-    public List<Project> getUserCurrentProjectByUid(Integer requester) {
         return null;
     }
 

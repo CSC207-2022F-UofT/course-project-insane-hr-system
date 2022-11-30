@@ -2,11 +2,9 @@ package screen_builder;
 
 import data_access.UIGateway;
 import presenter.IViewModel;
-import screen_builder.IUIGateway;
-import screen_builder.ScreenBuilder;
+import ui.ScreenBuilder;
 import ui.LeaveRequestUI;
 import view_model.Table;
-import view_model.ViewModel;
 import view_model.UserType;
 
 import javax.swing.*;

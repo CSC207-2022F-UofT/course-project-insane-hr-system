@@ -1,4 +1,4 @@
-package screen_builder;
+package view_model;
 
 import presenter.IViewModel;
 import ui.Integration;

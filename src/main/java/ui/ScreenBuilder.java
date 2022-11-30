@@ -1,17 +1,15 @@
-package screen_builder;
+package ui;
 
 import check_profile_validation.CheckProfileIGateway;
 import check_profile_validation.CheckProfileInputBoundary;
 import check_profile_validation.CheckProfileInteractor;
-import check_profile_validation.CheckProfileOutputBoundary;
 import controller.CheckProfileController;
 import data_access.CheckProfileGateway;
 import presenter.CheckProfilePresenter;
 import presenter.IViewModel;
+import view_model.IView;
 import view_model.Table;
-import view_model.UserType;
 import view_model.ViewModel;
-import ui.Integration;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -23,16 +21,16 @@ import java.util.UUID;
 public class ScreenBuilder implements IView {
     private final IViewModel dataModel;
     private final Integration view;
-    private CheckProfileController buttonController;
+    private final CheckProfileController buttonController;
 
     public ScreenBuilder(IViewModel dataModel) {
         this.dataModel = dataModel;
         view = new Integration(dataModel.getFrameName());
         this.dataModel.addObserver(view);
-//        CheckProfileIGateway gateway = new CheckProfileGateway();
-//        CheckProfilePresenter presenter =new CheckProfilePresenter();
-//        CheckProfileInputBoundary interactor = new CheckProfileInteractor(gateway, presenter);
-//        buttonController = new CheckProfileController(interactor);
+        CheckProfileIGateway gateway = new CheckProfileGateway();
+        CheckProfilePresenter presenter =new CheckProfilePresenter();
+        CheckProfileInputBoundary interactor = new CheckProfileInteractor(gateway, presenter);
+        buttonController = new CheckProfileController(interactor);
     }
 
     public ScreenBuilder(ViewModel dataModel, CheckProfileIGateway gateway) {
