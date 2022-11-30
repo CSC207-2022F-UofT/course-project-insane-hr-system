@@ -23,7 +23,7 @@ public class LeaveRequestInteractor implements LeaveRequestInputBoundary {
         User user = requestModel.getUser();
         int vacationDays = user.getVacationDays();
         int leaveDays = requestModel.getLeaveDays();
-        String leaveType = requestModel.getLeaveType().toString();
+        LeaveType leaveType = requestModel.getLeaveType();
         String startDate = requestModel.getStartDate().toString();
         String returnDate = requestModel.getReturnDate().toString();
 
@@ -31,12 +31,9 @@ public class LeaveRequestInteractor implements LeaveRequestInputBoundary {
             return outputBoundary.prepareFailureView("Return date have to be after the start date.");
         }
 
-        if (requestModel.getLeaveType() == LeaveType.VACATION) {
-            if (vacationDays < leaveDays) {
+        if (leaveType == LeaveType.VACATION && vacationDays < leaveDays) {
                 return outputBoundary.prepareFailureView("You do not have enough vacation days left\nRequested: "
                         + leaveDays + " Remaining: " + vacationDays);
-            }
-            user.setVacationDays(vacationDays - leaveDays); // update user's vacation days
         }
 
         // get all superiors of user
@@ -51,15 +48,15 @@ public class LeaveRequestInteractor implements LeaveRequestInputBoundary {
         }
 
         // e.g. "Tim Lan's VACATION Leave Request (2022-11-17 until 2022-12-12 return)"
-        String projectName = user.getName() + "'s " + leaveType + " Leave Request (" + startDate + " until " + returnDate
+        String projectName = user.getName() + "'s " + leaveType.toString() + " Leave Request (" + startDate + " until " + returnDate
                 + " return)";
-        Project project = projectBuilder.createProject(projectName, requestModel.getMessage(), members);
+        Project project = projectBuilder.createProject(projectName, requestModel.getMessage(), members, vacationDays, leaveType);
 
         // save the project and all its tasks
         LeaveRequestDsRequestModel dsRequestModel = new LeaveRequestDsRequestModel(project);
         gateway.save(dsRequestModel);
 
-        LeaveRequestResponseModel responseModel = new LeaveRequestResponseModel(leaveType, startDate, returnDate,
+        LeaveRequestResponseModel responseModel = new LeaveRequestResponseModel(leaveType.toString(), startDate, returnDate,
                 project.getCreateTime().toString());
         return outputBoundary.prepareSuccessView(responseModel);
     }
