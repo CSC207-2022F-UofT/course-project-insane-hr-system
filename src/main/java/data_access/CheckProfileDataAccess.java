@@ -10,12 +10,12 @@ import java.beans.PropertyChangeSupport;
 import java.util.List;
 import java.util.UUID;
 
-public class CheckProfileGateway implements CheckProfileIGateway {
+public class CheckProfileDataAccess implements CheckProfileIGateway {
 //TODO: implement this gateway.
 
     private final PropertyChangeSupport observable;
 
-    public CheckProfileGateway() {
+    public CheckProfileDataAccess() {
         this.observable = new PropertyChangeSupport(this);
 
     }

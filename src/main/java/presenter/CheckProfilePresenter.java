@@ -56,33 +56,9 @@ public class CheckProfilePresenter implements CheckProfileOutputBoundary {
         viewModel.setLeftTable(getLeftTable(responseModel));
         viewModel.setRightTable(getRightTable(responseModel));
         viewModel.setVisualLevel(responseModel.getVisualLevel());
-        viewModel.setFunction(getFunctions(responseModel.getRelation()));
+        viewModel.setFunction(new ButtonFactory(responseModel.getRelation()).getAllUseCases());
     }
 
-    private Function[] getFunctions(RelativeRelation relation) {
-        List<Function> functions = new LinkedList<>();
-
-        for (Function function : Function.values()) {
-            if (functionIsInNeed(function, relation)) {
-                functions.add(function);
-            }
-        }
-        return functions.toArray(new Function[0]);
-    }
-
-    private boolean functionIsInNeed(Function function, RelativeRelation relation) {
-        switch (function) {
-            case CREATE_TASK: return relation == RelativeRelation.IS_P_M_OF;
-            case LEAVE_REQUEST: return relation == RelativeRelation.IS_EMPLOYEE_SELF;
-            case CREATE_PROJECT:return relation == RelativeRelation.IS_DPT_HEAD_SELF;
-            case ENROLL_EMPLOYEE: return relation == RelativeRelation.IS_DPT_HEAD_SELF;
-            case SALARY_CALCULATOR: return relation == RelativeRelation.IS_EMPLOYEE_SELF || relation == RelativeRelation.IS_PM_SELF;
-            case COMPLETE_PROJECT: return relation == RelativeRelation.IS_HEAD_OF;
-            case COMPLETE_TASK: return relation == RelativeRelation.IS_MEMBER_OF;
-
-        }
-        return false;
-    }
 
 
 //    public ScreenBuilder createScreenBuilder(CheckProfileResponseModel responseModel) {

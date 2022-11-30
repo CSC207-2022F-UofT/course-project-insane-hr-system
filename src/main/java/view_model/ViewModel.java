@@ -1,7 +1,7 @@
 package view_model;
 
 import check_profile_validation.VisualLevel;
-import presenter.Function;
+import presenter.UseCase;
 import presenter.IViewModel;
 
 import javax.swing.*;
@@ -19,7 +19,7 @@ public class ViewModel implements PropertyChangeListener, IViewModel {
     private ScreenType screenType; // could be deleted
     private VisualLevel visualLevel;
     private Integer requesterID;
-    private Function[] functions;
+    private UseCase[] useCases;
     private UUID oid;
     private Integer uid;
     private Integer currUid;
@@ -67,8 +67,8 @@ public class ViewModel implements PropertyChangeListener, IViewModel {
 
 
     @Override
-    public void setFunction(Function[] functions) {
-        this.functions = functions;
+    public void setFunction(UseCase[] useCases) {
+        this.useCases = useCases;
     }
 
 
@@ -203,8 +203,8 @@ public class ViewModel implements PropertyChangeListener, IViewModel {
     }
 
     @Override
-    public Function[] getFunctions() {
-        return functions;
+    public UseCase[] getUseCases() {
+        return useCases;
     }
     public void show(JFrame frame) {
         JFrame app = new JFrame(this.getFrameName());
@@ -214,8 +214,8 @@ public class ViewModel implements PropertyChangeListener, IViewModel {
     }
 
     @Override
-    public void setFunctions(Function[] functions) {
-        this.functions = functions;
+    public void setFunctions(UseCase[] useCases) {
+        this.useCases = useCases;
     }
 
     @Override

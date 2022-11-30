@@ -1,4 +1,4 @@
-package enroll_employee.DAO;
+package DAO;
 
 import entity.CommonProject;
 import entity.CommonTask;
@@ -24,7 +24,6 @@ public class CommonProjectDAO {
             resultSet = statement.executeQuery(querySQL);
 
             while (resultSet.next()) {
-
                 UUID id = UUID.fromString(resultSet.getString("ID"));
                 String name = resultSet.getString("name");
                 Integer head = resultSet.getInt("head");
@@ -203,9 +202,9 @@ public class CommonProjectDAO {
 
     public CommonProject getProject(UUID id){
         List<CommonProject> projects = getAllCommonProjects();
-        for (CommonProject project : projects) {
-            if (project.getOid().equals(id)) {
-                return project;
+        for(int i = 0; i<projects.size(); i++){
+            if (projects.get(i).getOid().equals(id)){
+                return projects.get(i);
             }
         }
         return null;

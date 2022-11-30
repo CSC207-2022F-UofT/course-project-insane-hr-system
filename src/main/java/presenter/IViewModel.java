@@ -13,7 +13,7 @@ public interface IViewModel extends PropertyChangeListener{
 
 
 
-    void setFunction(Function[] functions);
+    void setFunction(UseCase[] useCases);
     /*
      * Add a new observer to observe the changes to this class.
      * @param observer
@@ -66,9 +66,9 @@ public interface IViewModel extends PropertyChangeListener{
     Integer getRequesterID();
     void setRequesterID(Integer requesterID);
 
-    Function[] getFunctions();
+    UseCase[] getUseCases();
 
-    void setFunctions(Function[] functions);
+    void setFunctions(UseCase[] useCases);
 
     UUID getOid();
 

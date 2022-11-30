@@ -4,9 +4,10 @@ import check_profile_validation.CheckProfileIGateway;
 import check_profile_validation.CheckProfileInputBoundary;
 import check_profile_validation.CheckProfileInteractor;
 import controller.CheckProfileController;
-import data_access.CheckProfileGateway;
+import data_access.CheckProfileDataAccess;
 import presenter.CheckProfilePresenter;
 import presenter.IViewModel;
+import presenter.UseCase;
 import view_model.IView;
 import view_model.Table;
 import view_model.ViewModel;
@@ -27,7 +28,7 @@ public class ScreenBuilder implements IView {
         this.dataModel = dataModel;
         view = new Integration(dataModel.getFrameName());
         this.dataModel.addObserver(view);
-        CheckProfileIGateway gateway = new CheckProfileGateway();
+        CheckProfileIGateway gateway = new CheckProfileDataAccess();
         CheckProfilePresenter presenter =new CheckProfilePresenter();
         CheckProfileInputBoundary interactor = new CheckProfileInteractor(gateway, presenter);
         buttonController = new CheckProfileController(interactor);
@@ -157,11 +158,15 @@ public class ScreenBuilder implements IView {
     public JPanel customizeLeftPanel(){
         JPanel jPanel = new JPanel(new GridBagLayout());
         jPanel.add(new JLabel("You need to add customized Left Panel here!"));
-        jPanel.add(function1());
+        jPanel.add(useCase1());
+//        for (UseCase useCase : dataModel.getUseCases()) {
+//             jPanel.add(UseCaseButtons.getPanel(useCase, this));
+//        }
+        jPanel.add(UseCaseButtons.getUseCase1(this));
         return jPanel;
     }
 
-    private JButton function1() {
+    private JButton useCase1() {
         return new JButton("Function 1");
     }
 

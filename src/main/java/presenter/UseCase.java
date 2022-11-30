@@ -1,6 +1,6 @@
 package presenter;
 
-public enum Function {
+public enum UseCase {
     LEAVE_REQUEST,
     SALARY_CALCULATOR,
     CREATE_TASK,
