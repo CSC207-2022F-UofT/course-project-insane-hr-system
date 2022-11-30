@@ -7,38 +7,38 @@ import java.util.List;
 import java.util.UUID;
 
 public class CheckProfileResponseModel {
-    private final CheckProfileGateway gateway;
-    private String fileType;
-    private int visualLevel;
+    private final CheckProfileIGateway gateway;
+    private FileType fileType;
+    private VisualLevel visualLevel;
     private String name;
-    private List<Object> list1 = new ArrayList<>();
+    private List<Object> list1;
     private Object[] reference1;
     private String list1Name;
-    private List<Object> list2 = new ArrayList<>();
+    private List<Object> list2;
     private Object[] reference2;
     private String list2Name;
-    private Integer uid;
-    private UUID oid;
+    private Integer targetUid;
+    private UUID targetOid;
     private RelativeRelation relation;
     private String bio;
 
-    public CheckProfileResponseModel(CheckProfileGateway gateway) {
+    public CheckProfileResponseModel(CheckProfileIGateway gateway) {
         this.gateway = gateway;
     }
 
-    public String getFileType() {
+    public FileType getFileType() {
         return fileType;
     }
 
-    public void setFileType(String fileType) {
+    public void setFileType(FileType fileType) {
         this.fileType = fileType;
     }
 
-    public int getVisualLevel() {
+    public VisualLevel getVisualLevel() {
         return visualLevel;
     }
 
-    public void setVisualLevel(int visualLevel) {
+    public void setVisualLevel(VisualLevel visualLevel) {
         this.visualLevel = visualLevel;
     }
 
@@ -66,20 +66,20 @@ public class CheckProfileResponseModel {
         this.list2 = list2;
     }
 
-    public Integer getUid() {
-        return uid;
+    public Integer getTargetUid() {
+        return targetUid;
     }
 
-    public void setUid(Integer uid) {
-        this.uid = uid;
+    public void setTargetUid(Integer targetUid) {
+        this.targetUid = targetUid;
     }
 
-    public UUID getOid() {
-        return oid;
+    public UUID getTargetOid() {
+        return targetOid;
     }
 
-    public void setOid(UUID oid) {
-        this.oid = oid;
+    public void setTargetOid(UUID targetOid) {
+        this.targetOid = targetOid;
     }
 
     public String getList1Name() {
@@ -98,7 +98,7 @@ public class CheckProfileResponseModel {
         this.list2Name = list2Name;
     }
 
-    public CheckProfileGateway getGateway() {
+    public CheckProfileIGateway getGateway() {
         return gateway;
     }
 

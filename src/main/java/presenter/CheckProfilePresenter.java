@@ -1,6 +1,7 @@
 package presenter;
 
 import check_profile_validation.*;
+import entity.Curr;
 import entity.RelativeRelation;
 import view_model.*;
 
@@ -8,35 +9,22 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class CheckProfilePresenter implements CheckProfileOutputBoundary {
-    private UIDataModel dataModel;
-    private UserIViewModel userIViewModel;
-    private OrgIViewModel orgIViewModel;
+    private IViewModel viewModel;
 
-    public CheckProfilePresenter() {
+    public CheckProfilePresenter(){
+
     }
 
-    public CheckProfilePresenter(UIDataModel dataModel, UserIViewModel userIViewModel, OrgIViewModel orgIViewModel) {
-        this.dataModel = dataModel;
-        this.userIViewModel = userIViewModel;
-        this.orgIViewModel = orgIViewModel;
+    public CheckProfilePresenter(IViewModel viewModel) {
+        this.viewModel = viewModel;
     }
 
-    public void initialSetup(CheckProfileResponseModel responseModel, IViewModel viewModel) {
-        responseModel.getGateway().addObserver(dataModel);
-        viewModel.setFrameName("HR system - " + responseModel.getFileType());
-        viewModel.setInfoTitle(responseModel.getName());
-        viewModel.setIntro(responseModel.getBio());
-        viewModel.setLeftTable(getLeftTable(responseModel));
-        viewModel.setRightTable(getRightTable(responseModel));
-        viewModel.setVisualLevel(responseModel.getVisualLevel());
-        viewModel.setFunction(getFunctions(responseModel.getRelation()));
-    }
     @Override
     public void prepareUserFrame(CheckProfileResponseModel responseModel) {
 
         //TODO: getBuilder is not yet finished
-        initialSetup(responseModel, userIViewModel);
-        userIViewModel.setUid(responseModel.getUid());
+        initialSetup(responseModel, viewModel);
+        viewModel.setCurrUid(Curr.getUser().getId());
 //        if (responseModel.getVisualLevel() == VisualLevel.INVISIBLE) {
 //            show(screenBuilder.getNotVisible());
 //        }else if (responseModel.getVisualLevel() == VisualLevel.ONLY_FACE) {
@@ -54,11 +42,23 @@ public class CheckProfilePresenter implements CheckProfileOutputBoundary {
 
     @Override
     public void prepareOrgFrame(CheckProfileResponseModel responseModel) {
-        initialSetup(responseModel, orgIViewModel);
-        orgIViewModel.setOid(responseModel.getOid());
+        initialSetup(responseModel, viewModel);
+        viewModel.setOid(responseModel.getTargetOid());
 
 //TODO
     }
+
+    public void initialSetup(CheckProfileResponseModel responseModel, IViewModel viewModel) {
+        responseModel.getGateway().addObserver(viewModel);
+        viewModel.setFrameName("HR system - " + responseModel.getFileType().toString());
+        viewModel.setInfoTitle(responseModel.getName());
+        viewModel.setIntro(responseModel.getBio());
+        viewModel.setLeftTable(getLeftTable(responseModel));
+        viewModel.setRightTable(getRightTable(responseModel));
+        viewModel.setVisualLevel(responseModel.getVisualLevel());
+        viewModel.setFunction(getFunctions(responseModel.getRelation()));
+    }
+
     private Function[] getFunctions(RelativeRelation relation) {
         List<Function> functions = new LinkedList<>();
 

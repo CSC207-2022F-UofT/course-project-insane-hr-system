@@ -1,5 +1,6 @@
-package check_profile_validation;
+package data_access;
 
+import check_profile_validation.CheckProfileIGateway;
 import entity.Organization;
 import entity.Project;
 import entity.Role;
@@ -10,7 +11,9 @@ import java.beans.PropertyChangeSupport;
 import java.util.List;
 import java.util.UUID;
 
-public class CheckProfileGateway {
+public class CheckProfileGateway implements CheckProfileIGateway {
+//TODO: implement this gateway.
+
     private final PropertyChangeSupport observable;
 
     public CheckProfileGateway() {
@@ -18,21 +21,26 @@ public class CheckProfileGateway {
 
     }
 
+    @Override
     public List<Role> getUserRolesByUid(Integer requester) {
         return null;
     }
 
+    @Override
     public List<Project> getUserCurrentProjectByUid(Integer requester) {
         return null;
     }
 
+    @Override
     public User getUserByUid(Integer requester) {
         return null;
     }
 
+    @Override
     public PropertyChangeSupport getObservable() {
         return observable;
     }
+    @Override
     public void addObserver(PropertyChangeListener observer) {
         observable.addPropertyChangeListener("FrameNameChange", observer);
         observable.addPropertyChangeListener("TitleChange", observer);
@@ -42,6 +50,7 @@ public class CheckProfileGateway {
     }
 
 
+    @Override
     public Organization getOrgByOid(UUID oid) {
         return null;
     }

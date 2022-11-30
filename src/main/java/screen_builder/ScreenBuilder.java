@@ -1,7 +1,16 @@
 package screen_builder;
 
+import check_profile_validation.CheckProfileIGateway;
+import check_profile_validation.CheckProfileInputBoundary;
+import check_profile_validation.CheckProfileInteractor;
+import check_profile_validation.CheckProfileOutputBoundary;
+import controller.CheckProfileController;
+import data_access.CheckProfileGateway;
+import presenter.CheckProfilePresenter;
+import presenter.IViewModel;
 import view_model.Table;
-import view_model.UIDataModel;
+import view_model.UserType;
+import view_model.ViewModel;
 import ui.Integration;
 
 import javax.swing.*;
@@ -9,50 +18,59 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.util.UUID;
 
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+public class ScreenBuilder implements IView {
+    private final IViewModel dataModel;
+    private final Integration view;
+    private CheckProfileController buttonController;
 
-public abstract class ScreenBuilder {
-    private UIDataModel dataModel;
-    private final Integration view = new Integration();
+    public ScreenBuilder(IViewModel dataModel) {
+        this.dataModel = dataModel;
+        view = new Integration(dataModel.getFrameName());
+        this.dataModel.addObserver(view);
+//        CheckProfileIGateway gateway = new CheckProfileGateway();
+//        CheckProfilePresenter presenter =new CheckProfilePresenter();
+//        CheckProfileInputBoundary interactor = new CheckProfileInteractor(gateway, presenter);
+//        buttonController = new CheckProfileController(interactor);
+    }
 
-    public ScreenBuilder(UIDataModel dataModel) {
+    public ScreenBuilder(ViewModel dataModel, CheckProfileIGateway gateway) {
 
         this.dataModel = dataModel;
         // Add view to the dataModel observable.
+        view = new Integration(dataModel.getFrameName());
         this.dataModel.addObserver(view);
+        CheckProfilePresenter presenter =new CheckProfilePresenter();
+        CheckProfileInputBoundary interactor = new CheckProfileInteractor(gateway, presenter);
+        buttonController = new CheckProfileController(interactor);
 
     }
 
-    public void setDataModel(UIDataModel dataModel) {
-        this.dataModel = dataModel;
-    }
 
     /**
      * This method initialize the frame.
      */
-    protected void initialization(){
-//        try {
-//            view.setIconImage(ImageIO.read(new File("java/ui/logo.png")));
-//        } catch (IOException e) {
-//            throw new RuntimeException("Didn't find Logo!", e);
-//        }
+    @Override
+    public void initialization(){
+
     }
 
     /**
      * This method set the Introduction part of the frame.
      * @return is a long and well-formed string that contain all detail of the user or organization.
      */
-    protected String setIntro() {
-        return "IntegrationIntro";
+    @Override
+    public String setIntro() {
+        return dataModel.getIntro();
     }
 
     /**
      * This method set the Introduction title.
      * @return is a string that at least have the name of the user or organization.
      */
-    protected String setInfoTitle() {
+    @Override
+    public String setInfoTitle() {
         return "Integration ObjectName";
     }
 
@@ -60,7 +78,8 @@ public abstract class ScreenBuilder {
      * This method set the Frame name in the top. Default is HR system.
      * @return is a string of the frame name
      */
-    protected String setFrameName() {
+    @Override
+    public String setFrameName() {
         return "HR System";
     }
 
@@ -68,7 +87,8 @@ public abstract class ScreenBuilder {
      * This method set the Left table using Table model.
      * @return a Table that will be present in left JTable.
      */
-    protected Table setLeftTable() {
+    @Override
+    public Table setLeftTable() {
         return new Table(new String[]{"Left Table need to be override!"}, new Object[][]{new Object[]{"Leon"}, new Object[]{"Alice"}}, new Object[]{10,20});
     }
 
@@ -76,53 +96,85 @@ public abstract class ScreenBuilder {
      * This method set the Right table using Table model.
      * @return a Table that will be present in right JTable.
      */
-    protected Table setRightTable(){
+    @Override
+    public Table setRightTable(){
         return new Table(new String[]{"Right Table need to be override!"}, new Object[][]{new Object[]{"Leon"}, new Object[]{"Alice"}}, new Object[]{10,20});
     }
 
-    protected String setLeftButtonLabel() {
+    @Override
+    public String setLeftButtonLabel() {
         return "Create a useless dialog";
     }
     /**
      * This method will be invoked after the left button is clicked.
      */
-    protected void customizeLeftButton(){
+    @Override
+    public void customizeLeftButton(){
+        for (int i : view.getLeftTable().getSelectedRows()){
+            Object reference = dataModel.getLeftTable().getReference()[i];
+            plugInController(reference);
 
-        JOptionPane.showMessageDialog(view,
-                "Left button haven't customized",
-                "Inane error",
-                JOptionPane.ERROR_MESSAGE);
+        }
+
+
     }
 
-    protected String setRightButtonLabel() {
+    @Override
+    public String setRightButtonLabel() {
         return "Add select row into introduction";
     }
     /**
      * This method will be invoked after the right button is clicked.
      */
-    protected void customizeRightButton(){
-        int[] nums = view.getRightTable().getSelectedRows();
-        for (int num : nums){
-            String name = (String) dataModel.getRightTable().getData()[num][0];
-            String reference = (String) dataModel.getRightTable().getReference()[num];
-            dataModel.updateIntro(dataModel.getIntro() + name + reference + " have been selected\n");
+    @Override
+    public void customizeRightButton(){
+//        int[] nums = view.getRightTable().getSelectedRows();
+//        for (int num : nums){
+//            String name = (String) dataModel.getRightTable().getData()[num][0];
+//            String reference = (String) dataModel.getRightTable().getReference()[num];
+//            dataModel.updateIntro(dataModel.getIntro() + name + reference + " have been selected\n");
+//        }
+        for (int i : view.getRightTable().getSelectedRows()){
+            Object reference = dataModel.getRightTable().getReference()[i];
+            plugInController(reference);
+
         }
 
     }
 
-    protected JPanel customizeLeftPanel(){
+    private void plugInController(Object reference) {
+        if (reference instanceof Integer) {
+            buttonController.create(dataModel.getRequesterID(), (Integer) reference);
+        } else if (reference instanceof UUID) {
+            buttonController.create(dataModel.getRequesterID(), (UUID) reference);
+        } else {
+            JOptionPane.showMessageDialog(view,
+                    "The reference is not in correct Type",
+                    "Inane error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    @Override
+    public JPanel customizeLeftPanel(){
         JPanel jPanel = new JPanel(new GridBagLayout());
         jPanel.add(new JLabel("You need to add customized Left Panel here!"));
+        jPanel.add(function1());
         return jPanel;
     }
 
-    protected JPanel customizeRightPanel(){
+    private JButton function1() {
+        return new JButton("Function 1");
+    }
+
+    @Override
+    public JPanel customizeRightPanel(){
         JPanel jPanel = new JPanel(new GridBagLayout());
         jPanel.add(new JLabel("You need to add customized Right Panel here!"));
         return jPanel;
     }
 
-    public void addConnection(UIDataModel dataModel) {
+    public void addConnection(ViewModel dataModel) {
         dataModel.addObserver(this.view);
     }
     private void addLeftTable(Table table) {
@@ -132,11 +184,21 @@ public abstract class ScreenBuilder {
         view.getRightTable().setModel(new DefaultTableModel(table.getData(), table.getColumnName()));
     }
 
+    public JFrame view(){
+        switch (this.dataModel.getVisualLevel()){
+            case INVISIBLE: return getNotVisible();
+            case ONLY_FACE: return getIntroOnly();
+            case PROFILE: return getIntroTableAndButton();
+            case EDITABLE: return getView();
+        }
+        return getNotVisible();
+    }
 
     /**
      * get the frame after build.
      * @return Integration frame
      */
+    @Override
     public Integration getView(){
 
         // Initialize the front data.
@@ -179,6 +241,7 @@ public abstract class ScreenBuilder {
         return view;
     }
 
+    @Override
     public Integration getIntroOnly(){
         initialization();
         view.setTitle(setFrameName());
@@ -194,6 +257,7 @@ public abstract class ScreenBuilder {
         return view;
     }
 
+    @Override
     public Integration getIntroAndTable(){
         initialization();
         view.setTitle(setFrameName());
@@ -208,6 +272,7 @@ public abstract class ScreenBuilder {
 
         return view;
     }
+    @Override
     public Integration getIntroTableAndButton(){
         initialization();
         view.setTitle(setFrameName());
@@ -237,7 +302,8 @@ public abstract class ScreenBuilder {
         view.getRootPanel().invalidate();
     }
 
-    public UIDataModel getDataModel() {
+    @Override
+    public IViewModel getDataModel() {
         return dataModel;
     }
 
@@ -269,8 +335,21 @@ public abstract class ScreenBuilder {
     }
 
 
+    @Override
     public JFrame getNotVisible() {
         // TODO: add a notification dialog to show this screen is not visible.
         return null;
+    }
+
+    public static void main(String[] args) {
+        Table left = new Table(new String[]{"Employee Name"}, new Object[][]{new Object[]{"Bob"}, new Object[]{"john"}}, new Object[]{11,22});
+        Table right = new Table(new String[]{"Head12 Name"}, new Object[][]{new Object[]{"Leon"}, new Object[]{"Alice"}}, new Object[]{11,22});
+        String intro = String.format("Introduction:\nUid:\t%s\n", 1);
+        IViewModel viewModel = new ViewModel(1, "FrameName", "User Name", intro, left, right);
+        ScreenBuilder screenBuilder = new ScreenBuilder(viewModel);
+        JFrame app = screenBuilder.getView();
+        app.pack();
+        app.setVisible(true);
+
     }
 }

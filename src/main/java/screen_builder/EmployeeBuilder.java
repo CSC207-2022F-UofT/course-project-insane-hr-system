@@ -1,11 +1,12 @@
-package ui;
+package screen_builder;
 
-import check_profile_validation.FileType;
 import data_access.UIGateway;
+import presenter.IViewModel;
 import screen_builder.IUIGateway;
 import screen_builder.ScreenBuilder;
+import ui.LeaveRequestUI;
 import view_model.Table;
-import view_model.UIDataModel;
+import view_model.ViewModel;
 import view_model.UserType;
 
 import javax.swing.*;
@@ -13,9 +14,9 @@ import javax.swing.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class EmployeeBuilder extends ScreenBuilder {
-    private final UIDataModel dataModel;
+    private final IViewModel dataModel;
 
-    public EmployeeBuilder(UIDataModel dataModel) {
+    public EmployeeBuilder(IViewModel dataModel) {
         super(dataModel);
         this.dataModel = dataModel;
     }
@@ -46,33 +47,33 @@ public class EmployeeBuilder extends ScreenBuilder {
 
 
     @Override
-    protected String setIntro() {
+    public String setIntro() {
         return dataModel.getIntro();
     }
 
     @Override
-    protected String setInfoTitle() {
+    public String setInfoTitle() {
         return dataModel.getInfoTitle();
     }
 
     @Override
-    protected String setFrameName() {
+    public String setFrameName() {
         return dataModel.getFrameName();
     }
 
     @Override
-    protected Table setLeftTable() {
+    public Table setLeftTable() {
         return dataModel.getLeftTable();
     }
 
     @Override
-    protected Table setRightTable() {
+    public Table setRightTable() {
         return dataModel.getRightTable();
     }
 
     public static void main(String[] args) {
         IUIGateway gateway = new UIGateway();
-        UIDataModel model = gateway.getFakeDataModel(1234, UserType.EMPLOYEE);
+        IViewModel model = gateway.getFakeDataModel(1234, UserType.PROJECT_MANAGER);
         EmployeeBuilder builder = new EmployeeBuilder(model);
         JFrame application = builder.getView();
         application.setDefaultCloseOperation(EXIT_ON_CLOSE);

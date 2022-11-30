@@ -1,15 +1,16 @@
 package presenter;
 
-import view_model.ScreenType;
+import check_profile_validation.VisualLevel;
 import view_model.Table;
-import view_model.UIDataModel;
+import view_model.ViewModel;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.UUID;
 
-public interface IViewModel {
+public interface IViewModel extends PropertyChangeListener{
+
 
 
     void setFunction(Function[] functions);
@@ -29,7 +30,7 @@ public interface IViewModel {
 
     void updateRightTable(Table newRightTable);
 
-    void updateAll(UIDataModel newDataModel);
+    void updateAll(ViewModel newDataModel);
 
     PropertyChangeSupport getObservable();
 
@@ -55,13 +56,25 @@ public interface IViewModel {
 
     void propertyChange(PropertyChangeEvent evt);
 
-    ScreenType getScreenType();
+//    ScreenType getScreenType();
+//
+//    void setScreenType(ScreenType screenType);
 
-    void setScreenType(ScreenType screenType);
+    VisualLevel getVisualLevel();
 
-    int getVisualLevel();
-
-    void setVisualLevel(int visualLevel);
+    void setVisualLevel(VisualLevel visualLevel);
     Integer getRequesterID();
     void setRequesterID(Integer requesterID);
+
+    Function[] getFunctions();
+
+    void setFunctions(Function[] functions);
+
+    UUID getOid();
+
+    void setOid(UUID oid);
+
+    Integer getCurrUid();
+
+    void setCurrUid(Integer uid);
 }

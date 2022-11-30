@@ -8,12 +8,13 @@ import java.util.UUID;
 
 public interface IUIGateway {
 
-    UIDataModel getDataModelByID(UUID oid);
-    UIDataModel getDataModelByID(Integration uid);
+    ViewModel getDataModelByID(UUID oid);
+    ViewModel getDataModelByID(Integration uid);
 
-    UserDataModel getFakeDataModel(Integer uid, UserType userType);
+    ViewModel getFakeDataModel(Integer uid, UserType userType);
 
-    OrgDataModel getFakeDataModel(UUID oid, OrgType orgType);
 
-    void updateDataModel(UIDataModel dataModel, UIDataModel newDataModel);
+    ViewModel getFakeDataModel(Integer uid, OrgType orgType);
+
+    void updateDataModel(ViewModel dataModel, ViewModel newDataModel);
 }
