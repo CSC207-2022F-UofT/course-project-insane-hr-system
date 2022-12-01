@@ -2,6 +2,8 @@ package project_manager_task_init_use_case;
 
 import entity.CommonProject;
 import entity.CommonUser;
+import entity.Curr;
+import entity.Project;
 
 public class PMTaskInitRequestModel {
 
@@ -11,14 +13,15 @@ public class PMTaskInitRequestModel {
 
     private int employeeId;
 
-    private CommonProject project;
 
-    public PMTaskInitRequestModel(String taskName, String taskDescription, int employeeId, CommonProject project) {
+
+    public PMTaskInitRequestModel(String taskName, String taskDescription, int employeeId) {
         this.taskName = taskName;
         this.taskDescription = taskDescription;
         this.employeeId = employeeId;
-        this.project = project;
-    }
+        }
+
+
 
     public String getTaskName() { return this.taskName; }
 
@@ -26,6 +29,6 @@ public class PMTaskInitRequestModel {
 
     public int getEmployeeId() { return this.employeeId; }
 
-    public CommonProject getProject() { return this.project; }
+
 
 }
