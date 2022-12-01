@@ -9,9 +9,12 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public abstract class ScreenBuilder {
-    private final UIDataModel dataModel;
+    private UIDataModel dataModel;
     private final Integration view = new Integration();
 
     public ScreenBuilder(UIDataModel dataModel) {
@@ -22,6 +25,9 @@ public abstract class ScreenBuilder {
 
     }
 
+    public void setDataModel(UIDataModel dataModel) {
+        this.dataModel = dataModel;
+    }
 
     /**
      * This method initialize the frame.
@@ -199,6 +205,7 @@ public abstract class ScreenBuilder {
 
         view.validate();
 
+
         return view;
     }
     public Integration getIntroTableAndButton(){
@@ -238,16 +245,22 @@ public abstract class ScreenBuilder {
 
     //APIs for get the data in the GUI.
 
-    public Object[][] getLeftSelectedColumns() {
-        JTable jTable = view.getLeftTable();
+    public Object[][] getLeftSelectedRows() {
+        JTable jTable= view.getLeftTable();
+        if (jTable == null) {
+            return null;
+        }
         Object[][] result = new Object[jTable.getSelectedRowCount()][jTable.getColumnCount()];
         for (int i= 0; i < result.length; i ++) {
             result[i] = this.dataModel.getLeftTable().getData()[i];
         }
         return result;
     }
-    public Object[][] getRightSelectedColumns() {
-        JTable jTable = view.getRightTable();
+    public Object[][] getRightSelectedRows() {
+        JTable jTable= view.getRightTable();
+        if (jTable == null) {
+            return null;
+        }
         Object[][] result = new Object[jTable.getSelectedRowCount()][jTable.getColumnCount()];
         for (int i= 0; i < result.length; i ++) {
             result[i] = this.dataModel.getLeftTable().getData()[i];
@@ -256,5 +269,8 @@ public abstract class ScreenBuilder {
     }
 
 
-
+    public JFrame getNotVisible() {
+        // TODO: add a notification dialog to show this screen is not visible.
+        return null;
+    }
 }

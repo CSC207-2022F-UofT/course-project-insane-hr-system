@@ -9,7 +9,6 @@ import view_model.UserDataModel;
 import view_model.UserType;
 
 public class FrameFactory {
-    private Role[] roles;
 
     Integration createOrgFrame(ScreenAuthority screenAuthority, OrgDataModel orgDataModel) {
 

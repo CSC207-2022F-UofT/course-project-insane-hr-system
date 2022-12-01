@@ -3,6 +3,7 @@ package view_model;
 public enum ScreenType {
     LOGIN,
     USER_SCREEN,
-    ORGANIZATION_SCREEN,
+    DEPARTMENT_SCREEN,
+    PROJECT_SCREEN,
     TASK_SCREEN
 }
