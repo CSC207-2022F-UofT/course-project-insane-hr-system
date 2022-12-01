@@ -33,10 +33,10 @@ public class ReviewRequestScreen extends JPanel implements ActionListener {
         System.out.println("Click " + evt.getActionCommand());
 
         try {
-            Object[] options = {"Approve", "Deny"};
+            Object[] options = {"Deny", "Approve"};
             int result = JOptionPane.showOptionDialog(frame, "Please approve or deny the leave " +
-                    "request", "Review Leave Request", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
-                    null, options, options[0]);
+                    "request", "Review Leave Request", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
+                    null, options, options[1]);
             if (result != JOptionPane.CANCEL_OPTION){
                 String response = controller.reviewRequest(oid, result == JOptionPane.YES_OPTION).getResult();
                 JOptionPane.showMessageDialog(frame, "You have " + response.toLowerCase() + "the " +
@@ -45,5 +45,13 @@ public class ReviewRequestScreen extends JPanel implements ActionListener {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
+    }
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame();
+        frame.setContentPane(new ReviewRequestScreen(frame, UUID.randomUUID()));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
     }
 }
