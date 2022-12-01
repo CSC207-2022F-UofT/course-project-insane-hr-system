@@ -1,7 +1,6 @@
 package check_profile_validation;
 
 import entity.*;
-import view_model.Table;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,12 +38,12 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
             responseModel.setTargetUid(target.getId());
         }else if (visualLevel != VisualLevel.INVISIBLE) {
             List<Organization> orgs1 = new ArrayList<>(target.getTasks());
-            List<Object> results1= getVisibleOrganizations(requester, getCommonOrgnizations(orgs1));
+            List<Object> results1= getVisibleOrganizations(requester, getOrgnizations(orgs1));
             responseModel.setList1(results1);
             responseModel.setList1Name("Tasks");
             responseModel.setReference1(getOReference(target.getTasks().toArray(new Organization[0])));
             List<Organization> orgs2 = new ArrayList<>(target.getProjects());
-            List<Object> results2= getVisibleOrganizations(requester, getCommonOrgnizations(orgs2));
+            List<Object> results2= getVisibleOrganizations(requester, getOrgnizations(orgs2));
             responseModel.setList2(results2);
             responseModel.setList2Name("Projects");
             responseModel.setReference2(getOReference(target.getProjects().toArray(new Organization[0])));
@@ -90,21 +89,23 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
             responseModel.setList1Name(getList1Name(getFileType(target)));
             responseModel.setList2Name(getList2Name(getFileType(target)));
         }
-
-
         outputBoundary.prepareOrgFrame(responseModel);
         return responseModel;
     }
     FileType getFileType(Object target) {
         if (target instanceof Department){
             return FileType.DEPARTMENT_FILE;
-        }else if (target instanceof Project) {
+        }else if (target instanceof CommonProject) {
             return FileType.PROJECT_FILE;
-        }else if (target instanceof Task) {
-            return FileType.TASK_FILE;
-        }else if (target instanceof User) {
-            return FileType.USER_FILE;
-        }
+        }else if (target instanceof LeaveRequestTask) {
+            return FileType.LEAVE_REQUEST_TASK_FILE;
+        }else if (target instanceof StarEvaluationTask) {
+            return FileType.EVALUATION_TASK_FILE;
+        }else if (target instanceof CommonTask) {
+                return FileType.TASK_FILE;
+            }else if (target instanceof User) {
+                return FileType.USER_FILE;
+            }
         return null;
     }
     void setTables(User requester, Organization target, CheckProfileResponseModel responseModel){
@@ -125,15 +126,20 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
     }
     String getList1Name(FileType fileType) {
         switch (fileType) {
-            case TASK_FILE:return "Members";
+            case TASK_FILE:
+            case EVALUATION_TASK_FILE:
+            case LEAVE_REQUEST_TASK_FILE:
+            case DEPARTMENT_FILE:
+            case PROJECT_FILE:
+                return "Members";
             case USER_FILE:return "Tasks";
-            case PROJECT_FILE:return "Members";
-            case DEPARTMENT_FILE:return "Members";
         }
         return null;
     }
     String getList2Name(FileType fileType) {
         switch (fileType) {
+            case EVALUATION_TASK_FILE:
+            case LEAVE_REQUEST_TASK_FILE:
             case TASK_FILE:return null;
             case USER_FILE:return "Projects";
             case PROJECT_FILE:return "Tasks";
@@ -210,9 +216,7 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
 
 
     private VisualLevel getVisibility(User requester, Organization org) {
-        if (!isCommon(org)) {
-            return VisualLevel.INVISIBLE;
-        } else if (org instanceof Department) {
+        if (org instanceof Department) {
             return getVisibility(requester, ((Department) org));
         } else if (org instanceof Project) {
             return getVisibility(requester, ((Project) org));
@@ -230,8 +234,7 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
         return VisualLevel.ONLY_FACE;
     }
     private VisualLevel getVisibility(User user, Project project) {
-
-        if (user.getProjects().contains(project)){
+        if (user.getProjects().contains(project) && project instanceof CommonProject){
             return VisualLevel.EDITABLE;
         }else if (project instanceof CommonProject){
             if (user.getDpt().equals(((CommonProject) project).getDpt())){
@@ -259,7 +262,7 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
         return VisualLevel.INVISIBLE;
     }
 
-    List<Organization> getCommonOrgnizations (List<Organization> organizations) {
+    List<Organization> getOrgnizations(List<Organization> organizations) {
         List<Organization> results = new ArrayList<>();
         for (Organization org : organizations) {
             if (isCommon(org)) results.add(org);

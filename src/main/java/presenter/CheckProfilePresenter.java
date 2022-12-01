@@ -55,7 +55,7 @@ public class CheckProfilePresenter implements CheckProfileOutputBoundary {
         viewModel.setLeftTable(getLeftTable(responseModel));
         viewModel.setRightTable(getRightTable(responseModel));
         viewModel.setVisualLevel(responseModel.getVisualLevel());
-        viewModel.setFunction(new ControllerFactory().getUseCases(responseModel.getRelation()));
+        viewModel.setFunction(new ControllerFactory().getUseCases(responseModel));
     }
 
 

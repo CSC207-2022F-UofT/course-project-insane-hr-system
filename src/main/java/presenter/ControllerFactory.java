@@ -1,5 +1,7 @@
 package presenter;
 
+import check_profile_validation.CheckProfileResponseModel;
+import check_profile_validation.FileType;
 import entity.RelativeRelation;
 
 import java.util.LinkedList;
@@ -10,11 +12,11 @@ public class ControllerFactory {
     }
 
 
-    Controllers[] getUseCases(RelativeRelation relation) {
+    Controllers[] getUseCases(CheckProfileResponseModel responseModel) {
         List<Controllers> controllers = new LinkedList<>();
 
         for (Controllers controller : Controllers.values()) {
-            if (functionIsInNeed(controller, relation)) {
+            if (functionIsInNeed(controller, responseModel)) {
                 controllers.add(controller);
             }
         }
@@ -25,7 +27,8 @@ public class ControllerFactory {
     public Controllers[] getAllUseCases() {
         return new Controllers[0];
     }
-    private boolean functionIsInNeed(Controllers controllers, RelativeRelation relation) {
+    private boolean functionIsInNeed(Controllers controllers, CheckProfileResponseModel responseModel) {
+        RelativeRelation relation = responseModel.getRelation();
         switch (controllers) {
             case CREATE_TASK: return relation == RelativeRelation.IS_P_M_OF;
             case LEAVE_REQUEST: return relation == RelativeRelation.IS_EMPLOYEE_SELF;
@@ -34,6 +37,8 @@ public class ControllerFactory {
             case SALARY_CALCULATOR: return relation == RelativeRelation.IS_EMPLOYEE_SELF || relation == RelativeRelation.IS_PM_SELF;
             case COMPLETE_PROJECT: return relation == RelativeRelation.IS_HEAD_OF;
             case COMPLETE_TASK: return relation == RelativeRelation.IS_MEMBER_OF;
+            case EVALUATE_TASK: return relation == RelativeRelation.IS_HEAD_OF && responseModel.getFileType() == FileType.EVALUATION_TASK_FILE;
+            case APPROVE_LEAVE_TASK: return relation == RelativeRelation.IS_MEMBER_OF && responseModel.getFileType() == FileType.LEAVE_REQUEST_TASK_FILE;
 
         }
         return false;
