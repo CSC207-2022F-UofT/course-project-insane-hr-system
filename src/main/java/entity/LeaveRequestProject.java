@@ -18,6 +18,13 @@ public class LeaveRequestProject extends CommonOrganization implements Project {
         this.leaveType = leaveType;
     }
 
+    public LeaveRequestProject(UUID oid, String name, Integer head, Set<Integer> members, String description,
+                               LocalDateTime createTime, LocalDateTime closeTime, int vacationDays, LeaveType leaveType) {
+        super(oid, name, head, members, description, createTime, closeTime);
+        this.vacationDays = vacationDays;
+        this.leaveType = leaveType;
+    }
+
     @Override
     public boolean addTask(Task task) {
         return this.tasks.add(task);
