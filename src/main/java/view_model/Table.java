@@ -1,6 +1,5 @@
-package ui;
+package view_model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Table {

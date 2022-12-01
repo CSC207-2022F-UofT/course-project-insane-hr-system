@@ -1,30 +1,38 @@
-package ui;
+package view_model;
 
+import check_profile_validation.VisualLevel;
+import presenter.Controllers;
+import presenter.IViewModel;
+
+import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.UUID;
 
-public class UIDataModel implements PropertyChangeListener {
+public class ViewModel implements PropertyChangeListener, IViewModel {
     private String frameName;
     private String infoTitle;
     private String intro;
     private Table leftTable;
     private Table rightTable;
-
+    private ScreenType screenType; // could be deleted
+    private VisualLevel visualLevel;
+    private Integer requesterID;
+    private Controllers[] controllers;
+    private UUID oid;
+    private Integer uid;
 
 
 
     private final PropertyChangeSupport observable;
 
-
-    public UIDataModel(String frameName, String infoTitle, String intro) {
-        this.frameName = frameName;
-        this.infoTitle = infoTitle;
-        this.intro = intro;
+    public ViewModel() {
         this.observable = new PropertyChangeSupport(this);
     }
 
-    public UIDataModel(String frameName, String infoTitle, String intro, Table leftTable, Table rightTable) {
+
+        public ViewModel(String frameName, String infoTitle, String intro, Table leftTable, Table rightTable) {
         this.frameName = frameName;
         this.infoTitle = infoTitle;
         this.intro = intro;
@@ -33,10 +41,21 @@ public class UIDataModel implements PropertyChangeListener {
         this.observable = new PropertyChangeSupport(this);
     }
 
+    public ViewModel(Integer currUid, String frameName, String infoTitle, String intro, Table leftTable, Table rightTable) {
+        this.frameName = frameName;
+        this.infoTitle = infoTitle;
+        this.intro = intro;
+        this.leftTable = leftTable;
+        this.rightTable = rightTable;
+        this.observable = new PropertyChangeSupport(this);
+        this.requesterID = currUid;
+    }
+
     /*
      * Add a new observer to observe the changes to this class.
      * @param observer
      */
+    @Override
     public void addObserver(PropertyChangeListener observer) {
         observable.addPropertyChangeListener("FrameNameChange", observer);
         observable.addPropertyChangeListener("TitleChange", observer);
@@ -46,73 +65,105 @@ public class UIDataModel implements PropertyChangeListener {
     }
 
 
+    @Override
+    public void setFunction(Controllers[] controllers) {
+        this.controllers = controllers;
+    }
+
+
+    @Override
     public void updateFrameName(String newFrameName) {
         String oldFrameName = this.frameName;
         this.frameName = newFrameName;
         observable.firePropertyChange("FrameNameChange", oldFrameName, newFrameName);
     }
 
+    @Override
     public void updateInfoTitle(String newInfoTitle) {
         String oldInfoTitle = this.infoTitle;
         this.infoTitle = newInfoTitle;
         observable.firePropertyChange("TitleChange", oldInfoTitle, newInfoTitle);
     }
+    @Override
     public void updateIntro(String newIntro) {
         String oldIntro = this.intro;
         this.intro = newIntro;
         observable.firePropertyChange("IntroChange", oldIntro, newIntro);
     }
+    @Override
     public void updateLeftTable(Table newLeftTable) {
         Table oldLeftTable = this.leftTable;
         this.leftTable = newLeftTable;
         observable.firePropertyChange("LeftTableChange", oldLeftTable, newLeftTable);
     }
+    @Override
     public void updateRightTable(Table newRightTable) {
         Table oldRightTable = this.rightTable;
         this.rightTable = newRightTable;
         observable.firePropertyChange("RightTableChange", oldRightTable, newRightTable);
     }
+    @Override
+    public void updateAll(ViewModel newDataModel) {
+        ViewModel oldDataModel = this;
+        this.updateIntro(newDataModel.getIntro());
+        this.updateFrameName(newDataModel.getFrameName());
+        this.updateInfoTitle(newDataModel.getInfoTitle());
+        this.updateLeftTable(newDataModel.getLeftTable());
+        this.updateRightTable(newDataModel.getRightTable());
+        observable.firePropertyChange("DataModelChange", oldDataModel, newDataModel);
+    }
+    @Override
     public PropertyChangeSupport getObservable() {
         return observable;
     }
 
 
+    @Override
     public String getFrameName() {
         return frameName;
     }
 
+    @Override
     public void setFrameName(String frameName) {
         this.frameName = frameName;
     }
 
+    @Override
     public String getInfoTitle() {
         return infoTitle;
     }
 
+    @Override
     public void setInfoTitle(String infoTitle) {
         this.infoTitle = infoTitle;
     }
 
+    @Override
     public String getIntro() {
         return intro;
     }
 
+    @Override
     public void setIntro(String intro) {
         this.intro = intro;
     }
 
+    @Override
     public Table getLeftTable() {
         return leftTable;
     }
 
+    @Override
     public void setLeftTable(Table leftTable) {
         this.leftTable = leftTable;
     }
 
+    @Override
     public Table getRightTable() {
         return rightTable;
     }
 
+    @Override
     public void setRightTable(Table rightTable) {
         this.rightTable = rightTable;
     }
@@ -131,4 +182,68 @@ public class UIDataModel implements PropertyChangeListener {
 
     }
 
+    @Override
+    public VisualLevel getVisualLevel() {
+        return visualLevel;
+    }
+
+    @Override
+    public void setVisualLevel(VisualLevel visualLevel) {
+        this.visualLevel = visualLevel;
+    }
+
+    @Override
+    public Integer getRequesterID() {
+        return requesterID;
+    }
+    @Override
+    public void setRequesterID(Integer requesterID) {
+        this.requesterID = requesterID;
+    }
+
+    @Override
+    public Controllers[] getUseCases() {
+        return controllers;
+    }
+    public void show(JFrame frame) {
+        JFrame app = new JFrame(this.getFrameName());
+        app.setContentPane(frame);
+        app.pack();
+        app.setVisible(true);
+    }
+
+    @Override
+    public void setControllers(Controllers[] controllers) {
+        this.controllers = controllers;
+    }
+
+    @Override
+    public UUID getOid() {
+        return oid;
+    }
+
+    @Override
+    public void setOid(UUID oid) {
+        this.oid = oid;
+    }
+
+
+    @Override
+    public Integer getUid() {
+        return uid;
+    }
+
+    @Override
+    public void setUid(Integer uid) {
+        this.uid = uid;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+    @Override
+    public Controllers[] getControllers() {
+        return controllers;
+    }
 }

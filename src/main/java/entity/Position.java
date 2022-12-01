@@ -3,5 +3,6 @@ package entity;
 public enum Position {
     CEO,
     HEAD,
-    MEMBER
+    // This are special position for test.
+    SAMEPROJECT, SAMEORG, HEADOF, HASOVERLAPORG, MEMBER
 }

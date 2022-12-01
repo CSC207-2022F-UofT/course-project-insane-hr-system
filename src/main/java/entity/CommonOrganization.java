@@ -142,4 +142,16 @@ public class CommonOrganization implements Organization {
     public void setState(String state) {
         this.state = state;
     }
+
+    /**
+     * @param obj any object.
+     * @return true if the oid are equal.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Organization) {
+            return this.getOid().equals((((Organization) obj).getOid()));
+        }
+        return false;
+    }
 }
