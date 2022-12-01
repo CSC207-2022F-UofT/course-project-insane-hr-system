@@ -7,7 +7,8 @@ import controller.CheckProfileController;
 import data_access.CheckProfileDataAccess;
 import presenter.CheckProfilePresenter;
 import presenter.IViewModel;
-import presenter.UseCase;
+import presenter.Controllers;
+import presenter.UseCaseButtons;
 import view_model.IView;
 import view_model.Table;
 import view_model.ViewModel;
@@ -70,7 +71,7 @@ public class ScreenBuilder implements IView {
      */
     @Override
     public String setInfoTitle() {
-        return "Integration ObjectName";
+        return dataModel.getInfoTitle();
     }
 
     /**
@@ -79,7 +80,7 @@ public class ScreenBuilder implements IView {
      */
     @Override
     public String setFrameName() {
-        return "HR System";
+        return dataModel.getFrameName();
     }
 
     /**
@@ -88,7 +89,8 @@ public class ScreenBuilder implements IView {
      */
     @Override
     public Table setLeftTable() {
-        return new Table(new String[]{"Left Table need to be override!"}, new Object[][]{new Object[]{"Leon"}, new Object[]{"Alice"}}, new Object[]{10,20});
+//        return new Table(new String[]{"Left Table need to be override!"}, new Object[][]{new Object[]{"Leon"}, new Object[]{"Alice"}}, new Object[]{10,20});
+        return dataModel.getLeftTable();
     }
 
     /**
@@ -97,12 +99,13 @@ public class ScreenBuilder implements IView {
      */
     @Override
     public Table setRightTable(){
-        return new Table(new String[]{"Right Table need to be override!"}, new Object[][]{new Object[]{"Leon"}, new Object[]{"Alice"}}, new Object[]{10,20});
+//        return new Table(new String[]{"Right Table need to be override!"}, new Object[][]{new Object[]{"Leon"}, new Object[]{"Alice"}}, new Object[]{10,20});
+        return dataModel.getRightTable();
     }
 
     @Override
     public String setLeftButtonLabel() {
-        return "Create a useless dialog";
+        return "go to selected " + dataModel.getLeftTable().getColumnName()[0];
     }
     /**
      * This method will be invoked after the left button is clicked.
@@ -120,7 +123,7 @@ public class ScreenBuilder implements IView {
 
     @Override
     public String setRightButtonLabel() {
-        return "Add select row into introduction";
+        return "go to selected " + dataModel.getRightTable().getColumnName()[0];
     }
     /**
      * This method will be invoked after the right button is clicked.
@@ -157,17 +160,20 @@ public class ScreenBuilder implements IView {
     @Override
     public JPanel customizeLeftPanel(){
         JPanel jPanel = new JPanel(new GridBagLayout());
-        jPanel.add(new JLabel("You need to add customized Left Panel here!"));
-        jPanel.add(useCase1());
-//        for (UseCase useCase : dataModel.getUseCases()) {
-//             jPanel.add(UseCaseButtons.getPanel(useCase, this));
-//        }
-        jPanel.add(UseCaseButtons.getUseCase1(this));
+        try{
+            for (Controllers controllers : dataModel.getUseCases()) {
+                jPanel.add(UseCaseButtons.getPanel(controllers, this));
+            }
+        } catch (NullPointerException e) {
+            jPanel.add(UseCaseButtons.getUseCase1(this));
+        }
+
+
         return jPanel;
     }
 
-    private JButton useCase1() {
-        return new JButton("Function 1");
+    private JLabel useCase1() {
+        return new JLabel("No use case is allowed");
     }
 
     @Override
@@ -201,7 +207,7 @@ public class ScreenBuilder implements IView {
      * get the frame after build.
      * @return Integration frame
      */
-    @Override
+
     public Integration getView(){
 
         // Initialize the front data.
@@ -244,8 +250,8 @@ public class ScreenBuilder implements IView {
         return view;
     }
 
-    @Override
-    public Integration getIntroOnly(){
+
+    private Integration getIntroOnly(){
         initialization();
         view.setTitle(setFrameName());
         view.setNameLabel(setInfoTitle());
@@ -260,8 +266,7 @@ public class ScreenBuilder implements IView {
         return view;
     }
 
-    @Override
-    public Integration getIntroAndTable(){
+    private Integration getIntroAndTable(){
         initialization();
         view.setTitle(setFrameName());
         view.setNameLabel(setInfoTitle());
@@ -275,8 +280,8 @@ public class ScreenBuilder implements IView {
 
         return view;
     }
-    @Override
-    public Integration getIntroTableAndButton(){
+
+    private Integration getIntroTableAndButton(){
         initialization();
         view.setTitle(setFrameName());
         view.setNameLabel(setInfoTitle());
@@ -338,7 +343,6 @@ public class ScreenBuilder implements IView {
     }
 
 
-    @Override
     public JFrame getNotVisible() {
         // TODO: add a notification dialog to show this screen is not visible.
         return null;
@@ -353,6 +357,5 @@ public class ScreenBuilder implements IView {
         JFrame app = screenBuilder.getView();
         app.pack();
         app.setVisible(true);
-
     }
 }

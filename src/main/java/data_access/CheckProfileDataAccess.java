@@ -21,12 +21,12 @@ public class CheckProfileDataAccess implements CheckProfileIGateway {
     }
 
     @Override
-    public List<Role> getUserRolesByUid(Integer requester) {
+    public List<Role> getUserRolesByUid(Integer target) {
         return null;
     }
 
     @Override
-    public User getUserByUid(Integer requester) {
+    public User getUserByUid(Integer target) {
         return null;
     }
 
@@ -46,6 +46,11 @@ public class CheckProfileDataAccess implements CheckProfileIGateway {
 
     @Override
     public Organization getOrgByOid(UUID oid) {
+        return null;
+    }
+
+    @Override
+    public User getFakeUserByUid(Integer target) {
         return null;
     }
 

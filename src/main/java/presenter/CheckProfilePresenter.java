@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class CheckProfilePresenter implements CheckProfileOutputBoundary {
-    private IViewModel viewModel;
+    private IViewModel viewModel = new ViewModel();
 
     public CheckProfilePresenter(){
 
@@ -22,9 +22,8 @@ public class CheckProfilePresenter implements CheckProfileOutputBoundary {
     @Override
     public void prepareUserFrame(CheckProfileResponseModel responseModel) {
 
-        //TODO: getBuilder is not yet finished
         initialSetup(responseModel, viewModel);
-        viewModel.setCurrUid(Curr.getUser().getId());
+        viewModel.setUid(responseModel.getTargetUid());
 //        if (responseModel.getVisualLevel() == VisualLevel.INVISIBLE) {
 //            show(screenBuilder.getNotVisible());
 //        }else if (responseModel.getVisualLevel() == VisualLevel.ONLY_FACE) {
@@ -34,7 +33,6 @@ public class CheckProfilePresenter implements CheckProfileOutputBoundary {
 //        }else if (responseModel.getVisualLevel() == VisualLevel.EDITABLE) {
 //            FrameFactoryInt factory = new FrameFactory();
 ////            factory.create(ScreenType.)
-//            //TODO move to frame layer
 //            show(screenBuilder.getIntroTableAndButton());
 //        }
 //        show(screenBuilder.getNotVisible());
@@ -50,13 +48,14 @@ public class CheckProfilePresenter implements CheckProfileOutputBoundary {
 
     public void initialSetup(CheckProfileResponseModel responseModel, IViewModel viewModel) {
         responseModel.getGateway().addObserver(viewModel);
+        viewModel.setRequesterID(Curr.getUser().getId());
         viewModel.setFrameName("HR system - " + responseModel.getFileType().toString());
         viewModel.setInfoTitle(responseModel.getName());
         viewModel.setIntro(responseModel.getBio());
         viewModel.setLeftTable(getLeftTable(responseModel));
         viewModel.setRightTable(getRightTable(responseModel));
         viewModel.setVisualLevel(responseModel.getVisualLevel());
-        viewModel.setFunction(new ButtonFactory(responseModel.getRelation()).getAllUseCases());
+        viewModel.setFunction(new ControllerFactory().getUseCases(responseModel.getRelation()));
     }
 
 

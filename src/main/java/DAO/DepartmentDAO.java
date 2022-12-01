@@ -91,6 +91,7 @@ public class DepartmentDAO {
 
     }
 
+
     public List<Department> getAllDepartments(){
 
         String departmentSQL = "SELECT * FROM department";

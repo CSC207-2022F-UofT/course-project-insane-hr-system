@@ -33,15 +33,15 @@ public interface IView {
 
     JPanel customizeRightPanel();
 
-    Integration getView();
-
-    Integration getIntroOnly();
-
-    Integration getIntroAndTable();
-
-    Integration getIntroTableAndButton();
+//    Integration getView();
+//
+//    Integration getIntroOnly();
+//
+//    Integration getIntroAndTable();
+//
+//    Integration getIntroTableAndButton();
 
     IViewModel getDataModel();
 
-    JFrame getNotVisible();
+//    JFrame getNotVisible();
 }

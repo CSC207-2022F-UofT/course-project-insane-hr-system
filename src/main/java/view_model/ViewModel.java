@@ -1,7 +1,7 @@
 package view_model;
 
 import check_profile_validation.VisualLevel;
-import presenter.UseCase;
+import presenter.Controllers;
 import presenter.IViewModel;
 
 import javax.swing.*;
@@ -19,10 +19,9 @@ public class ViewModel implements PropertyChangeListener, IViewModel {
     private ScreenType screenType; // could be deleted
     private VisualLevel visualLevel;
     private Integer requesterID;
-    private UseCase[] useCases;
+    private Controllers[] controllers;
     private UUID oid;
     private Integer uid;
-    private Integer currUid;
 
 
 
@@ -49,7 +48,7 @@ public class ViewModel implements PropertyChangeListener, IViewModel {
         this.leftTable = leftTable;
         this.rightTable = rightTable;
         this.observable = new PropertyChangeSupport(this);
-        this.currUid = currUid;
+        this.requesterID = currUid;
     }
 
     /*
@@ -67,8 +66,8 @@ public class ViewModel implements PropertyChangeListener, IViewModel {
 
 
     @Override
-    public void setFunction(UseCase[] useCases) {
-        this.useCases = useCases;
+    public void setFunction(Controllers[] controllers) {
+        this.controllers = controllers;
     }
 
 
@@ -203,8 +202,8 @@ public class ViewModel implements PropertyChangeListener, IViewModel {
     }
 
     @Override
-    public UseCase[] getUseCases() {
-        return useCases;
+    public Controllers[] getUseCases() {
+        return controllers;
     }
     public void show(JFrame frame) {
         JFrame app = new JFrame(this.getFrameName());
@@ -214,8 +213,8 @@ public class ViewModel implements PropertyChangeListener, IViewModel {
     }
 
     @Override
-    public void setFunctions(UseCase[] useCases) {
-        this.useCases = useCases;
+    public void setControllers(Controllers[] controllers) {
+        this.controllers = controllers;
     }
 
     @Override
@@ -228,13 +227,23 @@ public class ViewModel implements PropertyChangeListener, IViewModel {
         this.oid = oid;
     }
 
+
     @Override
-    public Integer getCurrUid() {
+    public Integer getUid() {
         return uid;
     }
 
     @Override
-    public void setCurrUid(Integer currUid) {
-        this.currUid = currUid;
+    public void setUid(Integer uid) {
+        this.uid = uid;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+    @Override
+    public Controllers[] getControllers() {
+        return controllers;
     }
 }

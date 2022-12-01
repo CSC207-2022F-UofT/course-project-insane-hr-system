@@ -1,12 +1,13 @@
 package presenter;
 
-public enum UseCase {
+public enum Controllers {
     LEAVE_REQUEST,
     SALARY_CALCULATOR,
     CREATE_TASK,
     ENROLL_EMPLOYEE,
     CREATE_PROJECT,
     COMPLETE_TASK,
-    COMPLETE_PROJECT
+    COMPLETE_PROJECT,
+    EXAMPLE_USE_CASE,
 
 }

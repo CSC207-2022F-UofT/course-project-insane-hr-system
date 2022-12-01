@@ -1,31 +1,32 @@
 package presenter;
 
 import entity.RelativeRelation;
-import ui.ScreenBuilder;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class ButtonFactory {
-    RelativeRelation relation;
-    public ButtonFactory(RelativeRelation relation) {
-        this.relation = relation;
+public class ControllerFactory {
+    public ControllerFactory() {
     }
 
 
-    UseCase[] getUseCases(RelativeRelation relation) {
-        List<UseCase> useCases = new LinkedList<>();
+    Controllers[] getUseCases(RelativeRelation relation) {
+        List<Controllers> controllers = new LinkedList<>();
 
-        for (UseCase useCase : UseCase.values()) {
-            if (functionIsInNeed(useCase)) {
-                useCases.add(useCase);
+        for (Controllers controller : Controllers.values()) {
+            if (functionIsInNeed(controller, relation)) {
+                controllers.add(controller);
             }
         }
-        return useCases.toArray(new UseCase[0]);
+        return controllers.toArray(new Controllers[0]);
     }
 
-    private boolean functionIsInNeed(UseCase useCase) {
-        switch (useCase) {
+
+    public Controllers[] getAllUseCases() {
+        return new Controllers[0];
+    }
+    private boolean functionIsInNeed(Controllers controllers, RelativeRelation relation) {
+        switch (controllers) {
             case CREATE_TASK: return relation == RelativeRelation.IS_P_M_OF;
             case LEAVE_REQUEST: return relation == RelativeRelation.IS_EMPLOYEE_SELF;
             case CREATE_PROJECT:return relation == RelativeRelation.IS_DPT_HEAD_SELF;
@@ -36,10 +37,5 @@ public class ButtonFactory {
 
         }
         return false;
-    }
-
-    public UseCase[] getAllUseCases() {
-
-        return new UseCase[0];
     }
 }
