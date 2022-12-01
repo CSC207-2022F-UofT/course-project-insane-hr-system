@@ -1,7 +1,7 @@
 package screen_builder;
 
+import ui.LeaveRequestScreen;
 import view_model.Table;
-import view_model.UIDataModel;
 import data_access.UIGateway;
 import view_model.UserDataModel;
 import view_model.UserType;
@@ -54,8 +54,15 @@ public class EmployeeScreenBuilder extends UserScreenBuilder {
     }
 
     @Override
-    protected JPanel customizeLeftPanel() {
-        return super.customizeLeftPanel();
+    public JPanel customizeLeftPanel() {
+        JPanel panel = new JPanel();
+        JButton requestButton = new JButton("Leave Request");
+        panel.add(requestButton);
+        requestButton.addActionListener(e -> {
+            LeaveRequestScreen screen = new LeaveRequestScreen(getView());
+            screen.setVisible(true);
+        });
+        return panel;
     }
 
     public static void main(String[] args) {
