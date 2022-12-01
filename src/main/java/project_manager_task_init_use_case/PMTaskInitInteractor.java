@@ -26,6 +26,14 @@ public class PMTaskInitInteractor implements PMTaskInitInputBoundary{
         this.taskInitGateway = gateway;
     }
 
+    /**
+     *This method creates a new task from the request model, and saves it in the database, then returns the response
+     * model that gets passed to the presenter.
+     *
+     * @param requestModel the request model created from user input
+     * @return the response model that gets passed to the presenter
+     */
+
     public PMTaskInitResponseModel createTask(PMTaskInitRequestModel requestModel) {
 
         Set<Integer> members = new HashSet<>();

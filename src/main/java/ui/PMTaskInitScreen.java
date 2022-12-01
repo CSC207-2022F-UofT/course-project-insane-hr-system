@@ -57,6 +57,11 @@ public class PMTaskInitScreen extends JPanel implements ActionListener {
 
     }
 
+    /**
+     * make the buttons eract to the action of clicking
+     * @param evt the event to be processed
+     */
+
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());
         taskInitController.create(taskName.getText(), taskDescription.getText(), Integer.parseInt(employeeId.getText()));
@@ -64,6 +69,10 @@ public class PMTaskInitScreen extends JPanel implements ActionListener {
         JOptionPane.showMessageDialog(this, "Task created");
     }
 
+    /**
+     * generates the screen
+     *
+     */
     public static void main(String[] args) {
         PMTaskInitGateway gateway = new PMTaskInitDataAccess();
         PMTaskInitPresenter presenter = new PMTaskInitPresenter();
