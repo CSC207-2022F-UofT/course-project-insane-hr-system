@@ -1,5 +1,7 @@
 package view_model;
 
+import java.util.List;
+
 public class Table {
     private String[] columnName;
     private Object[][] data;

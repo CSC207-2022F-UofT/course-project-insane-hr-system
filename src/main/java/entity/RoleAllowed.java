@@ -109,8 +109,15 @@ public class RoleAllowed {
         return  results;
     }
 
-    public static int getRelation(User user1, User user2) {
-        if (user1.equals(user2)) return RelativeRelation.IS_SELF;
+    public static RelativeRelation getRelation(User user1, User user2) {
+        if (user1.equals(user2)) {
+            switch (user1.getPosition()){
+                case CEO: return RelativeRelation.IS_CEO_OF;
+                case HEAD: if (isDptHeadOf(user1, user2)) return RelativeRelation.IS_DPT_HEAD_SELF;else return RelativeRelation.IS_PM_SELF;
+                case MEMBER: return RelativeRelation.IS_EMPLOYEE_SELF;
+            }
+
+        }
         if (hasSuper(user1.getRoles())) return RelativeRelation.IS_SUPER;
         else if (hasCEO(user1.getRoles())) return RelativeRelation.IS_CEO_OF;
         else if (isDptHeadOf(user1, user2)) return RelativeRelation.IS_DPT_HEAD_OF;
@@ -118,6 +125,11 @@ public class RoleAllowed {
         return RelativeRelation.NO_RELATION;
     }
 
+    public static RelativeRelation getRelation(User user, Organization org) {
+        if (roleOfOrg(user.getRoles(), org.getOid()).size() == 2) return RelativeRelation.IS_HEAD_OF;
+        else if (roleOfOrg(user.getRoles(), org.getOid()).size() == 2) return RelativeRelation.IS_MEMBER_OF;
+        return RelativeRelation.NO_RELATION;
+    }
     private static boolean isDptHeadOf(User user1, User user2) {
         for (UUID oidHeaded : getOidHeaded(user1.getRoles())) {
             if (user1.getDpt().getOid().equals(oidHeaded) && user2.getDpt().getOid() == oidHeaded) return true;

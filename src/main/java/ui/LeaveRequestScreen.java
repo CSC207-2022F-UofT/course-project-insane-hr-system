@@ -2,14 +2,18 @@ package ui;
 
 import com.github.lgooddatepicker.components.DatePicker;
 import controller.LeaveRequestController;
+import entity.Curr;
+import entity.LeaveRequestProjectBuilder;
 import entity.LeaveType;
+import entity.ProjectBuilder;
+
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LeaveRequestScreen extends JDialog implements ActionListener {
+public class LeaveRequestUI extends JDialog implements ActionListener {
     private JPanel mainPanel;
     JComboBox<LeaveType> leaveTypeComboBox = new JComboBox<>(LeaveType.values());
     JTextArea messageArea = new JTextArea();
@@ -27,12 +31,7 @@ public class LeaveRequestScreen extends JDialog implements ActionListener {
         return mainPanel;
     }
 
-    /**
-     * Creates a dialog for sending leave requests.
-     * @param frame the JFrame the dialog will be displayed on.
-     *
-     */
-    public LeaveRequestScreen(JFrame frame) {
+    public LeaveRequestUI(JFrame frame) {
         super(frame, "Leave Request");
 //        LeaveRequestDsGateway gateway = new DataAccess();
 //        LeaveRequestOutputBoundary outputBoundary = new LeaveRequestPresenter();
@@ -52,7 +51,7 @@ public class LeaveRequestScreen extends JDialog implements ActionListener {
         JButton button = new JButton("Test");
         panel.add(button);
         button.addActionListener(e -> {
-            LeaveRequestScreen ui = new LeaveRequestScreen(frame);
+            LeaveRequestUI ui = new LeaveRequestUI(frame);
             ui.setVisible(true);
         });
         frame.setContentPane(panel);

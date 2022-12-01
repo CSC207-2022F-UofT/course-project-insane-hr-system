@@ -11,6 +11,7 @@ public class CommonUser extends CommonUserFace implements User {
     //construct only with the initial uid
     public CommonUser(int uid) {
         super(uid);
+        this.userFile = new UserFile(uid);
     }
 
     // construct without UserFile
