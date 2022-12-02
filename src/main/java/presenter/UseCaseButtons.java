@@ -1,7 +1,12 @@
 package presenter;
 
+import controller.PMTaskInitController;
+import data_access.PMTaskInitDataAccess;
 import entity.RelativeRelation;
 import presenter.Controllers;
+import project_manager_task_init_use_case.PMTaskInitGateway;
+import project_manager_task_init_use_case.PMTaskInitInteractor;
+import ui.PMTaskInitScreen;
 import ui.ScreenBuilder;
 
 import javax.swing.*;
@@ -17,7 +22,7 @@ public class UseCaseButtons {
             case ENROLL_EMPLOYEE:;
             case CREATE_PROJECT:;
             case LEAVE_REQUEST:;
-            case COMPLETE_TASK:;
+            case COMPLETE_TASK: return getPMTaskInit();
             case CREATE_TASK:;
             case COMPLETE_PROJECT:;
             case EXAMPLE_USE_CASE: return getUseCase1(screenBuilder);
@@ -33,5 +38,22 @@ public class UseCaseButtons {
         JPanel jPanel = new JPanel();
         jPanel.add(new JLabel("This is use case 1"));
         return jPanel;
+    }
+
+    public static JPanel getPMTaskInit() {
+        JPanel panel = new JPanel();
+        JButton button = new JButton("Create New Task");
+        panel.add(button);
+        button.addActionListener(e -> {
+            PMTaskInitGateway gateway = new PMTaskInitDataAccess();
+            PMTaskInitPresenter presenter = new PMTaskInitPresenter();
+            PMTaskInitInteractor interactor = new PMTaskInitInteractor(presenter, gateway);
+            PMTaskInitController controller = new PMTaskInitController(interactor);
+
+            PMTaskInitScreen taskInitScreen = new PMTaskInitScreen(controller);
+            taskInitScreen.setVisible(true);
+
+        });
+        return panel;
     }
 }
