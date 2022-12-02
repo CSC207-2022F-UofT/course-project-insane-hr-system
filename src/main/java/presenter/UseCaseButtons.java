@@ -20,7 +20,8 @@ public class UseCaseButtons {
             case CREATE_PROJECT:;
             case LEAVE_REQUEST: return getLeaveRequest(screenBuilder);
             case COMPLETE_TASK:;
-            case CREATE_TASK:;
+            case CREATE_TASK: return getCompleteTask(screenBuilder);
+            case EVALUATE_TASK: return getEvaluateTask(screenBuilder);
             case COMPLETE_PROJECT:;
             case EXAMPLE_USE_CASE: return getUseCase1(screenBuilder);
             case APPROVE_LEAVE_TASK: return getApproveLeaveTask(screenBuilder);
@@ -41,6 +42,17 @@ public class UseCaseButtons {
         return panel;
     }
 
+    public static JPanel getCompleteTask(ScreenBuilder screenBuilder) {
+        JPanel jPanel = new JPanel();
+        jPanel.add(new JLabel("Complete Task Page"));
+        return jPanel;
+    }
+
+    public static JPanel getEvaluateTask(ScreenBuilder screenBuilder) {
+        JPanel jPanel = new JPanel();
+        jPanel.add(new JLabel("Evaluate Task page"));
+        return jPanel;
+    }
     public static JPanel getApproveLeaveTask(ScreenBuilder screenBuilder) {
         return new ReviewRequestScreen(screenBuilder.view(), screenBuilder.getDataModel().getOid());
     }
