@@ -2,6 +2,7 @@ package controller;
 
 import login.LoginInputBoundary;
 import login.LoginRequestModel;
+import login.LoginResponseModel;
 
 
 public class LoginController{
@@ -14,9 +15,9 @@ public class LoginController{
 
     public LoginController(){}
 
-    public void login(String username, String password) {
+    public LoginResponseModel login(String username, String password) {
         LoginRequestModel logReqMod = new LoginRequestModel(username, password);
-        interactor.login(logReqMod);
+        return interactor.login(logReqMod);
     }
 
 }

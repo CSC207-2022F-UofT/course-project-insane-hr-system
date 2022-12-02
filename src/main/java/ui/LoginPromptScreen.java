@@ -1,6 +1,9 @@
 package ui;
 
 import controller.LoginController;
+import login.LoginFailureResponseModel;
+import login.LoginResponseModel;
+import login.LoginSuccessResponseModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +12,7 @@ import java.awt.event.ActionListener;
 
 // Frameworks/Drivers layer
 
-public class LoginScreen extends JPanel implements ActionListener {
+public class LoginPromptScreen extends JPanel implements ActionListener {
 
     JTextField username = new JTextField(15);
 
@@ -17,7 +20,15 @@ public class LoginScreen extends JPanel implements ActionListener {
 
     LoginController loginController;
 
-    public LoginScreen(LoginController loginController) {
+    JPanel screens;
+
+    CardLayout cardLayout;
+
+    public LoginPromptScreen(LoginController loginController, JPanel screens, CardLayout cardLayout) {
+
+        this.cardLayout = cardLayout;
+
+        this.screens = screens;
 
         this.loginController = loginController;
 
@@ -51,7 +62,17 @@ public class LoginScreen extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());
 
-        this.loginController.login(username.getText(),
+        LoginResponseModel loginResponseModel = this.loginController.login(username.getText(),
                 String.valueOf(password.getPassword()));
+
+        if (loginResponseModel instanceof LoginSuccessResponseModel){}
+
+        else if (loginResponseModel instanceof LoginFailureResponseModel){
+            JPanel loginFailureScreen = new LoginFailureScreen((LoginFailureResponseModel) loginResponseModel);
+            cardLayout.addLayoutComponent(loginFailureScreen, "loginFailureScreen");
+            screens.add(loginFailureScreen);
+            cardLayout.show(screens, "loginFailureScreen");
+            System.out.println("here");
+        }
     }
 }

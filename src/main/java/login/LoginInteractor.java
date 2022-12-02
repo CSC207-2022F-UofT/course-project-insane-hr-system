@@ -5,31 +5,31 @@ import presenter.LoginPresenter;
 import entity.User;
 
 
-public class LoginInteractor<LoginReponseModel> implements LoginInputBoundary{
+public class LoginInteractor implements LoginInputBoundary{
 
     final LoginDSGateway loginDsGateway;
     final LoginPresenter userPresenter;
-    final Curr currentUser;
 
-    public LoginInteractor(LoginDSGateway loginDsGateway, LoginPresenter userPresenter, Curr currentUser){
+    public LoginInteractor(LoginDSGateway loginDsGateway, LoginPresenter userPresenter){
         this.loginDsGateway = loginDsGateway;
         this.userPresenter = userPresenter;
-        this.currentUser = currentUser;
     }
 
-    public void login(LoginRequestModel logReqMod) {
+    public LoginResponseModel login(LoginRequestModel logReqMod) {
         if (loginDsGateway.userExists(logReqMod)){
             User user = loginDsGateway.getUser(logReqMod);
-            LoginResponseModel loginResponseModel = new LoginResponseModel(true);
-            userPresenter.prepareSuccessView(user, loginResponseModel);
+            this.setCurrentUser(user);
+            int userID = user.getId();
+            return new LoginSuccessResponseModel(userID);
         }
         else {
-            LoginResponseModel loginResponseModel = new LoginResponseModel(false);
-            userPresenter.prepareFailView(loginResponseModel);
+            LoginFailureResponseModel loginFailureResponseModel = new LoginFailureResponseModel(logReqMod.getUsername());
+            userPresenter.prepareFailView(loginFailureResponseModel);
+            return loginFailureResponseModel;
         }
     }
 
-    public void setCurrUser(Curr currentUser, User user){
-
+    public void setCurrentUser(User user){
+        Curr.setUser(user);
     }
 }

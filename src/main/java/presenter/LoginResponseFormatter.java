@@ -1,16 +1,17 @@
 package presenter;
 
-import entity.User;
-import login.LoginResponseModel;
+import controller.CheckProfileController;
+import login.LoginFailureResponseModel;
+import login.LoginSuccessResponseModel;
 
 public class LoginResponseFormatter implements LoginPresenter {
     @Override
-    public LoginResponseModel prepareSuccessView(User user, LoginResponseModel loginSuccessModel) {
+    public LoginSuccessResponseModel prepareSuccessView(LoginSuccessResponseModel loginSuccessModel) {
         return loginSuccessModel;
     }
 
     @Override
-    public LoginResponseModel prepareFailView(LoginResponseModel loginFailureModel) {
+    public LoginFailureResponseModel prepareFailView(LoginFailureResponseModel loginFailureModel) {
         return loginFailureModel;
     }
 }

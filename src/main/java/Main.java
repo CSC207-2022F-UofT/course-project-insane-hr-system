@@ -1,7 +1,11 @@
 import controller.LoginController;
+import data_access.LoginDataAccess;
+import login.LoginDSGateway;
+import login.LoginInputBoundary;
+import login.LoginInteractor;
 import presenter.LoginPresenter;
 import presenter.LoginResponseFormatter;
-import ui.LoginScreen;
+import ui.LoginPromptScreen;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,15 +15,15 @@ public class Main {
     public static void main(String[] args) {
 
 
-        JFrame application = new JFrame("Application");
+        JFrame mainFrame = new JFrame("Insane HR System");
         CardLayout cardLayout = new CardLayout();
         JPanel screens = new JPanel(cardLayout);
-        application.add(screens);
+        mainFrame.add(screens);
 
         LoginPresenter loginPresenter = new LoginResponseFormatter();
-        // LoginInputBoundary interactor = new LoginInteractor(loginPresenter, currentUser);
-        // LoginController loginController = new LoginController(interactor);
-        LoginController loginController = new LoginController();
+        LoginDataAccess loginDataAccess = new LoginDataAccess();
+        LoginInputBoundary interactor = new LoginInteractor(loginDataAccess, loginPresenter);
+        LoginController loginController = new LoginController(interactor);
 
         // TODO intialize data access
 
@@ -28,11 +32,11 @@ public class Main {
         // TODO initialize feature interactors, controllers
 
         // Build the GUI, plugging in the parts
-        JPanel loginScreen = new LoginScreen(loginController);
+        JPanel loginScreen = new LoginPromptScreen(loginController, screens, cardLayout);
         screens.add(loginScreen, "welcome");
         cardLayout.show(screens, "login");
-        application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        application.pack();
-        application.setVisible(true);
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.pack();
+        mainFrame.setVisible(true);
     }
 }
