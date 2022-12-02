@@ -5,6 +5,8 @@ import entity.Project;
 import entity.Task;
 import entity.User;
 
+import java.util.UUID;
+
 import static entity.Constants.CLOSED;
 
 public class ReviewRequestInteractor implements ReviewRequestInputBoundary {
@@ -19,7 +21,8 @@ public class ReviewRequestInteractor implements ReviewRequestInputBoundary {
     @Override
     public ReviewRequestResponseModel reviewRequest(ReviewRequestRequestModel requestModel) {
         User user = Curr.getUser();
-        Task task = requestModel.getTask();
+        UUID oid = requestModel.getOid();
+        Task task = gateway.getTask(oid);
         Project project = task.getProject();
         boolean approval = requestModel.getApproval();
 

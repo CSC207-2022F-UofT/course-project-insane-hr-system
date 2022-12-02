@@ -36,7 +36,7 @@ public class EnrollDataAccess implements EnrollDsGateway {
 
     @Override
     public List<Department> getAllDepartments() {
-        Set s = new HashSet();
+        Set<Integer> s = new HashSet<>();
         Department dpt1 = new Department(UUID.randomUUID(),"dpta",2,s,"NOTHING", LocalDateTime.now());
         Department dpt2 = new Department(UUID.randomUUID(),"dptb",2,s,"NOTHING", LocalDateTime.now());
         Department dpt3 = new Department(UUID.randomUUID(),"dptc",2,s,"NOTHING", LocalDateTime.now());
