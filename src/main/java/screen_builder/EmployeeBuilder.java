@@ -1,21 +1,20 @@
-package ui;
+package screen_builder;
 
-import data_access.IUIGateway;
 import data_access.UIGateway;
+import presenter.IViewModel;
+import ui.ScreenBuilder;
+import ui.LeaveRequestScreen;
+import view_model.Table;
+import view_model.UserType;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-public class EmployeeBuilder extends IntegrationBuilder{
-    private final UIDataModel dataModel;
+public class EmployeeBuilder extends ScreenBuilder {
+    private final IViewModel dataModel;
 
-    public EmployeeBuilder(UIDataModel dataModel) {
+    public EmployeeBuilder(IViewModel dataModel) {
         super(dataModel);
         this.dataModel = dataModel;
     }
@@ -26,7 +25,7 @@ public class EmployeeBuilder extends IntegrationBuilder{
         JButton requestButton = new JButton("Leave Request");
         panel.add(requestButton);
         requestButton.addActionListener(e -> {
-            LeaveRequestUI ui = new LeaveRequestUI(getView());
+            LeaveRequestScreen ui = new LeaveRequestScreen(getView());
             ui.setVisible(true);
         });
         return panel;
@@ -46,33 +45,33 @@ public class EmployeeBuilder extends IntegrationBuilder{
 
 
     @Override
-    protected String setIntro() {
+    public String setIntro() {
         return dataModel.getIntro();
     }
 
     @Override
-    protected String setInfoTitle() {
+    public String setInfoTitle() {
         return dataModel.getInfoTitle();
     }
 
     @Override
-    protected String setFrameName() {
+    public String setFrameName() {
         return dataModel.getFrameName();
     }
 
     @Override
-    protected Table setLeftTable() {
+    public Table setLeftTable() {
         return dataModel.getLeftTable();
     }
 
     @Override
-    protected Table setRightTable() {
+    public Table setRightTable() {
         return dataModel.getRightTable();
     }
 
     public static void main(String[] args) {
         IUIGateway gateway = new UIGateway();
-        UIDataModel model = gateway.getUIDataModel(1234);
+        IViewModel model = gateway.getFakeDataModel(1234, UserType.PROJECT_MANAGER);
         EmployeeBuilder builder = new EmployeeBuilder(model);
         JFrame application = builder.getView();
         application.setDefaultCloseOperation(EXIT_ON_CLOSE);

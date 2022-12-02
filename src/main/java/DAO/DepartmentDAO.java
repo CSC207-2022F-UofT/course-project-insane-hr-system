@@ -112,6 +112,7 @@ public class DepartmentDAO implements DepartmentDAOInterface {
 
     }
 
+
     public List<Department> getAllDepartments(){
 
         String departmentSQL = "SELECT * FROM department";

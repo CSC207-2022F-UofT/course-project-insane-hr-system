@@ -91,7 +91,6 @@ public class CommonProjectDAO implements CommonProjectDAOInterface {
             resultSet = statement.executeQuery(querySQL);
 
             while (resultSet.next()) {
-
                 UUID id = UUID.fromString(resultSet.getString("ID"));
                 String name = resultSet.getString("name");
                 Integer head = resultSet.getInt("head");

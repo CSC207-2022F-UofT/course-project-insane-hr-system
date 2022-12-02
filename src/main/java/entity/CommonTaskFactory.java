@@ -6,16 +6,14 @@ import java.util.UUID;
 
 public class CommonTaskFactory implements TaskFactory{
     private final CommonProject project;
-    private Object results;
     private Integer star;
 
     public CommonTaskFactory(CommonProject project) {
         this.project = project;
     }
 
-    public CommonTaskFactory(CommonProject project, Object results, Integer star) {
+    public CommonTaskFactory(CommonProject project, Integer star) {
         this.project = project;
-        this.results = results;
         this.star = star;
     }
 
