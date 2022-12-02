@@ -19,5 +19,5 @@ public interface CommonUserDAOInterface {
     public List<CommonUser> getAllCommonUsers();
 
     // get one CommonUser
-    public CommonUser getCommonUser(UUID id);
+    public CommonUser getCommonUser(int id);
 }
