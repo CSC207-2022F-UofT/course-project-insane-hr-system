@@ -2,6 +2,8 @@ package presenter;
 
 import entity.RelativeRelation;
 import presenter.Controllers;
+import ui.LeaveRequestScreen;
+import ui.ReviewRequestScreen;
 import ui.ScreenBuilder;
 
 import javax.swing.*;
@@ -16,18 +18,32 @@ public class UseCaseButtons {
             case SALARY_CALCULATOR:;
             case ENROLL_EMPLOYEE:;
             case CREATE_PROJECT:;
-            case LEAVE_REQUEST:;
+            case LEAVE_REQUEST: return getLeaveRequest(screenBuilder);
             case COMPLETE_TASK:;
             case CREATE_TASK:;
             case COMPLETE_PROJECT:;
             case EXAMPLE_USE_CASE: return getUseCase1(screenBuilder);
+            case APPROVE_LEAVE_TASK: return getApproveLeaveTask(screenBuilder);
         }
         JPanel jPanel = new JPanel();
         jPanel.add(new JLabel("No Controller is allowed"));
         return jPanel;
     }
 
+    public static JPanel getLeaveRequest(ScreenBuilder screenBuilder) {
+        JPanel panel = new JPanel();
+        JButton requestButton = new JButton("Leave Request");
+        panel.add(requestButton);
+        requestButton.addActionListener(e -> {
+            LeaveRequestScreen ui = new LeaveRequestScreen(screenBuilder.view());
+            ui.setVisible(true);
+        });
+        return panel;
+    }
 
+    public static JPanel getApproveLeaveTask(ScreenBuilder screenBuilder) {
+        return new ReviewRequestScreen(screenBuilder.view(), screenBuilder.getDataModel().getOid());
+    }
 
     public static JPanel getUseCase1(ScreenBuilder screenBuilder){
         JPanel jPanel = new JPanel();

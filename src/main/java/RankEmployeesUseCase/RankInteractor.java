@@ -1,8 +1,8 @@
 package RankEmployeesUseCase;
 
 
-import Entity.CommonTask;
-import Entity.CommonUser;
+import entity.CommonTask;
+import entity.CommonUser;
 
 import java.lang.reflect.Array;
 import java.util.*;
