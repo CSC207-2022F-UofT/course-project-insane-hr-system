@@ -1,10 +1,10 @@
-package RankEmployeesUseCase;
+package rank_employees_use_case;
 
 
 import entity.CommonTask;
 import entity.CommonUser;
+import presenter.RankPresenter;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class RankInteractor implements RankInputBoundary {

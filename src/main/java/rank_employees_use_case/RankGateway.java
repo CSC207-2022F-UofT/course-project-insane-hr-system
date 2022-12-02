@@ -1,4 +1,4 @@
-package RankEmployeesUseCase;
+package rank_employees_use_case;
 
 
 import entity.CommonTask;

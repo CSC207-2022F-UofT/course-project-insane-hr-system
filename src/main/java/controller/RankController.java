@@ -1,9 +1,9 @@
-package RankEmployeesUseCase;
+package controller;
 
 import entity.CommonUser;
-import RankEmployeesUseCase.RankInputBoundary;
-import RankEmployeesUseCase.RankRequestModel;
-import RankEmployeesUseCase.RankResponseModel;
+import rank_employees_use_case.RankInputBoundary;
+import rank_employees_use_case.RankRequestModel;
+import rank_employees_use_case.RankResponseModel;
 
 import java.util.List;
 
