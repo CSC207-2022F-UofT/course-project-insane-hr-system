@@ -1,11 +1,8 @@
 package DAOInterfaces;
 
-import entity.CommonRole;
 import entity.CommonUser;
-import entity.CommonUserFace;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface CommonUserDAOInterface {
 
