@@ -154,4 +154,8 @@ public class CommonOrganization implements Organization {
         }
         return false;
     }
+
+    public String getType(){
+        return "ORG";
+    }
 }

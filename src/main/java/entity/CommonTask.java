@@ -45,4 +45,7 @@ public class CommonTask extends CommonOrganization implements Task {
         this.star = star;
     }
 
+    public String getType(){
+        return "COMMON";
+    }
 }
