@@ -60,13 +60,11 @@ public class ProjectDAO implements ProjectDAOInterface {
                 else{
                     int vacationDays = resultSet.getInt("vacation_days");
 
-                    // TODO : convert string into leave type.
-                    LeaveType leaveType = resultSet.getString("leave_type");
+                    LeaveType leaveType = LeaveType.valueOf(resultSet.getString("leave_type"));
 
                     if(resultSet.getString("status").equals(CLOSED)){
                         LocalDateTime end = LocalDateTime.parse(resultSet.getString("end"));
-                        // TODO : create another constructor.
-                        project = new LeaveRequestProject(id,name,head,memberIds,description,create,vacationDays,leaveType, end);
+                        project = new LeaveRequestProject(id,name,head,memberIds,description,create,end,vacationDays,leaveType);
                     }
                     else{
                         project = new LeaveRequestProject(id,name,head,memberIds,description,create,vacationDays,leaveType);
