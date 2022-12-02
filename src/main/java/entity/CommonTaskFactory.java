@@ -28,6 +28,6 @@ public class CommonTaskFactory implements TaskFactory{
     public Task createClosedTask(String name, Set<Integer> members, String description, LocalDateTime createTime,
                                  LocalDateTime closeTime) {
         return new CommonTask(UUID.randomUUID(), name, Curr.getUser().getId(), members, description, createTime, closeTime,
-                project, results, star);
+                project, star);
     }
 }

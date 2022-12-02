@@ -11,11 +11,14 @@ public class LeaveRequestProject extends CommonOrganization implements Project {
     private int vacationDays;
     private LeaveType leaveType;
 
+    private final String projectType;
+
     public LeaveRequestProject(UUID oid, String name, Integer head, Set<Integer> members, String description,
                                LocalDateTime createTime, int vacationDays, LeaveType leaveType) {
         super(oid, name, head, members, description, createTime);
         this.vacationDays = vacationDays;
         this.leaveType = leaveType;
+        this.projectType = "LEAVE";
     }
 
     @Override
@@ -60,6 +63,10 @@ public class LeaveRequestProject extends CommonOrganization implements Project {
 
     public void setVacationDays(int vacationDays) {
         this.vacationDays = vacationDays;
+    }
+
+    public String getType(){
+        return this.projectType;
     }
 
     public void update() {

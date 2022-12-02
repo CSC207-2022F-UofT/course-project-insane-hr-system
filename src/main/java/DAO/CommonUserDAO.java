@@ -1,4 +1,4 @@
-package enroll_employee.DAO;
+package DAO;
 
 public class CommonUserDAO {
 }

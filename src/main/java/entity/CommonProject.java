@@ -11,6 +11,8 @@ public class CommonProject extends CommonOrganization implements RealProject{
     private int funds;
     private int star;
 
+    private String projectType;
+
 
     public CommonProject(UUID oid, String name, int star, Integer head, Set<Integer> members, String description, LocalDateTime createTime, LocalDateTime closeTime,
                          Department dpt, List<Task> tasks, int funds) {
@@ -19,6 +21,7 @@ public class CommonProject extends CommonOrganization implements RealProject{
         this.tasks = tasks;
         this.funds = funds;
         this.star = star;
+        this.projectType = "COMMON";
     }
 
     public CommonProject(UUID oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime createTime,
@@ -68,6 +71,10 @@ public class CommonProject extends CommonOrganization implements RealProject{
     @Override
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    public String getType(){
+        return this.projectType;
     }
 
     @Override

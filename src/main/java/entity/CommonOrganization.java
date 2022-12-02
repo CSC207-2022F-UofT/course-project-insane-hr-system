@@ -142,4 +142,8 @@ public class CommonOrganization implements Organization {
     public void setState(String state) {
         this.state = state;
     }
+
+    public String getType(){
+        return "ORG";
+    }
 }
