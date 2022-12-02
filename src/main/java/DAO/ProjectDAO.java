@@ -229,8 +229,7 @@ public class ProjectDAO implements ProjectDAOInterface {
             else{
                 statement.setInt(8, ((LeaveRequestProject) project).getVacationDays());
 
-                // TODO : get a string representation of leave type below.
-                //statement.setString(9, ((LeaveRequestProject) project).getLeaveType();
+                statement.setString(9, ((LeaveRequestProject) project).getLeaveType().toString());
 
                 if (project.getState().equals(CLOSED)){
                     statement.setString(10, project.getCloseTime().toString());
