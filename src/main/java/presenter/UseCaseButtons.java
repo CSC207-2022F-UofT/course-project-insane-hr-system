@@ -1,12 +1,9 @@
 package presenter;
 
-import controller.PMTaskInitController;
-import data_access.PMTaskInitDataAccess;
 import entity.RelativeRelation;
 import presenter.Controllers;
-import project_manager_task_init_use_case.PMTaskInitGateway;
-import project_manager_task_init_use_case.PMTaskInitInteractor;
-import ui.PMTaskInitScreen;
+import ui.LeaveRequestScreen;
+import ui.ReviewRequestScreen;
 import ui.ScreenBuilder;
 
 import javax.swing.*;
@@ -21,39 +18,36 @@ public class UseCaseButtons {
             case SALARY_CALCULATOR:;
             case ENROLL_EMPLOYEE:;
             case CREATE_PROJECT:;
-            case LEAVE_REQUEST:;
-            case COMPLETE_TASK: return getPMTaskInit();
+            case LEAVE_REQUEST: return getLeaveRequest(screenBuilder);
+            case COMPLETE_TASK:;
             case CREATE_TASK:;
             case COMPLETE_PROJECT:;
             case EXAMPLE_USE_CASE: return getUseCase1(screenBuilder);
+            case APPROVE_LEAVE_TASK: return getApproveLeaveTask(screenBuilder);
         }
         JPanel jPanel = new JPanel();
         jPanel.add(new JLabel("No Controller is allowed"));
         return jPanel;
     }
 
+    public static JPanel getLeaveRequest(ScreenBuilder screenBuilder) {
+        JPanel panel = new JPanel();
+        JButton requestButton = new JButton("Leave Request");
+        panel.add(requestButton);
+        requestButton.addActionListener(e -> {
+            LeaveRequestScreen ui = new LeaveRequestScreen(screenBuilder.view());
+            ui.setVisible(true);
+        });
+        return panel;
+    }
 
+    public static JPanel getApproveLeaveTask(ScreenBuilder screenBuilder) {
+        return new ReviewRequestScreen(screenBuilder.view(), screenBuilder.getDataModel().getOid());
+    }
 
     public static JPanel getUseCase1(ScreenBuilder screenBuilder){
         JPanel jPanel = new JPanel();
         jPanel.add(new JLabel("This is use case 1"));
         return jPanel;
-    }
-
-    public static JPanel getPMTaskInit() {
-        JPanel panel = new JPanel();
-        JButton button = new JButton("Create New Task");
-        panel.add(button);
-        button.addActionListener(e -> {
-            PMTaskInitGateway gateway = new PMTaskInitDataAccess();
-            PMTaskInitPresenter presenter = new PMTaskInitPresenter();
-            PMTaskInitInteractor interactor = new PMTaskInitInteractor(presenter, gateway);
-            PMTaskInitController controller = new PMTaskInitController(interactor);
-
-            PMTaskInitScreen taskInitScreen = new PMTaskInitScreen(controller);
-            taskInitScreen.setVisible(true);
-
-        });
-        return panel;
     }
 }

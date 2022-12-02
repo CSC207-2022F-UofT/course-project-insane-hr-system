@@ -1,22 +1,22 @@
 package review_request;
 
-import entity.Task;
+import java.util.UUID;
 
 public class ReviewRequestRequestModel {
-    private Task task;
+    private UUID oid;
     private boolean approval;
 
-    public ReviewRequestRequestModel(Task task, boolean approval) {
-        this.task = task;
+    public ReviewRequestRequestModel(UUID oid, boolean approval) {
+        this.oid = oid;
         this.approval = approval;
     }
 
-    public Task getTask() {
-        return task;
+    public UUID getOid() {
+        return oid;
     }
 
-    public void setTask(Task task) {
-        this.task = task;
+    public void setOid(UUID oid) {
+        this.oid = oid;
     }
 
     public boolean getApproval() {
