@@ -7,7 +7,7 @@ public class LoginFailureResponseModel extends LoginResponseModel{
 
     public LoginFailureResponseModel(String username){
         this.username = username;
-        this.message = "Login failed: could not find user " + username;
+        this.message = "could not find user " + username;
     }
 
     public String getUsername() {

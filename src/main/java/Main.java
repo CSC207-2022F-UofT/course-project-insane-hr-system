@@ -9,10 +9,11 @@ import ui.LoginPromptScreen;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
 
         JFrame mainFrame = new JFrame("Insane HR System");

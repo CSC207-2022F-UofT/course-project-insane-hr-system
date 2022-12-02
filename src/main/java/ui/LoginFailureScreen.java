@@ -23,11 +23,11 @@ public class LoginFailureScreen extends JPanel implements ActionListener{
         JLabel message = new JLabel(loginFailureResponseModel.getMessage());
         message.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JButton goBackButton = new JButton("Go Back");
+        JButton tryAgainButton = new JButton("Try Again");
         JPanel buttons = new JPanel();
-        buttons.add(goBackButton);
+        buttons.add(tryAgainButton);
 
-        goBackButton.addActionListener(this);
+        tryAgainButton.addActionListener(this);
 
         // this.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
