@@ -5,9 +5,9 @@ public class ReviewRequestResponseModel {
 
     public ReviewRequestResponseModel(boolean approval) {
         if (approval) {
-            this.result = "approved";
+            this.result = "Approved";
         } else {
-            this.result = "denied";
+            this.result = "Denied";
         }
     }
 

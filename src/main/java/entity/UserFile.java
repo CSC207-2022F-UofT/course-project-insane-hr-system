@@ -56,6 +56,10 @@ class UserFile implements Serializable {
         this.status = OPEN;
     }
 
+    public UserFile(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return String.format("%s's File:\n Position: %s\n Current Project: %s\n Current Tasks: %s\n ",

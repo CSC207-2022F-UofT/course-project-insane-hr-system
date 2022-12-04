@@ -1,9 +1,10 @@
 package controller;
 
-import entity.Task;
 import review_request.ReviewRequestInputBoundary;
 import review_request.ReviewRequestRequestModel;
 import review_request.ReviewRequestResponseModel;
+
+import java.util.UUID;
 
 public class ReviewRequestController {
     final ReviewRequestInputBoundary inputBoundary;
@@ -12,8 +13,8 @@ public class ReviewRequestController {
         this.inputBoundary = inputBoundary;
     }
 
-    ReviewRequestResponseModel reviewRequest(Task task, boolean approval) {
-        ReviewRequestRequestModel requestModel = new ReviewRequestRequestModel(task, approval);
+    public ReviewRequestResponseModel reviewRequest(UUID oid, boolean approval) {
+        ReviewRequestRequestModel requestModel = new ReviewRequestRequestModel(oid, approval);
         return inputBoundary.reviewRequest(requestModel);
     }
 }

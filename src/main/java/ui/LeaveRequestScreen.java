@@ -2,7 +2,14 @@ package ui;
 
 import com.github.lgooddatepicker.components.DatePicker;
 import controller.LeaveRequestController;
+import data_access.LeaveRequestDataAccess;
 import entity.LeaveType;
+import leave_request.*;
+import entity.ProjectBuilder;
+import entity.LeaveRequestProjectBuilder;
+import presenter.LeaveRequestPresenter;
+import entity.Curr;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,18 +34,13 @@ public class LeaveRequestScreen extends JDialog implements ActionListener {
         return mainPanel;
     }
 
-    /**
-     * Creates a dialog for sending leave requests.
-     * @param frame the JFrame the dialog will be displayed on.
-     *
-     */
     public LeaveRequestScreen(JFrame frame) {
         super(frame, "Leave Request");
-//        LeaveRequestDsGateway gateway = new DataAccess();
-//        LeaveRequestOutputBoundary outputBoundary = new LeaveRequestPresenter();
-//        ProjectBuilder projectBuilder = new LeaveRequestProjectBuilder();
-//        LeaveRequestInputBoundary interactor = new LeaveRequestInteractor(gateway, outputBoundary, projectBuilder);
-//        this.controller = new LeaveRequestController(interactor);
+        LeaveRequestDsGateway gateway = new LeaveRequestDataAccess();
+        LeaveRequestOutputBoundary presenter = new LeaveRequestPresenter();
+        ProjectBuilder projectBuilder = new LeaveRequestProjectBuilder();
+        LeaveRequestInputBoundary interactor = new LeaveRequestInteractor(gateway, presenter, projectBuilder);
+        this.controller = new LeaveRequestController(interactor);
         this.frame = frame;
         initComponents();
         this.setContentPane(mainPanel);
@@ -66,11 +68,11 @@ public class LeaveRequestScreen extends JDialog implements ActionListener {
         System.out.println("Click " + evt.getActionCommand());
 
         try {
-//            LeaveRequestResponseModel response = controller.create(Curr.getUser(), messageArea.getText(), (LeaveType) leaveTypeComboBox.getSelectedItem(),
-//                    startDatePicker.getDate(), returnDatePicker.getDate());
-//            String message = "Your " + response.getLeaveType() + "leave request from " + response.getStartDate() + "to "
-//                    + response.getReturnDate() + "has been sent on " + response.getCreateTime() + ".";
-            JOptionPane.showMessageDialog(this.frame, " Request sent.", "SENT REQUEST", JOptionPane.PLAIN_MESSAGE);
+            LeaveRequestResponseModel response = controller.create(Curr.getUser(), messageArea.getText(), (LeaveType) leaveTypeComboBox.getSelectedItem(),
+                    startDatePicker.getDate(), returnDatePicker.getDate());
+            String message = "Your " + response.getLeaveType() + "leave request from " + response.getStartDate() + "to "
+                    + response.getReturnDate() + "has been sent on " + response.getCreateTime() + ".";
+            JOptionPane.showMessageDialog(this.frame, message, "Request Sent", JOptionPane.PLAIN_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this.frame, e.getMessage());
         }

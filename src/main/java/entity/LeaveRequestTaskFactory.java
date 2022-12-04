@@ -29,6 +29,7 @@ public class LeaveRequestTaskFactory implements TaskFactory {
     @Override
     public Task createClosedTask(String name, Set<Integer> members, String description, LocalDateTime createTime,
                                  LocalDateTime closeTime) {
-        return null;
+        return new LeaveRequestTask(UUID.randomUUID(), name, Curr.getUser().getId(), members, description, createTime,
+                closeTime, project);
     }
 }

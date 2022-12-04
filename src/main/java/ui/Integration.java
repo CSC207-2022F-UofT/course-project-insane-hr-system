@@ -1,7 +1,6 @@
 package ui;
 
 import view_model.Table;
-import view_model.UIDataModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -21,46 +20,45 @@ public class Integration extends JFrame implements PropertyChangeListener {
     private JPanel rightControllerPanel;
     private JButton leftButton;
     private JButton rightButton;
-    private UIDataModel dataModel;
 
 
-    public Integration() {
-        super("HR system");
+    public Integration(String frameName) {
+        super(frameName);
         this.setContentPane(this.rootPanel);
     }
-    public Integration(String name, String detail, Table leftTable, Table rightTable, JPanel leftCustomizePanel, JPanel rightControllerPanel) {
-        super("HR system");
-        this.setContentPane(this.rootPanel);
-        this.nameLabel.setText(name);
-        this.detailLabel.setText(detail);
-        this.leftTable.setModel(new DefaultTableModel(leftTable.getData(), leftTable.getColumnName()));
-        this.rightTable.setModel(new DefaultTableModel(rightTable.getData(), rightTable.getColumnName()));
-        this.leftControllerPanel.add(leftCustomizePanel);
-        this.rightControllerPanel.add(rightControllerPanel);
-    }
-    public Integration(String name, String detail, Table leftTable, Table rightTable, UIDataModel dataModel) {
-        super("HR system");
-        this.setContentPane(this.rootPanel);
-        this.nameLabel.setText(name);
-        this.detailLabel.setText(detail);
-        this.leftTable.setModel(new DefaultTableModel(leftTable.getData(), leftTable.getColumnName()));
-        this.rightTable.setModel(new DefaultTableModel(rightTable.getData(), rightTable.getColumnName()));
-        this.dataModel = dataModel;
-    }
-    public Integration(String name, String detail, JPanel leftControllerPanel, JPanel rightControllerPanel) {
-        super("HR system");
-        this.setContentPane(this.rootPanel);
-        this.leftControllerPanel.add(leftControllerPanel);
-        this.rightControllerPanel.add(rightControllerPanel);
-        this.nameLabel.setText(name);
-        this.detailLabel.setText(detail);
-    }
-    public Integration(String name, String detail) {
-        super("HR system");
-        this.setContentPane(this.rootPanel);
-        this.nameLabel.setText(name);
-        this.detailLabel.setText(detail);
-    }
+//    public Integration(String name, String detail, Table leftTable, Table rightTable, JPanel leftCustomizePanel, JPanel rightControllerPanel) {
+//        super("HR system");
+//        this.setContentPane(this.rootPanel);
+//        this.nameLabel.setText(name);
+//        this.detailLabel.setText(detail);
+//        this.leftTable.setModel(new DefaultTableModel(leftTable.getData(), leftTable.getColumnName()));
+//        this.rightTable.setModel(new DefaultTableModel(rightTable.getData(), rightTable.getColumnName()));
+//        this.leftControllerPanel.add(leftCustomizePanel);
+//        this.rightControllerPanel.add(rightControllerPanel);
+//    }
+//    public Integration(String name, String detail, Table leftTable, Table rightTable, UIDataModel dataModel) {
+//        super("HR system");
+//        this.setContentPane(this.rootPanel);
+//        this.nameLabel.setText(name);
+//        this.detailLabel.setText(detail);
+//        this.leftTable.setModel(new DefaultTableModel(leftTable.getData(), leftTable.getColumnName()));
+//        this.rightTable.setModel(new DefaultTableModel(rightTable.getData(), rightTable.getColumnName()));
+//        this.dataModel = dataModel;
+//    }
+//    public Integration(String name, String detail, JPanel leftControllerPanel, JPanel rightControllerPanel) {
+//        super("HR system");
+//        this.setContentPane(this.rootPanel);
+//        this.leftControllerPanel.add(leftControllerPanel);
+//        this.rightControllerPanel.add(rightControllerPanel);
+//        this.nameLabel.setText(name);
+//        this.detailLabel.setText(detail);
+//    }
+//    public Integration(String name, String detail) {
+//        super("HR system");
+//        this.setContentPane(this.rootPanel);
+//        this.nameLabel.setText(name);
+//        this.detailLabel.setText(detail);
+//    }
 
     public JPanel getRootPanel() {
         return rootPanel;
@@ -149,7 +147,7 @@ public class Integration extends JFrame implements PropertyChangeListener {
 
 
     public static void main(String[] args) {
-        JFrame frame = new Integration();
+        JFrame frame = new Integration("HR system");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
