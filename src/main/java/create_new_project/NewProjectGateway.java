@@ -1,11 +1,11 @@
-package ProjectMgt;
+package create_new_project;
 
 import entity.Project;
 import entity.User;
 
-public interface ProjectMgtGateway {
+public interface NewProjectGateway {
 
-    void save(ProjectMgtInteractor interactor);
+    void save(NewProjectInteractor interactor);
 
     void saveProject(Project project);
 
