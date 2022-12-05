@@ -11,15 +11,15 @@ import java.util.List;
 import java.util.UUID;
 
 public interface CheckProfileIGateway {
-    List<Role> getUserRolesByUid(Integer target);
+//    List<Role> getUserRolesByUid(Integer target);
 
     User getUserByUid(Integer target);
 
-    PropertyChangeSupport getObservable();
+//    PropertyChangeSupport getObservable();
 
     void addObserver(PropertyChangeListener observer);
 
     Organization getOrgByOid(UUID oid);
 
-    User getFakeUserByUid(Integer target);
+//    User getFakeUserByUid(Integer target);
 }

@@ -7,4 +7,5 @@ public interface CheckProfileOutputBoundary {
     void prepareOrgFrame(CheckProfileResponseModel responseModel);
 
     void update();
+
 }

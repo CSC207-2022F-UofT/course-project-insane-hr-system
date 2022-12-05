@@ -1,26 +1,24 @@
 package entity;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 public class LeaveRequestProject extends CommonOrganization implements Project {
-    private List<Task> tasks = new ArrayList<>();
+    private List<Task> tasks;
     private int numResponses = 0;
     private int vacationDays;
     private LeaveType leaveType;
 
-    private final String projectType = "LEAVE";
+    private final String projectType;
 
     public LeaveRequestProject(UUID oid, String name, Integer head, Set<Integer> members, String description,
                                LocalDateTime createTime, int vacationDays, LeaveType leaveType) {
         super(oid, name, head, members, description, createTime);
         this.vacationDays = vacationDays;
         this.leaveType = leaveType;
-        this.tasks = new ArrayList<>();
-
+        this.projectType = "LEAVE";
     }
 
     public LeaveRequestProject(UUID oid, String name, Integer head, Set<Integer> members, String description,
@@ -28,8 +26,7 @@ public class LeaveRequestProject extends CommonOrganization implements Project {
         super(oid, name, head, members, description, createTime, closeTime);
         this.vacationDays = vacationDays;
         this.leaveType = leaveType;
-        this.tasks = new ArrayList<>();
-
+        this.projectType = "LEAVE";
     }
 
     @Override
@@ -86,10 +83,5 @@ public class LeaveRequestProject extends CommonOrganization implements Project {
         if (this.numResponses == this.getMembers().size()) {
             this.close();
         }
-    }
-
-    @Override
-    public String getType() {
-        return "LEAVE_REQUEST";
     }
 }
