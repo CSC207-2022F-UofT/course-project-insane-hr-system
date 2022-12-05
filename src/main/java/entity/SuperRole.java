@@ -1,6 +1,6 @@
 package entity;
 
-public class SuperRole {
+public class SuperRole implements Role {
     protected final Position position;
     protected final String name;
 

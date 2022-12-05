@@ -6,6 +6,16 @@ import java.util.Set;
 import java.util.UUID;
 
 public class LeaveRequestProjectBuilder implements ProjectBuilder {
+    /**
+     * This method creates an open LeaveRequestProject with request review tasks assigned to every superior.
+     * @param projectName the name of the project providing the specifics of the leave request.
+     * @param description the message sent by the user requesting leave.
+     * @param members the superiors that needs to approve the request.
+     * @param vacationDays the number of days on leave requested.
+     * @param leaveType the type of leave.
+     *
+     * @return a new LeaveRequestProject.
+     */
     @Override
     public Project createProject(String projectName, String description, Set<Integer> members, int vacationDays,
                                  LeaveType leaveType) {
