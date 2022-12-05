@@ -1,53 +1,43 @@
 package data_access;
 
-
-import DAO.DepartmentDAO;
-import DAO.UserDAO;
-import DAOInterfaces.DepartmentDAOInterface;
-import DAOInterfaces.UserDAOInterface;
 import enroll_employee.EnrollDsGateway;
 import enroll_employee.EnrollDsRequestModel;
 import entity.CommonUser;
 import entity.Department;
 import entity.User;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-public class EnrollDataAccess implements EnrollDsGateway {
+public class IMEnrollEmployee implements EnrollDsGateway {
 
-    private final UserDAOInterface userDAOInterface = new UserDAO();
-    private final DepartmentDAOInterface departmentDAOInterface = new DepartmentDAO();
+    final List<CommonUser> users;
+    final List<Department> departments;
 
-    /**
-     * @return the first four letter of the last name of all users
-     */
+    public IMEnrollEmployee(List<CommonUser> users, List<Department> departments) {
+        this.users = users;
+        this.departments = departments;
+    }
+
     @Override
     public List<String> getUserNameLastFour() {
         List<String> names = new ArrayList<>();
-        List<CommonUser> users = userDAOInterface.getAllUsers();
         for (CommonUser user: users){
             names.add(user.getUsername().substring(0,4));
         }
         return names;
     }
 
-    /**
-     * @return the uid of all users
-     */
     @Override
     public List<Integer> getAllUID() {
         List<Integer> ids = new ArrayList<>();
-        List<CommonUser> users = userDAOInterface.getAllUsers();
         for (CommonUser user: users){
             ids.add(user.getId());
         }
         return ids;
     }
 
-    /**
-     * @param name is the username
-     * @return a generated username
-     */
     @Override
     public String generateUsername(String name) {
         List<String> allUsernameLastFour = getUserNameLastFour();
@@ -67,9 +57,6 @@ public class EnrollDataAccess implements EnrollDsGateway {
         return firstPart + secondPart;
     }
 
-    /**
-     * @return the generated id
-     */
     @Override
     public int generateId() {
         List<Integer> ids = getAllUID();
@@ -79,40 +66,31 @@ public class EnrollDataAccess implements EnrollDsGateway {
         return Collections.max(ids)+1;
     }
 
-    /**
-     * @param requestModel contains the new user
-     */
     @Override
     public void save(EnrollDsRequestModel requestModel) {
         User user = requestModel.getUser();
         CommonUser commonUser = new CommonUser(user.getId(),user.getDpt(), user.getBio(), user.getUserFile());
-        userDAOInterface.createUser(commonUser);
+        users.add(commonUser);
+        System.out.println(users.get(users.size()-1));
     }
 
-    /**
-     * @return all the department
-     */
     @Override
     public List<Department> getAllDepartments() {
-        return departmentDAOInterface.getAllDepartments();
+        return departments;
     }
 
-    /**
-     * @param dpt the department that will be updated in the database.
-     */
     @Override
     public void updateDepartment(Department dpt) {
-        departmentDAOInterface.updateDepartment(dpt);
+        for (int i =0; i < departments.size(); i++)
+            if (departments.get(i).getOid() == dpt.getOid()){
+                departments.set(i,dpt);
+            }
     }
 
-    /**
-     * @param name the department name that is used to find the department
-     * @return the department that has the given name
-     */
     @Override
     public Department findDptByName(String name) {
-        List<Department> dpts = getAllDepartments();
-        for (Department dpt: dpts){
+
+        for (Department dpt: departments){
             if (dpt.getName().equals(name)){
                 return dpt;
             }

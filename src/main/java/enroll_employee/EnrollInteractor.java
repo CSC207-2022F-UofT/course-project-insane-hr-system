@@ -33,9 +33,17 @@ public class EnrollInteractor implements EnrollInputBoundary{
         List<Project> projects = new ArrayList<Project>();
         List<Task> tasks = new ArrayList<Task>();
         Position position = Position.valueOf(requestModel.getPosition());
+
         LocalDate onboardDate = LocalDate.now();
 
         User user = userFactory.create(id,dpt,"",username,password,roles,projects,tasks, position,onboardDate);
+
+        if (position.equals(Position.MEMBER)){
+            dpt.addMember(user.getId());
+        }
+        if (position.equals(Position.HEAD)){
+            dpt.setHead(user.getId());
+        }
         EnrollDsRequestModel dsRequestModel = new EnrollDsRequestModel(user);
         enrolldsGateway.save(dsRequestModel);
         enrolldsGateway.updateDepartment(dpt);
