@@ -3,6 +3,8 @@ package check_profile_validation;
 import controller.CheckProfileController;
 import entity.CommonUser;
 import entity.Curr;
+import entity.RoleAllowed;
+import entity.RoleFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -46,8 +48,8 @@ class CheckProfileInteractorTest {
         CheckProfileInputBoundary interactor = new CheckProfileInteractor(gateway,presenter);
         CheckProfileController controller = new CheckProfileController(interactor);
         CheckProfileResponseModel responseModel = interactor.checkUserProfile(new CheckUserFileRequestModel(0,1));
-        //TODO add role generation in RoleFactory.
         System.out.println(responseModel);
+        assertEquals(responseModel.getVisualLevel(), VisualLevel.ONLY_FACE);
     }
     @Test
     void checkOrgProfile() {

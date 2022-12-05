@@ -16,6 +16,13 @@ public class CheckProfileTestDataAccess implements CheckProfileIGateway {
 //    public List<Role> getUserRolesByUid(Integer target) {
 //        return null;
 //    }
+    private final UUID dptOid = UUID.randomUUID();
+    private final UUID project1Oid = UUID.randomUUID();
+    private final UUID project2Oid = UUID.randomUUID();
+    private final UUID task1Oid = UUID.randomUUID();
+    private final UUID task2Oid = UUID.randomUUID();
+    private final UUID task3Oid = UUID.randomUUID();
+    private final UUID task4Oid = UUID.randomUUID();
 
     @Override
     public User getUserByUid(Integer target) {
@@ -24,23 +31,31 @@ public class CheckProfileTestDataAccess implements CheckProfileIGateway {
         User head = new CommonUser(2);
         User manager = new CommonUser(1);
 
+
         user.setPosition(Position.MEMBER);
         head.setPosition(Position.HEAD);
         manager.setPosition(Position.HEAD);
 
-        Department dpt = new Department(UUID.randomUUID(), "TestDepartment1", head.getId(), new HashSet<>(target), "This is the first dpt", LocalDateTime.now());
-        Project project = new CommonProject(UUID.randomUUID(), "Project 1", manager.getId(), new HashSet<>(user.getId()), "This is the first Project", LocalDateTime.now(), dpt, new ArrayList<>(), 1000);
+        Department dpt = new Department(dptOid, "TestDepartment1", head.getId(), new HashSet<>(target), "This is the first dpt", LocalDateTime.now());
+        Project project = new CommonProject(project1Oid, "Project 1", manager.getId(), new HashSet<>(user.getId()), "This is the first Project", LocalDateTime.now(), dpt, new ArrayList<>(), 1000);
         dpt.addProject(project);
         
         project.addMember(user.getId());
         user.addCurrProject(project);
-        
+        manager.addCurrProject(project);
+
         user.setDpt(dpt);
         manager.setDpt(dpt);
         head.setDpt(dpt);
         dpt.addMember(user.getId());
         dpt.addMember(manager.getId());
-        
+
+        RoleFactory roleFactory = new RoleFactory();
+
+        roleFactory.addRoleToUserBasedOnOrg(user);
+        roleFactory.addRoleToUserBasedOnOrg(head);
+        roleFactory.addRoleToUserBasedOnOrg(manager);
+
         if (target == 0) {
             return user;
         }else if (target==1){
@@ -87,4 +102,11 @@ public class CheckProfileTestDataAccess implements CheckProfileIGateway {
 //    public User getFakeUserByUid(Integer target) {
 //       
 //    }
+public static void main(String[] args) {
+    CheckProfileTestDataAccess dataAccess = new CheckProfileTestDataAccess();
+    User user = dataAccess.getUserByUid(0);
+    System.out.println(user);
+    User user1 = dataAccess.getUserByUid(1);
+    System.out.println(user1);
+}
 }

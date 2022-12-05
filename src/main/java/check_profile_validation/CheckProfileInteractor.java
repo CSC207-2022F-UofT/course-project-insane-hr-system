@@ -269,7 +269,7 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
             return VisualLevel.EDITABLE;
         } else if (RoleAllowed.isHeadOf(r2, r1)) {
             return VisualLevel.ONLY_FACE;
-        } else if (user1.getDpt().equals(user2.getDpt())) {
+        } else if (user1.getDpt().getOid().equals(user2.getDpt().getOid())) {
             return VisualLevel.PROFILE;
         }
         return VisualLevel.INVISIBLE;
