@@ -80,6 +80,6 @@ public class LeaveRequestProject extends CommonOrganization implements Project {
 
     @Override
     public String getType() {
-        return "LEAVE_REQUEST";
+        return "LEAVE";
     }
 }
