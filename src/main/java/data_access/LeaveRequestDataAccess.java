@@ -30,7 +30,7 @@ public class LeaveRequestDataAccess implements LeaveRequestDsGateway {
     }
 
     /**
-     * Retrieve the User class from the database.
+     * Retrieve the User from the database.
      * @param uid identifier of the user
      *
      * @return the matching User class
