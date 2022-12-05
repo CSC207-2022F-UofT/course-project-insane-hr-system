@@ -58,7 +58,7 @@ public class PMTaskInitScreen extends JPanel implements ActionListener {
     }
 
     /**
-     * make the buttons eract to the action of clicking
+     * make the buttons react to the action of clicking
      * @param evt the event to be processed
      */
 

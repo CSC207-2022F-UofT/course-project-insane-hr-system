@@ -41,7 +41,7 @@ public class PMTaskInitInteractor implements PMTaskInitInputBoundary{
         LocalDateTime createTime = LocalDateTime.now();
         Task task = commonTaskFactory.createOpenTask(requestModel.getTaskName(), members, requestModel.getTaskDescription(), createTime);
 
-        PMTaskInitDsRequestModel dsRequestModel = new PMTaskInitDsRequestModel(task.getOid(), task.getName(), task.getHead(), task.getMembers(), task.getDescription(), task.getCreateTime());
+        PMTaskInitDsRequestModel dsRequestModel = new PMTaskInitDsRequestModel((CommonTask) task);
         taskInitGateway.saveTask(dsRequestModel);
 
         PMTaskInitResponseModel responseModel = new PMTaskInitResponseModel(requestModel.getTaskName(), requestModel.getTaskDescription(), requestModel.getEmployeeId());
