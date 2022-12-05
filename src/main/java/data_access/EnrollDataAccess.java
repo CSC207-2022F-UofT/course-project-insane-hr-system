@@ -11,7 +11,6 @@ import entity.CommonUser;
 import entity.Department;
 import entity.User;
 
-import java.time.LocalDateTime;
 import java.util.*;
 
 public class EnrollDataAccess implements EnrollDsGateway {
@@ -21,11 +20,12 @@ public class EnrollDataAccess implements EnrollDsGateway {
 
 
     @Override
-    public List<String> getAllUsername() {
+    public List<String> getAllUserLastName() {
         List<String> names = new ArrayList<>();
         List<CommonUser> users = userDAOInterface.getAllUsers();
         for (CommonUser user: users){
-            names.add(user.getName());
+            String[] fullName = user.getName().split(" ");
+            names.add(fullName[1]);
         }
         return names;
     }
@@ -42,7 +42,7 @@ public class EnrollDataAccess implements EnrollDsGateway {
 
     @Override
     public String generateUsername(String name) {
-        List<String> allNames = getAllUsername();
+        List<String> allNames = getAllUserLastName();
         StringBuilder nameBuilder = new StringBuilder(name);
         while (nameBuilder.length() < 4){
             nameBuilder.append(nameBuilder.charAt(0));
