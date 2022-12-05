@@ -8,7 +8,6 @@ public class CompleteTaskScreen {
     private JButton button_complete;
     private JPanel panelMain;
     private JTextField textField2;
-    private JTextField textField3;
 
     public CompleteTaskScreen() {
         button_complete.addActionListener(new ActionListener() {

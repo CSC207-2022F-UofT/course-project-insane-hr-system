@@ -3,6 +3,7 @@ package complete_task;
 import entity.*;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public class CompleteTaskInteractor implements CompleteTaskInputBoundary{
     private final CompleteTaskDsGateway completeGateway;
@@ -17,6 +18,7 @@ public class CompleteTaskInteractor implements CompleteTaskInputBoundary{
     @Override
     public CompleteTaskResponseModel create(CompleteTaskRequestModel requestModel) {
         Task task = requestModel.getTask();
+        UUID oid = task.getOid();
         User user = requestModel.getUser();
 
         if (Objects.equals(requestModel.getTask().getState(), "CLOSED")) {
@@ -25,7 +27,7 @@ public class CompleteTaskInteractor implements CompleteTaskInputBoundary{
 
         task.setState("CLOSED");
 
-        CompleteTaskResponseModel completeResponseModel = new CompleteTaskResponseModel(task,
+        CompleteTaskResponseModel completeResponseModel = new CompleteTaskResponseModel(oid,
                 "Submitted successfully!");
         return completeOutputBoundary.prepareSuccessView(completeResponseModel);
     }

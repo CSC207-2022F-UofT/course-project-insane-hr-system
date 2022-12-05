@@ -5,19 +5,21 @@ import java.util.Set;
 import java.util.UUID;
 
 public class StarEvaluationTask extends CommonOrganization implements Task {
-    private final Organization evaluatedOrganization;
+    private final CommonTask commonTask;
     private final Project project;
     private Integer results;
 
-    public StarEvaluationTask(UUID oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime createTime, LocalDateTime closeTime, Organization evaluatedOrganization, Project project) {
+    public StarEvaluationTask(UUID oid, String name, Integer head, Set<Integer> members, String description,
+                              LocalDateTime createTime, LocalDateTime closeTime, CommonTask commonTask, Project project) {
         super(oid, name, head, members, description, createTime, closeTime);
-        this.evaluatedOrganization = evaluatedOrganization;
+        this.commonTask = commonTask;
         this.project = project;
     }
 
-    public StarEvaluationTask(UUID oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime createTime, Organization evaluatedOrganization, Project project) {
+    public StarEvaluationTask(UUID oid, String name, Integer head, Set<Integer> members, String description,
+                              LocalDateTime createTime, CommonTask commonTask, Project project) {
         super(oid, name, head, members, description, createTime);
-        this.evaluatedOrganization = evaluatedOrganization;
+        this.commonTask = commonTask;
         this.project = project;
     }
 

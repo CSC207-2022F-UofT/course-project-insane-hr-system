@@ -11,8 +11,8 @@ public class CompleteTaskController {
         this.userInput = userInput;
     }
 
-    public CompleteTaskResponseModel create(Task task, User user, String message) {
-        CompleteTaskRequestModel requestModel = new CompleteTaskRequestModel(task, user, message);
+    public CompleteTaskResponseModel create(Task task, User user) {
+        CompleteTaskRequestModel requestModel = new CompleteTaskRequestModel(task, user);
         return userInput.create(requestModel);
     }
 }

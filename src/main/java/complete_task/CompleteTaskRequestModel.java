@@ -1,17 +1,16 @@
 package complete_task;
 
-import entity.Task;
-import entity.User;
+import entity.*;
+
+
 
 public class CompleteTaskRequestModel {
     private Task task;
     private User user;
-    private String message;
 
-    public CompleteTaskRequestModel(Task task, User user, String message) {
+    public CompleteTaskRequestModel(Task task, User user) {
         this.task = task;
         this.user = user;
-        this.message = message;
     }
 
     public Task getTask() {
@@ -30,11 +29,4 @@ public class CompleteTaskRequestModel {
         this.user = user;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 }
