@@ -20,7 +20,7 @@ public class ProjectDAO implements ProjectDAOInterface {
         // the tasks must be created individually.
         // then project is added to each task.
         // finally each task is added to the project.
-
+        return null;
     }
 
     // helper 1. create the intended project with no tasks.
@@ -127,7 +127,7 @@ public class ProjectDAO implements ProjectDAOInterface {
 
 
 
-
+        return null;
     }
 
     // helper 3. get a list of project members.

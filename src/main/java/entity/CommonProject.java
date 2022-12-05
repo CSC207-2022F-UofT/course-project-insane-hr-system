@@ -80,5 +80,8 @@ public class CommonProject extends CommonOrganization implements RealProject{
         this.funds = funds;
     }
 
-
+    @Override
+    public String getType() {
+        return "COMMON";
+    }
 }

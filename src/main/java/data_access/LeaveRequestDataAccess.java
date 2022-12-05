@@ -16,6 +16,11 @@ public class LeaveRequestDataAccess implements LeaveRequestDsGateway {
     private final TaskDAOInterface taskDAO = new CommonTaskDAO();
     private final UserDAOInterface userDAO = new UserDAO();
 
+    /**
+     * Save the created leave request project and tasks.
+     * @param requestModel to store
+     *
+     */
     @Override
     public void save(LeaveRequestDsRequestModel requestModel) {
         projectDAO.createProject(requestModel.getProject());
@@ -24,6 +29,12 @@ public class LeaveRequestDataAccess implements LeaveRequestDsGateway {
         }
     }
 
+    /**
+     * Retrieve the User class from the database.
+     * @param uid identifier of the user
+     *
+     * @return the matching User class
+     */
     @Override
     public User getUser(Integer uid) {
         return userDAO.getUser(uid);

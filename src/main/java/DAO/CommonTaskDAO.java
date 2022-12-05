@@ -136,9 +136,9 @@ public class CommonTaskDAO implements TaskDAOInterface {
     }
 
     // get all tasks from the database
-    public List<CommonTask>  getAllTasks(){
+    public List<Task>  getAllTasks(){
         String query = "SELECT * FROM tasks";
-        List<CommonTask> tasks = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
         Statement statement;
         ResultSet result = null;
 
