@@ -16,6 +16,12 @@ public class LeaveRequestTask extends CommonOrganization implements Task {
         this.project = project;
     }
 
+    public LeaveRequestTask(UUID oid, String name, Integer head, Set<Integer> members, String description,
+                            LocalDateTime createTime, LocalDateTime closeTime, LeaveRequestProject project) {
+        super(oid, name, head, members, description, createTime, closeTime);
+        this.project = project;
+    }
+
     @Override
     public Project getProject() {
         return project;

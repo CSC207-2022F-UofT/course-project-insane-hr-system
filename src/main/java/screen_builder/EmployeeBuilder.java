@@ -3,7 +3,7 @@ package screen_builder;
 import data_access.UIGateway;
 import presenter.IViewModel;
 import ui.ScreenBuilder;
-import ui.LeaveRequestUI;
+import ui.LeaveRequestScreen;
 import view_model.Table;
 import view_model.UserType;
 
@@ -25,7 +25,7 @@ public class EmployeeBuilder extends ScreenBuilder {
         JButton requestButton = new JButton("Leave Request");
         panel.add(requestButton);
         requestButton.addActionListener(e -> {
-            LeaveRequestUI ui = new LeaveRequestUI(getView());
+            LeaveRequestScreen ui = new LeaveRequestScreen(getView());
             ui.setVisible(true);
         });
         return panel;

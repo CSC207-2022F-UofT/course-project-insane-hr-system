@@ -1,6 +1,6 @@
 package RankEmployeesUseCase;
 
-import Entity.CommonUser;
+import entity.CommonUser;
 import RankEmployeesUseCase.RankInputBoundary;
 import RankEmployeesUseCase.RankRequestModel;
 import RankEmployeesUseCase.RankResponseModel;
