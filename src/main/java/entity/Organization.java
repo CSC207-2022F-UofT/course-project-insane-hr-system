@@ -43,4 +43,6 @@ public interface Organization extends Serializable {
     String getState();
 
     void setState(String state);
+
+    String getType();
 }

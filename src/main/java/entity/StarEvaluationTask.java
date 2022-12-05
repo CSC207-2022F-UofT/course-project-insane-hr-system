@@ -38,4 +38,8 @@ public class StarEvaluationTask extends CommonOrganization implements Task {
     public void setResults(Object results) {
         this.results = (Integer) results;
     }
+
+    public String getType(){
+        return "STAR";
+    }
 }
