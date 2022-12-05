@@ -1,23 +1,33 @@
 package entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 public class CommonProject extends CommonOrganization implements RealProject{
     private Department dpt;
-    private List<Task> tasks;
+    private List<Task> tasks = new ArrayList<>();
     private int funds;
-    private String projectType;
+    private int star;
 
+    private final String projectType;
 
-    public CommonProject(UUID oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime createTime, LocalDateTime closeTime,
+    public CommonProject(UUID oid, String name, Integer head, String description, LocalDateTime createTime, Department dpt, int funds) {
+        super(oid, name, head, description, createTime);
+        this.dpt = dpt;
+        this.funds = funds;
+        this.projectType = "COMMON";
+    }
+
+    public CommonProject(UUID oid, String name, int star, Integer head, Set<Integer> members, String description, LocalDateTime createTime, LocalDateTime closeTime,
                          Department dpt, List<Task> tasks, int funds) {
         super(oid, name, head, members, description, createTime, closeTime);
         this.dpt = dpt;
         this.tasks = tasks;
         this.funds = funds;
+        this.star = star;
         this.projectType = "COMMON";
     }
 
@@ -27,6 +37,7 @@ public class CommonProject extends CommonOrganization implements RealProject{
         this.dpt = dpt;
         this.tasks = tasks;
         this.funds = funds;
+        this.projectType = "COMMON";
     }
 
     // adding/removing task
@@ -38,6 +49,16 @@ public class CommonProject extends CommonOrganization implements RealProject{
     @Override
     public boolean removeTask(Task Task) {
         return this.tasks.remove(Task);
+    }
+
+    @Override
+    public int getStar() {
+        return star;
+    }
+
+    @Override
+    public void setStar(int star) {
+        this.star = star;
     }
 
     @Override
@@ -60,7 +81,6 @@ public class CommonProject extends CommonOrganization implements RealProject{
         this.tasks = tasks;
     }
 
-    @Override
     public String getType(){
         return this.projectType;
     }
@@ -74,4 +94,6 @@ public class CommonProject extends CommonOrganization implements RealProject{
     public void setFunds(int funds) {
         this.funds = funds;
     }
+
+
 }

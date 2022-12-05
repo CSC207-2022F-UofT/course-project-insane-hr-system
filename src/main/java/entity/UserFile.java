@@ -2,6 +2,7 @@ package entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import static entity.Constants.CLOSED;
@@ -11,10 +12,10 @@ class UserFile implements Serializable {
     private final int id;
     private String username;
     private String password;
-    private List<Role> roles;
-    private List<Project> projects;
-    private List<Task> tasks;
-    private Position position;
+    private List<Role> roles = new ArrayList<>();
+    private List<Project> projects = new ArrayList<>();
+    private List<Task> tasks = new ArrayList<>();
+    private Position position; // employees are member, managers dpt Heads are heads and CEOs are CEO
     private LocalDate onboardDate;
     private LocalDate departureDate;
     private String status;

@@ -3,6 +3,7 @@ package presenter;
 import check_profile_validation.*;
 import entity.Curr;
 import entity.RelativeRelation;
+import ui.ScreenBuilder;
 import view_model.*;
 
 import java.util.LinkedList;
@@ -12,7 +13,6 @@ public class CheckProfilePresenter implements CheckProfileOutputBoundary {
     private IViewModel viewModel = new ViewModel();
 
     public CheckProfilePresenter(){
-
     }
 
     public CheckProfilePresenter(IViewModel viewModel) {
@@ -24,18 +24,9 @@ public class CheckProfilePresenter implements CheckProfileOutputBoundary {
 
         initialSetup(responseModel, viewModel);
         viewModel.setUid(responseModel.getTargetUid());
-//        if (responseModel.getVisualLevel() == VisualLevel.INVISIBLE) {
-//            show(screenBuilder.getNotVisible());
-//        }else if (responseModel.getVisualLevel() == VisualLevel.ONLY_FACE) {
-//            show(screenBuilder.getIntroOnly());
-//        }else if (responseModel.getVisualLevel() == VisualLevel.PROFILE) {
-//            show(screenBuilder.getIntroAndTable());
-//        }else if (responseModel.getVisualLevel() == VisualLevel.EDITABLE) {
-//            FrameFactoryInt factory = new FrameFactory();
-////            factory.create(ScreenType.)
-//            show(screenBuilder.getIntroTableAndButton());
-//        }
-//        show(screenBuilder.getNotVisible());
+//        ScreenBuilder screenBuilder = new ScreenBuilder(this.viewModel);
+//        screenBuilder.view();
+
     }
 
     @Override
@@ -118,6 +109,10 @@ public class CheckProfilePresenter implements CheckProfileOutputBoundary {
     @Override
     public void update() {
 //TODO
+    }
+
+    public IViewModel getViewModel() {
+        return viewModel;
     }
 //
 //    private void show(JFrame frame) {

@@ -1,6 +1,7 @@
 package entity;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -11,11 +12,21 @@ public class CommonOrganization implements Organization {
     private final UUID oid;
     private String name;
     private Integer head;
-    private Set<Integer> members;
+    private Set<Integer> members = new HashSet<>();
     private String description;
     private final LocalDateTime createTime;
     private LocalDateTime closeTime;
     private String state;
+
+    public CommonOrganization(UUID oid, String name, Integer head, String description, LocalDateTime createTime) {
+        this.oid = oid;
+        this.name = name;
+        this.head = head;
+        this.description = description;
+        this.createTime = createTime;
+        this.state = CLOSED;
+        this.members.add(head);
+    }
 
     //construction a CLOSED organization
     public CommonOrganization(UUID oid, String name,
@@ -30,6 +41,7 @@ public class CommonOrganization implements Organization {
         this.createTime = createTime;
         this.closeTime = closeTime;
         this.state = CLOSED;
+        this.members.add(head);
     }
 
     // construct an OPEN organization
@@ -44,6 +56,7 @@ public class CommonOrganization implements Organization {
         this.description = description;
         this.createTime = createTime;
         this.state = OPEN;
+        this.members.add(head);
     }
 
     //opening and closing the Organization
@@ -143,9 +156,6 @@ public class CommonOrganization implements Organization {
         this.state = state;
     }
 
-    @Override
-    public String getType(){ return "COMMON";}
-
     /**
      * @param obj any object.
      * @return true if the oid are equal.
@@ -156,5 +166,9 @@ public class CommonOrganization implements Organization {
             return this.getOid().equals((((Organization) obj).getOid()));
         }
         return false;
+    }
+
+    public String getType(){
+        return "ORG";
     }
 }
