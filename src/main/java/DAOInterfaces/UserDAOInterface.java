@@ -9,7 +9,7 @@ public interface UserDAOInterface {
 
 
     // get all users //
-    public List<CommonUser> getAllTasks();
+    public List<CommonUser> getAllUsers();
 
     // get one user //
     public Task getUser(int id);
