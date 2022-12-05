@@ -24,8 +24,8 @@ public class EnrollDataAccess implements EnrollDsGateway {
     @Override
     public List<String> getUserNameLastFour() {
         List<String> names = new ArrayList<>();
-        List<CommonUser> users = userDAOInterface.getAllUsers();
-        for (CommonUser user: users){
+        List<User> users = userDAOInterface.getAllUsers();
+        for (User user: users){
             names.add(user.getUsername().substring(0,4));
         }
         return names;
@@ -37,8 +37,8 @@ public class EnrollDataAccess implements EnrollDsGateway {
     @Override
     public List<Integer> getAllUID() {
         List<Integer> ids = new ArrayList<>();
-        List<CommonUser> users = userDAOInterface.getAllUsers();
-        for (CommonUser user: users){
+        List<User> users = userDAOInterface.getAllUsers();
+        for (User user: users){
             ids.add(user.getId());
         }
         return ids;

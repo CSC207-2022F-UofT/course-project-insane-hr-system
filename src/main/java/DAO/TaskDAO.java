@@ -1,6 +1,5 @@
 package DAO;
 
-import DAOInterfaces.TaskDAOInterface;
 import entity.*;
 
 import java.sql.PreparedStatement;
@@ -13,7 +12,7 @@ import java.util.*;
 import static entity.Constants.CLOSED;
 import static utilities.SQLiteDataSource.connection;
 
-public class TaskDAO implements TaskDAOInterface {
+public class TaskDAO {
 
     // get one task //
 
@@ -87,9 +86,9 @@ public class TaskDAO implements TaskDAOInterface {
         if (task.getType().equals("STAR")){
 
             if(task.getState().equals(CLOSED)){
-                query = "INSERT INTO tasks (id, projectID, name, head, description, status, start, type, evalTask, end, results) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+                query = "INSERT INTO tasks (id, projectID, name, head, description, status, start, type, evalTask, end, results) VALUES (?,?,?,?,?,?,?,?,?,?)";
             } else {
-                query = "INSERT INTO tasks (id, projectID, name, description, head, status, start, type, evalTask) VALUES (?,?,?,?,?,?,?,?,?)";
+                query = "INSERT INTO tasks (id, projectID, name, description, head, status, start, type, evalTask) VALUES (?,?,?,?,?,?,?)";
             }
 
 
@@ -98,7 +97,7 @@ public class TaskDAO implements TaskDAOInterface {
                 query = "INSERT INTO tasks (id, projectID, name, head, description, status, start, type, end, results) VALUES (?,?,?,?,?,?,?,?,?,?)";
             }
             else{
-                query = "INSERT INTO tasks (id, projectID, name, head, description, status, start, type) VALUES (?,?,?,?,?,?,?,?)";
+                query = "INSERT INTO tasks (id, projectID, name, head, description, status, start, type) VALUES (?,?,?,?,?,?,?,?,?,?)";
             }
 
         }
@@ -123,7 +122,7 @@ public class TaskDAO implements TaskDAOInterface {
             statement.setString(8, task.getType());
 
             if (task.getType().equals("STAR")){
-                statement.setString(9, ((StarEvaluationTask) task).getOid().toString());
+                statement.setString(9, (StarEvaluationTask task).getTask.getOid());
                 if(task.getState().equals(CLOSED)){
                     statement.setString(10, task.getCloseTime().toString());
                     statement.setString(11, task.getResults().toString());
@@ -238,7 +237,7 @@ public class TaskDAO implements TaskDAOInterface {
                         task = starTask;
 
                     } else {
-                        task = new StarEvaluationTask(id, name, head, members, description, start, evalTask, project);
+                        task = new StarEvaluationTask(id, name, head, description, start, evalTask, project);
                     }
 
 

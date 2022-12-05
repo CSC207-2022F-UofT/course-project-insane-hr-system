@@ -39,7 +39,7 @@ class EnrollInteractorTest {
             @Override
             public EnrollResponseModel prepareSuccessView(EnrollResponseModel responseModel) {
                 assertEquals("Kelly Zhang", responseModel.getName());
-                assertEquals("100007", responseModel.getId());
+                assertEquals(100007, responseModel.getId());
                 assertEquals("Zhan0003", responseModel.getUsername());
                 assertEquals("Zhan0003", responseModel.getPassword());
                 assertEquals("Zhan0003", responseModel.getUsername());
@@ -60,7 +60,6 @@ class EnrollInteractorTest {
         EnrollRequestModel enrollRequestModel = new EnrollRequestModel("Kelly Zhang", "Department2", "HEAD");
         interactor.create(enrollRequestModel);
         assertEquals(dpt2.getHead(), 100007);
-
 
     }
 
