@@ -44,4 +44,9 @@ public class BooleanEvaluationTask extends CommonOrganization implements Task {
 
     }
 
+
+    @Override
+    public String getType() {
+        return "BOOL";
+    }
 }

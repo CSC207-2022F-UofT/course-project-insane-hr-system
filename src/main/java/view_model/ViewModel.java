@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.Arrays;
 import java.util.UUID;
 
 public class ViewModel implements PropertyChangeListener, IViewModel {
@@ -239,11 +240,25 @@ public class ViewModel implements PropertyChangeListener, IViewModel {
     }
 
     @Override
-    public String toString() {
-        return super.toString();
-    }
-    @Override
     public Controllers[] getControllers() {
         return controllers;
+    }
+
+    @Override
+    public String toString() {
+        return "ViewModel{" + '\n' +
+                "frameName='" + frameName + '\'' +'\n' +
+                ", infoTitle='" + infoTitle + '\'' +'\n' +
+                ", intro='" + intro + '\'' +'\n' +
+                ", leftTable=" + leftTable +'\n' +
+                ", rightTable=" + rightTable +'\n' +
+                ", screenType=" + screenType +'\n' +
+                ", visualLevel=" + visualLevel +'\n' +
+                ", requesterID=" + requesterID +'\n' +
+                ", controllers=" + Arrays.toString(controllers) +'\n' +
+                ", oid=" + oid +'\n' +
+                ", uid=" + uid +'\n' +
+                ", observable=" + observable +'\n' +
+                '}';
     }
 }

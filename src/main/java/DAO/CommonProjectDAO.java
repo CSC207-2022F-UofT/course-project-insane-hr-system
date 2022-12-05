@@ -13,7 +13,74 @@ import java.util.*;
 
 import static utilities.SQLiteDataSource.connection;
 
-public class CommonProjectDAO {
+public class CommonProjectDAO implements CommonProjectDAOInterface {
+
+    public void createCommonProject(CommonProject project) {
+
+    }
+
+    @Override
+    public void updateCommonProject(CommonProject project) {
+
+    }
+
+
+    @Override
+    public CommonProject getCommonProject(UUID id) {
+
+    }
+
+    @Override
+
+
+    public List<CommonProject> getAllCommonProjects(){
+        String querySQL = "SELECT * FROM project";
+        List<CommonProject> projects = new ArrayList<>();
+        Statement statement;
+        ResultSet resultSet = null;
+
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(querySQL);
+
+            while (resultSet.next()) {
+                CommonProject project = getEmptyProject(resultSet.getString("ID"));
+                List<String> taskIds = getTaskIds(resultSet.getString("ID"));
+                for(int i = 0; i < taskIds.size(); i++){
+                    CommonTask task = (CommonTask) getProjectTask(UUID.fromString(taskIds.get(0)), project);
+                    project.addTask(task);
+                }
+                projects.add(project);
+
+
+            }
+
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return projects;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public CommonProject getEmptyProject(String projectID){
         String querySQL = "SELECT * FROM project WHERE ID=" + projectID;
         CommonProject project = null;
@@ -168,37 +235,9 @@ public class CommonProjectDAO {
 
     }
 
-    public List<CommonProject> getAllCommonProjects(){
-        String querySQL = "SELECT * FROM project";
-        List<CommonProject> projects = new ArrayList<>();
-        Statement statement;
-        ResultSet resultSet = null;
-
-        try {
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(querySQL);
-
-            while (resultSet.next()) {
-                CommonProject project = getEmptyProject(resultSet.getString("ID"));
-                List<String> taskIds = getTaskIds(resultSet.getString("ID"));
-                for(int i = 0; i < taskIds.size(); i++){
-                    CommonTask task = (CommonTask) getProjectTask(UUID.fromString(taskIds.get(0)), project);
-                    project.addTask(task);
-                }
-                projects.add(project);
-
-
-            }
 
 
 
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return projects;
-
-    }
 
     public CommonProject getProject(UUID id){
         List<CommonProject> projects = getAllCommonProjects();

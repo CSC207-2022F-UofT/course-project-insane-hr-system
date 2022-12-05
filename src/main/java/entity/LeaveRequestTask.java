@@ -43,4 +43,9 @@ public class LeaveRequestTask extends CommonOrganization implements Task {
         this.setCloseTime(LocalDateTime.now());
         project.update();
     }
+
+    public String getType(){
+        return "LEAVE";
+    }
+
 }

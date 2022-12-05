@@ -1,6 +1,7 @@
 package check_profile_validation;
 
 import entity.*;
+import presenter.CheckProfilePresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,10 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
         this.outputBoundary = outputBoundary;
     }
 
+    public CheckProfileInteractor(CheckProfileIGateway gateway) {
+        this.gateway = gateway;
+        this.outputBoundary = new CheckProfilePresenter();
+    }
 
     @Override
     public CheckProfileResponseModel checkUserProfile(CheckUserFileRequestModel requestModel) {
@@ -156,6 +161,11 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
 
     }
 
+    @Override
+    public CheckProfileOutputBoundary getOutputBoundary() {
+        return outputBoundary;
+    }
+
 
     // Helper methods.
 
@@ -252,6 +262,9 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
     private VisualLevel getVisibility(User user1, User user2) {
         List<Role> r1 = user1.getRoles();
         List<Role> r2 = user2.getRoles();
+        if (user1.equals(user2)) {
+            return VisualLevel.EDITABLE;
+        }
         if (RoleAllowed.isHeadOf(r1, r2) && !RoleAllowed.isHeadOf(r2, r1)) {
             return VisualLevel.EDITABLE;
         } else if (RoleAllowed.isHeadOf(r2, r1)) {

@@ -12,11 +12,11 @@ import java.util.*;
 
 import static utilities.SQLiteDataSource.connection;
 
-public class CommonTaskDAO {
+public class CommonTaskDAO implements CommonTaskDAOInterface {
 
     /// save a task in the database ///
 
-    public void saveTask(CommonTask task){
+    public void createCommonTask(CommonTask task){
 
         // check the status of the task.
         String sql;
@@ -65,7 +65,9 @@ public class CommonTaskDAO {
 
     }
 
-    // delete a task in the database (won't be used externally)//
+
+
+    // delete a task in the database (won't be used externally) //
 
     public void deleteTask(UUID taskID){
         String sql = "DELETE FROM tasks WHERE ID=?";
@@ -101,24 +103,25 @@ public class CommonTaskDAO {
 
     // update a task in the database
 
-    public void updateTask(CommonTask task){
+    public void updateCommonTask(CommonTask task){
         // delete the current task with the same oid
         deleteTask(task.getOid());
 
         // create a task with the updated corrections
-        saveTask(task);
+        createCommonTask(task);
 
     }
 
-    // the following method will be used as a helper method in saveTask().
-
+    // the following method will be used as a helper method in createCommonTask().
     private void saveTaskMembers(CommonTask task){
         String sql = "INSERT INTO task_map (ID, memberID) VALUES (?,?)";
         PreparedStatement statement;
 
         try{
+
             // connect to the database for each row.
             // insert each member.
+
             for (int memberID: task.getMembers()) {
                 statement = connection.prepareStatement(sql);
                 statement.setString(1, task.getOid().toString());
@@ -134,11 +137,11 @@ public class CommonTaskDAO {
     }
 
     // get all tasks from the database
-    public List<CommonTask>  getAllTasks(){
+    public List<CommonTask>  getAllCommonTasks(){
         String query = "SELECT * FROM tasks";
         List<CommonTask> tasks = new ArrayList<>();
         Statement statement;
-        ResultSet result = null;
+        ResultSet result;
 
         try{
 
@@ -147,7 +150,7 @@ public class CommonTaskDAO {
             while (result.next()){
                 UUID id = UUID.fromString(result.getString("ID"));
                 String projectID = result.getString("projectID");
-                CommonProject project = new CommonProjectDAO().getProject(UUID.fromString(projectID));
+                CommonProject project = new CommonProjectDAO().getCommonProject(UUID.fromString(projectID));
                 CommonTask task = getProjectTask(id, project);
                 tasks.add(task);
 
@@ -162,8 +165,6 @@ public class CommonTaskDAO {
 
     }
 
-
-    // the following is a helper for getTask()
     // get a list of memberIDs
     public Set<Integer> getTaskMembers(UUID taskID){
 
