@@ -1,21 +1,21 @@
 package DAOInterfaces;
 
-import entity.CommonUser;
-import entity.User;
+import entity.*;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface UserDAOInterface {
-
-    // create a CommonUser
-    public void createUser(User user);
-
-    // update a CommonUser
-    public void updateUser(User user);
-
-    // get all CommonUsers
+    // get all users //
     public List<User> getAllUsers();
 
-    // get one CommonUser
+    // get one user //
     public User getUser(int id);
+
+    // create a user //
+    public void createUser(User user);
+
+    // update a user //
+    public void updateUser(User user);
+
 }
