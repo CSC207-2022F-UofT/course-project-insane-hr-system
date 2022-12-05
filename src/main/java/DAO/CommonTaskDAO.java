@@ -1,7 +1,9 @@
 package DAO;
 
+import DAOInterfaces.TaskDAOInterface;
 import entity.CommonProject;
 import entity.CommonTask;
+import entity.Task;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +14,7 @@ import java.util.*;
 
 import static utilities.SQLiteDataSource.connection;
 
-public class CommonTaskDAO {
+public class CommonTaskDAO implements TaskDAOInterface {
 
     /// save a task in the database ///
 
@@ -134,9 +136,9 @@ public class CommonTaskDAO {
     }
 
     // get all tasks from the database
-    public List<CommonTask>  getAllTasks(){
+    public List<Task>  getAllTasks(){
         String query = "SELECT * FROM tasks";
-        List<CommonTask> tasks = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
         Statement statement;
         ResultSet result = null;
 
@@ -159,6 +161,21 @@ public class CommonTaskDAO {
         return tasks;
 
 
+
+    }
+
+    @Override
+    public Task getTask(UUID id) {
+        return null;
+    }
+
+    @Override
+    public void createTask(Task task) {
+
+    }
+
+    @Override
+    public void updateTask(Task task) {
 
     }
 

@@ -11,4 +11,5 @@ public interface Project extends Organization{
 
     void setTasks(List<Task> tasks);
 
+    String getType();
 }

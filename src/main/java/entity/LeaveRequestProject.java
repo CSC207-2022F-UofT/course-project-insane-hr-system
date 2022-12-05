@@ -1,12 +1,13 @@
 package entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 public class LeaveRequestProject extends CommonOrganization implements Project {
-    private List<Task> tasks;
+    private List<Task> tasks = new ArrayList<>();
     private int numResponses = 0;
     private int vacationDays;
     private LeaveType leaveType;
@@ -75,5 +76,10 @@ public class LeaveRequestProject extends CommonOrganization implements Project {
         if (this.numResponses == this.getMembers().size()) {
             this.close();
         }
+    }
+
+    @Override
+    public String getType() {
+        return "LEAVE_REQUEST";
     }
 }
