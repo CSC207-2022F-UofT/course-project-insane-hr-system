@@ -13,7 +13,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class EnrollScreen {
+public class EnrollScreen extends JPanel{
     private JPanel EnrollPanel;
     private JPanel TopPanel;
     private JTextField nameField;
@@ -25,7 +25,7 @@ public class EnrollScreen {
 
     private EnrollController enrollController;
 
-    public EnrollScreen() {
+    public EnrollScreen(){
 
         Add.addActionListener(new ActionListener() {
             /**
@@ -35,11 +35,15 @@ public class EnrollScreen {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
+                try{
                 String fname = nameField.getText();
                 String fdepartment = (String) dptCom.getSelectedItem();
                 String fposition = (String) positionCom.getSelectedItem();
                 EnrollResponseModel responseModel= enrollController.create(fname,fdepartment,fposition);
                 newEmployeeScreen(responseModel);
+                }catch (Exception evt){
+                    JOptionPane.showMessageDialog(EnrollPanel, evt.getMessage());
+                }
             }
         });
     }
