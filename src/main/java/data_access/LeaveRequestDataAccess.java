@@ -17,7 +17,7 @@ public class LeaveRequestDataAccess implements LeaveRequestDsGateway {
     private final UserDAOInterface userDAO = new UserDAO();
 
     /**
-     * Save the created leave request project and tasks.
+     * Save the created leave request project and tasks to the database.
      * @param requestModel to store
      *
      */

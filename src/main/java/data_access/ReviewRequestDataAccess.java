@@ -18,7 +18,7 @@ public class ReviewRequestDataAccess implements ReviewRequestDsGateway {
     private final UserDAOInterface userDAO = new UserDAO();
 
     /**
-     * Update the leave request project, task, and related users.
+     * Update the leave request project, task, and related users in the database.
      * @param requestModel to update
      *
      */
