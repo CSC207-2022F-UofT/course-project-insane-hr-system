@@ -143,6 +143,9 @@ public class CommonOrganization implements Organization {
         this.state = state;
     }
 
+    @Override
+    public String getType(){ return "COMMON";}
+
     /**
      * @param obj any object.
      * @return true if the oid are equal.
