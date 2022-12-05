@@ -6,18 +6,16 @@ import java.util.List;
 import java.util.UUID;
 
 public interface UserDAOInterface {
-
-
     // get all users //
-    public List<CommonUser> getAllUsers();
+    public List<User> getAllUsers();
 
     // get one user //
-    public Task getUser(int id);
+    public User getUser(int id);
 
     // create a user //
-    public void createUser(CommonUser user);
+    public void createUser(User user);
 
     // update a user //
-    public void updateUser(CommonUser user);
+    public void updateUser(User user);
 
 }

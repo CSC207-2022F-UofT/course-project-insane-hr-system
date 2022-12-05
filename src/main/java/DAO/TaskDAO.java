@@ -1,5 +1,6 @@
 package DAO;
 
+import DAOInterfaces.TaskDAOInterface;
 import entity.*;
 
 import java.sql.PreparedStatement;
@@ -12,7 +13,7 @@ import java.util.*;
 import static entity.Constants.CLOSED;
 import static utilities.SQLiteDataSource.connection;
 
-public class TaskDAO {
+public class TaskDAO implements TaskDAOInterface {
 
     // get one task //
 
@@ -122,7 +123,7 @@ public class TaskDAO {
             statement.setString(8, task.getType());
 
             if (task.getType().equals("STAR")){
-                statement.setString(9, (StarEvaluationTask task).getTask.getOid());
+                statement.setString(9, ((StarEvaluationTask) task).getOid().toString());
                 if(task.getState().equals(CLOSED)){
                     statement.setString(10, task.getCloseTime().toString());
                     statement.setString(11, task.getResults().toString());
@@ -237,7 +238,7 @@ public class TaskDAO {
                         task = starTask;
 
                     } else {
-                        task = new StarEvaluationTask(id, name, head, description, start, evalTask, project);
+                        task = new StarEvaluationTask(id, name, head, members, description, start, evalTask, project);
                     }
 
 
