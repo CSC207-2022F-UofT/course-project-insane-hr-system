@@ -28,6 +28,11 @@ public class EnrollScreen {
     public EnrollScreen() {
 
         Add.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 String fname = nameField.getText();
@@ -65,7 +70,7 @@ public class EnrollScreen {
     }
 
     public void setPositionCom() {
-        this.positionCom.setModel(new DefaultComboBoxModel<>(new String[] { "Head", "Member" }));
+        this.positionCom.setModel(new DefaultComboBoxModel<>(new String[] { "HEAD", "MEMBER" }));
     }
 
     public static void main(String[] args) {
