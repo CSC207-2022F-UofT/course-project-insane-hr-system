@@ -2,6 +2,7 @@ package presenter;
 
 import entity.RelativeRelation;
 import presenter.Controllers;
+import ui.EnrollScreen;
 import ui.LeaveRequestScreen;
 import ui.ReviewRequestScreen;
 import ui.ScreenBuilder;
@@ -16,7 +17,7 @@ public class UseCaseButtons {
     public static JPanel getPanel(Controllers controllers, ScreenBuilder screenBuilder){
         switch (controllers){
             case SALARY_CALCULATOR:;
-            case ENROLL_EMPLOYEE:;
+            case ENROLL_EMPLOYEE: return getEnrollEmployee();
             case CREATE_PROJECT:;
             case LEAVE_REQUEST: return getLeaveRequest(screenBuilder);
             case COMPLETE_TASK:;
@@ -49,5 +50,9 @@ public class UseCaseButtons {
         JPanel jPanel = new JPanel();
         jPanel.add(new JLabel("This is use case 1"));
         return jPanel;
+    }
+
+    public static JPanel getEnrollEmployee(){
+        return new EnrollScreen().getEnrollPanel();
     }
 }

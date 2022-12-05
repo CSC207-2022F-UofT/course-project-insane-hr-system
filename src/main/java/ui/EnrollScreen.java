@@ -99,4 +99,8 @@ public class EnrollScreen extends JPanel{
         frame.pack();
         frame.setVisible(true);
     }
+
+    public JPanel getEnrollPanel() {
+        return EnrollPanel;
+    }
 }
