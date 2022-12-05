@@ -12,27 +12,44 @@ import review_request.ReviewRequestDsRequestModel;
 
 import java.util.UUID;
 
-import static entity.Constants.CLOSED;
-
 public class ReviewRequestDataAccess implements ReviewRequestDsGateway {
     private final TaskDAOInterface taskDAO = new CommonTaskDAO();
     private final ProjectDAOInterface projectDAO = new ProjectDAO();
     private final UserDAOInterface userDAO = new UserDAO();
 
+    /**
+     * Update the leave request project, task, and related users.
+     * @param requestModel to update
+     *
+     */
     @Override
     public void updateRequest(ReviewRequestDsRequestModel requestModel) {
-        taskDAO.updateTask(requestModel.getTask());
+        Task task = requestModel.getTask();
+        taskDAO.updateTask(task);
+        for (Integer m : task.getMembers()) {
+            User member = userDAO.getUser(m);
+            member.removeCurrTask(task);
+            userDAO.updateUser(member);
+        }
+
         LeaveRequestProject project = (LeaveRequestProject) requestModel.getProject();
-        if (requestModel.getStatus().equals(CLOSED)) {
-            projectDAO.updateProject(project);
+        projectDAO.updateProject(project);
+        if (!requestModel.getStatus().isEmpty()) {
+            User user = userDAO.getUser(project.getHead());
+            user.setStatus(requestModel.getStatus());
             if (project.getLeaveType() == LeaveType.VACATION) {
-                User user = userDAO.getUser(requestModel.getTask().getHead());
                 user.setVacationDays(user.getVacationDays() - project.getVacationDays());
-                userDAO.updateUser(user);
             }
+            userDAO.updateUser(user);
         }
     }
 
+    /**
+     * Retrieve the Task from the database.
+     * @param oid identifier of the task
+     *
+     * @return the matching Task class
+     */
     @Override
     public Task getTask(UUID oid) {
         return taskDAO.getTask(oid);

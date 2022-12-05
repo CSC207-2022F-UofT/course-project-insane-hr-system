@@ -23,9 +23,7 @@ public class IMLeaveRequest implements LeaveRequestDsGateway {
     @Override
     public void save(LeaveRequestDsRequestModel requestModel) {
         Project project = requestModel.getProject();
-        Integer head = project.getHead();
         projects.put(project.getOid(), project);
-        getUser(head).addCurrProject(project);
         for (Task t : project.getTasks()) {
             tasks.put(t.getOid(), t);
             Integer m = t.getMembers().iterator().next();

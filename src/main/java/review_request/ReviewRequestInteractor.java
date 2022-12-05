@@ -42,8 +42,7 @@ public class ReviewRequestInteractor implements ReviewRequestInputBoundary {
         if (project.getState().equals(CLOSED)) {
             user.removeCurrProject(project);
             if (isAllApprovals(project)) { // all managers have approved leave request
-                String status = "On Leave";
-                dsRequestModel.setStatus(status);
+                dsRequestModel.setStatus("On Leave");
             }
         }
 
