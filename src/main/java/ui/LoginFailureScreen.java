@@ -10,9 +10,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * the login failure screen
+ */
 public class LoginFailureScreen extends JPanel implements ActionListener{
 
 
+    /**
+     * constructs failure screen with failure message and try again button
+     */
     public LoginFailureScreen(LoginFailureResponseModel loginFailureResponseModel) {
 
 
@@ -38,7 +44,7 @@ public class LoginFailureScreen extends JPanel implements ActionListener{
     }
 
     /**
-     * React to a button click that results in evt.
+     * react click of the try again button sending user back to login page
      */
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());

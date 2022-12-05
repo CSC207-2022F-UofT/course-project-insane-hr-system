@@ -1,5 +1,6 @@
 package ui;
 
+import controller.CheckProfileController;
 import controller.LoginController;
 import login.LoginFailureResponseModel;
 import login.LoginResponseModel;
@@ -12,18 +13,39 @@ import java.awt.event.ActionListener;
 
 // Frameworks/Drivers layer
 
+/**
+ * the login prompt screen
+ */
 public class LoginPromptScreen extends JPanel implements ActionListener {
 
+    /**
+     * username button label
+     */
     JTextField username = new JTextField(15);
 
+    /**
+     * password button label
+     */
     JPasswordField password = new JPasswordField(15);
 
+    /**
+     * the controller
+     */
     LoginController loginController;
 
+    /**
+     * the screens container
+     */
     JPanel screens;
 
+    /**
+     * the cardlayout
+     */
     CardLayout cardLayout;
 
+    /**
+     * constructs a login screen with username, password text panels and login button
+     */
     public LoginPromptScreen(LoginController loginController, JPanel screens, CardLayout cardLayout) {
 
         this.cardLayout = cardLayout;
@@ -57,7 +79,7 @@ public class LoginPromptScreen extends JPanel implements ActionListener {
     }
 
     /**
-     * React to a button click that results in evt.
+     * reacts to login button click by attempting to log user in
      */
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());
@@ -65,8 +87,18 @@ public class LoginPromptScreen extends JPanel implements ActionListener {
         LoginResponseModel loginResponseModel = this.loginController.login(username.getText(),
                 String.valueOf(password.getPassword()));
 
-        if (loginResponseModel instanceof LoginSuccessResponseModel){}
+        /**
+         * present the userscreen
+         */
+        if (loginResponseModel instanceof LoginSuccessResponseModel){
+            int userID = ((LoginSuccessResponseModel) loginResponseModel).getUserID();
+            CheckProfileController checkProfileController = new CheckProfileController();
+            checkProfileController.create(userID, userID);
+        }
 
+        /**
+         * present the login failure screen
+         */
         else if (loginResponseModel instanceof LoginFailureResponseModel){
             JPanel loginFailureScreen = new LoginFailureScreen((LoginFailureResponseModel) loginResponseModel);
             cardLayout.addLayoutComponent(loginFailureScreen, "loginFailureScreen");
