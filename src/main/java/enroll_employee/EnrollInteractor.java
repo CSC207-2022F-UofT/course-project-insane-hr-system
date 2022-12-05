@@ -27,7 +27,8 @@ public class EnrollInteractor implements EnrollInputBoundary{
         }
         Department dpt = enrolldsGateway.findDptByName(requestModel.getDpt());
         String username = enrolldsGateway.generateUsername(name);
-        String password = username; //By default, the password is the same as username
+        String password; //By default, the password is the same as username
+        password = username;
         List<Role> roles = new ArrayList<Role>();
         List<Project> projects = new ArrayList<Project>();
         List<Task> tasks = new ArrayList<Task>();

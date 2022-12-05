@@ -1,5 +1,10 @@
 package enroll_employee;
 
+import entity.Department;
+
+import java.time.LocalDateTime;
+import java.util.*;
+
 public class test {
     public enum Position {
         CEO,
@@ -18,3 +23,13 @@ public class test {
     }
 
 }
+
+//    Set<Integer> s = new HashSet<>();
+//    Department dpt1 = new Department(UUID.randomUUID(),"dpta",2,s,"NOTHING", LocalDateTime.now());
+//    Department dpt2 = new Department(UUID.randomUUID(),"dptb",2,s,"NOTHING", LocalDateTime.now());
+//    Department dpt3 = new Department(UUID.randomUUID(),"dptc",2,s,"NOTHING", LocalDateTime.now());
+//    List<Department> dpts = new ArrayList<>();
+//        dpts.add(dpt1);
+//                dpts.add(dpt2);
+//                dpts.add(dpt3);
+//                return dpts;
