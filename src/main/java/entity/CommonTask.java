@@ -5,9 +5,15 @@ import java.util.Set;
 import java.util.UUID;
 
 public class CommonTask extends CommonOrganization implements Task {
-    private final CommonProject commonProject;
+    private CommonProject commonProject;
     private Object results;
     private Integer star;
+
+    public CommonTask(UUID oid, String name, Integer head, String description, LocalDateTime createTime, CommonProject commonProject) {
+        super(oid, name, head, description, createTime);
+        this.commonProject = commonProject;
+        this.commonProject = commonProject;
+    }
 
     // construct CLOSED task
     public CommonTask(UUID oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime createTime, LocalDateTime closeTime, CommonProject commonProject, int star) {

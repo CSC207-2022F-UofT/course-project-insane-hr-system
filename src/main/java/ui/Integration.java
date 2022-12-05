@@ -24,7 +24,7 @@ public class Integration extends JFrame implements PropertyChangeListener {
 
     public Integration(String frameName) {
         super(frameName);
-        this.setContentPane(this.rootPanel);
+
     }
 //    public Integration(String name, String detail, Table leftTable, Table rightTable, JPanel leftCustomizePanel, JPanel rightControllerPanel) {
 //        super("HR system");
@@ -147,8 +147,9 @@ public class Integration extends JFrame implements PropertyChangeListener {
 
 
     public static void main(String[] args) {
-        JFrame frame = new Integration("HR system");
+        Integration frame = new Integration("HR system");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setNameLabel("name");
         frame.pack();
         frame.setVisible(true);
     }

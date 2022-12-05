@@ -5,4 +5,6 @@ public interface CheckProfileInputBoundary {
     CheckProfileResponseModel checkOrgProfile(CheckOrgFileRequestModel requestModel);
 
     void update();
+
+    CheckProfileOutputBoundary getOutputBoundary();
 }

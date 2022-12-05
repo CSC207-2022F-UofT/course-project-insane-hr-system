@@ -26,6 +26,7 @@ public class LeaveRequestProject extends CommonOrganization implements Project {
         super(oid, name, head, members, description, createTime, closeTime);
         this.vacationDays = vacationDays;
         this.leaveType = leaveType;
+        this.projectType = "LEAVE";
     }
 
     @Override
