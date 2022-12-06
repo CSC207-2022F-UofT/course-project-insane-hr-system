@@ -45,20 +45,6 @@ class CheckProfilePresenterTest {
         Curr.setUser(user);
     }
 
-    @Test
-    void prepareUserFrame() {
-        CheckProfileIGateway gateway = new CheckProfileTestDataAccess();
-        CheckProfilePresenter presenter = new CheckProfilePresenter(new ViewModel());
-        CheckProfileResponseModel responseModel = new CheckProfileResponseModel(gateway);
-        responseModel.setName("Name");
-        responseModel.setTargetUid(10);
-        responseModel.setVisualLevel(VisualLevel.EDITABLE);
-        responseModel.setFileType(FileType.USER_FILE);
-        responseModel.setRelation(RelativeRelation.IS_EMPLOYEE_SELF);
-
-        presenter.prepareUserFrame(responseModel);
-        System.out.println(presenter.getViewModel().toString());
-    }
 
     @Test
     void prepareOrgFrame() {

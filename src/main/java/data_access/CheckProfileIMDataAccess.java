@@ -3,6 +3,7 @@ package data_access;
 import check_profile_validation.CheckProfileIGateway;
 import entity.*;
 
+import javax.swing.plaf.UIResource;
 import java.beans.PropertyChangeListener;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -10,11 +11,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
+import static data_access.CheckProfileUserIDMap.*;
+
 public class CheckProfileIMDataAccess implements CheckProfileIGateway {
 //    @Override
 //    public List<Role> getUserRolesByUid(Integer target) {
 //        return null;
 //    }
+
 
     private final User dptHead = new CommonUser(CheckProfileUserIDMap.headId);
     private final User manager1 = new CommonUser(CheckProfileUserIDMap.manager1Id);
@@ -24,9 +28,9 @@ public class CheckProfileIMDataAccess implements CheckProfileIGateway {
     private final User ee12 = new CommonUser(CheckProfileUserIDMap.employee12Id);
     private final User ee21 = new CommonUser(CheckProfileUserIDMap.employee21Id);
     private final User ee22 = new CommonUser(CheckProfileUserIDMap.employee22Id);
-    private final Department dpt = new Department(UUID.randomUUID(), "TestDepartment1", dptHead.getId(), new HashSet<>(), "This is the first dpt", LocalDateTime.now());
-    private final Project project1 = new CommonProject(UUID.randomUUID(), "Project 1", manager1.getId(), new HashSet<>(), "This is the first Project", LocalDateTime.now(), dpt, new ArrayList<>(), 1000);
-    private final Project project2 = new CommonProject(UUID.randomUUID(), "Project 2", manager2.getId(), new HashSet<>(), "This is the second Project", LocalDateTime.now(), dpt, new ArrayList<>(), 1000);
+    private final Department dpt = new Department(dptUUID, "TestDepartment1", dptHead.getId(), new HashSet<>(), "This is the first dpt", LocalDateTime.now());
+    private final Project project1 = new CommonProject(project1UUID, "Project 1", manager1.getId(), new HashSet<>(), "This is the first Project", LocalDateTime.now(), dpt, new ArrayList<>(), 1000);
+    private final Project project2 = new CommonProject(project2UUID, "Project 2", manager2.getId(), new HashSet<>(), "This is the second Project", LocalDateTime.now(), dpt, new ArrayList<>(), 1000);
 
     private final List<User> userPool = new ArrayList<>();
     private final List<Organization> orgPool = new ArrayList<>();
@@ -78,12 +82,12 @@ public class CheckProfileIMDataAccess implements CheckProfileIGateway {
         member2.add(ee01.getId());
 
 
-        addTaskToEe(ee01, (CommonProject) project1);
-        addTaskToEe(ee01, (CommonProject) project2);
-        addTaskToEe(ee11, (CommonProject) project1);
-        addTaskToEe(ee12, (CommonProject) project1);
-        addTaskToEe(ee21, (CommonProject) project2);
-        addTaskToEe(ee22, (CommonProject) project2);
+        addTaskToEe(ee01, (CommonProject) project1, task1UUID);
+        addTaskToEe(ee01, (CommonProject) project2, task2UUID);
+        addTaskToEe(ee11, (CommonProject) project1, task3UUID);
+        addTaskToEe(ee12, (CommonProject) project1, task4UUID);
+        addTaskToEe(ee21, (CommonProject) project2, task5UUID);
+        addTaskToEe(ee22, (CommonProject) project2, task6UUID);
 
         orgPool.add(project1);
         orgPool.add(project2);
@@ -99,8 +103,8 @@ public class CheckProfileIMDataAccess implements CheckProfileIGateway {
         user.addCurrProject(project);
         project.addMember(user.getId());
     }
-    private void addTaskToEe(User user, CommonProject project){
-        Task task = new CommonTask(UUID.randomUUID(), "Task of " + user.getName(), project.getHead(), "This is the task for employee " + user.getName(), LocalDateTime.now(), project);
+    private void addTaskToEe(User user, CommonProject project, UUID taskID){
+        Task task = new CommonTask(taskID, "Task of " + user.getName(), project.getHead(), "This is the task for employee " + user.getName(), LocalDateTime.now(), project);
         user.addCurrTask(task);
         project.addTask(task);
         User manager = getUserByUid(project.getHead());
@@ -109,6 +113,7 @@ public class CheckProfileIMDataAccess implements CheckProfileIGateway {
         task.addMember(manager.getId());
 
         task.setDescription("This is " + user.getName() + "'s task in project " + project.getName());
+        orgPool.add(task);
     }
 
     @Override
@@ -154,9 +159,9 @@ public class CheckProfileIMDataAccess implements CheckProfileIGateway {
         for (User user : gateway.getUserPool()) {
             System.out.println(user);
         }
-        for (Organization organization : gateway.getOrgPool()){
-            System.out.println(organization);
-        }
+//        for (Organization organization : gateway.getOrgPool()){
+//            System.out.println(organization);
+//        }
     }
 
     public List<User> getUserPool() {

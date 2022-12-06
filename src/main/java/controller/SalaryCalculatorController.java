@@ -1,17 +1,18 @@
 package controller;
 
-import salary_calculator.SalaryCalculatorInputBoundary;
-import salary_calculator.SalaryRequestModel;
-import salary_calculator.SalaryResponseModel;
+import salary_calculator.*;
 
 import java.time.LocalDate;
 import java.util.InputMismatchException;
 
 public class SalaryCalculatorController {
-    private SalaryCalculatorInputBoundary userInput;
+    private SalaryCalculatorInputBoundary interactor = new SalaryCalculatorInteractor();
 
-    public SalaryCalculatorController(SalaryCalculatorInputBoundary userInput) {
-        this.userInput = userInput;
+    public SalaryCalculatorController() {
+    }
+
+    public SalaryCalculatorController(SalaryCalculatorGateway gateway) {
+        interactor = new SalaryCalculatorInteractor(gateway);
     }
 
     public SalaryResponseModel querySalary(Integer uid, String start, String end) throws InputMismatchException {
@@ -32,6 +33,6 @@ public class SalaryCalculatorController {
             throw new InputMismatchException("The input should be form of YYYY-MM-DD");
         }
 
-        return userInput.requestSalary(new SalaryRequestModel(uid, startDate, endDate));
+        return interactor.requestSalary(new SalaryRequestModel(uid, startDate, endDate));
     }
 }

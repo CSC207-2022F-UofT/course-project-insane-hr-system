@@ -3,6 +3,8 @@ package ui;
 import check_profile_validation.*;
 import controller.CheckProfileController;
 import data_access.CheckProfileDataAccess;
+import data_access.CheckProfileIMDataAccess;
+import entity.Organization;
 import entity.StarEvaluationTask;
 import presenter.CheckProfilePresenter;
 import presenter.IViewModel;
@@ -111,12 +113,18 @@ public class ScreenBuilder implements IView {
      */
     @Override
     public void customizeLeftButton(){
+        CheckProfileOutputBoundary presenter = new CheckProfilePresenter();
+        CheckProfileIGateway gateway = new CheckProfileIMDataAccess();
+        CheckProfileController controller = new CheckProfileController(presenter, gateway);
         for (int i : view.getLeftTable().getSelectedRows()){
             Object reference = dataModel.getLeftTable().getReference()[i];
-            plugInController(reference);
-
+            if (reference instanceof Integer){
+                controller.create(this.dataModel.getRequesterID(), (Integer) reference);
+            } else if (reference instanceof UUID) {
+                controller.create(this.dataModel.getRequesterID(), (UUID) reference);
+            }
+            presenter.showFrame();
         }
-
 
     }
 
@@ -135,26 +143,32 @@ public class ScreenBuilder implements IView {
 //            String reference = (String) dataModel.getRightTable().getReference()[num];
 //            dataModel.updateIntro(dataModel.getIntro() + name + reference + " have been selected\n");
 //        }
+        CheckProfileOutputBoundary presenter = new CheckProfilePresenter();
+        CheckProfileIGateway gateway = new CheckProfileIMDataAccess();
+        CheckProfileController controller = new CheckProfileController(presenter, gateway);
         for (int i : view.getRightTable().getSelectedRows()){
             Object reference = dataModel.getRightTable().getReference()[i];
-            plugInController(reference);
-
+            if (reference instanceof Integer){
+                controller.create(this.dataModel.getRequesterID(), (Integer) reference);
+            } else if (reference instanceof UUID) {
+                controller.create(this.dataModel.getRequesterID(), (UUID) reference);
+            }
         }
-
+        presenter.showFrame();
     }
 
-    private void plugInController(Object reference) {
-        if (reference instanceof Integer) {
-            buttonController.create(dataModel.getRequesterID(), (Integer) reference);
-        } else if (reference instanceof UUID) {
-            buttonController.create(dataModel.getRequesterID(), (UUID) reference);
-        } else {
-            JOptionPane.showMessageDialog(view,
-                    "The reference is not in correct Type",
-                    "Inane error",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-    }
+//    private void plugInController(Object reference) {
+//        if (reference instanceof Integer) {
+//            buttonController.create(dataModel.getRequesterID(), (Integer) reference);
+//        } else if (reference instanceof UUID) {
+//            buttonController.create(dataModel.getRequesterID(), (UUID) reference);
+//        } else {
+//            JOptionPane.showMessageDialog(view,
+//                    "The reference is not in correct Type",
+//                    "Inane error",
+//                    JOptionPane.ERROR_MESSAGE);
+//        }
+//    }
 
     @Override
     public JPanel customizeLeftPanel(){
@@ -178,14 +192,18 @@ public class ScreenBuilder implements IView {
     @Override
     public JPanel customizeRightPanel(){
         JPanel jPanel = new JPanel(new GridBagLayout());
-        JButton dptButton = new JButton("Go to dpt");
+        JButton dptButton = new JButton("Go to Department");
+        jPanel.add(dptButton);
         dptButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                CheckProfileOutputBoundary presenter = new CheckProfilePresenter();
+                CheckProfileIGateway gateway = new CheckProfileIMDataAccess();
+                CheckProfileController controller = new CheckProfileController(presenter, gateway);
+                controller.create(dataModel.getRequesterID(), dataModel.getDpt());
+                presenter.showFrame();
             }
         });
-        jPanel.add(new JButton());
         return jPanel;
     }
 
@@ -224,7 +242,9 @@ public class ScreenBuilder implements IView {
         view.getLeftButton().setText(setLeftButtonLabel());
         view.getRightButton().setText(setRightButtonLabel());
         addLeftTable(setLeftTable());
+        printTable(setLeftTable());
         addRightTable(setRightTable());
+        printTable(setRightTable());
 
         // Plug in Buttons
         view.getLeftButton().addActionListener(new ActionListener() {
@@ -346,6 +366,25 @@ public class ScreenBuilder implements IView {
         return null;
     }
 
+    public void printTable(Table table){
+        Object[] reference = table.getReference();
+        Object[][] data = table.getData();
+        for (int i= 0; i < data.length; i++){
+            Object ref = reference[i];
+            Object dat = data[i][0];
+            String c1 = "";
+            String c2 = "";
+            if (ref instanceof Integer){
+                c1 = ((Integer) ref).toString();
+            }else if (ref instanceof UUID){
+                c1 = ((UUID) ref).toString();
+            }
+            if (dat  instanceof String){
+                c2 = (String) dat;
+            }
+            System.out.println(c1 + "   " + c2);
+        }
+    }
     public void show(){
         JFrame frame = new JFrame(dataModel.getFrameName());
         Integration screen = view();

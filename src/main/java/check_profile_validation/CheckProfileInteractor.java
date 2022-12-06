@@ -31,7 +31,7 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
 
         responseModel.setFileType(FileType.USER_FILE);
         responseModel.setTargetUid(target.getId());
-
+        responseModel.setDpt(requester.getDpt().getOid());
         responseModel.setName(target.getName());
         responseModel.setRelation(RoleAllowed.getRelation(requester, target));
         responseModel.setBio(target.getBio());
@@ -78,6 +78,7 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
 
         CheckProfileResponseModel responseModel = new CheckProfileResponseModel(gateway);
 
+        responseModel.setDpt(requester.getDpt().getOid());
         responseModel.setFileType(getFileType(target));
         responseModel.setVisualLevel(visualLevel);
         responseModel.setRelation(RelativeRelation.NO_RELATION);
