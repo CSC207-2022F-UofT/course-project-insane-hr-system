@@ -95,6 +95,8 @@ public class UserDAO implements UserDAOInterface {
             // set user's roles
             new RoleSetter().resetRoleOfUser(user);
 
+            connection.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
