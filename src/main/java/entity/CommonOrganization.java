@@ -171,4 +171,18 @@ public class CommonOrganization implements Organization {
     public String getType(){
         return "ORG";
     }
+
+    @Override
+    public String toString() {
+        return "CommonOrganization{" + '\n' +
+                "oid=" + oid +'\n' +
+                ", name='" + name + '\'' +'\n' +
+                ", head=" + head +'\n' +
+                ", members=" + members +'\n' +
+                ", description='" + description + '\'' +'\n' +
+                ", createTime=" + createTime +'\n' +
+                ", closeTime=" + closeTime +'\n' +
+                ", state='" + state + '\'' +'\n' +
+                '}';
+    }
 }
