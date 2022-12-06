@@ -1,11 +1,16 @@
 package project_manager_task_init_test;
+import data_access.PMTaskInitDataAccess;
 import entity.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import presenter.PMTaskInitPresenter;
+import project_manager_task_init_use_case.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PMTaskInitInteractorTest {
     @Test
@@ -36,6 +41,24 @@ public class PMTaskInitInteractorTest {
 
         pm.addCurrProject(project);
         employee.addCurrProject(project);
+
+        //testing the interactor
+        PMTaskInitGateway gateway = new PMTaskInitDataAccess();
+        PMTaskInitPresenter presenter = new PMTaskInitPresenter() {
+            @Override
+            public PMTaskInitResponseModel prepareSuccessView(PMTaskInitResponseModel response) {
+                assertEquals("name of task", response.getTaskName());
+                assertEquals("description of task", response.getTaskDescription());
+                assertEquals(1, response.getEmployeeId());
+                return null;
+            }
+        };
+
+        PMTaskInitInputBoundary interactor = new PMTaskInitInteractor(presenter, gateway);
+
+        PMTaskInitRequestModel inputData = new PMTaskInitRequestModel("name of task", "description of task", 1);
+
+        interactor.createTask(inputData);
 
     }
 
