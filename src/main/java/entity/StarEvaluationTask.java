@@ -1,7 +1,5 @@
 package entity;
 
-import jdk.jshell.spi.ExecutionControl;
-
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
@@ -35,11 +33,11 @@ public class StarEvaluationTask extends CommonOrganization implements Task {
     }
 
     @Override
-    public void setResults(Object results) throws ExecutionControl.NotImplementedException {
-        if (results instanceof Integer) {
-            this.results = ((Integer) results);
-        }else {
-            throw new ExecutionControl.NotImplementedException("Input should be Integer");
-        }
+    public void setResults(Object results) {
+        this.results = (Integer) results;
+    }
+
+    public String getType(){
+        return "STAR";
     }
 }

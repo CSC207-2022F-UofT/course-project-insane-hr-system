@@ -1,7 +1,5 @@
 package entity;
 
-import jdk.jshell.spi.ExecutionControl;
-
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
@@ -18,6 +16,12 @@ public class LeaveRequestTask extends CommonOrganization implements Task {
         this.project = project;
     }
 
+    public LeaveRequestTask(UUID oid, String name, Integer head, Set<Integer> members, String description,
+                            LocalDateTime createTime, LocalDateTime closeTime, LeaveRequestProject project) {
+        super(oid, name, head, members, description, createTime, closeTime);
+        this.project = project;
+    }
+
     @Override
     public Project getProject() {
         return project;
@@ -29,12 +33,8 @@ public class LeaveRequestTask extends CommonOrganization implements Task {
     }
 
     @Override
-    public void setResults(Object results) throws ExecutionControl.NotImplementedException {
-        if (results instanceof Boolean) {
-            this.results = ((Boolean) results);
-        } else {
-            throw new ExecutionControl.NotImplementedException("Input should be Boolean");
-        }
+    public void setResults(Object results) {
+        this.results = (boolean) results;
     }
 
     @Override
@@ -43,4 +43,9 @@ public class LeaveRequestTask extends CommonOrganization implements Task {
         this.setCloseTime(LocalDateTime.now());
         project.update();
     }
+
+    public String getType(){
+        return "LEAVE";
+    }
+
 }

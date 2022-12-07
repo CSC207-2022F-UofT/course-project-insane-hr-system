@@ -5,13 +5,22 @@ import java.util.Set;
 import java.util.UUID;
 
 public class CommonTask extends CommonOrganization implements Task {
-    private final CommonProject commonProject;
+    private CommonProject commonProject;
     private Object results;
     private Integer star;
 
+    public CommonTask(UUID oid,
+                      String name,
+                      Integer head,
+                      String description,
+                      LocalDateTime createTime,
+                      CommonProject commonProject) {
+        super(oid, name, head, description, createTime);
+        this.commonProject = commonProject;
+    }
+
     // construct CLOSED task
-    public CommonTask(UUID oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime createTime, LocalDateTime closeTime, CommonProject commonProject,
-                      Object results, int star) {
+    public CommonTask(UUID oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime createTime, LocalDateTime closeTime, CommonProject commonProject, int star) {
         super(oid, name, head, members, description, createTime, closeTime);
         this.commonProject = commonProject;
         this.results = results;
@@ -44,5 +53,9 @@ public class CommonTask extends CommonOrganization implements Task {
 
     public void setStar(int star) {
         this.star = star;
+    }
+
+    public String getType(){
+        return "COMMON";
     }
 }
