@@ -22,6 +22,7 @@ public class CheckProfileResponseModel {
     private UUID targetOid;
     private RelativeRelation relation = RelativeRelation.IS_EMPLOYEE_SELF;
     private String bio = "Default Bio";
+    private UUID dpt;
 
     public CheckProfileResponseModel(CheckProfileIGateway gateway) {
         this.gateway = gateway;
@@ -153,5 +154,13 @@ public class CheckProfileResponseModel {
                 ", relation=" + relation +'\n' +
                 ", bio='" + bio + '\'' +'\n' +
                 '}';
+    }
+
+    public UUID getDpt() {
+        return this.dpt;
+    }
+
+    public void setDpt(UUID dpt) {
+        this.dpt = dpt;
     }
 }

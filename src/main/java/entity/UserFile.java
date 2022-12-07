@@ -61,11 +61,6 @@ class UserFile implements Serializable {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return String.format("%s's File:\n Position: %s\n Current Project: %s\n Current Tasks: %s\n ",
-                this.username, this.position, this.projects.toString(), this.tasks.toString());
-    }
 
     public String getName() {
         return this.username;
@@ -194,5 +189,22 @@ class UserFile implements Serializable {
             return this.getId() == ((UserFile) obj).getId();
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "UserFile{" + '\n' +
+                "id=" + id +'\n' +
+                ", username='" + username + '\'' +'\n' +
+                ", password='" + password + '\'' +'\n' +
+                ", roles=" + roles +'\n' +
+                ", projects=" + projects +'\n' +
+                ", tasks=" + tasks +'\n' +
+                ", position=" + position +'\n' +
+                ", onboardDate=" + onboardDate +'\n' +
+                ", departureDate=" + departureDate +'\n' +
+                ", status='" + status + '\'' +'\n' +
+                ", vacationDays=" + vacationDays +'\n' +
+                '}';
     }
 }

@@ -9,9 +9,13 @@ public class CommonTask extends CommonOrganization implements Task {
     private Object results;
     private Integer star;
 
-    public CommonTask(UUID oid, String name, Integer head, String description, LocalDateTime createTime, CommonProject commonProject) {
+    public CommonTask(UUID oid,
+                      String name,
+                      Integer head,
+                      String description,
+                      LocalDateTime createTime,
+                      CommonProject commonProject) {
         super(oid, name, head, description, createTime);
-        this.commonProject = commonProject;
         this.commonProject = commonProject;
     }
 
