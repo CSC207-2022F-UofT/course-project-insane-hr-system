@@ -1,15 +1,25 @@
 package salary_calculator;
 
+import data_access.SalaryCalculatorDataAccess;
 import entity.*;
+import presenter.SalaryPresenter;
+import ui.SalaryView;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-class SalaryCalculatorInteractor implements SalaryCalculatorInputBoundary{
-    private SalaryCalculatorGateway gateway;
-    private SalaryCalculateRules rules;
-    private SalaryCalculatorOutputBoundary outputBoundary;
+public class SalaryCalculatorInteractor implements SalaryCalculatorInputBoundary{
+    private SalaryCalculatorGateway gateway = new SalaryCalculatorDataAccess();
+    private final SalaryCalculateRules rules = new SalaryCalculateRules();
+    private final SalaryCalculatorOutputBoundary outputBoundary = new SalaryPresenter(new SalaryView());
+
+    public SalaryCalculatorInteractor() {
+    }
+
+    public SalaryCalculatorInteractor(SalaryCalculatorGateway gateway) {
+        this.gateway = gateway;
+    }
 
     @Override
     public SalaryResponseModel requestSalary(SalaryRequestModel input) throws IllegalArgumentException {

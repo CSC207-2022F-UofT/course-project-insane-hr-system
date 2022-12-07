@@ -84,7 +84,7 @@ public class RoleAllowed {
     }
     private static boolean hasSuper(List<Role> roles) {
         for (Role role : roles) {
-            if (role instanceof SuperRole) {
+            if (!(role instanceof CommonRole)) {
                 return true;
             }
         }
