@@ -16,6 +16,7 @@ import static utilities.SQLiteDataSource.connection;
 public class ProjectDAO implements ProjectDAOInterface {
 
     // get a project. //
+    @Override
     public Project getProject(UUID projectID){
         Project project = getEmptyProject(projectID);
         String query = "SELECT * FROM projectTaskMap WHERE projectID=" + projectID.toString();
@@ -42,6 +43,7 @@ public class ProjectDAO implements ProjectDAOInterface {
     }
 
     // get all projects //
+    @Override
     public List<Project> getAllProjects(){
         String query = "SELECT * FROM project";
         List<Project> projects = new ArrayList<>();
@@ -69,6 +71,7 @@ public class ProjectDAO implements ProjectDAOInterface {
     }
 
     // create a project //
+    @Override
     public void createProject(Project project){
 
         String taskQuery = "INSERT INTO projectTaskMap (projectID, taskID) VALUES (?,?)";
@@ -116,7 +119,7 @@ public class ProjectDAO implements ProjectDAOInterface {
                 statement.setInt(9, ((CommonProject) project).getFunds());
 
                 if (project.getState().equals(CLOSED)){
-                    statement.setString(10, ((CommonProject) project).getCloseTime().toString());
+                    statement.setString(10, project.getCloseTime().toString());
 
                 }
 
@@ -202,6 +205,7 @@ public class ProjectDAO implements ProjectDAOInterface {
 
 
     // update a project //
+    @Override
     public void updateProject(Project project){
         deleteProject(project.getOid());
         createProject(project);
@@ -241,7 +245,7 @@ public class ProjectDAO implements ProjectDAOInterface {
 
         Set<Integer> members = getProjectMembers(projectID);
         List<Task> tasks = new ArrayList<>();
-        String query = "SELECT * FROM project WHERE ID=" + projectID.toString();
+        String query = "SELECT * FROM project WHERE ID=" + projectID;
         Project project = null;
         Statement statement;
         ResultSet result;

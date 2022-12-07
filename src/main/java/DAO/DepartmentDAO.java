@@ -15,6 +15,7 @@ import static utilities.SQLiteDataSource.connection;
 public class DepartmentDAO implements DepartmentDAOInterface {
 
     // create a Department.. //
+    @Override
     public void createDepartment(Department department){
 
         PreparedStatement statement;
@@ -29,11 +30,11 @@ public class DepartmentDAO implements DepartmentDAOInterface {
         if (department.getState().equals("CLOSED")){
 
             // if a department is closed it has an end date.
-            insertDepartmentSQL = "INSERT INTO department (ID, name, head, description, create, status, end) VALUES (?,?,?,?,?,?,?)";
+            insertDepartmentSQL = "INSERT INTO department (ID, name, head, description, 'create', status, end) VALUES (?,?,?,?,?,?,?)";
         } else {
 
             // if a department is open it has no end date. the end date is an optional key in the table.
-            insertDepartmentSQL = "INSERT INTO department (ID, name, head, description, create, status) VALUES (?,?,?,?,?,?)";
+            insertDepartmentSQL = "INSERT INTO department (ID, name, head, description, 'create', status) VALUES (?,?,?,?,?,?)";
         }
 
         try{
@@ -104,6 +105,7 @@ public class DepartmentDAO implements DepartmentDAOInterface {
 
     }
 
+    @Override
     public void updateDepartment(Department department){
         deleteDepartment(department.getOid());
         createDepartment(department);
@@ -112,7 +114,7 @@ public class DepartmentDAO implements DepartmentDAOInterface {
 
     }
 
-
+    @Override
     public List<Department> getAllDepartments(){
 
         String departmentSQL = "SELECT * FROM department";
@@ -161,6 +163,7 @@ public class DepartmentDAO implements DepartmentDAOInterface {
         return departments;
     }
 
+    @Override
     public Department getDepartment(UUID id){
         List<Department> departments = getAllDepartments();
         for (Department department : departments) {

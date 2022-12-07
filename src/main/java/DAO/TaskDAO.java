@@ -16,7 +16,7 @@ import static utilities.SQLiteDataSource.connection;
 public class TaskDAO implements TaskDAOInterface {
 
     // get one task. //
-
+    @Override
     public Task getTask(UUID taskID){
         Task task = null;
 
@@ -48,7 +48,7 @@ public class TaskDAO implements TaskDAOInterface {
     }
 
     // get all tasks //
-
+    @Override
     public List<Task> getAllTasks(){
         String query = "SELECT * FROM tasks";
         List<Task> tasks = new ArrayList<>();
@@ -76,7 +76,7 @@ public class TaskDAO implements TaskDAOInterface {
     }
 
     // create a task in the database //
-
+    @Override
     public void createTask(Task task){
 
         String query;
@@ -189,6 +189,7 @@ public class TaskDAO implements TaskDAOInterface {
 
     }
 
+    @Override
     public void updateTask(Task task){
         deleteTask(task.getOid());
         createTask(task);
