@@ -2,6 +2,7 @@ package entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import static entity.Constants.CLOSED;
@@ -11,10 +12,10 @@ class UserFile implements Serializable {
     private final int id;
     private String username;
     private String password;
-    private List<Role> roles;
-    private List<Project> projects;
-    private List<Task> tasks;
-    private Position position;
+    private List<Role> roles = new ArrayList<>();
+    private List<Project> projects = new ArrayList<>();
+    private List<Task> tasks = new ArrayList<>();
+    private Position position; // employees are member, managers dpt Heads are heads and CEOs are CEO
     private LocalDate onboardDate;
     private LocalDate departureDate;
     private String status;
@@ -60,11 +61,6 @@ class UserFile implements Serializable {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return String.format("%s's File:\n Position: %s\n Current Project: %s\n Current Tasks: %s\n ",
-                this.username, this.position, this.projects.toString(), this.tasks.toString());
-    }
 
     public String getName() {
         return this.username;
@@ -193,5 +189,22 @@ class UserFile implements Serializable {
             return this.getId() == ((UserFile) obj).getId();
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "UserFile{" + '\n' +
+                "id=" + id +'\n' +
+                ", username='" + username + '\'' +'\n' +
+                ", password='" + password + '\'' +'\n' +
+                ", roles=" + roles +'\n' +
+                ", projects=" + projects +'\n' +
+                ", tasks=" + tasks +'\n' +
+                ", position=" + position +'\n' +
+                ", onboardDate=" + onboardDate +'\n' +
+                ", departureDate=" + departureDate +'\n' +
+                ", status='" + status + '\'' +'\n' +
+                ", vacationDays=" + vacationDays +'\n' +
+                '}';
     }
 }

@@ -175,4 +175,15 @@ public class CommonUser extends CommonUserFace implements User {
     public static void main(String[] args) {
 
     }
+
+    @Override
+    public String toString() {
+        return "CommonUser{" +'\n' +
+                "userFile=" + userFile.toString() +'\n' +
+                ", uid=" + uid +'\n' +
+                ", dpt=" + dpt +'\n' +
+                ", bio='" + bio + '\'' +'\n' +
+                ", name='" + name + '\'' +'\n' +
+                '}';
+    }
 }

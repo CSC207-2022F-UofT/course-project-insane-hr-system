@@ -6,5 +6,8 @@ public interface CheckProfileOutputBoundary {
 
     void prepareOrgFrame(CheckProfileResponseModel responseModel);
 
+    void showFrame();
+
     void update();
+
 }
