@@ -29,13 +29,14 @@ public class UseCaseButtons {
         switch (controllers){
             case SALARY_CALCULATOR: return getSalaryCalculator(screenBuilder);
             case ENROLL_EMPLOYEE:;
-            case CREATE_PROJECT:;
+            case CREATE_PROJECT:return getCreateProject(screenBuilder);
             case LEAVE_REQUEST: return getLeaveRequest(screenBuilder);
             case COMPLETE_TASK:;
             case CREATE_TASK: return getPMTaskInit();
             case COMPLETE_PROJECT:;
             case EXAMPLE_USE_CASE: return getUseCase1(screenBuilder);
             case APPROVE_LEAVE_TASK: return getApproveLeaveTask(screenBuilder);
+            case RANK_EMPLOYEE:;
         }
         JPanel jPanel = new JPanel();
         jPanel.add(new JLabel("No Controller is allowed"));
@@ -90,6 +91,12 @@ public class UseCaseButtons {
     public static JPanel getUseCase1(ScreenBuilder screenBuilder){
         JPanel jPanel = new JPanel();
         jPanel.add(new JLabel("No operator here"));
+        return jPanel;
+    }
+
+    public static JPanel getCreateProject(ScreenBuilder screenBuilder){
+        JPanel jPanel = new JPanel();
+        jPanel.add(new JLabel("createProejct Not Implement"));
         return jPanel;
     }
 }

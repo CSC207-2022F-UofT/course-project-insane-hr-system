@@ -259,7 +259,7 @@ class CheckProfileInteractorTest {
         CheckProfileController controller = new CheckProfileController(interactor);
         CheckProfileResponseModel responseModel = interactor.checkUserProfile(new CheckUserFileRequestModel(requester,target));
         System.out.println(gateway.getUserByUid(requester).toString() + '\n' + gateway.getUserByUid(target).toString());
-        assertEquals(VisualLevel.ONLY_FACE, responseModel.getVisualLevel());
+        assertEquals(VisualLevel.PROFILE, responseModel.getVisualLevel());
         assertEquals(RelativeRelation.NO_RELATION, responseModel.getRelation());
     }
 
