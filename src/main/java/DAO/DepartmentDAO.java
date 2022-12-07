@@ -14,7 +14,7 @@ import static utilities.SQLiteDataSource.connection;
 
 public class DepartmentDAO implements DepartmentDAOInterface {
 
-    // create a Department. //
+    // create a Department.. //
     public void createDepartment(Department department){
 
         PreparedStatement statement;

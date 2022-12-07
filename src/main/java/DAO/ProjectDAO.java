@@ -14,239 +14,128 @@ import static entity.Constants.CLOSED;
 import static utilities.SQLiteDataSource.connection;
 
 public class ProjectDAO implements ProjectDAOInterface {
-    @Override
-    public List<Project> getAllProjects() {
-        // to get each project a project with no tasks must be created.
-        // the tasks must be created individually.
-        // then project is added to each task.
-        // finally each task is added to the project.
 
-    }
+    // get a project. //
+    public Project getProject(UUID projectID){
+        Project project = getEmptyProject(projectID);
+        String query = "SELECT * FROM projectTaskMap WHERE projectID=" + projectID.toString();
 
-    // helper 1. create the intended project with no tasks.
-    private Project getEmptyProject(String projectID){
-        String querySQL = "SELECT * FROM project WHERE ID=" + projectID;
-        Project project = null;
         Statement statement;
-        ResultSet resultSet ;
+        ResultSet resultSet;
         try {
             statement = connection.createStatement();
-            resultSet = statement.executeQuery(querySQL);
+            resultSet = statement.executeQuery(query);
 
-            while (resultSet.next()) {
-
-                UUID id = UUID.fromString(resultSet.getString("ID"));
-                String name = resultSet.getString("name");
-                Integer head = resultSet.getInt("head");
-                Set<Integer> memberIds = getMemberIDs(projectID);
-                List<Task> tasks = new ArrayList<>();
-                String description = resultSet.getString("description");
-                LocalDateTime create = LocalDateTime.parse(resultSet.getString("start"));
-
-                if(resultSet.getString("type").equals("COMMON")){
-                    Department department = new DepartmentDAO().getDepartment(UUID.fromString(resultSet.getString("department")));
-                    int funds = resultSet.getInt("funds");
-
-                    if(resultSet.getString("status").equals("CLOSED")){
-                        int star = resultSet.getInt("star");
-                        LocalDateTime end = LocalDateTime.parse(resultSet.getString("end"));
-                        project = new CommonProject(id, name, star, head, memberIds, description, create, end, department, tasks, funds);
-                    }
-                    else{
-                        project = new CommonProject(id, name, head, memberIds, description, create, department, tasks, funds);
-                    }
-
-                }
-                else{
-                    int vacationDays = resultSet.getInt("vacation_days");
-
-                    // TODO : convert string into leave type.
-                    LeaveType leaveType = resultSet.getString("leave_type");
-
-                    if(resultSet.getString("status").equals(CLOSED)){
-                        LocalDateTime end = LocalDateTime.parse(resultSet.getString("end"));
-                        // TODO : create another constructor.
-                        project = new LeaveRequestProject(id,name,head,memberIds,description,create,vacationDays,leaveType, end);
-                    }
-                    else{
-                        project = new LeaveRequestProject(id,name,head,memberIds,description,create,vacationDays,leaveType);
-
-                    }
-
-                }
-
+            while (resultSet.next()){
+                UUID taskID = UUID.fromString(resultSet.getString("taskID"));
+                Task projectTask = (new TaskDAO()).getProjectTask(taskID, project);
+                project.addTask(projectTask);
 
             }
-        } catch (SQLException e) {
+            connection.close();
+
+
+        }catch (SQLException e){
             e.printStackTrace();
         }
         return project;
-
-
     }
 
-    // helper 2. create a task with a project
-    private Task getProjectTask(String taskID, Project project){
-        String SQL = "SELECT * FROM tasks WHERE ID="+ taskID;
+    // get all projects //
+    public List<Project> getAllProjects(){
+        String query = "SELECT * FROM project";
+        List<Project> projects = new ArrayList<>();
+
         Statement statement;
         ResultSet resultSet;
 
         try{
             statement = connection.createStatement();
-            resultSet = statement.executeQuery(SQL);
+            resultSet = statement.executeQuery(query);
 
-            while (resultSet.next()){
-                UUID id;
-                String name;
-                String description;
-                int head;
-                LocalDateTime start;
-
-                if (resultSet.getString("type").equals("COMMON")){
-                    //
-
-
-
-
-                } else if (resultSet.getString("type").equals("STAR")) {
-
-                    /// TODO:
-
-                } else if (resultSet.getString("type").equals("LEAVE")) {
-
-                }
-
+            while(resultSet.next()){
+                UUID projectID = UUID.fromString(resultSet.getString("results"));
+                Project currentProject = getProject(projectID);
+                projects.add(currentProject);
 
             }
-
-
-        } catch (SQLException e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
-
-
-
-
+        return projects;
 
 
 
     }
 
-    // helper 3. get a list of project members.
-    private Set<Integer> getMemberIDs(String projectID){
-        String querySQL = "SELECT * FROM project_member_map where projectID = " + projectID;
-        Set<Integer> memberIds = new TreeSet<>();
-        Statement statement;
-        ResultSet resultSet;
-        try {
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(querySQL);
+    // create a project //
+    public void createProject(Project project){
 
-            while (resultSet.next()) {
-                Integer memberID = resultSet.getInt("memberID");
-                memberIds.add(memberID);
+        String taskQuery = "INSERT INTO projectTaskMap (projectID, taskID) VALUES (?,?)";
+        String memberQuery = "INSERT INTO projectMemberMap (projectID, memberID) VALUES (?,?)";
 
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return memberIds;
-
-    }
-
-
-
-
-
-    @Override
-    public Project getProject(UUID id) {
-        return null;
-    }
-
-    @Override
-    public void createProject(Project project) {
-        PreparedStatement statement;
-
-        // the insert statement into the project table. depends on the project type and state.
-        String SQL;
-
-        if (project.getState().equals(CLOSED)){
-            if (project.getType().equals("COMMON")){
-                SQL = "INSERT INTO project (ID, name, head, description, start, status," +
-                        " type, department, funds, end, star) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        // check the type of the project //
+        String query;
+        if (project.getType().equals("COMMON")){
+            if (project.getState().equals(CLOSED)){
+                query = "INSERT INTO project (id, name, head, description, start, type, status, department, funds, end) VALUES (?,?,?,?,?,?,?,?,?,?)";
             }
             else{
-                SQL = "INSERT INTO project (ID, name, head, description, start, status," +
-                        " type, vacation_days, leave_type, end) VALUES (?,?,?,?,?,?,?,?,?,?)";
-
+                query = "INSERT INTO project (id, name, head, description, start, type, status, department, funds) VALUES (?,?,?,?,?,?,?,?,?)";
             }
-
         }
         else{
-            if (project.getType().equals("COMMON")){
-                SQL = "INSERT INTO project (ID, name, head, description, start, status," +
-                        " type, department, funds) VALUES (?,?,?,?,?,?,?,?,?)";
-            } else{
-                SQL = "INSERT INTO project (ID, name, head, description, start, status," +
-                        " type, vacation_days, leave_type) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            if (project.getState().equals(CLOSED)){
+                query = "INSERT INTO project (id, name, head, description, start, type, status, vacation_days, leave_type, num_responses, end) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             }
-
+            else{
+                query = "INSERT INTO project (id, name, head, description, start, type, status, vacation_days, leave_type, num_responses) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            }
 
         }
 
+        // insert data
+        PreparedStatement statement;
 
-        // keep track of project members in the project_member_map table.
-        String memberSQL = "INSERT INTO project_member_map (projectID, memberID) VALUES (?,?)";
-        String taskSQL = "INSERT INTO project_task_map (projectID, taskID) VALUES (?,?)";
+        try {
 
+            // connect to the database
+            statement = connection.prepareStatement(query);
 
-
-        try{
-
-            // create a connection.
-            statement = connection.prepareStatement(SQL);
-
-            // insert data.
+            // insert a new row
             statement.setString(1, project.getOid().toString());
             statement.setString(2, project.getName());
             statement.setInt(3, project.getHead());
             statement.setString(4, project.getDescription());
             statement.setString(5, project.getCreateTime().toString());
-            statement.setString(6, project.getState());
-            statement.setString(7, project.getType());
+            statement.setString(6, project.getType());
+            statement.setString(7, project.getState());
 
-            // if the project is common. also set the department and funds.
             if (project.getType().equals("COMMON")){
                 statement.setString(8, ((CommonProject) project).getDpt().getOid().toString());
                 statement.setInt(9, ((CommonProject) project).getFunds());
+
                 if (project.getState().equals(CLOSED)){
-                    statement.setString(10, project.getCloseTime().toString());
-                    statement.setInt(11, ((CommonProject) project).getStar());
+                    statement.setString(10, ((CommonProject) project).getCloseTime().toString());
+
                 }
 
-
             }
-            else{
+            else {
                 statement.setInt(8, ((LeaveRequestProject) project).getVacationDays());
+                statement.setString(9, ((LeaveRequestProject) project).getLeaveType().toString()) ;
+                statement.setInt(10, ((LeaveRequestProject) project).getNumResponses());
 
-                // TODO : get a string representation of leave type below.
-                //statement.setString(9, ((LeaveRequestProject) project).getLeaveType();
-
-                if (project.getState().equals(CLOSED)){
-                    statement.setString(10, project.getCloseTime().toString());
-                }
             }
 
 
-            // update the table.
             statement.executeUpdate();
 
-            // for each memberID the project_member_map stores, create a new connection and insert a row.
+            // save all project members to the database as well
+
             for (int memberID: project.getMembers()){
 
-                statement = connection.prepareStatement(memberSQL);
+                statement = connection.prepareStatement(memberQuery);
                 statement.setString(1, project.getOid().toString());
                 statement.setInt(2, memberID);
 
@@ -256,32 +145,41 @@ public class ProjectDAO implements ProjectDAOInterface {
 
             // for each taskID the project_task_map stores, create a new connection and insert a row.
             for(Task task: project.getTasks()){
-                statement = connection.prepareStatement(taskSQL);
+                statement = connection.prepareStatement(taskQuery);
                 statement.setString(1, project.getOid().toString());
                 statement.setString(2, task.getOid().toString());
+                statement.executeUpdate();
+
             }
 
 
-
-            // commit all changes then close the connection.
             connection.commit();
             connection.close();
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
+
+
+
+
+
+
+
+
     }
 
-    // this is a helper function to update the project.
-    private void deleteProject(UUID id){
-        String taskSQL = "DELETE FROM project_task_map WHERE projectID=?";
-        String memberSQL = "DELETE FROM project_member_map WHERE projectID=?";
+
+    // delete a project //
+    private void deleteProject(UUID id) {
+        String taskSQL = "DELETE FROM projectTaskMap WHERE projectID=?";
+        String memberSQL = "DELETE FROM projectMemberMap WHERE projectID=?";
         String SQL = "DELETE FROM project where ID=?";
 
         PreparedStatement statement;
 
-        try{
+        try {
 
             statement = connection.prepareStatement(taskSQL);
             statement.setString(1, id.toString());
@@ -296,25 +194,26 @@ public class ProjectDAO implements ProjectDAOInterface {
             connection.close();
 
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
-
-
     }
 
-    @Override
-    public void updateProject(Project project) {
+
+    // update a project //
+    public void updateProject(Project project){
         deleteProject(project.getOid());
         createProject(project);
-
     }
 
 
-    private Set<Integer> getTaskMembers(UUID taskID){
+/////////////////// HELPERS BELOW /////////////////////////////////
 
-        String querySQL = "SELECT * FROM task_map where ID=" + taskID.toString();
+
+    // helper function : get all project members //
+    public Set<Integer> getProjectMembers(UUID projectID){
+        String querySQL = "SELECT * FROM projectMemberMap where projectID = " + projectID.toString();
         Set<Integer> memberIds = new TreeSet<>();
         Statement statement;
         ResultSet resultSet;
@@ -328,11 +227,91 @@ public class ProjectDAO implements ProjectDAOInterface {
 
             }
 
+            connection.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return memberIds;
+    }
+
+    // helper function : get an empty project //
+    public Project getEmptyProject(UUID projectID){
+
+        Set<Integer> members = getProjectMembers(projectID);
+        List<Task> tasks = new ArrayList<>();
+        String query = "SELECT * FROM project WHERE ID=" + projectID.toString();
+        Project project = null;
+        Statement statement;
+        ResultSet result;
+
+        try{
+            statement = connection.createStatement();
+            result = statement.executeQuery(query);
+
+            while(result.next()){
+
+                UUID id = UUID.fromString(result.getString("ID"));
+                String name = result.getString("name");
+                Integer head = result.getInt("head");
+                String description = result.getString("description");
+                LocalDateTime start = LocalDateTime.parse(result.getString("start"));
+
+                if(result.getString("type").equals("COMMON")){
+                    // get department //
+                    Department dept = new DepartmentDAO().getDepartment(UUID.fromString(result.getString("department")));
+                    int funds = result.getInt("funds");
+
+                    if (result.getString("status").equals(CLOSED)){
+                        LocalDateTime end = LocalDateTime.parse(result.getString("end"));
+                        project = new CommonProject(id, name, head, members, description, start, end, dept, tasks, funds);
+                    }
+                    else{
+                        project = new CommonProject(id, name, head, members, description, start, dept, tasks, funds);
+                    }
+
+                } else{
+                    int vacationDays = result.getInt("vacation_days");
+
+                    LeaveType leaveType = LeaveType.valueOf(result.getString("leave_type"));
+
+                    int numResponses = result.getInt("num_responses");
+
+                    if(result.getString("status").equals(CLOSED)){
+                        LocalDateTime end = LocalDateTime.parse(result.getString("end"));
+                        LeaveRequestProject requestProject = new LeaveRequestProject(id, name, head, members, description, start, end, vacationDays, leaveType);
+                        requestProject.setNumResponses(numResponses);
+                        project = requestProject;
+
+
+
+                    }
+                    else{
+                        LeaveRequestProject leaveRequestProject = new LeaveRequestProject(id, name, head, members, description, start, vacationDays, leaveType);
+                        leaveRequestProject.setNumResponses(numResponses);
+                        project = leaveRequestProject;
+                    }
+
+                }
+
+            }
+            connection.close();
+
+
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return project;
+
+
+
 
     }
+
+
+
+
+
+
 }

@@ -23,10 +23,11 @@ public class ViewModel implements PropertyChangeListener, IViewModel {
     private Controllers[] controllers;
     private UUID oid;
     private Integer uid;
-
+    private UUID dpt;
 
 
     private final PropertyChangeSupport observable;
+
 
     public ViewModel() {
         this.observable = new PropertyChangeSupport(this);
@@ -245,6 +246,11 @@ public class ViewModel implements PropertyChangeListener, IViewModel {
     }
 
     @Override
+    public void setDpt(UUID dpt) {
+        this.dpt = dpt;
+    }
+
+    @Override
     public String toString() {
         return "ViewModel{" + '\n' +
                 "frameName='" + frameName + '\'' +'\n' +
@@ -260,5 +266,10 @@ public class ViewModel implements PropertyChangeListener, IViewModel {
                 ", uid=" + uid +'\n' +
                 ", observable=" + observable +'\n' +
                 '}';
+    }
+
+    @Override
+    public UUID getDpt() {
+        return dpt;
     }
 }

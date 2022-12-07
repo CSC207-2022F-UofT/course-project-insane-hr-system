@@ -79,4 +79,8 @@ public interface IViewModel extends PropertyChangeListener{
     void setUid(Integer uid);
 
     Controllers[] getControllers();
+
+    void setDpt(UUID dpt);
+
+    UUID getDpt();
 }

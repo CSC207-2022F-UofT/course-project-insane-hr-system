@@ -2,7 +2,9 @@ package entity;
 
 public enum Position {
     CEO,
-    HEAD,
+    HEAD,// DptHead or Project head
+    MEMBER,
     // This are special position for test.
-    SAMEPROJECT, SAMEORG, HEADOF, HASOVERLAPORG, MEMBER
+    SAMEPROJECT, SAMEORG, HEADOF, HASOVERLAPORG,
+
 }
