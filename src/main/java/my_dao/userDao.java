@@ -8,22 +8,22 @@ import java.util.List;
 
 public class userDao implements UserDAOInterface {
     @Override
-    public List<CommonUser> getAllTasks() {
+    public List<User> getAllUsers() {
         return null;
     }
 
     @Override
-    public User getUser(int id) {
+    public User getUser(Integer uid) {
         return null;
     }
 
     @Override
-    public void createUser(CommonUser user) {
+    public void createUser(User user) {
 
     }
 
     @Override
-    public void updateUser(CommonUser user) {
+    public void updateUser(User user) {
 
     }
 }

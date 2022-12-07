@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static entity.Constants.CLOSED;
 import static utilities.SQLiteDataSource.connection;
+import static entity.Constants.CLOSED;
 
 public class UserDAO implements UserDAOInterface {
     @Override
@@ -41,6 +41,11 @@ public class UserDAO implements UserDAOInterface {
         return users;
     }
 
+    /**
+     * get user by id
+     * @param uid uid
+     * @return user
+     */
     @Override
     public User getUser(Integer uid) {
         User user = new CommonUser(uid);  // initialize user class
