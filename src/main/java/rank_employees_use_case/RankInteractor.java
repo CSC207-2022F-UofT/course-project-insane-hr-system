@@ -20,7 +20,7 @@ public class RankInteractor implements RankInputBoundary {
     public RankResponseModel create(RankRequestModel requestModel) {
 
         // get a list of subordinates.
-        List<CommonUser> subordinates = this.rankGateway.getAllSubordinates(requestModel);
+        List<CommonUser> subordinates = this.rankGateway.getSubordinates(requestModel);
         TreeMap<Integer, List<CommonUser>> memberRatingMap = new TreeMap<>();
 
         for (int i = 0; i < subordinates.size(); i++) {
