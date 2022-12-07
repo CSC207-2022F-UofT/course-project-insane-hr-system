@@ -36,6 +36,7 @@ public class LeaveRequestProjectBuilder implements ProjectBuilder {
                 String taskName = "Review " + projectName;
                 Task task = taskFactory.createOpenTask(taskName, member, description, createTime);
                 project.addTask(task);
+                user.addCurrTask(task);
             }
         }
 
