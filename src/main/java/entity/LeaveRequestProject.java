@@ -83,7 +83,7 @@ public class LeaveRequestProject extends CommonOrganization implements Project {
     public void update() {
         this.numResponses += 1;
         // close the project when all responses have been gathered
-        if (this.numResponses == this.getMembers().size()) {
+        if (this.numResponses == this.getMembers().size() - 1) {
             this.close();
         }
     }

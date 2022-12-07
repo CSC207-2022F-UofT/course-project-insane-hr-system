@@ -57,9 +57,6 @@ public class LeaveRequestInteractor implements LeaveRequestInputBoundary {
         String projectName = user.getName() + "'s " + leaveType.toString() + " Leave Request (" + startDate + " until " + returnDate
                 + " return)";
         Project project = projectBuilder.createProject(projectName, requestModel.getMessage(), members, vacationDays, leaveType);
-        // add head to project members after so a task isn't created for head
-        members.add(user.getId());
-        project.setMembers(members);
 
         // save the project and all its tasks
         LeaveRequestDsRequestModel dsRequestModel = new LeaveRequestDsRequestModel(project);
