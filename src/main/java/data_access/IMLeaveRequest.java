@@ -28,6 +28,7 @@ public class IMLeaveRequest implements LeaveRequestDsGateway {
             tasks.put(t.getOid(), t);
             Integer m = t.getMembers().iterator().next();
             getUser(m).addCurrTask(t);
+            getUser(m).addCurrProject(project);
         }
     }
 

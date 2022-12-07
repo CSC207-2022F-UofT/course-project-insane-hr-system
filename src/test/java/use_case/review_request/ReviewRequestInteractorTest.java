@@ -37,6 +37,7 @@ public class ReviewRequestInteractorTest {
         Task task = project.getTasks().get(0);
         tasks.put(task.getOid(), task);
         head.addCurrTask(task);
+        head.addCurrProject(project);
 
         Curr.setUser(head);
         ReviewRequestDsGateway gateway = new IMReviewRequest(tasks, users);
@@ -48,6 +49,8 @@ public class ReviewRequestInteractorTest {
             assertEquals("On Leave", employee.getStatus()); // check employee status updated
             assertEquals(8, employee.getVacationDays());
             assertTrue(employee.getProjects().isEmpty()); // check project and task removed when closed
+            assertTrue(employee.getTasks().isEmpty());
+            assertTrue(head.getProjects().isEmpty());
             assertTrue(head.getTasks().isEmpty());
             return null;
         };
