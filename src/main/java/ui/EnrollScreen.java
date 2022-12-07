@@ -77,7 +77,7 @@ public class EnrollScreen extends JPanel{
         this.positionCom.setModel(new DefaultComboBoxModel<>(new String[] { "HEAD", "MEMBER" }));
     }
 
-    public static void main(String[] args) {
+    public void showScreen(){
         EnrollDsGateway dsGateway = new EnrollDataAccess();
         EnrollOutputBoundary enrollOutputBoundary = new EnrollPresenter();
         UserFactory userFactory = new CommonUserFactory();

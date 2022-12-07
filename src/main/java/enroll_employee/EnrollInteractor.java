@@ -1,11 +1,11 @@
 package enroll_employee;
 
+import data_access.IMEnrollEmployee;
 import entity.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public class EnrollInteractor implements EnrollInputBoundary{
     final EnrollDsGateway enrolldsGateway;
@@ -14,7 +14,9 @@ public class EnrollInteractor implements EnrollInputBoundary{
 
 
     public EnrollInteractor(EnrollDsGateway enrolldsGateway, EnrollOutputBoundary enrollOutputBoundary, UserFactory userFactory) {
-        this.enrolldsGateway = enrolldsGateway;
+        //this.enrolldsGateway = enrolldsGateway;
+
+        this.enrolldsGateway = new IMEnrollEmployee();
         this.enrollOutputBoundary = enrollOutputBoundary;
         this.userFactory = userFactory;
     }

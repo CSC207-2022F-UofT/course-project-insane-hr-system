@@ -8,7 +8,6 @@ import java.time.LocalDate;
 
 public class NewEmployeeScreen {
     private JPanel panel1;
-    private JTextField nameField;
     private JTextField idField;
     private JTextField userNameField;
     private JTextField passwordField;
