@@ -1,6 +1,7 @@
 package data_access;
 
-import DAO.CommonTaskDAO;
+
+import DAO.TaskDAO;
 import project_manager_task_init_use_case.PMTaskInitDsRequestModel;
 import project_manager_task_init_use_case.PMTaskInitGateway;
 
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 import static utilities.SQLiteDataSource.connection;
 
 
-public class PMTaskInitDataAccess extends CommonTaskDAO implements PMTaskInitGateway {
+public class PMTaskInitDataAccess extends TaskDAO implements PMTaskInitGateway {
 
 
 
@@ -26,7 +27,7 @@ public class PMTaskInitDataAccess extends CommonTaskDAO implements PMTaskInitGat
      */
     @Override
     public void saveTask(PMTaskInitDsRequestModel requestModel) {
-        super.saveTask(requestModel.getTask());
+        super.createTask(requestModel.getTask());
     }
 
         // check the status of the task.
