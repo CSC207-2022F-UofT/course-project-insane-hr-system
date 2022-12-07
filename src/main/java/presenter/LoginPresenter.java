@@ -1,14 +1,25 @@
 package presenter;
 
-import entity.User;
-import login.LoginResponseModel;
+import login.LoginFailureResponseModel;
+import login.LoginSuccessResponseModel;
 
-// Use case layer
-
+/**
+ * the login presenter
+ */
 public interface LoginPresenter {
 
-    LoginResponseModel prepareSuccessView(User user, LoginResponseModel loginResponseModel);
+    /**
+     * returns the successful response model
+     * @param loginSuccessResponseModel the successful response model
+     * @return the successful response model
+     */
+    LoginSuccessResponseModel prepareSuccessView(LoginSuccessResponseModel loginSuccessResponseModel);
 
-    LoginResponseModel prepareFailView(LoginResponseModel logFailRepMod);
+    /**
+     * returns the failure response model
+     * @param loginFailureResponseModel the failure response model
+     * @return the failure response model
+     */
+    LoginFailureResponseModel prepareFailView(LoginFailureResponseModel loginFailureResponseModel);
 
 }
