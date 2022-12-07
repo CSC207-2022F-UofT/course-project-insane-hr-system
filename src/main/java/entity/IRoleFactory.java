@@ -11,5 +11,7 @@ public interface IRoleFactory {
     SuperRole createSuperRole();
 
     SuperRole createSuperRole(String CEOName);
+
+    void addRoleToUserBasedOnOrg(User user);
 }
 

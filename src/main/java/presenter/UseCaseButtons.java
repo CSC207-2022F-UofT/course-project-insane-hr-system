@@ -1,13 +1,19 @@
 package presenter;
 
+import controller.SalaryCalculatorController;
 import entity.RelativeRelation;
 import presenter.Controllers;
-import ui.EnrollScreen;
+import salary_calculator.SalaryCalculator;
+import salary_calculator.SalaryCalculatorInputBoundary;
+import salary_calculator.SalaryCalculatorOutputBoundary;
 import ui.LeaveRequestScreen;
 import ui.ReviewRequestScreen;
+import ui.SalaryView;
 import ui.ScreenBuilder;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class UseCaseButtons {
     //TODO: Please create everyone's button here!
@@ -16,8 +22,8 @@ public class UseCaseButtons {
     // and then add a case in this page.
     public static JPanel getPanel(Controllers controllers, ScreenBuilder screenBuilder){
         switch (controllers){
-            case SALARY_CALCULATOR:;
-            case ENROLL_EMPLOYEE: return getEnrollEmployee();
+            case SALARY_CALCULATOR: return getSalaryCalculator(screenBuilder);
+            case ENROLL_EMPLOYEE:;
             case CREATE_PROJECT:;
             case LEAVE_REQUEST: return getLeaveRequest(screenBuilder);
             case COMPLETE_TASK:;
@@ -29,6 +35,20 @@ public class UseCaseButtons {
         JPanel jPanel = new JPanel();
         jPanel.add(new JLabel("No Controller is allowed"));
         return jPanel;
+    }
+
+    private static JPanel getSalaryCalculator(ScreenBuilder screenBuilder) {
+        JPanel panel = new JPanel();
+        JButton salaryButton = new JButton("Salary Calculator");
+        panel.add(salaryButton);
+        salaryButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame("Dialog");
+                JOptionPane.showMessageDialog(frame, "This functionality has been cut");
+            }
+        });
+        return panel;
     }
 
     public static JPanel getLeaveRequest(ScreenBuilder screenBuilder) {
@@ -48,11 +68,7 @@ public class UseCaseButtons {
 
     public static JPanel getUseCase1(ScreenBuilder screenBuilder){
         JPanel jPanel = new JPanel();
-        jPanel.add(new JLabel("This is use case 1"));
+        jPanel.add(new JLabel("No operator here"));
         return jPanel;
-    }
-
-    public static JPanel getEnrollEmployee(){
-        return new EnrollScreen().getEnrollPanel();
     }
 }

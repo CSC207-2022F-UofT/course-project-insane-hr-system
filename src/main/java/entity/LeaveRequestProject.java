@@ -1,6 +1,7 @@
 package entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -18,6 +19,7 @@ public class LeaveRequestProject extends CommonOrganization implements Project {
         super(oid, name, head, members, description, createTime);
         this.vacationDays = vacationDays;
         this.leaveType = leaveType;
+        this.tasks = new ArrayList<>();
         this.projectType = "LEAVE";
     }
 
@@ -27,6 +29,7 @@ public class LeaveRequestProject extends CommonOrganization implements Project {
         this.vacationDays = vacationDays;
         this.leaveType = leaveType;
         this.projectType = "LEAVE";
+        this.tasks = new ArrayList<>();
     }
 
     @Override
@@ -80,7 +83,7 @@ public class LeaveRequestProject extends CommonOrganization implements Project {
     public void update() {
         this.numResponses += 1;
         // close the project when all responses have been gathered
-        if (this.numResponses == this.getMembers().size()) {
+        if (this.numResponses == this.getMembers().size() - 1) {
             this.close();
         }
     }

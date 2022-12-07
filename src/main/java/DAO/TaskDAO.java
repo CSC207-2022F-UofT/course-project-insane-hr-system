@@ -14,7 +14,7 @@ import static utilities.SQLiteDataSource.connection;
 
 public class TaskDAO {
 
-    // get one task //
+    // get one task. //
 
     public Task getTask(UUID taskID){
         // get task members

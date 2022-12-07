@@ -24,6 +24,7 @@ public class RoleFactory implements IRoleFactory{
         return new SuperRole(Position.CEO, CEOName);
     }
 
+    @Override
     public void addRoleToUserBasedOnOrg(User user) {
         user.setRoles(new ArrayList<>());
         for (Project project : user.getProjects()) {

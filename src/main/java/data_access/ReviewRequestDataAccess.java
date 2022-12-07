@@ -36,6 +36,7 @@ public class ReviewRequestDataAccess implements ReviewRequestDsGateway {
         projectDAO.updateProject(project);
         if (!requestModel.getStatus().isEmpty()) {
             User user = userDAO.getUser(project.getHead());
+            user.removeCurrProject(project);
             user.setStatus(requestModel.getStatus());
             if (project.getLeaveType() == LeaveType.VACATION) {
                 user.setVacationDays(user.getVacationDays() - project.getVacationDays());
