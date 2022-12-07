@@ -33,7 +33,6 @@ public class ProjectDAO implements ProjectDAOInterface {
                 project.addTask(projectTask);
 
             }
-            connection.close();
 
 
         }catch (SQLException e){
@@ -157,7 +156,6 @@ public class ProjectDAO implements ProjectDAOInterface {
 
 
             connection.commit();
-            connection.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -194,7 +192,6 @@ public class ProjectDAO implements ProjectDAOInterface {
             statement.setString(1, id.toString());
             statement.executeUpdate();
             connection.commit();
-            connection.close();
 
 
         } catch (SQLException e) {
@@ -231,7 +228,6 @@ public class ProjectDAO implements ProjectDAOInterface {
 
             }
 
-            connection.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -300,7 +296,6 @@ public class ProjectDAO implements ProjectDAOInterface {
                 }
 
             }
-            connection.close();
 
 
         } catch(SQLException e){

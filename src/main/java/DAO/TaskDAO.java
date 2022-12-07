@@ -34,7 +34,6 @@ public class TaskDAO implements TaskDAOInterface {
                 task = getProjectTask(taskID, project);
             }
 
-            connection.close();
 
 
 
@@ -64,8 +63,6 @@ public class TaskDAO implements TaskDAOInterface {
                 UUID taskID = UUID.fromString(resultSet.getString("ID"));
                 tasks.add(getTask(taskID));
             }
-
-            connection.close();
 
         } catch (SQLException e){
             e.printStackTrace();
@@ -140,7 +137,6 @@ public class TaskDAO implements TaskDAOInterface {
             saveTaskMembers(task);
 
 
-            connection.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -181,7 +177,6 @@ public class TaskDAO implements TaskDAOInterface {
             statement.executeUpdate();
 
             connection.commit();
-            connection.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -319,7 +314,6 @@ public class TaskDAO implements TaskDAOInterface {
                 statement.executeUpdate();
             }
             connection.commit();
-            connection.close();
 
         } catch(SQLException e){
             e.printStackTrace();

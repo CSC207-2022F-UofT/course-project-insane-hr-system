@@ -70,7 +70,6 @@ public class DepartmentDAO implements DepartmentDAOInterface {
 
             // commit all changes then close the connection.
             connection.commit();
-            connection.close();
 
         } catch (SQLException e){
             e.printStackTrace();
@@ -96,7 +95,6 @@ public class DepartmentDAO implements DepartmentDAOInterface {
             statement.setString(1, oid.toString());
             statement.executeUpdate();
             connection.commit();
-            connection.close();
 
 
         } catch (SQLException e){
@@ -155,7 +153,6 @@ public class DepartmentDAO implements DepartmentDAOInterface {
 
 
             }
-            connection.close();
 
         } catch (SQLException e){
             e.printStackTrace();

@@ -5,15 +5,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class SQLiteDataSource {
+    public static Connection connection;
 
-    private static SQLiteDataSource sqLiteDataSource = null;
-    public static Connection connection = null;
-
-    private SQLiteDataSource(){
+    static {
         try {
             Class.forName("org.sqlite.JDBC");
-            String dbURL = "/Users/jlunger02/IdeaProjects/course-project-insane-hr-system/src/main/database/HR_DB.sqlite";
-            connection = DriverManager.getConnection(dbURL);
+            String dbURL = "/Users/tim/IdeaProjects/course-project-insane-hr-system/src/main/database/HR_DB.sqlite";
+            connection = DriverManager.getConnection("jdbc:sqlite:" + dbURL);
         } catch (ClassNotFoundException e) {
             System.out.println("connection fail");
             e.printStackTrace();
@@ -23,15 +21,5 @@ public class SQLiteDataSource {
             e.printStackTrace();
             //throw new RuntimeException(e);
         }
-
-
     }
-
-   public static Connection getConnection(){
-        if (sqLiteDataSource == null){
-            sqLiteDataSource = new SQLiteDataSource();
-        }
-        return connection;
-   }
-
 }
