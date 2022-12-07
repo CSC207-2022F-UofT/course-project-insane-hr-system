@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static entity.Constants.OPEN;
 import static utilities.SQLiteDataSource.connection;
 import static entity.Constants.CLOSED;
 
@@ -84,7 +85,10 @@ public class UserDAO implements UserDAOInterface {
             resultSet = statement.executeQuery(taskQuery);
             while (resultSet.next()) {
                 UUID taskID = UUID.fromString(resultSet.getString("ID"));
-                tasks.add(new TaskDAO().getTask(taskID));
+                Task task = new TaskDAO().getTask(taskID);
+                if (task.getState().equals(OPEN)) {
+                    tasks.add(task);
+                }
             }
             user.setTasks(tasks);
 
@@ -93,7 +97,10 @@ public class UserDAO implements UserDAOInterface {
             resultSet = statement.executeQuery(projectQuery);
             while (resultSet.next()) {
                 UUID projectID = UUID.fromString(resultSet.getString("projectID"));
-                projects.add(new ProjectDAO().getProject(projectID));
+                Project project = new ProjectDAO().getProject(projectID);
+                if (project.getState().equals(OPEN)) {
+                    projects.add(project);
+                }
             }
             user.setProjects(projects);
 
