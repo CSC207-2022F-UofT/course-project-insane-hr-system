@@ -15,7 +15,7 @@ import static utilities.SQLiteDataSource.connection;
 
 public class ProjectDAO implements ProjectDAOInterface {
 
-    // get a project //
+    // get a project. //
     public Project getProject(UUID projectID){
         Project project = getEmptyProject(projectID);
         String query = "SELECT * FROM projectTaskMap WHERE projectID=" + projectID.toString();
