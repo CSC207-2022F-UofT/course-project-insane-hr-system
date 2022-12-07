@@ -12,7 +12,7 @@ public interface RankGateway {
 
     public List<CommonUser> getAllSubordinates(RankRequestModel requestModel);
 
-    public List<CommonTask> getMemberTasks(CommonUser user);
+    public List<CommonTask> getCompletedTasks(CommonUser user);
 
 
 }

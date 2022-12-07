@@ -5,15 +5,17 @@ import entity.CommonUser;
 import java.util.List;
 
 public class RankRequestModel {
-    private final List<CommonUser> subordinateList;
+    private CommonUser currentUser;
 
-    public RankRequestModel(List<CommonUser> subordinateList){
-        this.subordinateList = subordinateList;
+    public RankRequestModel(CommonUser user){
+        this.currentUser = user;
     }
 
-    public List<CommonUser> getSubordinates(){
-        return subordinateList;
+    public CommonUser getCurrentUser(){
+        return this.currentUser;
     }
+
+    public void setCurrentUser(CommonUser user){this.currentUser = user;}
 
 
 }

@@ -15,4 +15,8 @@ public class RankResponseModel {
         return this.rankedEmployees;
     }
 
+    public void setRankedEmployees(List<CommonUser> sortedSubordinates){
+        this.rankedEmployees = sortedSubordinates;
+    }
+
 }
