@@ -48,7 +48,7 @@ public class EnrollInteractor implements EnrollInputBoundary{
         enrolldsGateway.save(dsRequestModel);
         enrolldsGateway.updateDepartment(dpt);
 
-        EnrollResponseModel responseModel = new EnrollResponseModel(user.getName(), user.getId(), user.getUsername(), user.getPassword(), user.getOnboardDate());
+        EnrollResponseModel responseModel = new EnrollResponseModel(user.getId(), user.getUsername(), user.getPassword(), user.getOnboardDate());
         return enrollOutputBoundary.prepareSuccessView(responseModel);
 
     }

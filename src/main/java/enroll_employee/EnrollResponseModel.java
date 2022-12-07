@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class EnrollResponseModel {
-    private String name;
+    //private String name;
     private int id;
     private String username;
     private String password;
@@ -13,8 +13,8 @@ public class EnrollResponseModel {
 
 
 
-    public EnrollResponseModel(String name, int id, String username, String password, LocalDate creationTime) {
-        this.name = name;
+    public EnrollResponseModel(int id, String username, String password, LocalDate creationTime) {
+        //this.name = name;
         this.id = id;
         this.username = username;
         this.password = password;
@@ -22,13 +22,13 @@ public class EnrollResponseModel {
         this.creationTime = creationTime;
     }
 
-    public String getName() {
-        return name;
-    }
+//    public String getName() {
+//        return name;
+//    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+//    public void setName(String name) {
+//        this.name = name;
+//    }
 
     public int getId() {
         return id;
