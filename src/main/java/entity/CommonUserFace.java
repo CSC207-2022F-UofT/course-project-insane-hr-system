@@ -69,4 +69,13 @@ public class CommonUserFace implements UserFace {
         return false;
     }
 
+    @Override
+    public String toString() {
+        return "CommonUserFace{" +
+                "uid=" + uid +
+                ", dpt=" + dpt +
+                ", bio='" + bio + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

@@ -18,6 +18,12 @@ public class ReviewRequestInteractor implements ReviewRequestInputBoundary {
         this.outputBoundary = outputBoundary;
     }
 
+    /**
+     * This method takes in the request model and updates the response of the user to the leave request in the database.
+     * @param requestModel a ReviewRequestRequestModel
+     *
+     * @return ReviewRequestResponseModel
+     */
     @Override
     public ReviewRequestResponseModel reviewRequest(ReviewRequestRequestModel requestModel) {
         User user = Curr.getUser();
@@ -36,8 +42,7 @@ public class ReviewRequestInteractor implements ReviewRequestInputBoundary {
         if (project.getState().equals(CLOSED)) {
             user.removeCurrProject(project);
             if (isAllApprovals(project)) { // all managers have approved leave request
-                String status = "On Leave";
-                dsRequestModel.setStatus(status);
+                dsRequestModel.setStatus("On Leave");
             }
         }
 
