@@ -1,4 +1,6 @@
-package utilities;
+package Utilities;
+
+import Entity.CommonUser;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,7 +14,7 @@ public class SQLiteDataSource {
     private SQLiteDataSource(){
         try {
             Class.forName("org.sqlite.JDBC");
-            String dbURL = "/Users/wukunlong/IdeaProjects/course-project-insane-hr-system/src/main/database/HR_DB.sqlite";
+            String dbURL = "jdbc:sqlite:/Users/tarachakkithara/Desktop/CSC207/course-project-insane-hr-system/src/main/HRDatabase/HR_DB.db";
             connection = DriverManager.getConnection(dbURL);
         } catch (ClassNotFoundException e) {
             System.out.println("connection fail");

@@ -14,8 +14,7 @@ public class RankController {
         this.userInput = userInput;
     }
 
-    RankResponseModel create(List<CommonUser> subordinates){
-        RankRequestModel requestModel = new RankRequestModel(subordinates);
+    RankResponseModel create(RankRequestModel requestModel){
         return userInput.create(requestModel);
 
     }
