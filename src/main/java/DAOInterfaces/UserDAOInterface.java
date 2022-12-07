@@ -5,18 +5,16 @@ import entity.*;
 import java.util.List;
 
 public interface UserDAOInterface {
-
-
     // get all users //
-    public List<CommonUser> getAllUsers();
+    List<User> getAllUsers();
 
     // get one user //
-    public User getUser(int id);
+    User getUser(Integer uid);
 
     // create a user //
-    public void createUser(CommonUser user);
+    void createUser(User user);
 
     // update a user //
-    public void updateUser(CommonUser user);
+    void updateUser(User user);
 
 }

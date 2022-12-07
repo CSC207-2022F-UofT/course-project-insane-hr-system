@@ -1,6 +1,6 @@
 package data_access;
 
-import DAO.CommonTaskDAO;
+import DAO.TaskDAO;
 import DAO.UserDAO;
 import DAO.ProjectDAO;
 import DAOInterfaces.UserDAOInterface;
@@ -13,7 +13,7 @@ import review_request.ReviewRequestDsRequestModel;
 import java.util.UUID;
 
 public class ReviewRequestDataAccess implements ReviewRequestDsGateway {
-    private final TaskDAOInterface taskDAO = new CommonTaskDAO();
+    private final TaskDAOInterface taskDAO = new TaskDAO();
     private final ProjectDAOInterface projectDAO = new ProjectDAO();
     private final UserDAOInterface userDAO = new UserDAO();
 

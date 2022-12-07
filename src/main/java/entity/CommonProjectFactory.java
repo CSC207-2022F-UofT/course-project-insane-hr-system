@@ -17,10 +17,10 @@ public class CommonProjectFactory implements RealProjectFactory {
     }
 
     @Override
-    public RealProject createClosedProject(String name, int star, Set<Integer> members, String description,
+    public RealProject createClosedProject(String name, Set<Integer> members, String description,
                                            LocalDateTime createTime, LocalDateTime closeTime, Department dpt,
                                            List<Task> tasks, int funds) {
-        return new CommonProject(UUID.randomUUID(), name, star, Curr.getUser().getId(), members, description, createTime,
+        return new CommonProject(UUID.randomUUID(), name, Curr.getUser().getId(), members, description, createTime,
                 closeTime, dpt, tasks, funds);
     }
 }

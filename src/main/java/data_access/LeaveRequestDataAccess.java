@@ -1,6 +1,6 @@
 package data_access;
 
-import DAO.CommonTaskDAO;
+import DAO.TaskDAO;
 import DAO.UserDAO;
 import DAO.ProjectDAO;
 import DAOInterfaces.UserDAOInterface;
@@ -13,7 +13,7 @@ import leave_request.LeaveRequestDsRequestModel;
 
 public class LeaveRequestDataAccess implements LeaveRequestDsGateway {
     private final ProjectDAOInterface projectDAO = new ProjectDAO();
-    private final TaskDAOInterface taskDAO = new CommonTaskDAO();
+    private final TaskDAOInterface taskDAO = new TaskDAO();
     private final UserDAOInterface userDAO = new UserDAO();
 
     /**
@@ -24,8 +24,14 @@ public class LeaveRequestDataAccess implements LeaveRequestDsGateway {
     @Override
     public void save(LeaveRequestDsRequestModel requestModel) {
         projectDAO.createProject(requestModel.getProject());
+        Integer head = requestModel.getProject().getHead();
+        userDAO.updateUser(getUser(head));  // save project to requester's list of projects
         for (Task t : requestModel.getProject().getTasks()) {
             taskDAO.createTask(t);
+            Integer m = t.getMembers().iterator().next();
+            User member = getUser(m);
+            member.addCurrTask(t);
+            userDAO.updateUser(member);  // save task to superior's list of tasks
         }
     }
 

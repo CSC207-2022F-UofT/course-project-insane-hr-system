@@ -13,7 +13,7 @@ import java.util.*;
 import static entity.Constants.CLOSED;
 import static utilities.SQLiteDataSource.connection;
 
-public class ProjectDAO{
+public class ProjectDAO implements ProjectDAOInterface {
 
     // get a project //
     public Project getProject(UUID projectID){
@@ -123,7 +123,6 @@ public class ProjectDAO{
             }
             else {
                 statement.setInt(8, ((LeaveRequestProject) project).getVacationDays());
-                // TODO : LOOK OVER WHETHER THE FOLLOWING IS A STRING
                 statement.setString(9, ((LeaveRequestProject) project).getLeaveType().toString()) ;
                 statement.setInt(10, ((LeaveRequestProject) project).getNumResponses());
 
@@ -275,8 +274,7 @@ public class ProjectDAO{
                 } else{
                     int vacationDays = result.getInt("vacation_days");
 
-                    // TODO : CONVERT THE STRING TO LEAVETYPE
-                    LeaveType leaveType = result.getString("leave_type");
+                    LeaveType leaveType = LeaveType.valueOf(result.getString("leave_type"));
 
                     int numResponses = result.getInt("num_responses");
 
