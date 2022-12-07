@@ -1,5 +1,6 @@
 package entity;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class RoleFactory implements IRoleFactory{
@@ -21,5 +22,27 @@ public class RoleFactory implements IRoleFactory{
     @Override
     public SuperRole createSuperRole(String CEOName) {
         return new SuperRole(Position.CEO, CEOName);
+    }
+
+    @Override
+    public void addRoleToUserBasedOnOrg(User user) {
+        user.setRoles(new ArrayList<>());
+        for (Project project : user.getProjects()) {
+            user.addRole(createCommonRole(Position.MEMBER, project.getName(), project.getOid()));
+            if (project.getHead() == user.getId()) {
+                user.addRole(createCommonRole(Position.HEAD, project.getName(), project.getOid()));
+            }
+         }
+        for (Task project : user.getTasks()) {
+            user.addRole(createCommonRole(Position.MEMBER, project.getName(), project.getOid()));
+            if (project.getHead() == user.getId()) {
+                user.addRole(createCommonRole(Position.HEAD, project.getName(), project.getOid()));
+            }
+        }
+        user.addRole(createCommonRole(Position.MEMBER, user.getDpt().getName(), user.getDpt().getOid()));
+        if (user.getDpt().getHead() == user.getId()) {
+            user.addRole(createCommonRole(Position.HEAD, user.getDpt().getName(), user.getDpt().getOid()));
+        }
+
     }
 }

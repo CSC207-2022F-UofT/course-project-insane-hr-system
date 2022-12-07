@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static entity.Constants.CLOSED;
 import static utilities.SQLiteDataSource.connection;
+import static entity.Constants.CLOSED;
 
 public class UserDAO implements UserDAOInterface {
     @Override

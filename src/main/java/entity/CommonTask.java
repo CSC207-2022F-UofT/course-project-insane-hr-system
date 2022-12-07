@@ -9,11 +9,20 @@ public class CommonTask extends CommonOrganization implements Task {
     private Object results;
     private Integer star;
 
+    public CommonTask(UUID oid,
+                      String name,
+                      Integer head,
+                      String description,
+                      LocalDateTime createTime,
+                      CommonProject commonProject) {
+        super(oid, name, head, description, createTime);
+        this.commonProject = commonProject;
+    }
+
     // construct CLOSED task
     public CommonTask(UUID oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime createTime, LocalDateTime closeTime, CommonProject commonProject, int star) {
         super(oid, name, head, members, description, createTime, closeTime);
         this.commonProject = commonProject;
-        this.results = results;
         this.star = star;
     }
     // construct OPEN task
@@ -45,4 +54,7 @@ public class CommonTask extends CommonOrganization implements Task {
         this.star = star;
     }
 
+    public String getType(){
+        return "COMMON";
+    }
 }

@@ -1,10 +1,11 @@
 package ui;
 
-import check_profile_validation.CheckProfileIGateway;
-import check_profile_validation.CheckProfileInputBoundary;
-import check_profile_validation.CheckProfileInteractor;
+import check_profile_validation.*;
 import controller.CheckProfileController;
 import data_access.CheckProfileDataAccess;
+import data_access.CheckProfileIMDataAccess;
+import entity.Organization;
+import entity.StarEvaluationTask;
 import presenter.CheckProfilePresenter;
 import presenter.IViewModel;
 import presenter.Controllers;
@@ -35,7 +36,8 @@ public class ScreenBuilder implements IView {
         buttonController = new CheckProfileController(interactor);
     }
 
-    public ScreenBuilder(ViewModel dataModel, CheckProfileIGateway gateway) {
+
+    public ScreenBuilder(IViewModel dataModel, CheckProfileIGateway gateway) {
 
         this.dataModel = dataModel;
         // Add view to the dataModel observable.
@@ -44,7 +46,6 @@ public class ScreenBuilder implements IView {
         CheckProfilePresenter presenter =new CheckProfilePresenter();
         CheckProfileInputBoundary interactor = new CheckProfileInteractor(gateway, presenter);
         buttonController = new CheckProfileController(interactor);
-
     }
 
 
@@ -112,12 +113,18 @@ public class ScreenBuilder implements IView {
      */
     @Override
     public void customizeLeftButton(){
+        CheckProfileOutputBoundary presenter = new CheckProfilePresenter();
+        CheckProfileIGateway gateway = new CheckProfileIMDataAccess();
+        CheckProfileController controller = new CheckProfileController(presenter, gateway);
         for (int i : view.getLeftTable().getSelectedRows()){
             Object reference = dataModel.getLeftTable().getReference()[i];
-            plugInController(reference);
-
+            if (reference instanceof Integer){
+                controller.create(this.dataModel.getRequesterID(), (Integer) reference);
+            } else if (reference instanceof UUID) {
+                controller.create(this.dataModel.getRequesterID(), (UUID) reference);
+            }
+            presenter.showFrame();
         }
-
 
     }
 
@@ -136,26 +143,32 @@ public class ScreenBuilder implements IView {
 //            String reference = (String) dataModel.getRightTable().getReference()[num];
 //            dataModel.updateIntro(dataModel.getIntro() + name + reference + " have been selected\n");
 //        }
+        CheckProfileOutputBoundary presenter = new CheckProfilePresenter();
+        CheckProfileIGateway gateway = new CheckProfileIMDataAccess();
+        CheckProfileController controller = new CheckProfileController(presenter, gateway);
         for (int i : view.getRightTable().getSelectedRows()){
             Object reference = dataModel.getRightTable().getReference()[i];
-            plugInController(reference);
-
+            if (reference instanceof Integer){
+                controller.create(this.dataModel.getRequesterID(), (Integer) reference);
+            } else if (reference instanceof UUID) {
+                controller.create(this.dataModel.getRequesterID(), (UUID) reference);
+            }
         }
-
+        presenter.showFrame();
     }
 
-    private void plugInController(Object reference) {
-        if (reference instanceof Integer) {
-            buttonController.create(dataModel.getRequesterID(), (Integer) reference);
-        } else if (reference instanceof UUID) {
-            buttonController.create(dataModel.getRequesterID(), (UUID) reference);
-        } else {
-            JOptionPane.showMessageDialog(view,
-                    "The reference is not in correct Type",
-                    "Inane error",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-    }
+//    private void plugInController(Object reference) {
+//        if (reference instanceof Integer) {
+//            buttonController.create(dataModel.getRequesterID(), (Integer) reference);
+//        } else if (reference instanceof UUID) {
+//            buttonController.create(dataModel.getRequesterID(), (UUID) reference);
+//        } else {
+//            JOptionPane.showMessageDialog(view,
+//                    "The reference is not in correct Type",
+//                    "Inane error",
+//                    JOptionPane.ERROR_MESSAGE);
+//        }
+//    }
 
     @Override
     public JPanel customizeLeftPanel(){
@@ -179,7 +192,18 @@ public class ScreenBuilder implements IView {
     @Override
     public JPanel customizeRightPanel(){
         JPanel jPanel = new JPanel(new GridBagLayout());
-        jPanel.add(new JLabel("You need to add customized Right Panel here!"));
+        JButton dptButton = new JButton("Go to Department");
+        jPanel.add(dptButton);
+        dptButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CheckProfileOutputBoundary presenter = new CheckProfilePresenter();
+                CheckProfileIGateway gateway = new CheckProfileIMDataAccess();
+                CheckProfileController controller = new CheckProfileController(presenter, gateway);
+                controller.create(dataModel.getRequesterID(), dataModel.getDpt());
+                presenter.showFrame();
+            }
+        });
         return jPanel;
     }
 
@@ -193,11 +217,11 @@ public class ScreenBuilder implements IView {
         view.getRightTable().setModel(new DefaultTableModel(table.getData(), table.getColumnName()));
     }
 
-    public JFrame view(){
+    public Integration view(){
         switch (this.dataModel.getVisualLevel()){
-            case INVISIBLE: return getNotVisible();
+            case INVISIBLE: return null;
             case ONLY_FACE: return getIntroOnly();
-            case PROFILE: return getIntroTableAndButton();
+            case PROFILE: return getProfile();
             case EDITABLE: return getView();
         }
         return getNotVisible();
@@ -208,7 +232,7 @@ public class ScreenBuilder implements IView {
      * @return Integration frame
      */
 
-    public Integration getView(){
+    private Integration getProfile(){
 
         // Initialize the front data.
         initialization();
@@ -218,7 +242,9 @@ public class ScreenBuilder implements IView {
         view.getLeftButton().setText(setLeftButtonLabel());
         view.getRightButton().setText(setRightButtonLabel());
         addLeftTable(setLeftTable());
+        printTable(setLeftTable());
         addRightTable(setRightTable());
+        printTable(setRightTable());
 
         // Plug in Buttons
         view.getLeftButton().addActionListener(new ActionListener() {
@@ -244,9 +270,7 @@ public class ScreenBuilder implements IView {
             }
         });
 
-        // Plug in customized Panels
-        view.setLeftControllerPanel(customizeLeftPanel());
-        view.setRightControllerPanel(customizeRightPanel());
+
         return view;
     }
 
@@ -266,18 +290,12 @@ public class ScreenBuilder implements IView {
         return view;
     }
 
-    private Integration getIntroAndTable(){
-        initialization();
-        view.setTitle(setFrameName());
-        view.setNameLabel(setInfoTitle());
-        view.getDetailLabel().setText(setIntro());
+    public Integration getView(){
+        getProfile();
 
-        removeButtons();
-        removeControllerPanels();
-
-        view.validate();
-
-
+        // Plug in customized Panels
+        view.setLeftControllerPanel(customizeLeftPanel());
+        view.setRightControllerPanel(customizeRightPanel());
         return view;
     }
 
@@ -343,19 +361,44 @@ public class ScreenBuilder implements IView {
     }
 
 
-    public JFrame getNotVisible() {
+    public Integration getNotVisible() {
         // TODO: add a notification dialog to show this screen is not visible.
         return null;
     }
 
+    public void printTable(Table table){
+        Object[] reference = table.getReference();
+        Object[][] data = table.getData();
+        for (int i= 0; i < data.length; i++){
+            Object ref = reference[i];
+            Object dat = data[i][0];
+            String c1 = "";
+            String c2 = "";
+            if (ref instanceof Integer){
+                c1 = ((Integer) ref).toString();
+            }else if (ref instanceof UUID){
+                c1 = ((UUID) ref).toString();
+            }
+            if (dat  instanceof String){
+                c2 = (String) dat;
+            }
+            System.out.println(c1 + "   " + c2);
+        }
+    }
+    public void show(){
+        JFrame frame = new JFrame(dataModel.getFrameName());
+        Integration screen = view();
+        frame.setContentPane(screen.getRootPanel());
+        frame.pack();
+        frame.setVisible(true);
+    }
     public static void main(String[] args) {
         Table left = new Table(new String[]{"Employee Name"}, new Object[][]{new Object[]{"Bob"}, new Object[]{"john"}}, new Object[]{11,22});
         Table right = new Table(new String[]{"Head12 Name"}, new Object[][]{new Object[]{"Leon"}, new Object[]{"Alice"}}, new Object[]{11,22});
         String intro = String.format("Introduction:\nUid:\t%s\n", 1);
-        IViewModel viewModel = new ViewModel(1, "FrameName", "User Name", intro, left, right);
+        IViewModel viewModel = new ViewModel(1, "Test Frame", "User Name", intro, left, right);
+        viewModel.setVisualLevel(VisualLevel.ONLY_FACE);
         ScreenBuilder screenBuilder = new ScreenBuilder(viewModel);
-        JFrame app = screenBuilder.getView();
-        app.pack();
-        app.setVisible(true);
+        screenBuilder.show();
     }
 }

@@ -12,7 +12,7 @@ public class LeaveRequestProject extends CommonOrganization implements Project {
     private int vacationDays;
     private LeaveType leaveType;
 
-    private final String projectType = "LEAVE";
+    private final String projectType;
 
     public LeaveRequestProject(UUID oid, String name, Integer head, Set<Integer> members, String description,
                                LocalDateTime createTime, int vacationDays, LeaveType leaveType) {
@@ -20,7 +20,7 @@ public class LeaveRequestProject extends CommonOrganization implements Project {
         this.vacationDays = vacationDays;
         this.leaveType = leaveType;
         this.tasks = new ArrayList<>();
-
+        this.projectType = "LEAVE";
     }
 
     public LeaveRequestProject(UUID oid, String name, Integer head, Set<Integer> members, String description,
@@ -28,8 +28,8 @@ public class LeaveRequestProject extends CommonOrganization implements Project {
         super(oid, name, head, members, description, createTime, closeTime);
         this.vacationDays = vacationDays;
         this.leaveType = leaveType;
+        this.projectType = "LEAVE";
         this.tasks = new ArrayList<>();
-
     }
 
     @Override
@@ -76,7 +76,6 @@ public class LeaveRequestProject extends CommonOrganization implements Project {
         this.vacationDays = vacationDays;
     }
 
-    @Override
     public String getType(){
         return this.projectType;
     }

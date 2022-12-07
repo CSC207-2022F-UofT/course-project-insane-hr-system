@@ -1,6 +1,7 @@
 package check_profile_validation;
 
 import entity.*;
+import presenter.CheckProfilePresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,10 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
         this.outputBoundary = outputBoundary;
     }
 
+    public CheckProfileInteractor(CheckProfileIGateway gateway) {
+        this.gateway = gateway;
+        this.outputBoundary = new CheckProfilePresenter();
+    }
 
     @Override
     public CheckProfileResponseModel checkUserProfile(CheckUserFileRequestModel requestModel) {
@@ -26,7 +31,7 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
 
         responseModel.setFileType(FileType.USER_FILE);
         responseModel.setTargetUid(target.getId());
-
+        responseModel.setDpt(requester.getDpt().getOid());
         responseModel.setName(target.getName());
         responseModel.setRelation(RoleAllowed.getRelation(requester, target));
         responseModel.setBio(target.getBio());
@@ -73,6 +78,7 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
 
         CheckProfileResponseModel responseModel = new CheckProfileResponseModel(gateway);
 
+        responseModel.setDpt(requester.getDpt().getOid());
         responseModel.setFileType(getFileType(target));
         responseModel.setVisualLevel(visualLevel);
         responseModel.setRelation(RelativeRelation.NO_RELATION);
@@ -154,6 +160,11 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
     @Override
     public void update() {
 
+    }
+
+    @Override
+    public CheckProfileOutputBoundary getOutputBoundary() {
+        return outputBoundary;
     }
 
 
@@ -252,11 +263,14 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
     private VisualLevel getVisibility(User user1, User user2) {
         List<Role> r1 = user1.getRoles();
         List<Role> r2 = user2.getRoles();
+        if (user1.equals(user2)) {
+            return VisualLevel.EDITABLE;
+        }
         if (RoleAllowed.isHeadOf(r1, r2) && !RoleAllowed.isHeadOf(r2, r1)) {
             return VisualLevel.EDITABLE;
         } else if (RoleAllowed.isHeadOf(r2, r1)) {
             return VisualLevel.ONLY_FACE;
-        } else if (user1.getDpt().equals(user2.getDpt())) {
+        } else if (user1.getDpt().getOid().equals(user2.getDpt().getOid())) {
             return VisualLevel.PROFILE;
         }
         return VisualLevel.INVISIBLE;
