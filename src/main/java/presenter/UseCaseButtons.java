@@ -6,10 +6,7 @@ import presenter.Controllers;
 import salary_calculator.SalaryCalculator;
 import salary_calculator.SalaryCalculatorInputBoundary;
 import salary_calculator.SalaryCalculatorOutputBoundary;
-import ui.LeaveRequestScreen;
-import ui.ReviewRequestScreen;
-import ui.SalaryView;
-import ui.ScreenBuilder;
+import ui.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -23,12 +20,11 @@ public class UseCaseButtons {
     public static JPanel getPanel(Controllers controllers, ScreenBuilder screenBuilder){
         switch (controllers){
             case SALARY_CALCULATOR: return getSalaryCalculator(screenBuilder);
-            case ENROLL_EMPLOYEE:;
+            case ENROLL_EMPLOYEE: return getEnrollEmploye();
             case CREATE_PROJECT:;
             case LEAVE_REQUEST: return getLeaveRequest(screenBuilder);
             case COMPLETE_TASK:;
-            case CREATE_TASK: return getCompleteTask();
-            case EVALUATE_TASK: return getEvaluateTask();
+            case CREATE_TASK:;
             case COMPLETE_PROJECT:;
             case EXAMPLE_USE_CASE: return getUseCase1(screenBuilder);
             case APPROVE_LEAVE_TASK: return getApproveLeaveTask(screenBuilder);
@@ -36,6 +32,18 @@ public class UseCaseButtons {
         JPanel jPanel = new JPanel();
         jPanel.add(new JLabel("No Controller is allowed"));
         return jPanel;
+    }
+
+    private static JPanel getEnrollEmploye() {
+        JPanel panel = new JPanel();
+        JButton enrollButton = new JButton("Enroll Employee");
+        panel.add(enrollButton);
+        EnrollScreen enrollScreen = new EnrollScreen();
+        enrollButton.addActionListener(e -> {
+            enrollScreen.showScreen();
+
+        });
+        return panel;
     }
 
     private static JPanel getSalaryCalculator(ScreenBuilder screenBuilder) {
@@ -63,17 +71,6 @@ public class UseCaseButtons {
         return panel;
     }
 
-    public static JPanel getCompleteTask() {
-        JPanel jPanel = new JPanel();
-        jPanel.add(new JLabel("Complete Task Page"));
-        return jPanel;
-    }
-
-    public static JPanel getEvaluateTask() {
-        JPanel jPanel = new JPanel();
-        jPanel.add(new JLabel("Evaluate Task page"));
-        return jPanel;
-    }
     public static JPanel getApproveLeaveTask(ScreenBuilder screenBuilder) {
         return new ReviewRequestScreen(screenBuilder.view(), screenBuilder.getDataModel().getOid());
     }

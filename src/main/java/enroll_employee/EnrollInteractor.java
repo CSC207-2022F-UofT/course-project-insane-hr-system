@@ -1,11 +1,11 @@
 package enroll_employee;
 
+import data_access.IMEnrollEmployee;
 import entity.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public class EnrollInteractor implements EnrollInputBoundary{
     final EnrollDsGateway enrolldsGateway;
@@ -14,7 +14,9 @@ public class EnrollInteractor implements EnrollInputBoundary{
 
 
     public EnrollInteractor(EnrollDsGateway enrolldsGateway, EnrollOutputBoundary enrollOutputBoundary, UserFactory userFactory) {
-        this.enrolldsGateway = enrolldsGateway;
+        //this.enrolldsGateway = enrolldsGateway;
+
+        this.enrolldsGateway = new IMEnrollEmployee();
         this.enrollOutputBoundary = enrollOutputBoundary;
         this.userFactory = userFactory;
     }
@@ -48,7 +50,7 @@ public class EnrollInteractor implements EnrollInputBoundary{
         enrolldsGateway.save(dsRequestModel);
         enrolldsGateway.updateDepartment(dpt);
 
-        EnrollResponseModel responseModel = new EnrollResponseModel(user.getName(), user.getId(), user.getUsername(), user.getPassword(), user.getOnboardDate());
+        EnrollResponseModel responseModel = new EnrollResponseModel(user.getId(), user.getUsername(), user.getPassword(), user.getOnboardDate());
         return enrollOutputBoundary.prepareSuccessView(responseModel);
 
     }

@@ -27,11 +27,11 @@ public class SQLiteDataSource {
 
     }
 
-   public static Connection getConnection(){
+    public static Connection getConnection(){
         if (sqLiteDataSource == null){
             sqLiteDataSource = new SQLiteDataSource();
         }
         return connection;
-   }
+    }
 
 }
