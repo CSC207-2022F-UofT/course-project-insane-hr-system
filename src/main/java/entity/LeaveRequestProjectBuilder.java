@@ -39,10 +39,6 @@ public class LeaveRequestProjectBuilder implements ProjectBuilder {
             }
         }
 
-        // add head after task creation
-        members.add(userID);
-        project.setMembers(members);
-
         return project;
     }
 }
