@@ -1,43 +1,39 @@
 package leave_request;
 
-import entity.LeaveType;
-
-import java.time.LocalDate;
-
 public class LeaveRequestResponseModel {
-    private LeaveType leaveType;
-    private LocalDate startDate;
-    private LocalDate returnDate;
+    private String leaveType;
+    private String startDate;
+    private String returnDate;
     private String createTime;
 
-    public LeaveRequestResponseModel(LeaveType leaveType, LocalDate startDate, LocalDate returnDate, String createTime) {
+    public LeaveRequestResponseModel(String leaveType, String startDate, String returnDate, String createTime) {
         this.leaveType = leaveType;
         this.startDate = startDate;
         this.returnDate = returnDate;
         this.createTime = createTime;
     }
 
-    public LeaveType getLeaveType() {
+    public String getLeaveType() {
         return leaveType;
     }
 
-    public void setLeaveType(LeaveType leaveType) {
+    public void setLeaveType(String leaveType) {
         this.leaveType = leaveType;
     }
 
-    public LocalDate getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDate getReturnDate() {
+    public String getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(LocalDate returnDate) {
+    public void setReturnDate(String returnDate) {
         this.returnDate = returnDate;
     }
 

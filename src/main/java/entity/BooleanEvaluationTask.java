@@ -39,12 +39,14 @@ public class BooleanEvaluationTask extends CommonOrganization implements Task {
     }
 
     @Override
-    public void setResults(Object results) throws NotImplementedException {
-        if (results instanceof Boolean) {
+    public void setResults(Object results) {
             this.results = ((Boolean) results);
-        }else {
-            throw new NotImplementedException("Input should be Boolean");
-        }
+
     }
 
+
+    @Override
+    public String getType() {
+        return "BOOL";
+    }
 }

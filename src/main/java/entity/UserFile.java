@@ -2,6 +2,7 @@ package entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import static entity.Constants.CLOSED;
@@ -11,10 +12,10 @@ class UserFile implements Serializable {
     private final int id;
     private String username;
     private String password;
-    private List<String> roles;
-    private List<Project> projects;
-    private List<Task> tasks;
-    private String position;
+    private List<Role> roles = new ArrayList<>();
+    private List<Project> projects = new ArrayList<>();
+    private List<Task> tasks = new ArrayList<>();
+    private Position position; // employees are member, managers dpt Heads are heads and CEOs are CEO
     private LocalDate onboardDate;
     private LocalDate departureDate;
     private String status;
@@ -24,9 +25,9 @@ class UserFile implements Serializable {
     public UserFile(int id,
                     String username,
                     String password,
-                    List<String> roles, List<Project> projects,
+                    List<Role> roles, List<Project> projects,
                     List<Task> tasks,
-                    String position,
+                    Position position,
                     LocalDate onboardDate,
                     LocalDate departureDate) {
         this.id = id;
@@ -43,8 +44,8 @@ class UserFile implements Serializable {
 
     // construct the userFile for onboard user
     public UserFile(int id, String username, String password,
-                    List<String> roles, List<Project> projects, List<Task> tasks,
-                    String position, LocalDate onboardDate) {
+                    List<Role> roles, List<Project> projects, List<Task> tasks,
+                    Position position, LocalDate onboardDate) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -56,11 +57,10 @@ class UserFile implements Serializable {
         this.status = OPEN;
     }
 
-    @Override
-    public String toString() {
-        return String.format("%s's File:\n Position: %s\n Current Project: %s\n Current Tasks: %s\n ",
-                this.username, this.position, this.projects.toString(), this.tasks.toString());
+    public UserFile(int id) {
+        this.id = id;
     }
+
 
     public String getName() {
         return this.username;
@@ -121,11 +121,11 @@ class UserFile implements Serializable {
         this.tasks = tasks;
     }
 
-    public String getPosition() {
+    public Position getPosition() {
         return position;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(Position position) {
         this.position = position;
     }
 
@@ -153,19 +153,19 @@ class UserFile implements Serializable {
         this.status = status;
     }
 
-    public List<String> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<String> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 
-    public boolean addRole(String role) {
+    public boolean addRole(Role role) {
         return this.roles.add(role);
     }
 
-    public boolean removeRole(String role) {
+    public boolean removeRole(Role role) {
         return this.roles.remove(role);
     }
 
@@ -175,5 +175,36 @@ class UserFile implements Serializable {
 
     public void setVacationDays(int vacationDays) {
         this.vacationDays = vacationDays;
+    }
+
+    /**
+     * @param obj any object.
+     * @return true if the uid are equal.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof UserFace) {
+            return this.getId() == ((UserFace) obj).getId();
+        } else if (obj instanceof UserFile) {
+            return this.getId() == ((UserFile) obj).getId();
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "UserFile{" + '\n' +
+                "id=" + id +'\n' +
+                ", username='" + username + '\'' +'\n' +
+                ", password='" + password + '\'' +'\n' +
+                ", roles=" + roles +'\n' +
+                ", projects=" + projects +'\n' +
+                ", tasks=" + tasks +'\n' +
+                ", position=" + position +'\n' +
+                ", onboardDate=" + onboardDate +'\n' +
+                ", departureDate=" + departureDate +'\n' +
+                ", status='" + status + '\'' +'\n' +
+                ", vacationDays=" + vacationDays +'\n' +
+                '}';
     }
 }

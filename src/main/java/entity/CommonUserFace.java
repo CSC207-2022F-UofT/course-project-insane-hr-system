@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.List;
+
 public class CommonUserFace implements UserFace {
     protected final int uid;
     protected Department dpt;
@@ -51,5 +53,29 @@ public class CommonUserFace implements UserFace {
     @Override
     public int getId() {
         return this.uid;
+    }
+
+    /**
+     * @param obj any object.
+     * @return true if the uid are equal.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof UserFace) {
+            return this.getId() == ((UserFace) obj).getId();
+        } else if (obj instanceof UserFile) {
+            return this.getId() == ((UserFile) obj).getId();
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "CommonUserFace{" +
+                "uid=" + uid +
+                ", dpt=" + dpt +
+                ", bio='" + bio + '\'' +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

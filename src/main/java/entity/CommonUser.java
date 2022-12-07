@@ -1,6 +1,7 @@
 package entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommonUser extends CommonUserFace implements User {
@@ -10,6 +11,7 @@ public class CommonUser extends CommonUserFace implements User {
     //construct only with the initial uid
     public CommonUser(int uid) {
         super(uid);
+        this.userFile = new UserFile(uid);
     }
 
     // construct without UserFile
@@ -61,12 +63,12 @@ public class CommonUser extends CommonUserFace implements User {
     }
 
     @Override
-    public boolean addRole(String role) {
+    public boolean addRole(Role role) {
         return this.userFile.getRoles().add(role);
     }
 
     @Override
-    public boolean removeRole(String role) {
+    public boolean removeRole(Role role) {
         return this.userFile.getRoles().remove(role);
     }
 
@@ -111,12 +113,12 @@ public class CommonUser extends CommonUserFace implements User {
     }
 
     @Override
-    public String getPosition() {
+    public Position getPosition() {
         return this.userFile.getPosition();
     }
 
     @Override
-    public void setPosition(String position) {
+    public void setPosition(Position position) {
         this.userFile.setPosition(position);
     }
 
@@ -151,12 +153,12 @@ public class CommonUser extends CommonUserFace implements User {
     }
 
     @Override
-    public List<String> getRoles() {
+    public List<Role> getRoles() {
         return this.userFile.getRoles();
     }
 
     @Override
-    public void setRoles(List<String> roles) {
+    public void setRoles(List<Role> roles) {
         this.userFile.setRoles(roles);
     }
 
@@ -170,4 +172,18 @@ public class CommonUser extends CommonUserFace implements User {
         this.userFile.setVacationDays(vacationDays);
     }
 
+    public static void main(String[] args) {
+
+    }
+
+    @Override
+    public String toString() {
+        return "CommonUser{" +'\n' +
+                "userFile=" + userFile.toString() +'\n' +
+                ", uid=" + uid +'\n' +
+                ", dpt=" + dpt +'\n' +
+                ", bio='" + bio + '\'' +'\n' +
+                ", name='" + name + '\'' +'\n' +
+                '}';
+    }
 }

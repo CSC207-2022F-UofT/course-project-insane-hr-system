@@ -1,7 +1,7 @@
 package leave_request;
 
-import entity.User;
 import entity.LeaveType;
+import entity.User;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -30,7 +30,7 @@ public class LeaveRequestRequestModel {
         this.user = user;
     }
 
-    public String getMessage() {
+    public java.lang.String getMessage() {
         return message;
     }
 
@@ -64,5 +64,9 @@ public class LeaveRequestRequestModel {
 
     public int getLeaveDays() {
         return (int) startDate.until(returnDate, ChronoUnit.DAYS);
+    }
+
+    public boolean isReturnAfter() {
+        return returnDate.isAfter(startDate);
     }
 }
