@@ -1,6 +1,4 @@
-package Utilities;
-
-import Entity.CommonUser;
+package utilities;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -29,11 +27,11 @@ public class SQLiteDataSource {
 
     }
 
-   public static Connection getConnection(){
+    public static Connection getConnection(){
         if (sqLiteDataSource == null){
             sqLiteDataSource = new SQLiteDataSource();
         }
         return connection;
-   }
+    }
 
 }
