@@ -33,20 +33,24 @@ public class ReviewRequestInteractorTest {
         // initialize the leave request
         Curr.setUser(employee);
         Project project = new LeaveRequestProjectBuilder().createProject("Request", "d",
-                new HashSet<>(List.of(0)), 6, LeaveType.SICK);
+                new HashSet<>(List.of(0)), 6, LeaveType.VACATION);
         Task task = project.getTasks().get(0);
         tasks.put(task.getOid(), task);
         head.addCurrTask(task);
+        head.addCurrProject(project);
 
         Curr.setUser(head);
         ReviewRequestDsGateway gateway = new IMReviewRequest(tasks, users);
 
         ReviewRequestOutputBoundary presenter = responseModel -> {
-            assertEquals(responseModel.getResult(), task.getResults());  // check result was updated
+            assertEquals(true, task.getResults());  // check result was updated
             assertNotNull(task.getCloseTime()); // check task was closed
             assertNotNull(project.getCloseTime()); // check project was closed
             assertEquals("On Leave", employee.getStatus()); // check employee status updated
+            assertEquals(8, employee.getVacationDays());
             assertTrue(employee.getProjects().isEmpty()); // check project and task removed when closed
+            assertTrue(employee.getTasks().isEmpty());
+            assertTrue(head.getProjects().isEmpty());
             assertTrue(head.getTasks().isEmpty());
             return null;
         };

@@ -8,10 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
+import static entity.Constants.OPEN;
 import static utilities.SQLiteDataSource.connection;
 import static entity.Constants.CLOSED;
 
@@ -32,7 +31,6 @@ public class UserDAO implements UserDAOInterface {
                 users.add(getUser(uid));
             }
 
-            connection.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -84,7 +82,10 @@ public class UserDAO implements UserDAOInterface {
             resultSet = statement.executeQuery(taskQuery);
             while (resultSet.next()) {
                 UUID taskID = UUID.fromString(resultSet.getString("ID"));
-                tasks.add(new TaskDAO().getTask(taskID));
+                Task task = new TaskDAO().getTask(taskID);
+                if (task.getState().equals(OPEN)) {
+                    tasks.add(task);
+                }
             }
             user.setTasks(tasks);
 
@@ -93,14 +94,16 @@ public class UserDAO implements UserDAOInterface {
             resultSet = statement.executeQuery(projectQuery);
             while (resultSet.next()) {
                 UUID projectID = UUID.fromString(resultSet.getString("projectID"));
-                projects.add(new ProjectDAO().getProject(projectID));
+                Project project = new ProjectDAO().getProject(projectID);
+                if (project.getState().equals(OPEN)) {
+                    projects.add(project);
+                }
             }
             user.setProjects(projects);
 
             // set user's roles
             new RoleSetter().resetRoleOfUser(user);
 
-            connection.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -117,7 +120,7 @@ public class UserDAO implements UserDAOInterface {
 
         if (user.getStatus().equals(CLOSED)) {
             userQuery = "INSERT INTO employees (employee_id, username, password, name, onboarding_date, " +
-                    "departure_date, department_id, bio, position, status) VALUES (?,?,?,?,?,?,?,?,?,?)";
+                    "department_id, bio, position, status, departure_date) VALUES (?,?,?,?,?,?,?,?,?,?)";
         } else {
             userQuery = "INSERT INTO employees (employee_id, username, password, name, roles, onboarding_date, department_id, " +
                     "bio, position, status) VALUES (?,?,?,?,?,?,?,?,?,?)";
@@ -137,15 +140,15 @@ public class UserDAO implements UserDAOInterface {
             // TODO: drop roles column and update column index below
             statement.setString(6, user.getOnboardDate().toString());
 
-            String status = user.getStatus();
-            if (status.equals(CLOSED)) {
-                statement.setString(7, user.getDepartureDate().toString());
-            }
+            statement.setString(7, user.getDpt().getOid().toString());
+            statement.setString(8, user.getBio());
+            statement.setString(9, user.getPosition().toString());
 
-            statement.setString(8, user.getDpt().getOid().toString());
-            statement.setString(9, user.getBio());
-            statement.setString(10, user.getPosition().toString());
-            statement.setString(11, status);
+            String status = user.getStatus();
+            statement.setString(10, status);
+            if (status.equals(CLOSED)) {
+                statement.setString(11, user.getDepartureDate().toString());
+            }
 
             statement.executeUpdate();
 
@@ -166,7 +169,6 @@ public class UserDAO implements UserDAOInterface {
             }
 
             connection.commit();
-            connection.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -203,7 +205,6 @@ public class UserDAO implements UserDAOInterface {
             statement.executeUpdate();
 
             connection.commit();
-            connection.close();
 
         } catch (SQLException e) {
             e.printStackTrace();

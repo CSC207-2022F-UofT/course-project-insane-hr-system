@@ -24,14 +24,8 @@ public class LeaveRequestDataAccess implements LeaveRequestDsGateway {
     @Override
     public void save(LeaveRequestDsRequestModel requestModel) {
         projectDAO.createProject(requestModel.getProject());
-        Integer head = requestModel.getProject().getHead();
-        userDAO.updateUser(getUser(head));  // save project to requester's list of projects
         for (Task t : requestModel.getProject().getTasks()) {
-            taskDAO.createTask(t);
-            Integer m = t.getMembers().iterator().next();
-            User member = getUser(m);
-            member.addCurrTask(t);
-            userDAO.updateUser(member);  // save task to superior's list of tasks
+            taskDAO.createTask(t);  // save task to database
         }
     }
 

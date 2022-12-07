@@ -18,16 +18,11 @@ public class IMReviewRequest implements ReviewRequestDsGateway {
 
     @Override
     public void updateRequest(ReviewRequestDsRequestModel requestModel) {
-        // DAO not needed as it is in memory
-        Task task = requestModel.getTask();
-        for (Integer m : task.getMembers()) {
-            User member = users.get(m);
-            member.removeCurrTask(task);
-        }
-
         LeaveRequestProject project = (LeaveRequestProject) requestModel.getProject();
         if (!requestModel.getStatus().isEmpty()) {
             User user = users.get(project.getHead());
+            user.removeCurrProject(project);
+            user.removeCurrTask(requestModel.getTask());
             user.setStatus(requestModel.getStatus());
             if (project.getLeaveType() == LeaveType.VACATION) {
                 user.setVacationDays(user.getVacationDays() - project.getVacationDays());
