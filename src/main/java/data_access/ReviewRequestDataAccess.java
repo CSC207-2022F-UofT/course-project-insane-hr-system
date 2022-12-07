@@ -24,24 +24,18 @@ public class ReviewRequestDataAccess implements ReviewRequestDsGateway {
      */
     @Override
     public void updateRequest(ReviewRequestDsRequestModel requestModel) {
-        Task task = requestModel.getTask();
-        taskDAO.updateTask(task);
-        for (Integer m : task.getMembers()) {
-            User member = userDAO.getUser(m);
-            member.removeCurrTask(task);
-            userDAO.updateUser(member);
-        }
+        taskDAO.updateTask(requestModel.getTask());
 
         LeaveRequestProject project = (LeaveRequestProject) requestModel.getProject();
         projectDAO.updateProject(project);
         if (!requestModel.getStatus().isEmpty()) {
             User user = userDAO.getUser(project.getHead());
-            user.removeCurrProject(project);
             user.setStatus(requestModel.getStatus());
             if (project.getLeaveType() == LeaveType.VACATION) {
                 user.setVacationDays(user.getVacationDays() - project.getVacationDays());
             }
             userDAO.updateUser(user);
+            user.removeCurrProject(project);
         }
     }
 
