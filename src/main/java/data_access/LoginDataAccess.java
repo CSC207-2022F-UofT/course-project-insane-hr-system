@@ -1,6 +1,6 @@
 package data_access;
 
-import DAO.CommonUserDAO;
+import DAO.UserDAO;
 import entity.CommonUser;
 import entity.User;
 import login.LoginDSGateway;
@@ -11,9 +11,9 @@ import java.util.List;
 public class LoginDataAccess implements LoginDSGateway {
     @Override
     public User getUser(LoginRequestModel logReqMod) {
-        CommonUserDAO commonUserDAO = new CommonUserDAO();
-        List<CommonUser> userList = commonUserDAO.getAllCommonUsers();
-        for (CommonUser user : userList) {
+        UserDAO userDAO = new UserDAO();
+        List<User> userList = userDAO.getAllUsers();
+        for (User user : userList) {
             if (user.getUsername().equals(logReqMod.getUsername())
                     && user.getPassword().equals(logReqMod.getPassword())){
                     return user;
@@ -26,10 +26,10 @@ public class LoginDataAccess implements LoginDSGateway {
     @Override
     public boolean userExists(LoginRequestModel logReqMod) {
         boolean userExists = false;
-        CommonUserDAO commonUserDAO = new CommonUserDAO();
-        List<CommonUser> userList = commonUserDAO.getAllCommonUsers();
+        UserDAO userDAO = new UserDAO();
+        List<User> userList = userDAO.getAllUsers();
         if (userList != null) {
-            for (CommonUser user : userList) {
+            for (User user : userList) {
                 if (user.getUsername().equals(logReqMod.getUsername())
                         && user.getPassword().equals(logReqMod.getPassword())) {
                     userExists = true;

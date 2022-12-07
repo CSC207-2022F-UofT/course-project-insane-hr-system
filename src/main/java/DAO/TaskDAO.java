@@ -18,8 +18,6 @@ public class TaskDAO implements TaskDAOInterface {
     // get one task. //
 
     public Task getTask(UUID taskID){
-        // get task members
-        Set<Integer> members = getTaskMembers(taskID);
         Task task = null;
 
         String query = "SELECT * FROM tasks WHERE ID=" +taskID.toString();
@@ -123,7 +121,7 @@ public class TaskDAO implements TaskDAOInterface {
             statement.setString(8, task.getType());
 
             if (task.getType().equals("STAR")){
-                statement.setString(9, ((StarEvaluationTask) task).getOid().toString());
+                statement.setString(9, task.getOid().toString());
                 if(task.getState().equals(CLOSED)){
                     statement.setString(10, task.getCloseTime().toString());
                     statement.setString(11, task.getResults().toString());
@@ -209,7 +207,7 @@ public class TaskDAO implements TaskDAOInterface {
     public Task getProjectTask(UUID taskID, Project project) {
         Task task = null;
         Set<Integer> members = getTaskMembers(taskID);
-        String query = "SELECT * FROM tasks WHERE ID=" + taskID.toString();
+        String query = "SELECT * FROM tasks WHERE ID=" + taskID;
         Statement statement;
         ResultSet result;
 
