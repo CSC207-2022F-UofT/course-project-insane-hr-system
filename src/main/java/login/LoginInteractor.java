@@ -4,32 +4,53 @@ import entity.Curr;
 import presenter.LoginPresenter;
 import entity.User;
 
+/**
+ * the interactor
+ */
+public class LoginInteractor implements LoginInputBoundary{
 
-public class LoginInteractor<LoginReponseModel> implements LoginInputBoundary{
-
+    /**
+     * the gateway to access the user from database
+     */
     final LoginDSGateway loginDsGateway;
-    final LoginPresenter userPresenter;
-    final Curr currentUser;
 
-    public LoginInteractor(LoginDSGateway loginDsGateway, LoginPresenter userPresenter, Curr currentUser){
+    /**
+     * the presenter
+     */
+    final LoginPresenter userPresenter;
+
+    /**
+     * interactor constructor
+     * @param loginDsGateway gateway
+     * @param userPresenter presenter
+     */
+    public LoginInteractor(LoginDSGateway loginDsGateway, LoginPresenter userPresenter){
         this.loginDsGateway = loginDsGateway;
         this.userPresenter = userPresenter;
-        this.currentUser = currentUser;
     }
 
-    public void login(LoginRequestModel logReqMod) {
+    /**
+     * assigns current user to Curr and returns userID if user exists
+     * returns failure message otherwise
+     * @param logReqMod username, password
+     * @return success-model if successful, failure-model otherwise
+     */
+    public LoginResponseModel login(LoginRequestModel logReqMod) {
         if (loginDsGateway.userExists(logReqMod)){
             User user = loginDsGateway.getUser(logReqMod);
-            LoginResponseModel loginResponseModel = new LoginResponseModel(true);
-            userPresenter.prepareSuccessView(user, loginResponseModel);
+            this.setCurrentUser(user);
+            int userID = user.getId();
+            return new LoginSuccessResponseModel(userID);
         }
         else {
-            LoginResponseModel loginResponseModel = new LoginResponseModel(false);
-            userPresenter.prepareFailView(loginResponseModel);
+            return new LoginFailureResponseModel(logReqMod.getUsername());
         }
     }
 
-    public void setCurrUser(Curr currentUser, User user){
-
+    /**
+     * sets current user of Curr
+     */
+    public void setCurrentUser(User user){
+        Curr.setUser(user);
     }
 }
