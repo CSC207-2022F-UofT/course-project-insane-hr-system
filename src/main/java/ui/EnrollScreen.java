@@ -13,7 +13,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class EnrollScreen {
+public class EnrollScreen extends JPanel{
     private JPanel EnrollPanel;
     private JPanel TopPanel;
     private JTextField nameField;
@@ -25,16 +25,25 @@ public class EnrollScreen {
 
     private EnrollController enrollController;
 
-    public EnrollScreen() {
+    public EnrollScreen(){
 
         Add.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
+                try{
                 String fname = nameField.getText();
                 String fdepartment = (String) dptCom.getSelectedItem();
                 String fposition = (String) positionCom.getSelectedItem();
                 EnrollResponseModel responseModel= enrollController.create(fname,fdepartment,fposition);
                 newEmployeeScreen(responseModel);
+                }catch (Exception evt){
+                    JOptionPane.showMessageDialog(EnrollPanel, evt.getMessage());
+                }
             }
         });
     }
@@ -65,7 +74,7 @@ public class EnrollScreen {
     }
 
     public void setPositionCom() {
-        this.positionCom.setModel(new DefaultComboBoxModel<>(new String[] { "Head", "Member" }));
+        this.positionCom.setModel(new DefaultComboBoxModel<>(new String[] { "HEAD", "MEMBER" }));
     }
 
     public static void main(String[] args) {
@@ -89,5 +98,9 @@ public class EnrollScreen {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+    }
+
+    public JPanel getEnrollPanel() {
+        return EnrollPanel;
     }
 }

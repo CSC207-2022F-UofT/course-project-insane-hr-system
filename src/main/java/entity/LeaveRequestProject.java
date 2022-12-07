@@ -73,7 +73,6 @@ public class LeaveRequestProject extends CommonOrganization implements Project {
         this.vacationDays = vacationDays;
     }
 
-    @Override
     public String getType(){
         return this.projectType;
     }
