@@ -1,6 +1,6 @@
 package use_case.check_profile_validation;
 
-import check_profile_validation.*;
+import use_case.check_profile_validation.*;
 import controller.CheckProfileController;
 import data_access.CheckProfileIMDataAccess;
 import data_access.CheckProfileUserIDMap;

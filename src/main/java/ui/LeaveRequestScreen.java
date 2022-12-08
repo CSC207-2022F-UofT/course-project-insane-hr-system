@@ -4,7 +4,7 @@ import com.github.lgooddatepicker.components.DatePicker;
 import controller.LeaveRequestController;
 import data_access.LeaveRequestDataAccess;
 import entity.LeaveType;
-import leave_request.*;
+import use_case.leave_request.*;
 import entity.ProjectBuilder;
 import entity.LeaveRequestProjectBuilder;
 import presenter.LeaveRequestPresenter;

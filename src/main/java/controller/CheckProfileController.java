@@ -1,6 +1,6 @@
 package controller;
 
-import check_profile_validation.*;
+import use_case.check_profile_validation.*;
 import data_access.CheckProfileDataAccess;
 import presenter.CheckProfilePresenter;
 import use_case.check_profile_validation.*;
