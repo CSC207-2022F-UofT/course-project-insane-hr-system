@@ -3,6 +3,7 @@ package ui;
 import controller.PMTaskInitController;
 import data_access.PMTaskInitDataAccess;
 import data_access.placeholderDataAccessClass;
+import entity.*;
 import presenter.PMTaskInitPresenter;
 import project_manager_task_init_use_case.PMTaskInitDsRequestModel;
 import project_manager_task_init_use_case.PMTaskInitGateway;
@@ -12,12 +13,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.List;
 
 public class PMTaskInitScreen extends JPanel implements ActionListener {
 
-    JTextField taskName = new JTextField(50);
-    JTextField taskDescription = new JTextField(50);
-    JTextField employeeId = new JTextField(50);
+    JTextField taskName = new JTextField(20);
+    JTextField taskDescription = new JTextField(20);
+    JTextField employeeId = new JTextField(20);
     PMTaskInitController taskInitController;
 
     public PMTaskInitScreen(PMTaskInitController controller) {
@@ -50,9 +55,9 @@ public class PMTaskInitScreen extends JPanel implements ActionListener {
         createNewTask.addActionListener(this);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(title);
-        this.add(taskNameInfo);
-        this.add(taskDescriptionInfo);
-        this.add(employeeIdInfo);
+        this.add(taskNamePanel);
+        this.add(taskDescriptionPanel);
+        this.add(employeeIdPanel);
         this.add(buttons);
 
     }
@@ -74,6 +79,32 @@ public class PMTaskInitScreen extends JPanel implements ActionListener {
      *
      */
     public static void main(String[] args) {
+        Department department = new Department(UUID.randomUUID(), "Fake Department", 0, new HashSet<>(java.util.List.of(1)),
+                "a fake department for testing", LocalDateTime.now());
+
+        java.util.List<Role> pm_roles = Collections.singletonList(new RoleFactory().createCommonRole(Position.HEADOF, department));
+        java.util.List<Project> pm_projects = new ArrayList<>();
+        java.util.List<Task> pm_tasks = new ArrayList<>();
+
+        User pm = new CommonUserFactory().create(0, department, "bio", "pmusername", "password", pm_roles, pm_projects, pm_tasks, Position.HEADOF, LocalDate.now());
+
+        java.util.List<Role> employee_roles = Collections.singletonList(new RoleFactory().createCommonRole(Position.MEMBER, department));
+        java.util.List<Project> employee_projects = new ArrayList<>();
+        java.util.List<Task> employee_tasks = new ArrayList<>();
+
+        User employee = new CommonUserFactory().create(1, department, "bio1", "employeeusername", "employeepassword", employee_roles, employee_projects, employee_tasks, Position.MEMBER, LocalDate.now());
+
+        Curr.setUser(pm);
+
+        Set<Integer> members = new HashSet<>();
+        members.add(pm.getId());
+        members.add(employee.getId());
+        List<Task> tasks = new ArrayList<>();
+        Project project = new CommonProjectFactory().createOpenProject("project1", members, "description", LocalDateTime.now(), department, tasks, 1);
+
+        pm.addCurrProject(project);
+        employee.addCurrProject(project);
+
         PMTaskInitGateway gateway = new PMTaskInitDataAccess();
         PMTaskInitPresenter presenter = new PMTaskInitPresenter();
         PMTaskInitInteractor interactor = new PMTaskInitInteractor(presenter, gateway);

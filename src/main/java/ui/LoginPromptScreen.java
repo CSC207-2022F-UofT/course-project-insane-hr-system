@@ -1,10 +1,18 @@
 package ui;
 
+import check_profile_validation.CheckProfileIGateway;
+import check_profile_validation.CheckProfileOutputBoundary;
 import controller.CheckProfileController;
 import controller.LoginController;
+import data_access.CheckProfileDataAccess;
+import data_access.CheckProfileIMDataAccess;
+import data_access.CheckProfileUserIDMap;
+import entity.Curr;
 import login.LoginFailureResponseModel;
 import login.LoginResponseModel;
 import login.LoginSuccessResponseModel;
+import presenter.CheckProfilePresenter;
+import view_model.ViewModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -92,8 +100,11 @@ public class LoginPromptScreen extends JPanel implements ActionListener {
          */
         if (loginResponseModel instanceof LoginSuccessResponseModel){
             int userID = ((LoginSuccessResponseModel) loginResponseModel).getUserID();
-            CheckProfileController checkProfileController = new CheckProfileController();
-            checkProfileController.create(userID, userID);
+            CheckProfileIGateway gateway = new CheckProfileDataAccess();
+            CheckProfileOutputBoundary presenter = new CheckProfilePresenter(new ViewModel());
+            CheckProfileController controller = new CheckProfileController(presenter, gateway);
+            controller.create(userID, userID);
+            presenter.showFrame();
         }
 
         /**

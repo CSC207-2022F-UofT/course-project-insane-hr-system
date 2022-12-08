@@ -19,6 +19,7 @@ import java.util.UUID;
 
 public class CheckProfileDataAccess implements CheckProfileIGateway {
 //TODO: implement this gateway.
+
     private final DepartmentDAOInterface dptDB = new DepartmentDAO();
     private final UserDAOInterface userDB = new UserDAO();
     private final TaskDAOInterface taskDB = new TaskDAO();

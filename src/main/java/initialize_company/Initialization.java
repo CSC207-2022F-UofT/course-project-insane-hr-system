@@ -52,12 +52,11 @@ public class Initialization {
         userPool.add(ee22);
 
         for (User user : userPool){
-
             dpt.addMember(user.getId());
             user.setName("User " + user.getId());
             user.setStatus(Constants.OPEN);
             user.setUsername("username" + user.getId());
-            user.setPassword("psw" + user.getId());
+            user.setPassword("psw");
             user.setBio("hello everyone! I am " + user.getName() + ". I am in department " + user.getDpt().getName() + ".");
             user.setDpt(dpt);
         }
