@@ -1,8 +1,7 @@
 package use_case.enroll_employee;
 
 import data_access.IMEnrollEmployee;
-import enroll_employee.*;
-import entity.*;
+import entity.Department;
 import entity.user.CommonUser;
 import entity.user.CommonUserFactory;
 import entity.user.UserFactory;
@@ -110,9 +109,14 @@ class EnrollInteractorTest {
         userss.add(u6);
 
         EnrollDsGateway enrollDsGateway = new IMEnrollEmployee(departmentss,userss);
+        List<Department> dpts = enrollDsGateway.getAllDepartments();
 
 
         //assertArrayEquals(departmentss.equals(enrollDsGateway.getAllDepartments()), true );
+        for (int i=0; i < departmentss.size(); i++){
+            boolean check = departmentss.get(i).equals(dpts.get(i));
+            assertTrue(check);
+        }
 
     }
 }
