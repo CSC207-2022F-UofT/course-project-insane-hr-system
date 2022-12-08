@@ -18,7 +18,6 @@ public class CompleteTaskInteractor implements CompleteTaskInputBoundary{
     @Override
     public CompleteTaskResponseModel create(CompleteTaskRequestModel requestModel) {
         Task task = requestModel.getTask();
-        UUID oid = task.getOid();
         User user = requestModel.getUser();
 
         if (Objects.equals(requestModel.getTask().getState(), "CLOSED")) {
@@ -32,7 +31,7 @@ public class CompleteTaskInteractor implements CompleteTaskInputBoundary{
         completeGateway.save(completeTaskDsRequestModel);
 
         // prepare response
-        CompleteTaskResponseModel completeResponseModel = new CompleteTaskResponseModel(oid,
+        CompleteTaskResponseModel completeResponseModel = new CompleteTaskResponseModel(
                 "Submitted successfully!");
         return completeOutputBoundary.prepareSuccessView(completeResponseModel);
     }

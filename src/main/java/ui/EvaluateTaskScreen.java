@@ -18,6 +18,9 @@ public class EvaluateTaskScreen {
         });
     }
 
+    public JPanel getPanelMain() {
+        return panelMain;
+    }
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Evaluate Page");
