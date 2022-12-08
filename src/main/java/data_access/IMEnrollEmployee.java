@@ -46,6 +46,11 @@ public class IMEnrollEmployee implements EnrollDsGateway {
         this.departments = departmentss;
     }
 
+    public IMEnrollEmployee(List<Department> dpts, List<CommonUser> users) {
+        this.departments = dpts;
+        this.users = users;
+    }
+
     @Override
     public List<String> getUserNameLastFour() {
         List<String> names = new ArrayList<>();

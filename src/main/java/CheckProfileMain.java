@@ -36,6 +36,5 @@ public class CheckProfileMain {
         controller.create(CheckProfileUserIDMap.headId, CheckProfileUserIDMap.headId);
         presenter.showFrame();
 
-
     }
 }
