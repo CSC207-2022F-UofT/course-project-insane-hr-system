@@ -10,11 +10,7 @@ import salary_calculator.SalaryCalculatorInputBoundary;
 import salary_calculator.SalaryCalculatorOutputBoundary;
 import project_manager_task_init_use_case.PMTaskInitGateway;
 import project_manager_task_init_use_case.PMTaskInitInteractor;
-import ui.LeaveRequestScreen;
-import ui.PMTaskInitScreen;
-import ui.ReviewRequestScreen;
-import ui.SalaryView;
-import ui.ScreenBuilder;
+import ui.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -36,7 +32,7 @@ public class UseCaseButtons {
             case COMPLETE_PROJECT:;
             case EXAMPLE_USE_CASE: return getUseCase1(screenBuilder);
             case APPROVE_LEAVE_TASK: return getApproveLeaveTask(screenBuilder);
-            case RANK_EMPLOYEE:;
+            case RANK_EMPLOYEE: return getRankEmployees(screenBuilder);
         }
         JPanel jPanel = new JPanel();
         jPanel.add(new JLabel("No Controller is allowed"));
@@ -70,6 +66,19 @@ public class UseCaseButtons {
 
     public static JPanel getApproveLeaveTask(ScreenBuilder screenBuilder) {
         return new ReviewRequestScreen(screenBuilder.view(), screenBuilder.getDataModel().getOid());
+    }
+
+    public static JPanel getRankEmployees(ScreenBuilder screenBuilder){
+        JPanel panel = new JPanel();
+        JButton rankButton = new JButton("Rank Employees");
+        panel.add(rankButton);
+        rankButton.addActionListener(e -> {
+            RankPresenter presenter = new RankPresenter();
+            RankEmployeesScreen ui = new RankEmployeesScreen(screenBuilder.view());
+            ui.setVisible(true);
+        });
+        return panel;
+
     }
 
     public static JPanel getPMTaskInit() {
