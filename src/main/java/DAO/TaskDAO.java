@@ -1,6 +1,5 @@
 package DAO;
 
-import DAOInterfaces.TaskDAOInterface;
 import entity.*;
 
 import java.sql.PreparedStatement;

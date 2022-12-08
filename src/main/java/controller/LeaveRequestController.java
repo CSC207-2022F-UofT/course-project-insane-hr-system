@@ -2,9 +2,9 @@ package controller;
 
 import entity.LeaveType;
 import entity.User;
-import leave_request.LeaveRequestInputBoundary;
-import leave_request.LeaveRequestRequestModel;
-import leave_request.LeaveRequestResponseModel;
+import use_case.leave_request.LeaveRequestInputBoundary;
+import use_case.leave_request.LeaveRequestRequestModel;
+import use_case.leave_request.LeaveRequestResponseModel;
 
 import java.time.LocalDate;
 

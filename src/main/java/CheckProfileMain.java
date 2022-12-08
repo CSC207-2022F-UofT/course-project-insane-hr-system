@@ -4,7 +4,9 @@ import data_access.CheckProfileIMDataAccess;
 import data_access.CheckProfileUserIDMap;
 import entity.Curr;
 import presenter.CheckProfilePresenter;
-import view_model.ViewModel;
+import use_case.check_profile_validation.CheckProfileIGateway;
+import use_case.check_profile_validation.CheckProfileOutputBoundary;
+import presenter.view_model.ViewModel;
 
 public class CheckProfileMain {
     public static void main(String[] args) {

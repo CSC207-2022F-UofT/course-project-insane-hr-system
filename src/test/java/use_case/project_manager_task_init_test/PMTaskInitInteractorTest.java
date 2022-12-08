@@ -3,7 +3,7 @@ import data_access.PMTaskInitDataAccess;
 import entity.*;
 import org.junit.jupiter.api.Test;
 import presenter.PMTaskInitPresenter;
-import project_manager_task_init_use_case.*;
+import use_case.project_manager_task_init_use_case.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

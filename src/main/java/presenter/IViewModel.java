@@ -1,9 +1,9 @@
 package presenter;
 
-import check_profile_validation.VisualLevel;
-import view_model.ScreenType;
-import view_model.Table;
-import view_model.ViewModel;
+import use_case.check_profile_validation.VisualLevel;
+import presenter.view_model.ScreenType;
+import presenter.view_model.Table;
+import presenter.view_model.ViewModel;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

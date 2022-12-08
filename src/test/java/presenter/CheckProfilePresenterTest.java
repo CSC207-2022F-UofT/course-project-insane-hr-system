@@ -1,20 +1,15 @@
 package presenter;
 
 import check_profile_validation.*;
-import data_access.CheckProfileDataAccess;
 import entity.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ui.ScreenBuilder;
-import view_model.ViewModel;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CheckProfilePresenterTest {
     @BeforeEach

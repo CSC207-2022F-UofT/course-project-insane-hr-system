@@ -1,10 +1,9 @@
 package data_access;
 
-import DAOInterfaces.DepartmentDAOInterface;
-import DAOInterfaces.ProjectDAOInterface;
-import DAOInterfaces.TaskDAOInterface;
-import DAOInterfaces.UserDAOInterface;
-import entity.CommonUser;
+import DAO.DepartmentDAOInterface;
+import DAO.ProjectDAOInterface;
+import DAO.TaskDAOInterface;
+import DAO.UserDAOInterface;
 import entity.Project;
 import entity.Task;
 import entity.User;
@@ -12,7 +11,7 @@ import my_dao.dptDao;
 import my_dao.projectDao;
 import my_dao.taskDao;
 import my_dao.userDao;
-import salary_calculator.SalaryCalculatorGateway;
+import use_case.salary_calculator.SalaryCalculatorGateway;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

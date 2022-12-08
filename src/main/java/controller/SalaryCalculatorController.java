@@ -1,6 +1,7 @@
 package controller;
 
 import salary_calculator.*;
+import use_case.salary_calculator.*;
 
 import java.time.LocalDate;
 import java.util.InputMismatchException;

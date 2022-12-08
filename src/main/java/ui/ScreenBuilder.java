@@ -7,10 +7,11 @@ import presenter.CheckProfilePresenter;
 import presenter.IViewModel;
 import presenter.Controllers;
 import presenter.UseCaseButtons;
-import view_model.IView;
-import view_model.ScreenType;
-import view_model.Table;
-import view_model.ViewModel;
+import use_case.check_profile_validation.*;
+import presenter.view_model.IView;
+import presenter.view_model.ScreenType;
+import presenter.view_model.Table;
+import presenter.view_model.ViewModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

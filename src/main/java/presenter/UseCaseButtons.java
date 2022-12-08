@@ -2,13 +2,11 @@ package presenter;
 
 import controller.PMTaskInitController;
 import data_access.PMTaskInitDataAccess;
-import project_manager_task_init_use_case.PMTaskInitGateway;
-import project_manager_task_init_use_case.PMTaskInitInteractor;
+import use_case.project_manager_task_init_use_case.PMTaskInitGateway;
+import use_case.project_manager_task_init_use_case.PMTaskInitInteractor;
 import ui.*;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class UseCaseButtons {
     //TODO: Please create everyone's button here!

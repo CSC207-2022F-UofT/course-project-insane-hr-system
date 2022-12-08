@@ -5,11 +5,11 @@ import DAO.DepartmentDAO;
 import DAO.ProjectDAO;
 import DAO.TaskDAO;
 import DAO.UserDAO;
-import DAOInterfaces.DepartmentDAOInterface;
-import DAOInterfaces.ProjectDAOInterface;
-import DAOInterfaces.TaskDAOInterface;
-import DAOInterfaces.UserDAOInterface;
-import check_profile_validation.CheckProfileIGateway;
+import DAO.DepartmentDAOInterface;
+import DAO.ProjectDAOInterface;
+import DAO.TaskDAOInterface;
+import DAO.UserDAOInterface;
+import use_case.check_profile_validation.CheckProfileIGateway;
 import entity.Organization;
 import entity.User;
 

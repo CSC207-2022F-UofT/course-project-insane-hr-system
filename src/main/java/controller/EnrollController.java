@@ -1,9 +1,9 @@
 package controller;
 
 
-import enroll_employee.EnrollInputBoundary;
-import enroll_employee.EnrollRequestModel;
-import enroll_employee.EnrollResponseModel;
+import use_case.enroll_employee.EnrollInputBoundary;
+import use_case.enroll_employee.EnrollRequestModel;
+import use_case.enroll_employee.EnrollResponseModel;
 
 import java.util.List;
 

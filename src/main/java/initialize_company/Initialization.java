@@ -4,10 +4,10 @@ import DAO.DepartmentDAO;
 import DAO.ProjectDAO;
 import DAO.TaskDAO;
 import DAO.UserDAO;
-import DAOInterfaces.DepartmentDAOInterface;
-import DAOInterfaces.ProjectDAOInterface;
-import DAOInterfaces.TaskDAOInterface;
-import DAOInterfaces.UserDAOInterface;
+import DAO.DepartmentDAOInterface;
+import DAO.ProjectDAOInterface;
+import DAO.TaskDAOInterface;
+import DAO.UserDAOInterface;
 import data_access.CheckProfileUserIDMap;
 import entity.*;
 

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import presenter.CheckProfilePresenter;
 import presenter.IViewModel;
-import view_model.ViewModel;
+import presenter.view_model.ViewModel;
 
 import java.util.UUID;
 

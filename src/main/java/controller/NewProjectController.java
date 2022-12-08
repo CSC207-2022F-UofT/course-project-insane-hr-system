@@ -1,9 +1,9 @@
 package controller;
 
-import create_new_project.NewProjectInputBoundary;
-import create_new_project.NewProjectInteractor;
-import create_new_project.NewProjectRequestModel;
-import create_new_project.NewProjectResponseModel;
+import use_case.create_new_project.NewProjectInputBoundary;
+import use_case.create_new_project.NewProjectInteractor;
+import use_case.create_new_project.NewProjectRequestModel;
+import use_case.create_new_project.NewProjectResponseModel;
 
 public class NewProjectController {
 

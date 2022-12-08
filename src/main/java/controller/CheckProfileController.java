@@ -3,7 +3,8 @@ package controller;
 import check_profile_validation.*;
 import data_access.CheckProfileDataAccess;
 import presenter.CheckProfilePresenter;
-import view_model.ViewModel;
+import use_case.check_profile_validation.*;
+import presenter.view_model.ViewModel;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
