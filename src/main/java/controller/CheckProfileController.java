@@ -13,11 +13,9 @@ public class CheckProfileController implements PropertyChangeListener {
     private final CheckProfileInputBoundary interactor;
 
     public CheckProfileController() {
+        CheckProfileOutputBoundary presenter = new CheckProfilePresenter(new ViewModel());
         CheckProfileIGateway gateway = new CheckProfileDataAccess();
-        this.interactor = new CheckProfileInteractor(gateway);
-    }
-    public CheckProfileController(CheckProfileInputBoundary interactor) {
-        this.interactor = interactor;
+        this.interactor = new CheckProfileInteractor(gateway, presenter);
     }
     public CheckProfileController(CheckProfileIGateway gateway) {
         CheckProfileOutputBoundary presenter = new CheckProfilePresenter(new ViewModel());
