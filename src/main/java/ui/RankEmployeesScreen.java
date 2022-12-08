@@ -33,15 +33,18 @@ public class RankEmployeesScreen extends JPanel {
         JLabel title = new JLabel("Employee Rankings");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        // create a list of string names.
+
         DefaultListModel<String> rankedNames = new DefaultListModel<>();
         for(int i = 0; i < response.getRankedEmployees().size(); i++){
-            String name = response.getRankedEmployees().get(i).getName();
+            String name = response.getRankedEmployees().get(i);
             rankedNames.addElement(name);
         }
         JList<String> employeeRanking = new JList<>();
         employeeRanking.setModel(rankedNames);
 
         this.add(new JScrollPane(employeeRanking));
+
 
 
     }

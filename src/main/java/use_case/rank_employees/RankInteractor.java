@@ -52,19 +52,28 @@ public class RankInteractor implements RankInputBoundary {
             totalRating += memberTask.getStar();
         }
 
+        if(memberTasks.size() == 0){
+            return 0;
+        }
+
         return totalRating/memberTasks.size();
 
     }
 
-    public List<CommonUser> sortByRating(TreeMap<Integer, List<CommonUser>> memberRatingMap){
+    public List<String> sortByRating(TreeMap<Integer, List<CommonUser>> memberRatingMap){
         List<Integer> ratingList = new ArrayList<> (memberRatingMap.keySet());
-        List<CommonUser> sortedUsers = new ArrayList<>();
+        List<String> sortedUsers = new ArrayList<>();
 
 
         for(int i = 1; i <= ratingList.size(); i++){
             Integer ratingKey = ratingList.get(ratingList.size() - i);
             List<CommonUser> ratingUsers = memberRatingMap.get(ratingKey);
-            sortedUsers.addAll(ratingUsers);
+            for (int c = 0; c < ratingUsers.size(); c++){
+                String name = ratingUsers.get(c).getName();
+                sortedUsers.add(name);
+
+            }
+
         }
         return sortedUsers;
 
