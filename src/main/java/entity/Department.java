@@ -18,6 +18,10 @@ public class Department extends CommonOrganization {
         super(oid, name, head, members, description, createTime);
     }
 
+    public Department(UUID oid, String name, String description, LocalDateTime createTime) {
+        super(oid, name, description, createTime);
+    }
+
     public boolean addProject(Project project) {
         return this.projects.add(project.getOid());
     }
