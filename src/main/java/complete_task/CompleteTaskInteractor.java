@@ -17,14 +17,13 @@ public class CompleteTaskInteractor implements CompleteTaskInputBoundary{
 
     @Override
     public CompleteTaskResponseModel create(CompleteTaskRequestModel requestModel) {
-        Task task = requestModel.getTask();
+        UUID taskId = requestModel.getTaskId();
+        Task task = completeGateway.getTask(taskId);
         User user = requestModel.getUser();
 
-        if (Objects.equals(requestModel.getTask().getState(), "CLOSED")) {
+        if (task.getState().equals("CLOSE")) {
             return completeOutputBoundary.prepareFailureView("Task already closed!");
         }
-
-        task.setState("CLOSED");
 
         // create in file saved information
         CompleteTaskDsRequestModel completeTaskDsRequestModel = new CompleteTaskDsRequestModel(task);
