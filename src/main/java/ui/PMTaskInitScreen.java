@@ -112,6 +112,7 @@ public class PMTaskInitScreen extends JPanel implements ActionListener {
         pm.addCurrProject(project);
         employee.addCurrProject(project);
 
+
         ProjectDAO projectDAO = new ProjectDAO();
         projectDAO.createProject(project);
 

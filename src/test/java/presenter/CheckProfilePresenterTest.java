@@ -37,6 +37,7 @@ class CheckProfilePresenterTest {
         project.addMember(user.getId());
         user.addCurrProject(project);
 
+
         user.setDpt(dpt);
         dpt.addMember(user.getId());
         dpt.addMember(manager.getId());
