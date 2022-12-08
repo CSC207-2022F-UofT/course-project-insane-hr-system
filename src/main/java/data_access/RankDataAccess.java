@@ -17,12 +17,14 @@ import static entity.Constants.COMMON;
 public class RankDataAccess implements RankGateway {
     @Override
     public List<CommonUser> getSubordinates(RankRequestModel requestModel) {
-        CommonUser currentUser = requestModel.getCurrentUser();
+        int userId = requestModel.getUserId();
+        CommonUser user = (CommonUser) new UserDAO().getUser(userId);
+
         List<CommonUser> subordinates = new ArrayList<>();
-        List<Integer> memberIDs = new ArrayList<>(currentUser.getDpt().getMembers());
+        List<Integer> memberIDs = new ArrayList<>(user.getDpt().getMembers());
         for (Integer memberID : memberIDs) {
-            CommonUser user = (CommonUser) new UserDAO().getUser(memberID);
-            subordinates.add(user);
+            CommonUser subordinate = (CommonUser) new UserDAO().getUser(memberID);
+            subordinates.add(subordinate);
 
         }
         return subordinates;

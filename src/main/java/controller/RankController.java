@@ -1,5 +1,6 @@
 package controller;
 
+import entity.Department;
 import entity.user.CommonUser;
 import use_case.rank_employees.RankInputBoundary;
 import use_case.rank_employees.RankRequestModel;
@@ -12,8 +13,8 @@ public class RankController {
         this.userInput = userInput;
     }
 
-    RankResponseModel create(CommonUser user){
-        RankRequestModel requestModel = new RankRequestModel(user);
+    public RankResponseModel create(int id){
+        RankRequestModel requestModel = new RankRequestModel(id);
         return userInput.create(requestModel);
 
     }

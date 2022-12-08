@@ -1,12 +1,16 @@
 package presenter;
 
 import controller.PMTaskInitController;
+import controller.RankController;
 import data_access.PMTaskInitDataAccess;
+import entity.Department;
 import use_case.project_manager_task_init_use_case.PMTaskInitGateway;
 import use_case.project_manager_task_init_use_case.PMTaskInitInteractor;
 import ui.*;
+import use_case.rank_employees.RankGateway;
 
 import javax.swing.*;
+import java.util.UUID;
 
 public class UseCaseButtons {
     //TODO: Please create everyone's button here!
@@ -24,7 +28,7 @@ public class UseCaseButtons {
             case COMPLETE_PROJECT:
             case EXAMPLE_USE_CASE: return getUseCase1();
             case APPROVE_LEAVE_TASK: return getApproveLeaveTask(screenBuilder);
-            case RANK_EMPLOYEE:
+            case RANK_EMPLOYEE: return getRankedEmployees(screenBuilder);
         }
         JPanel jPanel = new JPanel();
         jPanel.add(new JLabel("No Controller is allowed"));
@@ -41,6 +45,18 @@ public class UseCaseButtons {
         });
         return panel;
     }
+    private static JPanel getRankedEmployees(ScreenBuilder screenBuilder){
+        JPanel panel = new JPanel();
+        JButton button = new JButton("Rank Employees");
+        panel.add(button);
+        button.addActionListener(e -> {
+            RankEmployeesScreen ui = new RankEmployeesScreen(screenBuilder.getDataModel().getRequesterID());
+            ui.setVisible(true);
+        });
+        return panel;
+
+    }
+
 
     public static JPanel getLeaveRequest(ScreenBuilder screenBuilder) {
         JPanel panel = new JPanel();
