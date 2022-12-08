@@ -30,10 +30,6 @@ public class LeaveRequestScreen extends JDialog implements ActionListener {
     LeaveRequestController controller;
     JFrame frame;
 
-    public JPanel getMainPanel() {
-        return mainPanel;
-    }
-
     public LeaveRequestScreen(JFrame frame) {
         super(frame, "Leave Request");
         LeaveRequestDsGateway gateway = new LeaveRequestDataAccess();
@@ -74,7 +70,7 @@ public class LeaveRequestScreen extends JDialog implements ActionListener {
                     + response.getReturnDate() + " has been sent on " + response.getCreateTime() + ".";
             JOptionPane.showMessageDialog(this.frame, message, "Request Sent", JOptionPane.PLAIN_MESSAGE);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this.frame, e.getMessage());
+            JOptionPane.showMessageDialog(this.frame, e.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
         }
     }
 
