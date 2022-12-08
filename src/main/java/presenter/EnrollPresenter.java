@@ -1,8 +1,8 @@
 package presenter;
 
-import enroll_employee.EnrollOutputBoundary;
-import enroll_employee.EnrollResponseModel;
-import enroll_employee.UserCreationFailed;
+import use_case.enroll_employee.EnrollOutputBoundary;
+import use_case.enroll_employee.EnrollResponseModel;
+import use_case.enroll_employee.UserCreationFailed;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

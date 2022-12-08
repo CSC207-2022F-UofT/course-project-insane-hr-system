@@ -3,12 +3,15 @@ package data_access;
 import DAO.TaskDAO;
 import DAO.UserDAO;
 import DAO.ProjectDAO;
-import DAOInterfaces.UserDAOInterface;
-import DAOInterfaces.ProjectDAOInterface;
-import DAOInterfaces.TaskDAOInterface;
+import DAO.UserDAOInterface;
+import DAO.ProjectDAOInterface;
+import DAO.TaskDAOInterface;
 import entity.*;
-import review_request.ReviewRequestDsGateway;
-import review_request.ReviewRequestDsRequestModel;
+import entity.project.LeaveRequestProject;
+import entity.task.Task;
+import entity.user.User;
+import use_case.review_request.ReviewRequestDsGateway;
+import use_case.review_request.ReviewRequestDsRequestModel;
 
 import java.util.UUID;
 

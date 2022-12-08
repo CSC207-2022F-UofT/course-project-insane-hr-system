@@ -1,5 +1,9 @@
 package presenter;
 
+import controller.PMTaskInitController;
+import data_access.PMTaskInitDataAccess;
+import use_case.project_manager_task_init_use_case.PMTaskInitGateway;
+import use_case.project_manager_task_init_use_case.PMTaskInitInteractor;
 import controller.SalaryCalculatorController;
 import entity.RelativeRelation;
 import presenter.Controllers;
@@ -20,22 +24,28 @@ public class UseCaseButtons {
     // and then add a case in this page.
     public static JPanel getPanel(Controllers controllers, ScreenBuilder screenBuilder){
         switch (controllers){
-            case SALARY_CALCULATOR: return getSalaryCalculator(screenBuilder);
-            case ENROLL_EMPLOYEE: return getEnrollEmploye();
-            case CREATE_PROJECT:;
+            case SALARY_CALCULATOR: return getSalaryCalculator();
+            case ENROLL_EMPLOYEE: return getEnrollEmployee();
+            case CREATE_PROJECT:return getCreateProject();
             case LEAVE_REQUEST: return getLeaveRequest(screenBuilder);
+            case COMPLETE_TASK:
+            case CREATE_TASK: return getPMTaskInit();
+            case COMPLETE_PROJECT:
+            case EXAMPLE_USE_CASE: return getUseCase1();
             case COMPLETE_TASK: return getCompleteTask(screenBuilder);
             case EVALUATE_TASK: return getEvaluateTask();
             case CREATE_TASK:;
             case COMPLETE_PROJECT:;
             case EXAMPLE_USE_CASE: return getUseCase1(screenBuilder);
             case APPROVE_LEAVE_TASK: return getApproveLeaveTask(screenBuilder);
+            case RANK_EMPLOYEE:
         }
         JPanel jPanel = new JPanel();
         jPanel.add(new JLabel("No Controller is allowed"));
         return jPanel;
     }
 
+    private static JPanel getSalaryCalculator() {
     private static JPanel getEnrollEmploye() {
         JPanel panel = new JPanel();
         JButton enrollButton = new JButton("Enroll Employee");
@@ -74,12 +84,9 @@ public class UseCaseButtons {
         JPanel panel = new JPanel();
         JButton salaryButton = new JButton("Salary Calculator");
         panel.add(salaryButton);
-        salaryButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFrame frame = new JFrame("Dialog");
-                JOptionPane.showMessageDialog(frame, "This functionality has been cut");
-            }
+        salaryButton.addActionListener(e -> {
+            JFrame frame = new JFrame("Dialog");
+            JOptionPane.showMessageDialog(frame, "This functionality has been cut");
         });
         return panel;
     }
@@ -89,19 +96,53 @@ public class UseCaseButtons {
         JButton requestButton = new JButton("Leave Request");
         panel.add(requestButton);
         requestButton.addActionListener(e -> {
-            LeaveRequestScreen ui = new LeaveRequestScreen(screenBuilder.view());
+            LeaveRequestScreen ui = new LeaveRequestScreen(screenBuilder.getViewOnly());
             ui.setVisible(true);
         });
         return panel;
     }
 
     public static JPanel getApproveLeaveTask(ScreenBuilder screenBuilder) {
-        return new ReviewRequestScreen(screenBuilder.view(), screenBuilder.getDataModel().getOid());
+
+        return new ReviewRequestScreen(screenBuilder.getViewOnly(), screenBuilder.getDataModel().getOid());
     }
 
-    public static JPanel getUseCase1(ScreenBuilder screenBuilder){
+    public static JPanel getPMTaskInit() {
+        JPanel panel = new JPanel();
+        JButton button = new JButton("Create New Task");
+        panel.add(button);
+        button.addActionListener(e -> {
+            PMTaskInitGateway gateway = new PMTaskInitDataAccess();
+            PMTaskInitPresenter presenter = new PMTaskInitPresenter();
+            PMTaskInitInteractor interactor = new PMTaskInitInteractor(presenter, gateway);
+            PMTaskInitController controller = new PMTaskInitController(interactor);
+
+            PMTaskInitScreen taskInitScreen = new PMTaskInitScreen(controller);
+            taskInitScreen.setVisible(true);
+        });
+        return panel;
+    }
+
+    public static JPanel getUseCase1(){
         JPanel jPanel = new JPanel();
         jPanel.add(new JLabel("No operator here"));
         return jPanel;
+    }
+
+    public static JPanel getCreateProject(){
+        JPanel jPanel = new JPanel();
+        jPanel.add(new JLabel("createProejct Not Implement"));
+        return jPanel;
+    }
+
+    public static JPanel getEnrollEmployee(){
+        JPanel panel = new JPanel();
+        JButton enrollButton = new JButton("Enroll Employee");
+        panel.add(enrollButton);
+        enrollButton.addActionListener(e -> {
+            EnrollScreen ui = new EnrollScreen();
+            ui.showScreenMain();
+        });
+        return panel;
     }
 }

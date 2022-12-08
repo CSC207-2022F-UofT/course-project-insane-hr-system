@@ -1,6 +1,6 @@
 package ui;
 
-import view_model.Table;
+import presenter.view_model.Table;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

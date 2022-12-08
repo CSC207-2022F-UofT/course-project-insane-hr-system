@@ -1,9 +1,6 @@
 package ui;
 
-import controller.LoginController;
-import login.LoginFailureResponseModel;
-import login.LoginResponseModel;
-import login.LoginSuccessResponseModel;
+import use_case.login.LoginFailureResponseModel;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,8 +1,8 @@
 package controller;
 
-import login.LoginInputBoundary;
-import login.LoginRequestModel;
-import login.LoginResponseModel;
+import use_case.login.LoginInputBoundary;
+import use_case.login.LoginRequestModel;
+import use_case.login.LoginResponseModel;
 
 /**
  * the controller

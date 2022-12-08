@@ -1,8 +1,7 @@
 package presenter;
 
-import controller.CheckProfileController;
-import login.LoginFailureResponseModel;
-import login.LoginSuccessResponseModel;
+import use_case.login.LoginFailureResponseModel;
+import use_case.login.LoginSuccessResponseModel;
 
 /**
  * the response formatter

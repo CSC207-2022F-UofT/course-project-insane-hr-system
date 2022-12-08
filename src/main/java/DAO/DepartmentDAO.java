@@ -1,6 +1,5 @@
 package DAO;
 
-import DAOInterfaces.DepartmentDAOInterface;
 import entity.Department;
 
 import java.sql.PreparedStatement;
@@ -92,7 +91,6 @@ public class DepartmentDAO implements DepartmentDAOInterface {
             statement = connection.prepareStatement(deleteDepartmentSQL);
             statement.setString(1, oid.toString());
             statement.executeUpdate();
-            connection.commit();
 
 
         } catch (SQLException e){

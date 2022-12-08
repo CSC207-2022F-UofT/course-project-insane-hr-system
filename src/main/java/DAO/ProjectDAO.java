@@ -1,7 +1,10 @@
 package DAO;
 
-import DAOInterfaces.ProjectDAOInterface;
 import entity.*;
+import entity.project.CommonProject;
+import entity.project.LeaveRequestProject;
+import entity.project.Project;
+import entity.task.Task;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -80,7 +83,7 @@ public class ProjectDAO implements ProjectDAOInterface {
         String query;
         if (project.getType().equals("COMMON")){
             if (project.getState().equals(CLOSED)){
-                query = "INSERT INTO project (id, name, head, description, start, type, status, department, funds, end) VALUES (?,?,?,?,?,?,?,?,?,?)";
+                query = "INSERT INTO project (id, name, head, description, start, type, status, department, funds, 'end') VALUES (?,?,?,?,?,?,?,?,?,?)";
             }
             else{
                 query = "INSERT INTO project (id, name, head, description, start, type, status, department, funds) VALUES (?,?,?,?,?,?,?,?,?)";
@@ -88,10 +91,10 @@ public class ProjectDAO implements ProjectDAOInterface {
         }
         else{
             if (project.getState().equals(CLOSED)){
-                query = "INSERT INTO project (id, name, head, description, start, type, status, vacation_days, leave_type, num_responses, end) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+                query = "INSERT INTO project (id, name, head, description, start, type, status, department, vacation_days, leave_type, num_responses, 'end') VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
             }
             else{
-                query = "INSERT INTO project (id, name, head, description, start, type, status, vacation_days, leave_type, num_responses) VALUES (?,?,?,?,?,?,?,?,?,?)";
+                query = "INSERT INTO project (id, name, head, description, start, type, status, department, vacation_days, leave_type, num_responses) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             }
 
         }
@@ -112,9 +115,9 @@ public class ProjectDAO implements ProjectDAOInterface {
             statement.setString(5, project.getCreateTime().toString());
             statement.setString(6, project.getType());
             statement.setString(7, project.getState());
+            statement.setString(8, project.getDpt().getOid().toString());
 
             if (project.getType().equals("COMMON")){
-                statement.setString(8, ((CommonProject) project).getDpt().getOid().toString());
                 statement.setInt(9, ((CommonProject) project).getFunds());
 
                 if (project.getState().equals(CLOSED)){
@@ -124,9 +127,12 @@ public class ProjectDAO implements ProjectDAOInterface {
 
             }
             else {
-                statement.setInt(8, ((LeaveRequestProject) project).getVacationDays());
-                statement.setString(9, ((LeaveRequestProject) project).getLeaveType().toString()) ;
-                statement.setInt(10, ((LeaveRequestProject) project).getNumResponses());
+                statement.setInt(9, ((LeaveRequestProject) project).getVacationDays());
+                statement.setString(10, ((LeaveRequestProject) project).getLeaveType().toString()) ;
+                statement.setInt(11, ((LeaveRequestProject) project).getNumResponses());
+                if (project.getState().equals(CLOSED)) {
+                    statement.setString(12, project.getCloseTime().toString());
+                }
 
             }
 
@@ -154,8 +160,6 @@ public class ProjectDAO implements ProjectDAOInterface {
 
             }
 
-
-            connection.commit();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -191,7 +195,6 @@ public class ProjectDAO implements ProjectDAOInterface {
             statement = connection.prepareStatement(SQL);
             statement.setString(1, id.toString());
             statement.executeUpdate();
-            connection.commit();
 
 
         } catch (SQLException e) {
@@ -257,10 +260,9 @@ public class ProjectDAO implements ProjectDAOInterface {
                 Integer head = result.getInt("head");
                 String description = result.getString("description");
                 LocalDateTime start = LocalDateTime.parse(result.getString("start"));
+                Department dept = new DepartmentDAO().getDepartment(UUID.fromString(result.getString("department")));
 
                 if(result.getString("type").equals("COMMON")){
-                    // get department //
-                    Department dept = new DepartmentDAO().getDepartment(UUID.fromString(result.getString("department")));
                     int funds = result.getInt("funds");
 
                     if (result.getString("status").equals(CLOSED)){
@@ -280,7 +282,7 @@ public class ProjectDAO implements ProjectDAOInterface {
 
                     if(result.getString("status").equals(CLOSED)){
                         LocalDateTime end = LocalDateTime.parse(result.getString("end"));
-                        LeaveRequestProject requestProject = new LeaveRequestProject(id, name, head, members, description, start, end, vacationDays, leaveType);
+                        LeaveRequestProject requestProject = new LeaveRequestProject(id, name, head, members, description, start, end, vacationDays, leaveType, dept);
                         requestProject.setNumResponses(numResponses);
                         project = requestProject;
 
@@ -288,7 +290,7 @@ public class ProjectDAO implements ProjectDAOInterface {
 
                     }
                     else{
-                        LeaveRequestProject leaveRequestProject = new LeaveRequestProject(id, name, head, members, description, start, vacationDays, leaveType);
+                        LeaveRequestProject leaveRequestProject = new LeaveRequestProject(id, name, head, members, description, start, vacationDays, leaveType, dept);
                         leaveRequestProject.setNumResponses(numResponses);
                         project = leaveRequestProject;
                     }

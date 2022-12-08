@@ -1,8 +1,7 @@
 import controller.LoginController;
 import data_access.LoginDataAccess;
-import login.LoginDSGateway;
-import login.LoginInputBoundary;
-import login.LoginInteractor;
+import use_case.login.LoginInputBoundary;
+import use_case.login.LoginInteractor;
 import presenter.LoginPresenter;
 import presenter.LoginResponseFormatter;
 import ui.LoginPromptScreen;
@@ -35,7 +34,7 @@ public class Main {
         // Build the GUI, plugging in the parts
         JPanel loginScreen = new LoginPromptScreen(loginController, screens, cardLayout);
         screens.add(loginScreen, "welcome");
-        cardLayout.show(screens, "login");
+        cardLayout.show(screens, "use_case/login");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.pack();
         mainFrame.setVisible(true);
