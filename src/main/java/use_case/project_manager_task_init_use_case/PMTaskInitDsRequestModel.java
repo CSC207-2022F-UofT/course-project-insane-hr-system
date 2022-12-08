@@ -1,10 +1,6 @@
 package use_case.project_manager_task_init_use_case;
 
-import entity.CommonTask;
-
-import java.time.LocalDateTime;
-import java.util.Set;
-import java.util.UUID;
+import entity.task.CommonTask;
 
 public class PMTaskInitDsRequestModel {
 

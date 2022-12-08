@@ -1,6 +1,12 @@
 package use_case.project_manager_task_init_use_case;
 
 import entity.*;
+import entity.project.CommonProject;
+import entity.project.Project;
+import entity.task.CommonTask;
+import entity.task.CommonTaskFactory;
+import entity.task.Task;
+import entity.task.TaskFactory;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;

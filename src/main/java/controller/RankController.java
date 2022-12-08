@@ -1,11 +1,9 @@
 package controller;
 
-import entity.CommonUser;
-import rank_employees.RankInputBoundary;
-import rank_employees.RankRequestModel;
-import rank_employees.RankResponseModel;
-
-import java.util.List;
+import entity.user.CommonUser;
+import use_case.rank_employees.RankInputBoundary;
+import use_case.rank_employees.RankRequestModel;
+import use_case.rank_employees.RankResponseModel;
 
 public class RankController {
     private final RankInputBoundary userInput;

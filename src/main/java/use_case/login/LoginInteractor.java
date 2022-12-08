@@ -2,7 +2,7 @@ package use_case.login;
 
 import entity.Curr;
 import presenter.LoginPresenter;
-import entity.User;
+import entity.user.User;
 
 /**
  * the interactor

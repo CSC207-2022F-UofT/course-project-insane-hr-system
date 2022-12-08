@@ -1,6 +1,6 @@
 package use_case.leave_request;
 
-import entity.Project;
+import entity.project.Project;
 
 // save the project and all its tasks
 // update all members + head

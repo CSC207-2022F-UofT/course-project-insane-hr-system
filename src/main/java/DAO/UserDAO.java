@@ -1,6 +1,11 @@
 package DAO;
 
-import entity.*;
+import entity.project.Project;
+import entity.role.Position;
+import entity.role.RoleSetter;
+import entity.task.Task;
+import entity.user.CommonUser;
+import entity.user.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

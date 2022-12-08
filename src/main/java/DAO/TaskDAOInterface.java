@@ -1,6 +1,6 @@
 package DAO;
 
-import entity.Task;
+import entity.task.Task;
 
 import java.util.List;
 import java.util.UUID;

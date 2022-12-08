@@ -1,6 +1,6 @@
 package use_case.salary_calculator;
 
-import entity.User;
+import entity.user.User;
 
 public interface SalaryCalculator {
     Integer getBonusSalary(User user);

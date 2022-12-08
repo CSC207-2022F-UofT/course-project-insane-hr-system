@@ -1,8 +1,8 @@
 package use_case.salary_calculator;
 
-import entity.CommonTask;
-import entity.Task;
-import entity.User;
+import entity.task.CommonTask;
+import entity.task.Task;
+import entity.user.User;
 
 import java.util.ArrayList;
 import java.util.List;

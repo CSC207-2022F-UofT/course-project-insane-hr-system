@@ -10,6 +10,12 @@ import DAO.TaskDAOInterface;
 import DAO.UserDAOInterface;
 import data_access.CheckProfileUserIDMap;
 import entity.*;
+import entity.project.CommonProject;
+import entity.project.Project;
+import entity.task.CommonTask;
+import entity.task.Task;
+import entity.user.CommonUser;
+import entity.user.User;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

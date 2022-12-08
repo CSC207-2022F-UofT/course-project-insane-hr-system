@@ -1,6 +1,6 @@
 package use_case.create_new_project;
 
-import entity.Project;
+import entity.project.Project;
 
 public class NewProjectResponseModel {
     Project project;

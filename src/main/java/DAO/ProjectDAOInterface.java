@@ -1,6 +1,6 @@
 package DAO;
 
-import entity.Project;
+import entity.project.Project;
 
 import java.util.List;
 import java.util.UUID;

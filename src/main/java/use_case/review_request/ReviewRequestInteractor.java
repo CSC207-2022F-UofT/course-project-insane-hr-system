@@ -1,9 +1,9 @@
 package use_case.review_request;
 
 import entity.Curr;
-import entity.Project;
-import entity.Task;
-import entity.User;
+import entity.project.Project;
+import entity.task.Task;
+import entity.user.User;
 
 import java.util.UUID;
 

@@ -1,8 +1,8 @@
 package data_access;
 
-import entity.Project;
-import entity.Task;
-import entity.User;
+import entity.project.Project;
+import entity.task.Task;
+import entity.user.User;
 import use_case.leave_request.LeaveRequestDsGateway;
 import use_case.leave_request.LeaveRequestDsRequestModel;
 
