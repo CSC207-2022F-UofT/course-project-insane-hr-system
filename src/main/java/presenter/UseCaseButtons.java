@@ -1,8 +1,14 @@
 package presenter;
 
+import controller.CompleteTaskController;
+import data_access.CompleteTaskDataAccess;
 import ui.*;
+import use_case.complete_task.CompleteTaskInputBoundary;
+import use_case.complete_task.CompleteTaskInteractor;
+import use_case.complete_task.CompleteTaskOutputBoundary;
 
 import javax.swing.*;
+import java.util.UUID;
 
 public class UseCaseButtons {
     //TODO: Please create everyone's button here!
@@ -32,9 +38,7 @@ public class UseCaseButtons {
         JPanel panel = new JPanel();
         JButton createButton = new JButton("Complete Project");
         panel.add(createButton);
-        createButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(panel, "This functionality will coming soon");
-        });
+        createButton.addActionListener(e -> JOptionPane.showMessageDialog(panel, "This functionality will coming soon"));
         return panel;
     }
 
@@ -42,9 +46,7 @@ public class UseCaseButtons {
         JPanel panel = new JPanel();
         JButton createButton = new JButton("Create Task");
         panel.add(createButton);
-        createButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(panel, "This functionality will coming soon");
-        });
+        createButton.addActionListener(e -> JOptionPane.showMessageDialog(panel, "This functionality will coming soon"));
         return panel;
     }
 
@@ -53,10 +55,7 @@ public class UseCaseButtons {
         JButton completeButton = new JButton("Complete Task");
         panel.add(completeButton);
         CompleteTaskScreen completeTaskScreen = new CompleteTaskScreen();
-        completeButton.addActionListener(e -> {
-            screenBuilder.getLeftSelectedRows();
-            completeTaskScreen.viewScreen();
-        });
+        completeButton.addActionListener(e -> completeTaskScreen.viewScreen(screenBuilder.getDataModel().getOid()));
         return panel;
     }
 
