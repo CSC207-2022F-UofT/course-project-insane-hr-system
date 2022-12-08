@@ -53,6 +53,7 @@ public class UseCaseButtons {
         panel.add(completeButton);
         CompleteTaskScreen completeTaskScreen = new CompleteTaskScreen();
         completeButton.addActionListener(e -> {
+            completeTaskScreen.viewScreen();
         });
         return panel;
     }
