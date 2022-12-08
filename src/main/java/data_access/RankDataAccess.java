@@ -2,11 +2,11 @@ package data_access;
 
 import DAO.TaskDAO;
 import DAO.UserDAO;
-import entity.CommonTask;
-import entity.CommonUser;
-import entity.Task;
-import rank_employees.RankGateway;
-import rank_employees.RankRequestModel;
+import entity.task.CommonTask;
+import entity.user.CommonUser;
+import entity.task.Task;
+import use_case.rank_employees.RankGateway;
+import use_case.rank_employees.RankRequestModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +20,8 @@ public class RankDataAccess implements RankGateway {
         CommonUser currentUser = requestModel.getCurrentUser();
         List<CommonUser> subordinates = new ArrayList<>();
         List<Integer> memberIDs = new ArrayList<>(currentUser.getDpt().getMembers());
-        for(int i = 0; i< memberIDs.size(); i++){
-            CommonUser user = (CommonUser) new UserDAO().getUser(memberIDs.get(i));
+        for (Integer memberID : memberIDs) {
+            CommonUser user = (CommonUser) new UserDAO().getUser(memberID);
             subordinates.add(user);
 
         }
@@ -33,12 +33,9 @@ public class RankDataAccess implements RankGateway {
     public List<CommonTask> getCompletedTasks(CommonUser user) {
         List<Task> tasks = new TaskDAO().getAllTasks();
         List<CommonTask> completedTasks = new ArrayList<>();
-        for(int i=0; i< tasks.size(); i++){
-            Task task = tasks.get(i);
-            if (task.getType().equals(COMMON) && task.getState().equals(CLOSED) && task.getMembers().contains(user.getId())){
+        for (Task task : tasks) {
+            if (task.getType().equals(COMMON) && task.getState().equals(CLOSED) && task.getMembers().contains(user.getId())) {
                 completedTasks.add((CommonTask) task);
-
-
             }
 
 

@@ -1,8 +1,8 @@
-package rank_employees;
+package use_case.rank_employees;
 
 
-import entity.CommonTask;
-import entity.CommonUser;
+import entity.task.CommonTask;
+import entity.user.CommonUser;
 
 import java.util.*;
 
@@ -22,18 +22,17 @@ public class RankInteractor implements RankInputBoundary {
         List<CommonUser> subordinates = this.rankGateway.getSubordinates(requestModel);
         TreeMap<Integer, List<CommonUser>> memberRatingMap = new TreeMap<>();
 
-        for (int i = 0; i < subordinates.size(); i++) {
+        for (CommonUser subordinate : subordinates) {
 
-            List<CommonTask> memberTasks = this.rankGateway.getCompletedTasks(subordinates.get(i));
+            List<CommonTask> memberTasks = this.rankGateway.getCompletedTasks(subordinate);
             int memberRating = getMemberRating(memberTasks);
 
-            if(memberRatingMap.containsKey(memberRating)){
-                List<CommonUser> memberList =  memberRatingMap.get(memberRating);
-                memberList.add(subordinates.get(i));
-            }
-            else{
+            if (memberRatingMap.containsKey(memberRating)) {
+                List<CommonUser> memberList = memberRatingMap.get(memberRating);
+                memberList.add(subordinate);
+            } else {
                 List<CommonUser> ratingList = new ArrayList<>();
-                ratingList.add(subordinates.get(i));
+                ratingList.add(subordinate);
                 memberRatingMap.put(memberRating, ratingList);
             }
 
@@ -49,8 +48,8 @@ public class RankInteractor implements RankInputBoundary {
 
     public int getMemberRating(List<CommonTask> memberTasks){
         int totalRating = 0;
-        for(int i = 0; i < memberTasks.size(); i++){
-            totalRating += memberTasks.get(i).getStar();
+        for (CommonTask memberTask : memberTasks) {
+            totalRating += memberTask.getStar();
         }
 
         return totalRating/memberTasks.size();

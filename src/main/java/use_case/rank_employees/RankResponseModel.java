@@ -1,6 +1,6 @@
-package rank_employees;
+package use_case.rank_employees;
 
-import entity.CommonUser;
+import entity.user.CommonUser;
 
 import java.util.List;
 
