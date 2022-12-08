@@ -1,4 +1,4 @@
-package RankEmployeesUseCase;
+package controller;
 
 import entity.CommonUser;
 import RankEmployeesUseCase.RankInputBoundary;

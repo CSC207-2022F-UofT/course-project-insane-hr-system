@@ -36,6 +36,7 @@ public class ReviewRequestDataAccess implements ReviewRequestDsGateway {
             }
             userDAO.updateUser(user);
             user.removeCurrProject(project);
+            user.removeCurrTask(requestModel.getTask());
         }
     }
 

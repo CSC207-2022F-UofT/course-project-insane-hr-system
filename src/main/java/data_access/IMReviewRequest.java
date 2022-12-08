@@ -22,6 +22,7 @@ public class IMReviewRequest implements ReviewRequestDsGateway {
         if (!requestModel.getStatus().isEmpty()) {
             User user = users.get(project.getHead());
             user.removeCurrProject(project);
+            user.removeCurrTask(requestModel.getTask());
             user.setStatus(requestModel.getStatus());
             if (project.getLeaveType() == LeaveType.VACATION) {
                 user.setVacationDays(user.getVacationDays() - project.getVacationDays());
