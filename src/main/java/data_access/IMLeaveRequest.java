@@ -3,8 +3,8 @@ package data_access;
 import entity.Project;
 import entity.Task;
 import entity.User;
-import leave_request.LeaveRequestDsGateway;
-import leave_request.LeaveRequestDsRequestModel;
+import use_case.leave_request.LeaveRequestDsGateway;
+import use_case.leave_request.LeaveRequestDsRequestModel;
 
 import java.util.Map;
 import java.util.UUID;

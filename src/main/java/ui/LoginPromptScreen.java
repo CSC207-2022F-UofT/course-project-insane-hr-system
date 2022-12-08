@@ -1,18 +1,15 @@
 package ui;
 
-import check_profile_validation.CheckProfileIGateway;
-import check_profile_validation.CheckProfileOutputBoundary;
+import use_case.check_profile_validation.CheckProfileIGateway;
+import use_case.check_profile_validation.CheckProfileOutputBoundary;
 import controller.CheckProfileController;
 import controller.LoginController;
 import data_access.CheckProfileDataAccess;
-import data_access.CheckProfileIMDataAccess;
-import data_access.CheckProfileUserIDMap;
-import entity.Curr;
-import login.LoginFailureResponseModel;
-import login.LoginResponseModel;
-import login.LoginSuccessResponseModel;
+import use_case.login.LoginFailureResponseModel;
+import use_case.login.LoginResponseModel;
+import use_case.login.LoginSuccessResponseModel;
 import presenter.CheckProfilePresenter;
-import view_model.ViewModel;
+import presenter.view_model.ViewModel;
 
 import javax.swing.*;
 import java.awt.*;

@@ -3,13 +3,13 @@ package data_access;
 import DAO.TaskDAO;
 import DAO.UserDAO;
 import DAO.ProjectDAO;
-import DAOInterfaces.UserDAOInterface;
-import DAOInterfaces.ProjectDAOInterface;
-import DAOInterfaces.TaskDAOInterface;
+import DAO.UserDAOInterface;
+import DAO.ProjectDAOInterface;
+import DAO.TaskDAOInterface;
 import entity.Task;
 import entity.User;
-import leave_request.LeaveRequestDsGateway;
-import leave_request.LeaveRequestDsRequestModel;
+import use_case.leave_request.LeaveRequestDsGateway;
+import use_case.leave_request.LeaveRequestDsRequestModel;
 
 public class LeaveRequestDataAccess implements LeaveRequestDsGateway {
     private final ProjectDAOInterface projectDAO = new ProjectDAO();

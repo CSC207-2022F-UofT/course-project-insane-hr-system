@@ -1,16 +1,16 @@
 package controller;
 
-import create_new_project.NewProjectInputBoundary;
-import create_new_project.NewProjectInteractor;
-import create_new_project.NewProjectRequestModel;
-import create_new_project.NewProjectResponseModel;
+import use_case.create_new_project.NewProjectInputBoundary;
+import use_case.create_new_project.NewProjectInteractor;
+import use_case.create_new_project.NewProjectRequestModel;
+import use_case.create_new_project.NewProjectResponseModel;
 
 public class NewProjectController {
 
-    public final NewProjectInputBoundary projectInput = new NewProjectInteractor();
+    public NewProjectInputBoundary projectInput = new NewProjectInteractor();
 
     public NewProjectController(NewProjectInputBoundary projectInput) {
-        projectInput = projectInput;
+        this.projectInput = projectInput;
     }
 
     public NewProjectResponseModel create(int PMid, int funds, String name, String description, String dpt) {

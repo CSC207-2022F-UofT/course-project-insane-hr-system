@@ -1,6 +1,5 @@
 package DAO;
 
-import DAOInterfaces.TaskDAOInterface;
 import entity.*;
 
 import java.sql.PreparedStatement;
@@ -31,7 +30,11 @@ public class TaskDAO implements TaskDAOInterface {
             while(resultSet.next()){
                 UUID projectID = UUID.fromString(resultSet.getString("projectID"));
                 Project project = new ProjectDAO().getProject(projectID);
-                task = getProjectTask(taskID, project);
+                for (Task t : project.getTasks()) {
+                    if (t.getOid().equals(taskID)) {
+                        task = t;
+                    }
+                }
             }
 
 
@@ -82,7 +85,7 @@ public class TaskDAO implements TaskDAOInterface {
         if (task.getType().equals("STAR")){
 
             if(task.getState().equals(CLOSED)){
-                query = "INSERT INTO tasks (id, projectID, name, head, description, status, start, type, evalTask, end, results) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+                query = "INSERT INTO tasks (id, projectID, name, head, description, status, start, type, evalTask, 'end', results) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             } else {
                 query = "INSERT INTO tasks (id, projectID, name, description, head, status, start, type, evalTask) VALUES (?,?,?,?,?,?,?,?,?)";
             }
@@ -90,7 +93,7 @@ public class TaskDAO implements TaskDAOInterface {
 
         } else{
             if (task.getState().equals(CLOSED)){
-                query = "INSERT INTO tasks (id, projectID, name, head, description, status, start, type, end, results) VALUES (?,?,?,?,?,?,?,?,?,?)";
+                query = "INSERT INTO tasks (id, projectID, name, head, description, status, start, type, 'end', results) VALUES (?,?,?,?,?,?,?,?,?,?)";
             }
             else{
                 query = "INSERT INTO tasks (id, projectID, name, head, description, status, start, type) VALUES (?,?,?,?,?,?,?,?)";
@@ -113,8 +116,8 @@ public class TaskDAO implements TaskDAOInterface {
             statement.setString(3, task.getName());
             statement.setInt(4, task.getHead());
             statement.setString(5, task.getDescription());
-            statement.setString(6, task.getCreateTime().toString());
-            statement.setString(7, task.getState());
+            statement.setString(6, task.getState());
+            statement.setString(7, task.getCreateTime().toString());
             statement.setString(8, task.getType());
 
             if (task.getType().equals("STAR")){
@@ -131,7 +134,6 @@ public class TaskDAO implements TaskDAOInterface {
             }
 
             statement.executeUpdate();
-            connection.commit();
 
             // save all task members to the database as well
             saveTaskMembers(task);
@@ -176,7 +178,6 @@ public class TaskDAO implements TaskDAOInterface {
             statement.setString(1, taskID.toString());
             statement.executeUpdate();
 
-            connection.commit();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -313,7 +314,6 @@ public class TaskDAO implements TaskDAOInterface {
                 statement.setInt(2, memberID);
                 statement.executeUpdate();
             }
-            connection.commit();
 
         } catch(SQLException e){
             e.printStackTrace();

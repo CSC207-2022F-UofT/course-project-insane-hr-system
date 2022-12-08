@@ -1,6 +1,6 @@
 package ui;
 
-import enroll_employee.EnrollResponseModel;
+import use_case.enroll_employee.EnrollResponseModel;
 
 import javax.swing.*;
 import java.awt.*;

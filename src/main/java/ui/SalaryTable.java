@@ -1,8 +1,8 @@
 package ui;
 
 import presenter.DataFormatter;
-import salary_calculator.PayStub;
-import salary_calculator.SalaryResponseModel;
+import use_case.salary_calculator.PayStub;
+import use_case.salary_calculator.SalaryResponseModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

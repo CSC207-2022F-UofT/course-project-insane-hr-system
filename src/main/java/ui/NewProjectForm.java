@@ -1,14 +1,10 @@
 package ui;
 
 import controller.NewProjectController;
-import create_new_project.NewProjectInputBoundary;
-import create_new_project.NewProjectInteractor;
+import use_case.create_new_project.NewProjectInputBoundary;
+import use_case.create_new_project.NewProjectInteractor;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.InputMethodEvent;
-import java.awt.event.InputMethodListener;
 
 public class NewProjectForm {
     private JButton submitAndCreateProjectButton;
@@ -29,18 +25,13 @@ public class NewProjectForm {
 
     public NewProjectForm() {
 
-        submitAndCreateProjectButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int PMid = Integer.parseInt(PMidTextField.getText());
-                int funds = Integer.parseInt(FundtextField.getText());
-                String name = ProjNametextField.getText();
-                String description = descriptextField.getText();
-                String dpt = descriptextField.getText();
-                controller.create(PMid, funds, name, description, dpt);
-            }
-
-
+        submitAndCreateProjectButton.addActionListener(e -> {
+            int PMid = Integer.parseInt(PMidTextField.getText());
+            int funds = Integer.parseInt(FundtextField.getText());
+            String name = ProjNametextField.getText();
+            String description = descriptextField.getText();
+            String dpt = descriptextField.getText();
+            controller.create(PMid, funds, name, description, dpt);
         });
     }
 

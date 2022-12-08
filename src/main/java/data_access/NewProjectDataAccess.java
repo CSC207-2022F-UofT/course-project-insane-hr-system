@@ -2,11 +2,11 @@ package data_access;
 
 import DAO.DepartmentDAO;
 import DAO.ProjectDAO;
-import create_new_project.NewProjectGateway;
-import create_new_project.NewProjectResponseModel;
+import use_case.create_new_project.NewProjectGateway;
+import use_case.create_new_project.NewProjectResponseModel;
 import entity.Department;
-import DAOInterfaces.DepartmentDAOInterface;
-import DAOInterfaces.ProjectDAOInterface;
+import DAO.DepartmentDAOInterface;
+import DAO.ProjectDAOInterface;
 import entity.Project;
 
 import java.util.List;

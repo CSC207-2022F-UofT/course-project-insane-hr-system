@@ -1,7 +1,5 @@
 package entity;
 
-import java.util.List;
-
 public class CommonUserFace implements UserFace {
     protected final int uid;
     protected Department dpt;

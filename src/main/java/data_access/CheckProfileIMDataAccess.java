@@ -1,9 +1,8 @@
 package data_access;
 
-import check_profile_validation.CheckProfileIGateway;
+import use_case.check_profile_validation.CheckProfileIGateway;
 import entity.*;
 
-import javax.swing.plaf.UIResource;
 import java.beans.PropertyChangeListener;
 import java.time.LocalDateTime;
 import java.util.ArrayList;

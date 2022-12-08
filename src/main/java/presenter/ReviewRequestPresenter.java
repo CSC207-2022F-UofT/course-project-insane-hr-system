@@ -1,7 +1,7 @@
 package presenter;
 
-import review_request.ReviewRequestOutputBoundary;
-import review_request.ReviewRequestResponseModel;
+import use_case.review_request.ReviewRequestOutputBoundary;
+import use_case.review_request.ReviewRequestResponseModel;
 
 public class ReviewRequestPresenter implements ReviewRequestOutputBoundary {
     @Override

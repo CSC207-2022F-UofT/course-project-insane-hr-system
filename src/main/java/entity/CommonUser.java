@@ -1,7 +1,6 @@
 package entity;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CommonUser extends CommonUserFace implements User {
@@ -182,7 +181,7 @@ public class CommonUser extends CommonUserFace implements User {
         return "CommonUser{" +'\n' +
                 "userFile=" + userFile.toString() +'\n' +
                 ", uid=" + uid +'\n' +
-                ", dpt=" + dpt +'\n' +
+                ", dpt=" + dpt.getName() +'\n' +
                 ", bio='" + bio + '\'' +'\n' +
                 ", name='" + name + '\'' +'\n' +
                 '}';

@@ -4,10 +4,10 @@ import DAO.DepartmentDAO;
 import DAO.ProjectDAO;
 import DAO.TaskDAO;
 import DAO.UserDAO;
-import DAOInterfaces.DepartmentDAOInterface;
-import DAOInterfaces.ProjectDAOInterface;
-import DAOInterfaces.TaskDAOInterface;
-import DAOInterfaces.UserDAOInterface;
+import DAO.DepartmentDAOInterface;
+import DAO.ProjectDAOInterface;
+import DAO.TaskDAOInterface;
+import DAO.UserDAOInterface;
 import data_access.CheckProfileUserIDMap;
 import entity.*;
 
@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.UUID;
 
 import static data_access.CheckProfileUserIDMap.*;
 
@@ -24,6 +25,8 @@ public class Initialization {
     private final static TaskDAOInterface taskDB = new TaskDAO();
     private final static UserDAOInterface userDB = new UserDAO();
 
+    private static  List<User> userPool = new ArrayList<>();
+    private static  List<Organization> orgPool = new ArrayList<>();
     public static void initialize() {
         User dptHead = new CommonUser(CheckProfileUserIDMap.headId);
         User manager1 = new CommonUser(CheckProfileUserIDMap.manager1Id);
@@ -33,14 +36,11 @@ public class Initialization {
         User ee12 = new CommonUser(CheckProfileUserIDMap.employee12Id);
         User ee21 = new CommonUser(CheckProfileUserIDMap.employee21Id);
         User ee22 = new CommonUser(CheckProfileUserIDMap.employee22Id);
-        Department dpt = new Department(dptUUID, "TestDepartment1", dptHead.getId(), new HashSet<>(), "This is the first dpt", LocalDateTime.now());
+        Department dpt = new Department(dptUUID, "CheckProfileTestDepartment", dptHead.getId(), new HashSet<>(), "This is the first dpt", LocalDateTime.now());
         Project project1 = new CommonProject(project1UUID, "Project 1", manager1.getId(), new HashSet<>(), "This is the first Project", LocalDateTime.now(), dpt, new ArrayList<>(), 1000);
         Project project2 = new CommonProject(project2UUID, "Project 2", manager2.getId(), new HashSet<>(), "This is the second Project", LocalDateTime.now(), dpt, new ArrayList<>(), 1000);
 
 
-
-        List<User> userPool = new ArrayList<>();
-        List<Organization> orgPool = new ArrayList<>();
 
         userPool.add(dptHead);
         userPool.add(manager1);
@@ -69,11 +69,47 @@ public class Initialization {
             user.setDpt(dpt);
         }
 
+        for (User user : userPool) {
+            userDB.updateUser(user);
+        }
+
 
 
     }
-//
-//    {}
+
+    public static List<User> getUserPool() {
+        return userPool;
+    }
+
+    public static void setUserPool(List<User> userPool) {
+        Initialization.userPool = userPool;
+    }
+
+    public static List<Organization> getOrgPool() {
+        return orgPool;
+    }
+
+    public static void setOrgPool(List<Organization> orgPool) {
+        Initialization.orgPool = orgPool;
+    }
+
+    private void connectUserProject(User user, Project project) {
+        user.addCurrProject(project);
+        project.addMember(user.getId());
+    }
+    private void addTaskToEe(User user, CommonProject project, UUID taskID){
+        Task task = new CommonTask(taskID, "Task of " + user.getName(), project.getHead(), "This is the task for employee " + user.getName(), LocalDateTime.now(), project);
+        user.addCurrTask(task);
+        project.addTask(task);
+        User manager = userDB.getUser(project.getHead());
+        manager.addCurrTask(task);
+        task.addMember(user.getId());
+        task.addMember(manager.getId());
+
+        task.setDescription("This is " + user.getName() + "'s task in project " + project.getName());
+        orgPool.add(task);
+    }
+
 //
 //        connectUserProject(manager1, project1);
 //        connectUserProject(ee01, project1);

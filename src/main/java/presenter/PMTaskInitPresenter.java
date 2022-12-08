@@ -1,7 +1,7 @@
 package presenter;
 
-import project_manager_task_init_use_case.PMTaskInitOutputBoundary;
-import project_manager_task_init_use_case.PMTaskInitResponseModel;
+import use_case.project_manager_task_init_use_case.PMTaskInitOutputBoundary;
+import use_case.project_manager_task_init_use_case.PMTaskInitResponseModel;
 
 public class PMTaskInitPresenter implements PMTaskInitOutputBoundary {
 

@@ -4,11 +4,11 @@ import com.github.lgooddatepicker.components.DatePicker;
 import controller.LeaveRequestController;
 import data_access.LeaveRequestDataAccess;
 import entity.LeaveType;
-import leave_request.*;
 import entity.ProjectBuilder;
 import entity.LeaveRequestProjectBuilder;
 import presenter.LeaveRequestPresenter;
 import entity.Curr;
+import use_case.leave_request.*;
 
 
 import javax.swing.*;
@@ -70,8 +70,8 @@ public class LeaveRequestScreen extends JDialog implements ActionListener {
         try {
             LeaveRequestResponseModel response = controller.create(Curr.getUser(), messageArea.getText(), (LeaveType) leaveTypeComboBox.getSelectedItem(),
                     startDatePicker.getDate(), returnDatePicker.getDate());
-            String message = "Your " + response.getLeaveType() + "leave request from " + response.getStartDate() + "to "
-                    + response.getReturnDate() + "has been sent on " + response.getCreateTime() + ".";
+            String message = "Your " + response.getLeaveType() + " leave request from " + response.getStartDate() + " to "
+                    + response.getReturnDate() + " has been sent on " + response.getCreateTime() + ".";
             JOptionPane.showMessageDialog(this.frame, message, "Request Sent", JOptionPane.PLAIN_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this.frame, e.getMessage());
