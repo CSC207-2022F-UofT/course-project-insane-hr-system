@@ -17,7 +17,7 @@ public class UseCaseButtons {
         switch (controllers){
             case SALARY_CALCULATOR: return getSalaryCalculator();
             case ENROLL_EMPLOYEE: return getEnrollEmployee();
-            case CREATE_PROJECT:return getCreateProject();
+            case CREATE_PROJECT:return getCreateProject(screenBuilder);
             case LEAVE_REQUEST: return getLeaveRequest(screenBuilder);
             case COMPLETE_TASK:
             case CREATE_TASK: return getPMTaskInit();
@@ -92,14 +92,14 @@ public class UseCaseButtons {
         });
         return panel;
     }
-
-    public static JPanel getEnrollEmployee(){
-        JPanel panel = new JPanel();
-        JButton enrollButton = new JButton("Enroll Employee");
-        panel.add(enrollButton);
-        enrollButton.addActionListener(e -> {
-            EnrollScreen ui = new EnrollScreen();
-            ui.showScreenMain();
-        });
-        return panel;
-}
+        public static JPanel getEnrollEmployee() {
+            JPanel panel = new JPanel();
+            JButton enrollButton = new JButton("Enroll Employee");
+            panel.add(enrollButton);
+            enrollButton.addActionListener(e -> {
+                EnrollScreen ui = new EnrollScreen();
+                ui.showScreenMain();
+            });
+            return panel;
+        }
+    }
