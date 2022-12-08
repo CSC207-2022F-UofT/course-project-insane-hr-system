@@ -6,7 +6,7 @@ import entity.Task;
 public class ReviewRequestDsRequestModel {
     private Task task;
     private Project project;
-    private String status;
+    private String status = "";
 
     public ReviewRequestDsRequestModel(Task task, Project project) {
         this.task = task;

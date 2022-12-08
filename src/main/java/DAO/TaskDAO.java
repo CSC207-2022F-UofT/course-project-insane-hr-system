@@ -31,7 +31,11 @@ public class TaskDAO implements TaskDAOInterface {
             while(resultSet.next()){
                 UUID projectID = UUID.fromString(resultSet.getString("projectID"));
                 Project project = new ProjectDAO().getProject(projectID);
-                task = getProjectTask(taskID, project);
+                for (Task t : project.getTasks()) {
+                    if (t.getOid().equals(taskID)) {
+                        task = t;
+                    }
+                }
             }
 
 

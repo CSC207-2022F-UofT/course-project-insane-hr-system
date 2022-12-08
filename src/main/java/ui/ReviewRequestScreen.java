@@ -38,8 +38,8 @@ public class ReviewRequestScreen extends JPanel implements ActionListener {
                     "request", "Review Leave Request", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
                     null, options, options[1]);
             if (result != JOptionPane.CANCEL_OPTION){
-                String response = controller.reviewRequest(oid, result == JOptionPane.YES_OPTION).getResult();
-                JOptionPane.showMessageDialog(frame, "You have " + response.toLowerCase() + "the " +
+                String response = controller.reviewRequest(oid, result == JOptionPane.NO_OPTION).getResult();
+                JOptionPane.showMessageDialog(frame, "You have " + response.toLowerCase() + " the " +
                         "leave request.", "Leave Request " + response, JOptionPane.PLAIN_MESSAGE);
             }
         } catch (Exception e) {
