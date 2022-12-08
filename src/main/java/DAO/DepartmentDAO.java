@@ -146,6 +146,14 @@ public class DepartmentDAO implements DepartmentDAOInterface {
                 } else {
                     department = new Department(id,name,head,memberIds,description,create);
                 }
+
+                Statement statement3 = connection.createStatement();
+                ResultSet dptProjectResult = statement3.executeQuery("SELECT * FROM project WHERE department ='" + departmentID + "'");
+
+                while (dptProjectResult.next()) {
+                    department.addProject(UUID.fromString(dptProjectResult.getString("ID")));
+                }
+
                 departments.add(department);
 
 
