@@ -11,6 +11,7 @@ import ui.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.UUID;
 
 public class UseCaseButtons {
     //TODO: Please create everyone's button here!
@@ -23,7 +24,7 @@ public class UseCaseButtons {
             case ENROLL_EMPLOYEE: return getEnrollEmploye();
             case CREATE_PROJECT:;
             case LEAVE_REQUEST: return getLeaveRequest(screenBuilder);
-            case COMPLETE_TASK: return getCompleteTask();
+            case COMPLETE_TASK: return getCompleteTask(screenBuilder);
             case EVALUATE_TASK: return getEvaluateTask();
             case CREATE_TASK:;
             case COMPLETE_PROJECT:;
@@ -47,12 +48,13 @@ public class UseCaseButtons {
         return panel;
     }
 
-    private static JPanel getCompleteTask() {
+    private static JPanel getCompleteTask(ScreenBuilder screenBuilder) {
         JPanel panel = new JPanel();
         JButton completeButton = new JButton("Complete Task");
         panel.add(completeButton);
         CompleteTaskScreen completeTaskScreen = new CompleteTaskScreen();
         completeButton.addActionListener(e -> {
+            UUID taskId = screenBuilder.getDataModel().getOid();
             completeTaskScreen.viewScreen();
         });
         return panel;

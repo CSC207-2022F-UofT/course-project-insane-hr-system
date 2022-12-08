@@ -2,23 +2,20 @@ package complete_task;
 
 import entity.*;
 
+import java.util.UUID;
 
 
 public class CompleteTaskRequestModel {
-    private Task task;
+    private final UUID taskId;
     private User user;
 
-    public CompleteTaskRequestModel(Task task, User user) {
-        this.task = task;
+    public CompleteTaskRequestModel(UUID taskId, User user) {
+        this.taskId = taskId;
         this.user = user;
     }
 
-    public Task getTask() {
-        return task;
-    }
-
-    public void setTask(Task task) {
-        this.task = task;
+    public UUID getTaskId() {
+        return taskId;
     }
 
     public User getUser() {
