@@ -32,8 +32,8 @@ public class NewProjectForm {
         submitAndCreateProjectButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Integer PMid = Integer.valueOf(PMidTextField.getText());
-                Integer funds = Integer.valueOf(FundtextField.getText());
+                int PMid = Integer.parseInt(PMidTextField.getText());
+                int funds = Integer.parseInt(FundtextField.getText());
                 String name = ProjNametextField.getText();
                 String description = descriptextField.getText();
                 String dpt = descriptextField.getText();
