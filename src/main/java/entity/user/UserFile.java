@@ -151,6 +151,10 @@ class UserFile implements Serializable {
     }
 
     public String getStatus() {
+        switch (status) {
+            case OPEN: return "Available";
+            case CLOSED: return "Departed from Company";
+        }
         return status;
     }
 
