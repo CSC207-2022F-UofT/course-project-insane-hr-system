@@ -1,6 +1,5 @@
-package entity.leave_request;
+package entity;
 
-import entity.Department;
 import entity.project.LeaveRequestProject;
 import entity.task.LeaveRequestTask;
 import entity.project.LeaveType;
