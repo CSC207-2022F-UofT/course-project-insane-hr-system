@@ -114,7 +114,7 @@ public class ScreenBuilder implements IView {
     @Override
     public void customizeLeftButton(){
         CheckProfileOutputBoundary presenter = new CheckProfilePresenter();
-        CheckProfileIGateway gateway = new CheckProfileIMDataAccess();
+        CheckProfileIGateway gateway = new CheckProfileDataAccess();
         CheckProfileController controller = new CheckProfileController(presenter, gateway);
         for (int i : view.getLeftTable().getSelectedRows()){
             Object reference = dataModel.getLeftTable().getReference()[i];
@@ -144,7 +144,7 @@ public class ScreenBuilder implements IView {
 //            dataModel.updateIntro(dataModel.getIntro() + name + reference + " have been selected\n");
 //        }
         CheckProfileOutputBoundary presenter = new CheckProfilePresenter();
-        CheckProfileIGateway gateway = new CheckProfileIMDataAccess();
+        CheckProfileIGateway gateway = new CheckProfileDataAccess();
         CheckProfileController controller = new CheckProfileController(presenter, gateway);
         for (int i : view.getRightTable().getSelectedRows()){
             Object reference = dataModel.getRightTable().getReference()[i];
@@ -198,7 +198,7 @@ public class ScreenBuilder implements IView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CheckProfileOutputBoundary presenter = new CheckProfilePresenter();
-                CheckProfileIGateway gateway = new CheckProfileIMDataAccess();
+                CheckProfileIGateway gateway = new CheckProfileDataAccess();
                 CheckProfileController controller = new CheckProfileController(presenter, gateway);
                 controller.create(dataModel.getRequesterID(), dataModel.getDpt());
                 presenter.showFrame();

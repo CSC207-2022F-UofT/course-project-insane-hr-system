@@ -113,8 +113,8 @@ public class TaskDAO implements TaskDAOInterface {
             statement.setString(3, task.getName());
             statement.setInt(4, task.getHead());
             statement.setString(5, task.getDescription());
-            statement.setString(6, task.getCreateTime().toString());
-            statement.setString(7, task.getState());
+            statement.setString(6, task.getState());
+            statement.setString(7, task.getCreateTime().toString());
             statement.setString(8, task.getType());
 
             if (task.getType().equals("STAR")){
