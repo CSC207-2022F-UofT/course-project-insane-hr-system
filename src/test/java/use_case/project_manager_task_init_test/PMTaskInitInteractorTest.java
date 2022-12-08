@@ -1,4 +1,5 @@
 package use_case.project_manager_task_init_test;
+import DAO.ProjectDAO;
 import data_access.PMTaskInitDataAccess;
 import entity.*;
 import entity.project.CommonProjectFactory;
@@ -48,6 +49,8 @@ public class PMTaskInitInteractorTest {
 
         pm.addCurrProject(project);
         employee.addCurrProject(project);
+        ProjectDAO projectDAO = new ProjectDAO();
+        projectDAO.createProject(project);
 
         //testing the interactor
         PMTaskInitGateway gateway = new PMTaskInitDataAccess();

@@ -1,5 +1,6 @@
 package ui;
 
+import DAO.ProjectDAO;
 import controller.PMTaskInitController;
 import data_access.PMTaskInitDataAccess;
 import entity.*;
@@ -37,9 +38,9 @@ public class PMTaskInitScreen extends JPanel implements ActionListener {
 
         JLabel title = new JLabel("Task Initialization");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        JLabel taskNameInfo = new JLabel("Name of the task: ");
-        JLabel taskDescriptionInfo = new JLabel("Description: ");
-        JLabel employeeIdInfo = new JLabel("ID of the employee to assign the task to: ");
+        JLabel taskNameInfo = new JLabel("Name of the task: ", SwingConstants.LEFT);
+        JLabel taskDescriptionInfo = new JLabel("Description: ", SwingConstants.LEFT);
+        JLabel employeeIdInfo = new JLabel("ID of the employee to assign the task to: ", SwingConstants.LEFT);
 
         JPanel taskNamePanel = new JPanel();
         taskNamePanel.add(taskNameInfo);
@@ -110,6 +111,9 @@ public class PMTaskInitScreen extends JPanel implements ActionListener {
 
         pm.addCurrProject(project);
         employee.addCurrProject(project);
+
+        ProjectDAO projectDAO = new ProjectDAO();
+        projectDAO.createProject(project);
 
         PMTaskInitGateway gateway = new PMTaskInitDataAccess();
         PMTaskInitPresenter presenter = new PMTaskInitPresenter();
