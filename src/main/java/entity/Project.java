@@ -12,4 +12,8 @@ public interface Project extends Organization{
     void setTasks(List<Task> tasks);
 
     String getType();
+
+    Department getDpt();
+
+    void setDpt(Department dpt);
 }

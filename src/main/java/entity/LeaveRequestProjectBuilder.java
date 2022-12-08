@@ -24,7 +24,7 @@ public class LeaveRequestProjectBuilder implements ProjectBuilder {
         LocalDateTime createTime = LocalDateTime.now();
 
         LeaveRequestProject project = new LeaveRequestProject(UUID.randomUUID(), projectName, userID, members, description,
-                createTime, vacationDays, leaveType);
+                createTime, vacationDays, leaveType, user.getDpt());
         user.addCurrProject(project);
 
         // crate a task for every member of the project

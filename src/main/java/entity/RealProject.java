@@ -7,10 +7,6 @@ public interface RealProject extends Project {
 
     boolean removeTask(Task task);
 
-    Department getDpt();
-
-    void setDpt(Department dpt);
-
     List<Task> getTasks();
 
     void setTasks(List<Task> tasks);

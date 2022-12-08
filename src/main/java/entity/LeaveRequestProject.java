@@ -13,23 +13,26 @@ public class LeaveRequestProject extends CommonOrganization implements Project {
     private LeaveType leaveType;
 
     private final String projectType;
+    private Department dpt;
 
     public LeaveRequestProject(UUID oid, String name, Integer head, Set<Integer> members, String description,
-                               LocalDateTime createTime, int vacationDays, LeaveType leaveType) {
+                               LocalDateTime createTime, int vacationDays, LeaveType leaveType, Department dpt) {
         super(oid, name, head, members, description, createTime);
         this.vacationDays = vacationDays;
         this.leaveType = leaveType;
         this.tasks = new ArrayList<>();
         this.projectType = "LEAVE";
+        this.dpt = dpt;
     }
 
     public LeaveRequestProject(UUID oid, String name, Integer head, Set<Integer> members, String description,
-                               LocalDateTime createTime, LocalDateTime closeTime, int vacationDays, LeaveType leaveType) {
+                               LocalDateTime createTime, LocalDateTime closeTime, int vacationDays, LeaveType leaveType, Department dpt) {
         super(oid, name, head, members, description, createTime, closeTime);
         this.vacationDays = vacationDays;
         this.leaveType = leaveType;
         this.projectType = "LEAVE";
         this.tasks = new ArrayList<>();
+        this.dpt = dpt;
     }
 
     @Override
@@ -78,6 +81,16 @@ public class LeaveRequestProject extends CommonOrganization implements Project {
 
     public String getType(){
         return this.projectType;
+    }
+
+    @Override
+    public Department getDpt() {
+        return dpt;
+    }
+
+    @Override
+    public void setDpt(Department dpt) {
+        this.dpt = dpt;
     }
 
     public void update() {
