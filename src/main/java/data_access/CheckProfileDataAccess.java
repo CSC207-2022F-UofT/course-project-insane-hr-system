@@ -10,27 +10,20 @@ import DAOInterfaces.ProjectDAOInterface;
 import DAOInterfaces.TaskDAOInterface;
 import DAOInterfaces.UserDAOInterface;
 import check_profile_validation.CheckProfileIGateway;
-import entity.Department;
 import entity.Organization;
-import entity.Role;
 import entity.User;
-import my_dao.dptDao;
-import my_dao.projectDao;
-import my_dao.taskDao;
-import my_dao.userDao;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.List;
 import java.util.UUID;
 
 public class CheckProfileDataAccess implements CheckProfileIGateway {
 //TODO: implement this gateway.
 
-    private final DepartmentDAOInterface departmentDAO = new DepartmentDAO();
-    private final UserDAOInterface userDAOInterface = new UserDAO();
-    private final TaskDAOInterface taskDAOInterface = new TaskDAO();
-    private final ProjectDAOInterface projectDAOInterface = new ProjectDAO();
+    private final DepartmentDAOInterface dptDB = new DepartmentDAO();
+    private final UserDAOInterface userDB = new UserDAO();
+    private final TaskDAOInterface taskDB = new TaskDAO();
+    private final ProjectDAOInterface projectDB = new ProjectDAO();
 
     private final PropertyChangeSupport observable;
 
@@ -45,7 +38,8 @@ public class CheckProfileDataAccess implements CheckProfileIGateway {
 
     @Override
     public User getUserByUid(Integer target) {
-        return userDAOInterface.getUser(target);
+        return userDB.getUser(target);
+
     }
 
 //    @Override
@@ -64,8 +58,15 @@ public class CheckProfileDataAccess implements CheckProfileIGateway {
 
     @Override
     public Organization getOrgByOid(UUID oid) {
-//            departmentDAO.getDepartment(oid);
+        if (dptDB.getDepartment(oid) != null){
+            return dptDB.getDepartment(oid);
+        } else if(projectDB.getProject(oid) != null){
+            return projectDB.getProject(oid);
+        } else if (taskDB.getTask(oid) != null){
+            return taskDB.getTask(oid);
+        }
         return null;
+
     }
 //
 //    @Override
