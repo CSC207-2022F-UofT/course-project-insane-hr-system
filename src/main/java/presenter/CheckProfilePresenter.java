@@ -1,6 +1,5 @@
 package presenter;
 
-import check_profile_validation.*;
 import entity.Curr;
 import entity.Organization;
 import entity.User;
@@ -10,7 +9,6 @@ import presenter.view_model.ViewModel;
 import ui.ScreenBuilder;
 import use_case.check_profile_validation.CheckProfileOutputBoundary;
 import use_case.check_profile_validation.CheckProfileResponseModel;
-import view_model.*;
 
 public class CheckProfilePresenter implements CheckProfileOutputBoundary {
     private IViewModel viewModel = new ViewModel();

@@ -3,7 +3,6 @@ package ui;
 import controller.ReviewRequestController;
 import data_access.ReviewRequestDataAccess;
 import presenter.ReviewRequestPresenter;
-import review_request.*;
 import use_case.review_request.ReviewRequestDsGateway;
 import use_case.review_request.ReviewRequestInputBoundary;
 import use_case.review_request.ReviewRequestInteractor;

@@ -1,6 +1,5 @@
 package ui;
 
-import check_profile_validation.*;
 import controller.CheckProfileController;
 import data_access.CheckProfileDataAccess;
 import presenter.CheckProfilePresenter;
