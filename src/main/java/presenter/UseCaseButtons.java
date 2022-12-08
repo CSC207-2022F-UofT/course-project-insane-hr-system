@@ -51,7 +51,10 @@ public class UseCaseButtons {
         panel.add(button);
         button.addActionListener(e -> {
             RankEmployeesScreen ui = new RankEmployeesScreen(screenBuilder.getDataModel().getRequesterID());
-            ui.setVisible(true);
+            JFrame frame = new JFrame("Employee Rankings");
+            frame.setContentPane(ui);
+            frame.pack();
+            frame.setVisible(true);
         });
         return panel;
 
