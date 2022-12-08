@@ -2,16 +2,8 @@ package data_access;
 
 
 import DAO.TaskDAO;
-import project_manager_task_init_use_case.PMTaskInitDsRequestModel;
-import project_manager_task_init_use_case.PMTaskInitGateway;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.time.LocalDateTime;
-
-import static utilities.SQLiteDataSource.connection;
+import use_case.project_manager_task_init_use_case.PMTaskInitDsRequestModel;
+import use_case.project_manager_task_init_use_case.PMTaskInitGateway;
 
 
 public class PMTaskInitDataAccess extends TaskDAO implements PMTaskInitGateway {

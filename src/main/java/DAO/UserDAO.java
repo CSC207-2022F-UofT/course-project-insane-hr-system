@@ -1,7 +1,11 @@
 package DAO;
 
-import DAOInterfaces.UserDAOInterface;
-import entity.*;
+import entity.project.Project;
+import entity.role.Position;
+import entity.role.RoleSetter;
+import entity.task.Task;
+import entity.user.CommonUser;
+import entity.user.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -75,6 +79,7 @@ public class UserDAO implements UserDAOInterface {
                 user.setBio(resultSet.getString("bio"));
                 user.setPosition(Position.valueOf(resultSet.getString("position")));
                 user.setStatus(status);
+                user.setVacationDays(resultSet.getInt("vacation_days"));
             }
 
             // get user's tasks
@@ -120,10 +125,10 @@ public class UserDAO implements UserDAOInterface {
 
         if (user.getStatus().equals(CLOSED)) {
             userQuery = "INSERT INTO employees (employee_id, username, password, name, onboarding_date, " +
-                    "department_id, bio, position, status, departure_date) VALUES (?,?,?,?,?,?,?,?,?,?)";
+                    "department_id, bio, position, status, vacation_days, departure_date) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         } else {
-            userQuery = "INSERT INTO employees (employee_id, username, password, name, roles, onboarding_date, department_id, " +
-                    "bio, position, status) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            userQuery = "INSERT INTO employees (employee_id, username, password, name, onboarding_date, department_id, " +
+                    "bio, position, status, vacation_days) VALUES (?,?,?,?,?,?,?,?,?,?)";
         }
 
         PreparedStatement statement;
@@ -138,14 +143,15 @@ public class UserDAO implements UserDAOInterface {
             statement.setString(3, user.getPassword());
             statement.setString(4, user.getName());
             // TODO: drop roles column and update column index below
-            statement.setString(6, user.getOnboardDate().toString());
+            statement.setString(5, user.getOnboardDate().toString());
 
-            statement.setString(7, user.getDpt().getOid().toString());
-            statement.setString(8, user.getBio());
-            statement.setString(9, user.getPosition().toString());
+            statement.setString(6, user.getDpt().getOid().toString());
+            statement.setString(7, user.getBio());
+            statement.setString(8, user.getPosition().toString());
 
             String status = user.getStatus();
-            statement.setString(10, status);
+            statement.setString(9, status);
+            statement.setInt(10, user.getVacationDays());
             if (status.equals(CLOSED)) {
                 statement.setString(11, user.getDepartureDate().toString());
             }

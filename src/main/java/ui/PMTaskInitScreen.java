@@ -2,12 +2,18 @@ package ui;
 
 import controller.PMTaskInitController;
 import data_access.PMTaskInitDataAccess;
-import data_access.placeholderDataAccessClass;
 import entity.*;
+import entity.project.CommonProjectFactory;
+import entity.project.Project;
+import entity.role.Position;
+import entity.role.Role;
+import entity.role.RoleFactory;
+import entity.task.Task;
+import entity.user.CommonUserFactory;
+import entity.user.User;
 import presenter.PMTaskInitPresenter;
-import project_manager_task_init_use_case.PMTaskInitDsRequestModel;
-import project_manager_task_init_use_case.PMTaskInitGateway;
-import project_manager_task_init_use_case.PMTaskInitInteractor;
+import use_case.project_manager_task_init_use_case.PMTaskInitGateway;
+import use_case.project_manager_task_init_use_case.PMTaskInitInteractor;
 
 import javax.swing.*;
 import java.awt.*;

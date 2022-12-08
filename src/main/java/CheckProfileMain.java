@@ -1,33 +1,13 @@
-import check_profile_validation.*;
 import controller.CheckProfileController;
-import data_access.CheckProfileDataAccess;
 import data_access.CheckProfileIMDataAccess;
 import data_access.CheckProfileUserIDMap;
 import entity.Curr;
 import presenter.CheckProfilePresenter;
-import presenter.IViewModel;
-import ui.ScreenBuilder;
-import view_model.Table;
-import view_model.ViewModel;
-
-import javax.swing.*;
+import use_case.check_profile_validation.CheckProfileIGateway;
+import use_case.check_profile_validation.CheckProfileOutputBoundary;
+import presenter.view_model.ViewModel;
 
 public class CheckProfileMain {
-//    public static void main(String[] args) {
-//        ViewModel viewModel = new ViewModel();
-//        CheckProfileIGateway gateway = new CheckProfileDataAccess();
-//
-//        ScreenBuilder screenBuilder = new ScreenBuilder(viewModel, gateway);
-//
-//        CheckProfileOutputBoundary presenter = new CheckProfilePresenter(viewModel);
-//
-//        CheckProfileInputBoundary interactor = new CheckProfileInteractor(gateway, presenter);
-//        CheckProfileController controller = new CheckProfileController(interactor);
-//        JFrame screen = screenBuilder.view();
-//        screen.pack();
-//        screen.setVisible(true);
-//    }
-
     public static void main(String[] args) {
         CheckProfileIGateway gateway = new CheckProfileIMDataAccess();
         CheckProfileOutputBoundary presenter = new CheckProfilePresenter(new ViewModel());
@@ -35,6 +15,7 @@ public class CheckProfileMain {
         Curr.setUser(gateway.getUserByUid(CheckProfileUserIDMap.headId));
         controller.create(CheckProfileUserIDMap.headId, CheckProfileUserIDMap.headId);
         presenter.showFrame();
+
 
     }
 }
