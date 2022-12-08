@@ -61,6 +61,7 @@ public class UseCaseButtons {
         panel.add(evaluateButton);
         EvaluateTaskScreen evaluateTaskScreen = new EvaluateTaskScreen();
         evaluateButton.addActionListener(e -> {
+            evaluateTaskScreen.viewScreen();
         });
         return panel;
     }
