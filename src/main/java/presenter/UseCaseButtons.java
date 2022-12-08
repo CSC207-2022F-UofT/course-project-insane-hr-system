@@ -1,12 +1,8 @@
 package presenter;
 
-import controller.SalaryCalculatorController;
-import presenter.Controllers;
 import ui.*;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class UseCaseButtons {
     //TODO: Please create everyone's button here!
@@ -36,10 +32,7 @@ public class UseCaseButtons {
         JButton enrollButton = new JButton("Enroll Employee");
         panel.add(enrollButton);
         EnrollScreen enrollScreen = new EnrollScreen();
-        enrollButton.addActionListener(e -> {
-            enrollScreen.showScreenMain();
-
-        });
+        enrollButton.addActionListener(e -> enrollScreen.showScreenMain());
         return panel;
     }
 
@@ -60,9 +53,7 @@ public class UseCaseButtons {
         JButton evaluateButton = new JButton("Evaluate Task");
         panel.add(evaluateButton);
         EvaluateTaskScreen evaluateTaskScreen = new EvaluateTaskScreen();
-        evaluateButton.addActionListener(e -> {
-            evaluateTaskScreen.viewScreen();
-        });
+        evaluateButton.addActionListener(e -> evaluateTaskScreen.viewScreen());
         return panel;
     }
 
@@ -70,12 +61,9 @@ public class UseCaseButtons {
         JPanel panel = new JPanel();
         JButton salaryButton = new JButton("Salary Calculator");
         panel.add(salaryButton);
-        salaryButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFrame frame = new JFrame("Dialog");
-                JOptionPane.showMessageDialog(frame, "This functionality has been cut");
-            }
+        salaryButton.addActionListener(e -> {
+            JFrame frame = new JFrame("Dialog");
+            JOptionPane.showMessageDialog(frame, "This functionality has been cut");
         });
         return panel;
     }
@@ -85,14 +73,14 @@ public class UseCaseButtons {
         JButton requestButton = new JButton("Leave Request");
         panel.add(requestButton);
         requestButton.addActionListener(e -> {
-            LeaveRequestScreen ui = new LeaveRequestScreen(screenBuilder.view());
+            LeaveRequestScreen ui = new LeaveRequestScreen(screenBuilder.getViewOnly());
             ui.setVisible(true);
         });
         return panel;
     }
 
     public static JPanel getApproveLeaveTask(ScreenBuilder screenBuilder) {
-        return new ReviewRequestScreen(screenBuilder.view(), screenBuilder.getDataModel().getOid());
+        return new ReviewRequestScreen(screenBuilder.getViewOnly(), screenBuilder.getDataModel().getOid());
     }
 
     public static JPanel getUseCase1(){
@@ -105,7 +93,7 @@ public class UseCaseButtons {
         JButton createButton = new JButton("Create Project");
         panel.add(createButton);
         createButton.addActionListener(e -> {
-            NewProjectForm ui = new NewProjectForm(screenBuilder.view());
+            NewProjectForm ui = new NewProjectForm(screenBuilder.getViewOnly());
             ui.setContentPane(ui.mainPanel);
             ui.pack();
             ui.setVisible(true);

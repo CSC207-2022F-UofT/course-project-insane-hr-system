@@ -9,4 +9,9 @@ public class NewProjectPresenter implements NewProjectOutputBoundary {
     public NewProjectResponseModel prepareCreateProject(NewProjectResponseModel responseModel) {
         return responseModel;
     }
+
+    @Override
+    public NewProjectResponseModel prepareFailureView(String error) {
+        throw new RuntimeException(error);
+    }
 }
