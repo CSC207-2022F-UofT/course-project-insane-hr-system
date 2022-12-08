@@ -202,10 +202,12 @@ public class UserDAO implements UserDAOInterface {
             statement.setInt(1, uid);
             statement.executeUpdate();
 
-            connection.commit();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+
     }
 }
