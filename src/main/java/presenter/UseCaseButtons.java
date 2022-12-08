@@ -1,11 +1,15 @@
 package presenter;
 
 import controller.CompleteTaskController;
+import controller.PMTaskInitController;
 import data_access.CompleteTaskDataAccess;
+import data_access.PMTaskInitDataAccess;
 import ui.*;
 import use_case.complete_task.CompleteTaskInputBoundary;
 import use_case.complete_task.CompleteTaskInteractor;
 import use_case.complete_task.CompleteTaskOutputBoundary;
+import use_case.project_manager_task_init_use_case.PMTaskInitGateway;
+import use_case.project_manager_task_init_use_case.PMTaskInitInteractor;
 
 import javax.swing.*;
 import java.util.UUID;
@@ -23,7 +27,7 @@ public class UseCaseButtons {
             case LEAVE_REQUEST: return getLeaveRequest(screenBuilder);
             case COMPLETE_TASK: return getCompleteTask(screenBuilder);
             case EVALUATE_TASK: return getEvaluateTask();
-            case CREATE_TASK: return getCreateTask();
+            case CREATE_TASK: return getPMTaskInit();
             case COMPLETE_PROJECT:return getCompleteProject();
             case EXAMPLE_USE_CASE: return getUseCase1();
             case APPROVE_LEAVE_TASK: return getApproveLeaveTask(screenBuilder);
@@ -34,6 +38,24 @@ public class UseCaseButtons {
         return null;
     }
 
+    public static JPanel getPMTaskInit() {
+        JPanel panel = new JPanel();
+        JButton button = new JButton("Create New Task");
+        panel.add(button);
+        button.addActionListener(e -> {
+            PMTaskInitGateway gateway = new PMTaskInitDataAccess();
+            PMTaskInitPresenter presenter = new PMTaskInitPresenter();
+            PMTaskInitInteractor interactor = new PMTaskInitInteractor(presenter, gateway);
+            PMTaskInitController controller = new PMTaskInitController(interactor);
+
+            PMTaskInitScreen taskInitScreen = new PMTaskInitScreen(controller);
+            JFrame frame = new JFrame("Task Initialization");
+            frame.setContentPane(taskInitScreen);
+            frame.pack();
+            frame.setVisible(true);
+        });
+        return panel;
+    }
     private static JPanel getCompleteProject() {
         JPanel panel = new JPanel();
         JButton createButton = new JButton("Complete Project");
