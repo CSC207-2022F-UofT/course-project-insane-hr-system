@@ -1,5 +1,6 @@
-package check_profile_validation;
+package use_case.check_profile_validation;
 
+import check_profile_validation.*;
 import controller.CheckProfileController;
 import data_access.CheckProfileIMDataAccess;
 import data_access.CheckProfileUserIDMap;
@@ -9,7 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import presenter.CheckProfilePresenter;
 import presenter.IViewModel;
-import ui.ScreenBuilder;
 import view_model.ViewModel;
 
 import java.util.UUID;

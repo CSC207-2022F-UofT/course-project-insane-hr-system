@@ -1,5 +1,8 @@
-package create_new_project;
+package use_case.create_new_project;
 
+import create_new_project.NewProjectGateway;
+import create_new_project.NewProjectInputBoundary;
+import create_new_project.NewProjectRequestModel;
 import data_access.NewProjectDataAccess;
 import entity.Project;
 import org.junit.Test;

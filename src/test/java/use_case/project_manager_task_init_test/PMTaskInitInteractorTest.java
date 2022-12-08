@@ -1,7 +1,6 @@
-package project_manager_task_init_test;
+package use_case.project_manager_task_init_test;
 import data_access.PMTaskInitDataAccess;
 import entity.*;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import presenter.PMTaskInitPresenter;
 import project_manager_task_init_use_case.*;
