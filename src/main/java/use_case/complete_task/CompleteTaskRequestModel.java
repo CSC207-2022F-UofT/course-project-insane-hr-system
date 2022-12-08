@@ -3,23 +3,20 @@ package use_case.complete_task;
 import entity.task.Task;
 import entity.user.User;
 
+import java.util.UUID;
+
 public class CompleteTaskRequestModel {
-    private Task task;
+    private final UUID taskId;
     private User user;
-    private String message;
 
-    public CompleteTaskRequestModel(Task task, User user, String message) {
-        this.task = task;
+    public CompleteTaskRequestModel(UUID taskId, User user) {
+        this.taskId = taskId;
         this.user = user;
-        this.message = message;
     }
 
-    public Task getTask() {
-        return task;
-    }
 
-    public void setTask(Task task) {
-        this.task = task;
+    public UUID getTaskId() {
+        return taskId;
     }
 
     public User getUser() {
@@ -30,11 +27,4 @@ public class CompleteTaskRequestModel {
         this.user = user;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 }
