@@ -17,22 +17,34 @@ public class UseCaseButtons {
             case LEAVE_REQUEST: return getLeaveRequest(screenBuilder);
             case COMPLETE_TASK: return getCompleteTask(screenBuilder);
             case EVALUATE_TASK: return getEvaluateTask();
-            case CREATE_TASK:;
-            case COMPLETE_PROJECT:;
+            case CREATE_TASK: return getCreateTask();
+            case COMPLETE_PROJECT:return getCompleteProject();
             case EXAMPLE_USE_CASE: return getUseCase1();
             case APPROVE_LEAVE_TASK: return getApproveLeaveTask(screenBuilder);
         }
-        JPanel jPanel = new JPanel();
-        jPanel.add(new JLabel("No Controller is allowed"));
-        return jPanel;
+//        JPanel jPanel = new JPanel();
+//        jPanel.add(new JLabel("No Controller is allowed"));
+//        return jPanel;
+        return null;
     }
 
-    private static JPanel getEnrollEmploye() {
+    private static JPanel getCompleteProject() {
         JPanel panel = new JPanel();
-        JButton enrollButton = new JButton("Enroll Employee");
-        panel.add(enrollButton);
-        EnrollScreen enrollScreen = new EnrollScreen();
-        enrollButton.addActionListener(e -> enrollScreen.showScreenMain());
+        JButton createButton = new JButton("Complete Project");
+        panel.add(createButton);
+        createButton.addActionListener(e -> {
+            JOptionPane.showMessageDialog(panel, "This functionality will coming soon");
+        });
+        return panel;
+    }
+
+    private static JPanel getCreateTask() {
+        JPanel panel = new JPanel();
+        JButton createButton = new JButton("Create Task");
+        panel.add(createButton);
+        createButton.addActionListener(e -> {
+            JOptionPane.showMessageDialog(panel, "This functionality will coming soon");
+        });
         return panel;
     }
 
