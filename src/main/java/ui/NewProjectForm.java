@@ -10,9 +10,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.InputMethodEvent;
 import java.awt.event.InputMethodListener;
 
-public class NewProjectForm {
+public class NewProjectForm extends JDialog {
     private JButton submitAndCreateProjectButton;
-    private JPanel mainPanel;
+    public JPanel mainPanel;
     private JTextField PMidTextField;
     private JTextField ProjNametextField;
     private JTextField descriptextField;
@@ -27,8 +27,9 @@ public class NewProjectForm {
     public final NewProjectInputBoundary projectInput = new NewProjectInteractor();
     public final NewProjectController controller = new NewProjectController(projectInput);
 
-    public NewProjectForm() {
+    public NewProjectForm(JFrame frame) {
 
+        super(frame, "Create Project");
         submitAndCreateProjectButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -39,14 +40,12 @@ public class NewProjectForm {
                 String dpt = descriptextField.getText();
                 controller.create(PMid, funds, name, description, dpt);
             }
-
-
         });
     }
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Project");
-        frame.setContentPane(new NewProjectForm().mainPanel);
+        frame.setContentPane(new NewProjectForm(frame).mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);

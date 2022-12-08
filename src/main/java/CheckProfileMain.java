@@ -32,8 +32,8 @@ public class CheckProfileMain {
         CheckProfileIGateway gateway = new CheckProfileIMDataAccess();
         CheckProfileOutputBoundary presenter = new CheckProfilePresenter(new ViewModel());
         CheckProfileController controller = new CheckProfileController(presenter, gateway);
-        Curr.setUser(gateway.getUserByUid(CheckProfileUserIDMap.employee01Id));
-        controller.create(CheckProfileUserIDMap.employee01Id, CheckProfileUserIDMap.employee01Id);
+        Curr.setUser(gateway.getUserByUid(CheckProfileUserIDMap.headId));
+        controller.create(CheckProfileUserIDMap.headId, CheckProfileUserIDMap.headId);
         presenter.showFrame();
 
 
