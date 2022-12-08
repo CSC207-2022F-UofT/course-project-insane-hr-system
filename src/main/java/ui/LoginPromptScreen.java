@@ -11,10 +11,14 @@ import use_case.login.LoginSuccessResponseModel;
 import presenter.CheckProfilePresenter;
 import presenter.view_model.ViewModel;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 // Frameworks/Drivers layer
 
@@ -51,16 +55,13 @@ public class LoginPromptScreen extends JPanel implements ActionListener {
     /**
      * constructs a login screen with username, password text panels and login button
      */
-    public LoginPromptScreen(LoginController loginController, JPanel screens, CardLayout cardLayout) {
+    public LoginPromptScreen(LoginController loginController, JPanel screens, CardLayout cardLayout) throws IOException {
 
         this.cardLayout = cardLayout;
 
         this.screens = screens;
 
         this.loginController = loginController;
-
-        JLabel title = new JLabel("Login Screen");
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         LabelTextPanel usernameInfo = new LabelTextPanel(
                 new JLabel("Username"), username);
@@ -69,15 +70,18 @@ public class LoginPromptScreen extends JPanel implements ActionListener {
 
         JButton signUp = new JButton("Login");
 
+        BufferedImage logo = ImageIO.read(new File("src/main/java/ui/logo.png"));
+        Image scaledLogo = logo.getScaledInstance(150,75,Image.SCALE_SMOOTH);
+        JLabel logoLabel = new JLabel(new ImageIcon(scaledLogo));
+
         JPanel buttons = new JPanel();
         buttons.add(signUp);
 
         signUp.addActionListener(this);
 
-        // this.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        this.add(title);
+        this.add(logoLabel);
         this.add(usernameInfo);
         this.add(passwordInfo);
         this.add(buttons);
