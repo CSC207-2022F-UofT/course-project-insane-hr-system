@@ -1,5 +1,14 @@
 package data_access;
 
+import entity.project.CommonProject;
+import entity.project.Project;
+import entity.role.IRoleFactory;
+import entity.role.PositionSetter;
+import entity.role.RoleFactory;
+import entity.task.CommonTask;
+import entity.task.Task;
+import entity.user.CommonUser;
+import entity.user.User;
 import use_case.check_profile_validation.CheckProfileIGateway;
 import entity.*;
 

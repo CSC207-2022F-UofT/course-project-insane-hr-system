@@ -2,9 +2,9 @@ package data_access;
 
 import use_case.enroll_employee.EnrollDsGateway;
 import use_case.enroll_employee.EnrollDsRequestModel;
-import entity.CommonUser;
+import entity.user.CommonUser;
 import entity.Department;
-import entity.User;
+import entity.user.User;
 
 import java.time.LocalDateTime;
 import java.util.*;

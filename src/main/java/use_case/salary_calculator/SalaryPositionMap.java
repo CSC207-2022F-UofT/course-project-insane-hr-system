@@ -1,7 +1,7 @@
 package use_case.salary_calculator;
 
-import entity.Position;
-import entity.Role;
+import entity.role.Position;
+import entity.role.Role;
 
 public class SalaryPositionMap {
     static Integer getHourSalaryByPosition(Role role) throws IllegalArgumentException {

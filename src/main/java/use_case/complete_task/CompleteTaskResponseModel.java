@@ -1,23 +1,16 @@
 package use_case.complete_task;
 
-import entity.Task;
+import entity.task.Task;
+
+import java.util.UUID;
 
 public class CompleteTaskResponseModel {
-    private Task task;
     private String response;
 
-    public CompleteTaskResponseModel(Task task, String response) {
-        this.task = task;
+    public CompleteTaskResponseModel(String response) {
         this.response = response;
     }
 
-    public Task getTask() {
-        return task;
-    }
-
-    public void setTask(Task task) {
-        this.task = task;
-    }
 
     public String getResponse() {
         return response;

@@ -1,6 +1,10 @@
 package presenter;
 
 import entity.*;
+import entity.project.CommonProject;
+import entity.project.Project;
+import entity.user.CommonUser;
+import entity.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

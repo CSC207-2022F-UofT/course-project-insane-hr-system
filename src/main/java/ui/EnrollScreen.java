@@ -3,8 +3,8 @@ package ui;
 
 import controller.EnrollController;
 import data_access.EnrollDataAccess;
-import entity.CommonUserFactory;
-import entity.UserFactory;
+import entity.user.CommonUserFactory;
+import entity.user.UserFactory;
 import presenter.EnrollPresenter;
 import use_case.enroll_employee.*;
 

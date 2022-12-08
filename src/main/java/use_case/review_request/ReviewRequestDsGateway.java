@@ -1,6 +1,6 @@
 package use_case.review_request;
 
-import entity.Task;
+import entity.task.Task;
 
 import java.util.UUID;
 

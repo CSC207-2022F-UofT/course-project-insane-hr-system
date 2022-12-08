@@ -1,6 +1,6 @@
 package use_case.add_remove_employee_to_project;
 
-import entity.Project;
+import entity.project.Project;
 
 public class EmployeeToProjectRequestModel {
 

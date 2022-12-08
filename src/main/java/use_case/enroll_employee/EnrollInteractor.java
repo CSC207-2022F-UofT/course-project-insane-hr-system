@@ -1,6 +1,12 @@
 package use_case.enroll_employee;
 
 import entity.*;
+import entity.project.Project;
+import entity.role.Position;
+import entity.role.Role;
+import entity.task.Task;
+import entity.user.User;
+import entity.user.UserFactory;
 
 import java.time.LocalDate;
 import java.util.*;

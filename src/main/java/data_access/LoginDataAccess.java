@@ -1,7 +1,7 @@
 package data_access;
 
 import DAO.UserDAO;
-import entity.User;
+import entity.user.User;
 import use_case.login.LoginDSGateway;
 import use_case.login.LoginRequestModel;
 

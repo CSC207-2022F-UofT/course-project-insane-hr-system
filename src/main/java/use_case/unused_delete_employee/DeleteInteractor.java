@@ -1,6 +1,6 @@
 package use_case.unused_delete_employee;
 
-import entity.User;
+import entity.user.User;
 
 import java.time.LocalDateTime;
 

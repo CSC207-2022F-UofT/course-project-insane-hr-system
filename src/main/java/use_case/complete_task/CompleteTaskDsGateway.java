@@ -1,5 +1,11 @@
 package use_case.complete_task;
 
+import java.util.UUID;
+
+import entity.task.Task;
+
 public interface CompleteTaskDsGateway {
-    void save(CompleteTaskRequestModel requestModel);
+    void save(CompleteTaskDsRequestModel requestModel);
+
+    Task getTask(UUID oid);
 }

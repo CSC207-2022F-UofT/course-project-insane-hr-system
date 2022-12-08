@@ -4,6 +4,8 @@ import controller.CheckProfileController;
 import data_access.CheckProfileIMDataAccess;
 import data_access.CheckProfileUserIDMap;
 import entity.*;
+import entity.role.RelativeRelation;
+import entity.user.CommonUser;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

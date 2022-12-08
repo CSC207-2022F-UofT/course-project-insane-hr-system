@@ -2,6 +2,9 @@ package use_case.enroll_employee;
 
 import data_access.IMEnrollEmployee;
 import entity.*;
+import entity.user.CommonUser;
+import entity.user.CommonUserFactory;
+import entity.user.UserFactory;
 import org.junit.jupiter.api.Test;
 import presenter.EnrollPresenter;
 

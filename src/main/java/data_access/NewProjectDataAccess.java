@@ -7,7 +7,7 @@ import use_case.create_new_project.NewProjectResponseModel;
 import entity.Department;
 import DAO.DepartmentDAOInterface;
 import DAO.ProjectDAOInterface;
-import entity.Project;
+import entity.project.Project;
 
 import java.util.List;
 import java.util.UUID;

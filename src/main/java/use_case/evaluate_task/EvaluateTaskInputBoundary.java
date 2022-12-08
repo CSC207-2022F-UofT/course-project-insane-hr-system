@@ -3,5 +3,5 @@ package use_case.evaluate_task;
 import use_case.complete_task.CompleteTaskRequestModel;
 
 public interface EvaluateTaskInputBoundary {
-    EvaluateTaskResponseModel create(CompleteTaskRequestModel requestModel);
+    EvaluateTaskResponseModel create(EvaluateTaskRequestModel requestModel);
 }

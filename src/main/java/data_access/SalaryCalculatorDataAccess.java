@@ -1,9 +1,9 @@
 package data_access;
 
 import DAO.*;
-import entity.Project;
-import entity.Task;
-import entity.User;
+import entity.project.Project;
+import entity.task.Task;
+import entity.user.User;
 
 import use_case.salary_calculator.SalaryCalculatorGateway;
 

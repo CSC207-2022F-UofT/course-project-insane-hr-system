@@ -7,9 +7,9 @@ import DAO.DepartmentDAOInterface;
 import DAO.UserDAOInterface;
 import use_case.enroll_employee.EnrollDsGateway;
 import use_case.enroll_employee.EnrollDsRequestModel;
-import entity.CommonUser;
+import entity.user.CommonUser;
 import entity.Department;
-import entity.User;
+import entity.user.User;
 
 import java.util.*;
 
