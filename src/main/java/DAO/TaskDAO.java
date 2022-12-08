@@ -16,11 +16,11 @@ import static utilities.SQLiteDataSource.connection;
 public class TaskDAO implements TaskDAOInterface {
 
     // get one task. //
-
+    @Override
     public Task getTask(UUID taskID){
         Task task = null;
 
-        String query = "SELECT * FROM tasks WHERE ID=" +taskID.toString();
+        String query = "SELECT * FROM tasks WHERE ID='" + taskID.toString() + "'";
         Statement statement;
         ResultSet resultSet;
 
@@ -34,7 +34,6 @@ public class TaskDAO implements TaskDAOInterface {
                 task = getProjectTask(taskID, project);
             }
 
-            connection.close();
 
 
 
@@ -48,7 +47,7 @@ public class TaskDAO implements TaskDAOInterface {
     }
 
     // get all tasks //
-
+    @Override
     public List<Task> getAllTasks(){
         String query = "SELECT * FROM tasks";
         List<Task> tasks = new ArrayList<>();
@@ -65,8 +64,6 @@ public class TaskDAO implements TaskDAOInterface {
                 tasks.add(getTask(taskID));
             }
 
-            connection.close();
-
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -76,7 +73,7 @@ public class TaskDAO implements TaskDAOInterface {
     }
 
     // create a task in the database //
-
+    @Override
     public void createTask(Task task){
 
         String query;
@@ -140,7 +137,6 @@ public class TaskDAO implements TaskDAOInterface {
             saveTaskMembers(task);
 
 
-            connection.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -181,7 +177,6 @@ public class TaskDAO implements TaskDAOInterface {
             statement.executeUpdate();
 
             connection.commit();
-            connection.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -189,6 +184,7 @@ public class TaskDAO implements TaskDAOInterface {
 
     }
 
+    @Override
     public void updateTask(Task task){
         deleteTask(task.getOid());
         createTask(task);
@@ -207,7 +203,7 @@ public class TaskDAO implements TaskDAOInterface {
     public Task getProjectTask(UUID taskID, Project project) {
         Task task = null;
         Set<Integer> members = getTaskMembers(taskID);
-        String query = "SELECT * FROM tasks WHERE ID=" + taskID;
+        String query = "SELECT * FROM tasks WHERE ID='" + taskID + "'";
         Statement statement;
         ResultSet result;
 
@@ -278,7 +274,7 @@ public class TaskDAO implements TaskDAOInterface {
     // helper function : get task members //
     public Set<Integer> getTaskMembers(UUID taskID){
 
-        String querySQL = "SELECT * FROM task_map where ID=" + taskID.toString();
+        String querySQL = "SELECT * FROM task_map where ID='" + taskID.toString() + "'";
         Set<Integer> memberIds = new TreeSet<>();
         Statement statement;
         ResultSet resultSet;
@@ -318,7 +314,6 @@ public class TaskDAO implements TaskDAOInterface {
                 statement.executeUpdate();
             }
             connection.commit();
-            connection.close();
 
         } catch(SQLException e){
             e.printStackTrace();

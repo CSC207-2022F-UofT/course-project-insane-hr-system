@@ -86,6 +86,7 @@ public class EnrollDataAccess implements EnrollDsGateway {
     public void save(EnrollDsRequestModel requestModel) {
         User user = requestModel.getUser();
         CommonUser commonUser = new CommonUser(user.getId(),user.getDpt(), user.getBio(), user.getUserFile());
+        commonUser.setName(user.getName());
         userDAOInterface.createUser(commonUser);
     }
 

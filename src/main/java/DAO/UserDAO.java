@@ -8,9 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import static entity.Constants.OPEN;
 import static utilities.SQLiteDataSource.connection;
@@ -33,7 +31,6 @@ public class UserDAO implements UserDAOInterface {
                 users.add(getUser(uid));
             }
 
-            connection.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -50,9 +47,9 @@ public class UserDAO implements UserDAOInterface {
     @Override
     public User getUser(Integer uid) {
         User user = new CommonUser(uid);  // initialize user class
-        String userQuery = "SELECT * FROM employees WHERE employee_id=" + uid;
-        String taskQuery = "SELECT * FROM task_map WHERE memberID=" + uid;
-        String projectQuery = "SELECT * FROM projectMemberMap WHERE memberID=" + uid;
+        String userQuery = "SELECT * FROM employees WHERE employee_id='" + uid + "'";
+        String taskQuery = "SELECT * FROM task_map WHERE memberID='" + uid + "'";
+        String projectQuery = "SELECT * FROM projectMemberMap WHERE memberID='" + uid + "'";
 
         Statement statement;
         ResultSet resultSet;
@@ -107,7 +104,6 @@ public class UserDAO implements UserDAOInterface {
             // set user's roles
             new RoleSetter().resetRoleOfUser(user);
 
-            connection.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -124,7 +120,7 @@ public class UserDAO implements UserDAOInterface {
 
         if (user.getStatus().equals(CLOSED)) {
             userQuery = "INSERT INTO employees (employee_id, username, password, name, onboarding_date, " +
-                    "departure_date, department_id, bio, position, status) VALUES (?,?,?,?,?,?,?,?,?,?)";
+                    "department_id, bio, position, status, departure_date) VALUES (?,?,?,?,?,?,?,?,?,?)";
         } else {
             userQuery = "INSERT INTO employees (employee_id, username, password, name, roles, onboarding_date, department_id, " +
                     "bio, position, status) VALUES (?,?,?,?,?,?,?,?,?,?)";
@@ -144,15 +140,15 @@ public class UserDAO implements UserDAOInterface {
             // TODO: drop roles column and update column index below
             statement.setString(6, user.getOnboardDate().toString());
 
-            String status = user.getStatus();
-            if (status.equals(CLOSED)) {
-                statement.setString(7, user.getDepartureDate().toString());
-            }
+            statement.setString(7, user.getDpt().getOid().toString());
+            statement.setString(8, user.getBio());
+            statement.setString(9, user.getPosition().toString());
 
-            statement.setString(8, user.getDpt().getOid().toString());
-            statement.setString(9, user.getBio());
-            statement.setString(10, user.getPosition().toString());
-            statement.setString(11, status);
+            String status = user.getStatus();
+            statement.setString(10, status);
+            if (status.equals(CLOSED)) {
+                statement.setString(11, user.getDepartureDate().toString());
+            }
 
             statement.executeUpdate();
 
@@ -171,9 +167,6 @@ public class UserDAO implements UserDAOInterface {
                 statement.setInt(2, user.getId());
                 statement.executeUpdate();
             }
-
-            connection.commit();
-            connection.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -209,11 +202,12 @@ public class UserDAO implements UserDAOInterface {
             statement.setInt(1, uid);
             statement.executeUpdate();
 
-            connection.commit();
-            connection.close();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+
     }
 }

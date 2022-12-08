@@ -36,6 +36,5 @@ public class CheckProfileMain {
         controller.create(CheckProfileUserIDMap.employee11Id, CheckProfileUserIDMap.employee11Id);
         presenter.showFrame();
 
-
     }
 }

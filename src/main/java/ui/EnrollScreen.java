@@ -46,6 +46,14 @@ public class EnrollScreen extends JPanel{
                 }
             }
         });
+
+//        Cancel.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                EnrollPanel.
+//            }
+//        });
+
     }
     public void newEmployeeScreen(EnrollResponseModel enrollResponseModel){
         JFrame frame2 = new JFrame("New Employee");
@@ -54,7 +62,7 @@ public class EnrollScreen extends JPanel{
         newEmployeeScreen.setEnrollResponseModel(enrollResponseModel);
         newEmployeeScreen.setInfo();
         newEmployeeScreen.showScreen(newEmployeeScreen,frame2);
-        frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame2.pack();
         frame2.setVisible(true);
     }
@@ -77,7 +85,7 @@ public class EnrollScreen extends JPanel{
         this.positionCom.setModel(new DefaultComboBoxModel<>(new String[] { "HEAD", "MEMBER" }));
     }
 
-    public void showScreen(){
+    public void showScreenMain(){
         EnrollDsGateway dsGateway = new EnrollDataAccess();
         EnrollOutputBoundary enrollOutputBoundary = new EnrollPresenter();
         UserFactory userFactory = new CommonUserFactory();
@@ -95,7 +103,9 @@ public class EnrollScreen extends JPanel{
         EnrollScreen.setPositionCom();
         EnrollScreen.showScreen(EnrollScreen,frame);
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }

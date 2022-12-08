@@ -14,9 +14,9 @@ public class EnrollInteractor implements EnrollInputBoundary{
 
 
     public EnrollInteractor(EnrollDsGateway enrolldsGateway, EnrollOutputBoundary enrollOutputBoundary, UserFactory userFactory) {
-        //this.enrolldsGateway = enrolldsGateway;
+        this.enrolldsGateway = enrolldsGateway;
 
-        this.enrolldsGateway = new IMEnrollEmployee();
+        //this.enrolldsGateway = new IMEnrollEmployee();
         this.enrollOutputBoundary = enrollOutputBoundary;
         this.userFactory = userFactory;
     }
@@ -39,6 +39,7 @@ public class EnrollInteractor implements EnrollInputBoundary{
         LocalDate onboardDate = LocalDate.now();
 
         User user = userFactory.create(id,dpt,"",username,password,roles,projects,tasks, position,onboardDate);
+        user.setName(requestModel.getName());
 
         if (position.equals(Position.MEMBER)){
             dpt.addMember(user.getId());
@@ -50,7 +51,7 @@ public class EnrollInteractor implements EnrollInputBoundary{
         enrolldsGateway.save(dsRequestModel);
         enrolldsGateway.updateDepartment(dpt);
 
-        EnrollResponseModel responseModel = new EnrollResponseModel(user.getId(), user.getUsername(), user.getPassword(), user.getOnboardDate());
+        EnrollResponseModel responseModel = new EnrollResponseModel(user.getName(),user.getId(), user.getUsername(), user.getPassword(), user.getOnboardDate());
         return enrollOutputBoundary.prepareSuccessView(responseModel);
 
     }
