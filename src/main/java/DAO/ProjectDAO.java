@@ -19,7 +19,7 @@ public class ProjectDAO implements ProjectDAOInterface {
     @Override
     public Project getProject(UUID projectID){
         Project project = getEmptyProject(projectID);
-        String query = "SELECT * FROM projectTaskMap WHERE projectID=" + projectID.toString();
+        String query = "SELECT * FROM projectTaskMap WHERE projectID='" + projectID.toString() + "'";
 
         Statement statement;
         ResultSet resultSet;
@@ -214,7 +214,7 @@ public class ProjectDAO implements ProjectDAOInterface {
 
     // helper function : get all project members //
     public Set<Integer> getProjectMembers(UUID projectID){
-        String querySQL = "SELECT * FROM projectMemberMap where projectID = " + projectID.toString();
+        String querySQL = "SELECT * FROM projectMemberMap where projectID = '" + projectID.toString() + "'";
         Set<Integer> memberIds = new TreeSet<>();
         Statement statement;
         ResultSet resultSet;
@@ -241,7 +241,7 @@ public class ProjectDAO implements ProjectDAOInterface {
 
         Set<Integer> members = getProjectMembers(projectID);
         List<Task> tasks = new ArrayList<>();
-        String query = "SELECT * FROM project WHERE ID=" + projectID;
+        String query = "SELECT * FROM project WHERE ID='" + projectID + "'";
         Project project = null;
         Statement statement;
         ResultSet result;

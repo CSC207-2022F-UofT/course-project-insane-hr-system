@@ -20,7 +20,7 @@ public class TaskDAO implements TaskDAOInterface {
     public Task getTask(UUID taskID){
         Task task = null;
 
-        String query = "SELECT * FROM tasks WHERE ID=" +taskID.toString();
+        String query = "SELECT * FROM tasks WHERE ID='" + taskID.toString() + "'";
         Statement statement;
         ResultSet resultSet;
 
@@ -203,7 +203,7 @@ public class TaskDAO implements TaskDAOInterface {
     public Task getProjectTask(UUID taskID, Project project) {
         Task task = null;
         Set<Integer> members = getTaskMembers(taskID);
-        String query = "SELECT * FROM tasks WHERE ID=" + taskID;
+        String query = "SELECT * FROM tasks WHERE ID='" + taskID + "'";
         Statement statement;
         ResultSet result;
 
@@ -274,7 +274,7 @@ public class TaskDAO implements TaskDAOInterface {
     // helper function : get task members //
     public Set<Integer> getTaskMembers(UUID taskID){
 
-        String querySQL = "SELECT * FROM task_map where ID=" + taskID.toString();
+        String querySQL = "SELECT * FROM task_map where ID='" + taskID.toString() + "'";
         Set<Integer> memberIds = new TreeSet<>();
         Statement statement;
         ResultSet resultSet;

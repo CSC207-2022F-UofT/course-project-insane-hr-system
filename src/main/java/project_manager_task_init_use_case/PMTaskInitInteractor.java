@@ -26,6 +26,14 @@ public class PMTaskInitInteractor implements PMTaskInitInputBoundary{
         this.taskInitGateway = gateway;
     }
 
+    /**
+     *This method creates a new task from the request model, and saves it in the database, then returns the response
+     * model that gets passed to the presenter.
+     *
+     * @param requestModel the request model created from user input
+     * @return the response model that gets passed to the presenter
+     */
+
     public PMTaskInitResponseModel createTask(PMTaskInitRequestModel requestModel) {
 
         Set<Integer> members = new HashSet<>();
@@ -33,7 +41,7 @@ public class PMTaskInitInteractor implements PMTaskInitInputBoundary{
         LocalDateTime createTime = LocalDateTime.now();
         Task task = commonTaskFactory.createOpenTask(requestModel.getTaskName(), members, requestModel.getTaskDescription(), createTime);
 
-        PMTaskInitDsRequestModel dsRequestModel = new PMTaskInitDsRequestModel(task.getOid(), task.getName(), task.getHead(), task.getMembers(), task.getDescription(), task.getCreateTime());
+        PMTaskInitDsRequestModel dsRequestModel = new PMTaskInitDsRequestModel((CommonTask) task);
         taskInitGateway.saveTask(dsRequestModel);
 
         PMTaskInitResponseModel responseModel = new PMTaskInitResponseModel(requestModel.getTaskName(), requestModel.getTaskDescription(), requestModel.getEmployeeId());
