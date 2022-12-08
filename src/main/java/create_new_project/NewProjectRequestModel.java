@@ -8,21 +8,21 @@ import java.util.UUID;
 
 public class NewProjectRequestModel {
     Integer ProjectManagerID;
-    Set<Integer> teams;
     Integer funds;
     String name;
     String description;
-    LocalDateTime createTime;
-    Department dpt;
-    LocalDateTime closeTime;
-    Boolean finished;
+    static String dpt;
+
+    public NewProjectRequestModel(int pmid, int funds, String name, String descrip, String dpt) {
+        this.ProjectManagerID = pmid;
+        this.funds = funds;
+        this.name = name;
+        this.description = descrip;
+        this.dpt = dpt;
+    }
 
     public Integer getProjectManagerID() {
         return ProjectManagerID;
-    }
-
-    public Set<Integer> getTeams() {
-        return teams;
     }
 
     public Integer getFunds() {
@@ -37,19 +37,7 @@ public class NewProjectRequestModel {
         return description;
     }
 
-    public Boolean getFinished() {
-        return finished;
-    }
-
-    public LocalDateTime getCloseTime() {
-        return closeTime;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public Department getDpt() {
+    public static String getDpt() {
         return dpt;
     }
 }

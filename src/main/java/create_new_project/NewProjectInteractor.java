@@ -1,15 +1,19 @@
 package create_new_project;
 
+import DAO.DepartmentDAO;
+import DAOInterfaces.DepartmentDAOInterface;
+import data_access.NewProjectDataAccess;
 import entity.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
 public class NewProjectInteractor implements NewProjectInputBoundary {
 
-
+    private final NewProjectGateway newgateway = new NewProjectDataAccess();
     @Override
     public NewProjectResponseModel create(NewProjectRequestModel requestModel) {
 
@@ -22,7 +26,7 @@ public class NewProjectInteractor implements NewProjectInputBoundary {
         String name = requestModel.getName();
         String description = requestModel.getDescription();
         LocalDateTime createTime = LocalDateTime.now();
-        Department dpt = requestModel.getDpt();
+        Department dpt = getDpt(NewProjectRequestModel.getDpt());
         LocalDateTime closeTime = null;
         Boolean finished = false;
 
@@ -31,8 +35,16 @@ public class NewProjectInteractor implements NewProjectInputBoundary {
                 dpt, tasks, funds);
 
         // return response model
-        return new NewProjectResponseModel(PMid, teams, tasks, funds, name, description,
-                createTime, dpt, closeTime, finished, project);
+        return new NewProjectResponseModel(project);
     }
 
+    private Department getDpt(String dpt) {
+        List<Department> ldpt = newgateway.getDptList();
+        for (Department dp: ldpt) {
+            if (Objects.equals(dp.getName(), dpt)) {
+                return dp;
+            }
+        }
+        return null;
+    }
 }

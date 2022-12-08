@@ -10,81 +10,12 @@ import java.util.Set;
 import java.util.UUID;
 
 public class NewProjectResponseModel {
-    UUID oid;
-    Integer ProjectManagerID;
-    Set<Integer> teams;
-    List<Task> tasks;
-    Integer funds;
-    String name;
-    String description;
-    LocalDateTime createTime;
-    Department dpt;
-    LocalDateTime closeTime;
-    Boolean finished;
     Project project;
 
-    public NewProjectResponseModel(Integer PM, Set<Integer> teams, List<Task> tasks,
-                                   Integer funds, String name, String description,
-                                   LocalDateTime createTime, Department dpt,
-                                   LocalDateTime closeTime, Boolean finished,
-                                   Project project) {
-        this.ProjectManagerID = PM;
-        this.tasks = tasks;
-        this.teams = teams;
-        this.funds = funds;
-        this.name = name;
-        this.description = description;
-        this.createTime = createTime;
-        this.dpt = dpt;
-        this.closeTime = closeTime;
+    public NewProjectResponseModel(Project project) {
         this.project = project;
     }
-
-    public Integer getProjectManagerID() {
-        return ProjectManagerID;
-    }
-
-    public Set<Integer> getTeams() {
-        return teams;
-    }
-
     public Project getProject() {
         return project;
-    }
-
-    public UUID getOid() {
-        return oid;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Boolean getFinished() {
-        return finished;
-    }
-
-    public LocalDateTime getCloseTime() {
-        return closeTime;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public Integer getFunds() {
-        return funds;
-    }
-
-    public Department getDpt() {
-        return dpt;
     }
 }
