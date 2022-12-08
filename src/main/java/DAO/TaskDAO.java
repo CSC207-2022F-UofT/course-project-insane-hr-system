@@ -131,7 +131,6 @@ public class TaskDAO implements TaskDAOInterface {
             }
 
             statement.executeUpdate();
-            connection.commit();
 
             // save all task members to the database as well
             saveTaskMembers(task);
@@ -313,7 +312,6 @@ public class TaskDAO implements TaskDAOInterface {
                 statement.setInt(2, memberID);
                 statement.executeUpdate();
             }
-            connection.commit();
 
         } catch(SQLException e){
             e.printStackTrace();

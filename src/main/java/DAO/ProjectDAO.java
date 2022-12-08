@@ -88,10 +88,10 @@ public class ProjectDAO implements ProjectDAOInterface {
         }
         else{
             if (project.getState().equals(CLOSED)){
-                query = "INSERT INTO project (id, name, head, description, start, type, status, vacation_days, leave_type, num_responses, 'end') VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+                query = "INSERT INTO project (id, name, head, description, start, type, status, department, vacation_days, leave_type, num_responses, 'end') VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
             }
             else{
-                query = "INSERT INTO project (id, name, head, description, start, type, status, vacation_days, leave_type, num_responses) VALUES (?,?,?,?,?,?,?,?,?,?)";
+                query = "INSERT INTO project (id, name, head, description, start, type, status, department, vacation_days, leave_type, num_responses) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             }
 
         }
@@ -124,9 +124,9 @@ public class ProjectDAO implements ProjectDAOInterface {
 
             }
             else {
-                statement.setInt(8, ((LeaveRequestProject) project).getVacationDays());
-                statement.setString(9, ((LeaveRequestProject) project).getLeaveType().toString()) ;
-                statement.setInt(10, ((LeaveRequestProject) project).getNumResponses());
+                statement.setInt(9, ((LeaveRequestProject) project).getVacationDays());
+                statement.setString(10, ((LeaveRequestProject) project).getLeaveType().toString()) ;
+                statement.setInt(11, ((LeaveRequestProject) project).getNumResponses());
 
             }
 
@@ -154,8 +154,6 @@ public class ProjectDAO implements ProjectDAOInterface {
 
             }
 
-
-            connection.commit();
 
         } catch (SQLException e) {
             e.printStackTrace();
