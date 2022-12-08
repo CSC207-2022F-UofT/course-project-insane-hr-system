@@ -143,6 +143,7 @@ public class TaskDAO implements TaskDAOInterface {
 
             // save all task members to the database as well
             saveTaskMembers(task);
+            saveTaskProject(task);
 
 
 
@@ -323,6 +324,20 @@ public class TaskDAO implements TaskDAOInterface {
             }
 
         } catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void saveTaskProject(Task task) {
+        String query = "INSERT INTO projectTaskMap (projectID, taskID) VALUES (?,?)";
+        PreparedStatement statement;
+
+        try {
+            statement = connection.prepareStatement(query);
+            statement.setString(1, task.getProject().getOid().toString());
+            statement.setString(2, task.getOid().toString());
+            statement.executeUpdate();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
