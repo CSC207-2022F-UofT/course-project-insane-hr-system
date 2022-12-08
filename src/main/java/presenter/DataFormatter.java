@@ -1,7 +1,7 @@
 package presenter;
 
-import salary_calculator.PayStub;
-import salary_calculator.SalaryResponseModel;
+import use_case.salary_calculator.PayStub;
+import use_case.salary_calculator.SalaryResponseModel;
 
 import java.lang.reflect.Field;
 import java.time.LocalDate;

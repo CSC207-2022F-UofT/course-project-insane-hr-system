@@ -1,7 +1,7 @@
 package presenter;
 
-import salary_calculator.SalaryCalculatorOutputBoundary;
-import salary_calculator.SalaryResponseModel;
+import use_case.salary_calculator.SalaryCalculatorOutputBoundary;
+import use_case.salary_calculator.SalaryResponseModel;
 
 public class SalaryPresenter implements SalaryCalculatorOutputBoundary {
     private final SalaryIView view;

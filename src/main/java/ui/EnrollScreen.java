@@ -3,10 +3,10 @@ package ui;
 
 import controller.EnrollController;
 import data_access.EnrollDataAccess;
-import enroll_employee.*;
-import entity.CommonUserFactory;
-import entity.UserFactory;
+import entity.user.CommonUserFactory;
+import entity.user.UserFactory;
 import presenter.EnrollPresenter;
+import use_case.enroll_employee.*;
 
 import javax.swing.*;
 import java.awt.*;

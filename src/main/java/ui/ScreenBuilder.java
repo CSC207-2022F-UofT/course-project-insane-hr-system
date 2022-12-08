@@ -1,18 +1,16 @@
 package ui;
 
-import check_profile_validation.*;
 import controller.CheckProfileController;
 import data_access.CheckProfileDataAccess;
-import data_access.CheckProfileIMDataAccess;
-import entity.Organization;
-import entity.StarEvaluationTask;
 import presenter.CheckProfilePresenter;
 import presenter.IViewModel;
 import presenter.Controllers;
 import presenter.UseCaseButtons;
-import view_model.IView;
-import view_model.Table;
-import view_model.ViewModel;
+import use_case.check_profile_validation.*;
+import presenter.view_model.IView;
+import presenter.view_model.ScreenType;
+import presenter.view_model.Table;
+import presenter.view_model.ViewModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -114,7 +112,7 @@ public class ScreenBuilder implements IView {
     @Override
     public void customizeLeftButton(){
         CheckProfileOutputBoundary presenter = new CheckProfilePresenter();
-        CheckProfileIGateway gateway = new CheckProfileIMDataAccess();
+        CheckProfileIGateway gateway = new CheckProfileDataAccess();
         CheckProfileController controller = new CheckProfileController(presenter, gateway);
         for (int i : view.getLeftTable().getSelectedRows()){
             Object reference = dataModel.getLeftTable().getReference()[i];
@@ -144,7 +142,7 @@ public class ScreenBuilder implements IView {
 //            dataModel.updateIntro(dataModel.getIntro() + name + reference + " have been selected\n");
 //        }
         CheckProfileOutputBoundary presenter = new CheckProfilePresenter();
-        CheckProfileIGateway gateway = new CheckProfileIMDataAccess();
+        CheckProfileIGateway gateway = new CheckProfileDataAccess();
         CheckProfileController controller = new CheckProfileController(presenter, gateway);
         for (int i : view.getRightTable().getSelectedRows()){
             Object reference = dataModel.getRightTable().getReference()[i];
@@ -157,6 +155,9 @@ public class ScreenBuilder implements IView {
         presenter.showFrame();
     }
 
+    public Integration getViewOnly(){
+        return view;
+    }
 //    private void plugInController(Object reference) {
 //        if (reference instanceof Integer) {
 //            buttonController.create(dataModel.getRequesterID(), (Integer) reference);
@@ -178,7 +179,7 @@ public class ScreenBuilder implements IView {
                 jPanel.add(UseCaseButtons.getPanel(controllers, this));
             }
         } catch (NullPointerException e) {
-            jPanel.add(UseCaseButtons.getUseCase1(this));
+            jPanel.add(UseCaseButtons.getUseCase1());
         }
 
 
@@ -194,15 +195,12 @@ public class ScreenBuilder implements IView {
         JPanel jPanel = new JPanel(new GridBagLayout());
         JButton dptButton = new JButton("Go to Department");
         jPanel.add(dptButton);
-        dptButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                CheckProfileOutputBoundary presenter = new CheckProfilePresenter();
-                CheckProfileIGateway gateway = new CheckProfileIMDataAccess();
-                CheckProfileController controller = new CheckProfileController(presenter, gateway);
-                controller.create(dataModel.getRequesterID(), dataModel.getDpt());
-                presenter.showFrame();
-            }
+        dptButton.addActionListener(e -> {
+            CheckProfileOutputBoundary presenter = new CheckProfilePresenter();
+            CheckProfileIGateway gateway = new CheckProfileDataAccess();
+            CheckProfileController controller = new CheckProfileController(presenter, gateway);
+            controller.create(dataModel.getRequesterID(), dataModel.getDpt());
+            presenter.showFrame();
         });
         return jPanel;
     }
@@ -271,6 +269,10 @@ public class ScreenBuilder implements IView {
         });
 
 
+        if (dataModel.getScreenType() == ScreenType.TASK_SCREEN){
+            removeDataPanels();
+        }
+
         return view;
     }
 
@@ -318,7 +320,7 @@ public class ScreenBuilder implements IView {
         view.getRightPanel().invalidate();
     }
     void removeDataPanels() {
-        view.getRootPanel().remove(view.getLeftPanel());
+//        view.getRootPanel().remove(view.getLeftPanel());
         view.getRootPanel().remove(view.getRightPanel());
         view.getRootPanel().invalidate();
     }
@@ -377,7 +379,7 @@ public class ScreenBuilder implements IView {
             if (ref instanceof Integer){
                 c1 = ((Integer) ref).toString();
             }else if (ref instanceof UUID){
-                c1 = ((UUID) ref).toString();
+                c1 = ref.toString();
             }
             if (dat  instanceof String){
                 c2 = (String) dat;

@@ -1,8 +1,8 @@
 package controller;
 
-import review_request.ReviewRequestInputBoundary;
-import review_request.ReviewRequestRequestModel;
-import review_request.ReviewRequestResponseModel;
+import use_case.review_request.ReviewRequestInputBoundary;
+import use_case.review_request.ReviewRequestRequestModel;
+import use_case.review_request.ReviewRequestResponseModel;
 
 import java.util.UUID;
 

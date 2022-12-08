@@ -3,7 +3,10 @@ package ui;
 import controller.ReviewRequestController;
 import data_access.ReviewRequestDataAccess;
 import presenter.ReviewRequestPresenter;
-import review_request.*;
+import use_case.review_request.ReviewRequestDsGateway;
+import use_case.review_request.ReviewRequestInputBoundary;
+import use_case.review_request.ReviewRequestInteractor;
+import use_case.review_request.ReviewRequestOutputBoundary;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -37,9 +40,9 @@ public class ReviewRequestScreen extends JPanel implements ActionListener {
             int result = JOptionPane.showOptionDialog(frame, "Please approve or deny the leave " +
                     "request", "Review Leave Request", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
                     null, options, options[1]);
-            if (result != JOptionPane.CANCEL_OPTION){
-                String response = controller.reviewRequest(oid, result == JOptionPane.YES_OPTION).getResult();
-                JOptionPane.showMessageDialog(frame, "You have " + response.toLowerCase() + "the " +
+            if (result != JOptionPane.CLOSED_OPTION){
+                String response = controller.reviewRequest(oid, result == JOptionPane.NO_OPTION).getResult();
+                JOptionPane.showMessageDialog(frame, "You have " + response.toLowerCase() + " the " +
                         "leave request.", "Leave Request " + response, JOptionPane.PLAIN_MESSAGE);
             }
         } catch (Exception e) {

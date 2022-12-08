@@ -1,9 +1,8 @@
 package controller;
 
-import entity.CommonProject;
-import project_manager_task_init_use_case.PMTaskInitInputBoundary;
-import project_manager_task_init_use_case.PMTaskInitRequestModel;
-import project_manager_task_init_use_case.PMTaskInitResponseModel;
+import use_case.project_manager_task_init_use_case.PMTaskInitInputBoundary;
+import use_case.project_manager_task_init_use_case.PMTaskInitRequestModel;
+import use_case.project_manager_task_init_use_case.PMTaskInitResponseModel;
 
 public class PMTaskInitController {
 

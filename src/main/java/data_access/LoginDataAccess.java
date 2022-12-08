@@ -1,10 +1,9 @@
 package data_access;
 
 import DAO.UserDAO;
-import entity.CommonUser;
-import entity.User;
-import login.LoginDSGateway;
-import login.LoginRequestModel;
+import entity.user.User;
+import use_case.login.LoginDSGateway;
+import use_case.login.LoginRequestModel;
 
 import java.util.List;
 
