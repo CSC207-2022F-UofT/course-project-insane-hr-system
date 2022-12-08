@@ -1,14 +1,10 @@
 package ui;
 
 import controller.NewProjectController;
-import create_new_project.NewProjectInputBoundary;
-import create_new_project.NewProjectInteractor;
+import use_case.create_new_project.NewProjectInputBoundary;
+import use_case.create_new_project.NewProjectInteractor;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.InputMethodEvent;
-import java.awt.event.InputMethodListener;
 
 public class NewProjectForm extends JDialog {
     private JButton submitAndCreateProjectButton;

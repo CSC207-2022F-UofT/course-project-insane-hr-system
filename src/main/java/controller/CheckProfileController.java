@@ -1,9 +1,9 @@
 package controller;
 
-import check_profile_validation.*;
-import data_access.CheckProfileIMDataAccess;
+import data_access.CheckProfileDataAccess;
 import presenter.CheckProfilePresenter;
-import view_model.ViewModel;
+import use_case.check_profile_validation.*;
+import presenter.view_model.ViewModel;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -13,11 +13,9 @@ public class CheckProfileController implements PropertyChangeListener {
     private final CheckProfileInputBoundary interactor;
 
     public CheckProfileController() {
-        CheckProfileIGateway gateway = new CheckProfileIMDataAccess();
-        this.interactor = new CheckProfileInteractor(gateway);
-    }
-    public CheckProfileController(CheckProfileInputBoundary interactor) {
-        this.interactor = interactor;
+        CheckProfileOutputBoundary presenter = new CheckProfilePresenter(new ViewModel());
+        CheckProfileIGateway gateway = new CheckProfileDataAccess();
+        this.interactor = new CheckProfileInteractor(gateway, presenter);
     }
     public CheckProfileController(CheckProfileIGateway gateway) {
         CheckProfileOutputBoundary presenter = new CheckProfilePresenter(new ViewModel());
@@ -26,6 +24,10 @@ public class CheckProfileController implements PropertyChangeListener {
 
     public CheckProfileController(CheckProfileOutputBoundary presenter, CheckProfileIGateway gateway) {
         this.interactor = new CheckProfileInteractor(gateway, presenter);
+    }
+
+    public CheckProfileController(CheckProfileInputBoundary interactor) {
+        this.interactor = interactor;
     }
 
     public void create(Integer requester, Integer target){

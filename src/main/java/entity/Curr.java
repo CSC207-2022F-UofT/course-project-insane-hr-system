@@ -1,5 +1,7 @@
 package entity;
 
+import entity.user.User;
+
 public class Curr {
     private static User user;
     private static Integer lastUid;

@@ -3,17 +3,17 @@ package ui;
 
 import controller.EnrollController;
 import data_access.EnrollDataAccess;
-import enroll_employee.*;
-import entity.CommonUserFactory;
-import entity.UserFactory;
+import entity.user.CommonUserFactory;
+import entity.user.UserFactory;
 import presenter.EnrollPresenter;
+import use_case.enroll_employee.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class EnrollScreen {
+public class EnrollScreen extends JPanel{
     private JPanel EnrollPanel;
     private JPanel TopPanel;
     private JTextField nameField;
@@ -25,18 +25,35 @@ public class EnrollScreen {
 
     private EnrollController enrollController;
 
-    public EnrollScreen() {
+    public EnrollScreen(){
 
         Add.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
+                try{
                 String fname = nameField.getText();
                 String fdepartment = (String) dptCom.getSelectedItem();
                 String fposition = (String) positionCom.getSelectedItem();
                 EnrollResponseModel responseModel= enrollController.create(fname,fdepartment,fposition);
                 newEmployeeScreen(responseModel);
+                }catch (Exception evt){
+                    JOptionPane.showMessageDialog(EnrollPanel, evt.getMessage());
+                }
             }
         });
+
+//        Cancel.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                EnrollPanel.
+//            }
+//        });
+
     }
     public void newEmployeeScreen(EnrollResponseModel enrollResponseModel){
         JFrame frame2 = new JFrame("New Employee");
@@ -45,7 +62,7 @@ public class EnrollScreen {
         newEmployeeScreen.setEnrollResponseModel(enrollResponseModel);
         newEmployeeScreen.setInfo();
         newEmployeeScreen.showScreen(newEmployeeScreen,frame2);
-        frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame2.pack();
         frame2.setVisible(true);
     }
@@ -65,10 +82,10 @@ public class EnrollScreen {
     }
 
     public void setPositionCom() {
-        this.positionCom.setModel(new DefaultComboBoxModel<>(new String[] { "Head", "Member" }));
+        this.positionCom.setModel(new DefaultComboBoxModel<>(new String[] { "HEAD", "MEMBER" }));
     }
 
-    public static void main(String[] args) {
+    public void showScreenMain(){
         EnrollDsGateway dsGateway = new EnrollDataAccess();
         EnrollOutputBoundary enrollOutputBoundary = new EnrollPresenter();
         UserFactory userFactory = new CommonUserFactory();
@@ -86,8 +103,14 @@ public class EnrollScreen {
         EnrollScreen.setPositionCom();
         EnrollScreen.showScreen(EnrollScreen,frame);
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+    }
+
+    public JPanel getEnrollPanel() {
+        return EnrollPanel;
     }
 }

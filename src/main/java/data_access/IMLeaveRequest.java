@@ -1,10 +1,10 @@
 package data_access;
 
-import entity.Project;
-import entity.Task;
-import entity.User;
-import leave_request.LeaveRequestDsGateway;
-import leave_request.LeaveRequestDsRequestModel;
+import entity.project.Project;
+import entity.task.Task;
+import entity.user.User;
+import use_case.leave_request.LeaveRequestDsGateway;
+import use_case.leave_request.LeaveRequestDsRequestModel;
 
 import java.util.Map;
 import java.util.UUID;
@@ -28,6 +28,7 @@ public class IMLeaveRequest implements LeaveRequestDsGateway {
             tasks.put(t.getOid(), t);
             Integer m = t.getMembers().iterator().next();
             getUser(m).addCurrTask(t);
+            getUser(m).addCurrProject(project);
         }
     }
 
