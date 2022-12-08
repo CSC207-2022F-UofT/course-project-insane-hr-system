@@ -15,9 +15,9 @@ public class UseCaseButtons {
     // and then add a case in this page.
     public static JPanel getPanel(Controllers controllers, ScreenBuilder screenBuilder){
         switch (controllers){
-            case SALARY_CALCULATOR: return getSalaryCalculator(screenBuilder);
-            case ENROLL_EMPLOYEE: return getEnrollEmploye();
-            case CREATE_PROJECT:;
+            case SALARY_CALCULATOR: return getSalaryCalculator();
+            case ENROLL_EMPLOYEE: return getEnrollEmployee();
+            case CREATE_PROJECT:return getCreateProject(screenBuilder);
             case LEAVE_REQUEST: return getLeaveRequest(screenBuilder);
             case COMPLETE_TASK: return getCompleteTask(screenBuilder);
             case EVALUATE_TASK: return getEvaluateTask();
@@ -66,7 +66,7 @@ public class UseCaseButtons {
         return panel;
     }
 
-    private static JPanel getSalaryCalculator(ScreenBuilder screenBuilder) {
+    private static JPanel getSalaryCalculator() {
         JPanel panel = new JPanel();
         JButton salaryButton = new JButton("Salary Calculator");
         panel.add(salaryButton);
@@ -100,4 +100,27 @@ public class UseCaseButtons {
         jPanel.add(new JLabel("No operator here"));
         return jPanel;
     }
+    public static JPanel getCreateProject(ScreenBuilder screenBuilder) {
+        JPanel panel = new JPanel();
+        JButton createButton = new JButton("Create Project");
+        panel.add(createButton);
+        createButton.addActionListener(e -> {
+            NewProjectForm ui = new NewProjectForm(screenBuilder.view());
+            ui.setContentPane(ui.mainPanel);
+            ui.pack();
+            ui.setVisible(true);
+        });
+        return panel;
+    }
+    public static JPanel getEnrollEmployee() {
+            JPanel panel = new JPanel();
+            JButton enrollButton = new JButton("Enroll Employee");
+            panel.add(enrollButton);
+            enrollButton.addActionListener(e -> {
+                EnrollScreen ui = new EnrollScreen();
+                ui.showScreenMain();
+            });
+            return panel;
+    }
 }
+

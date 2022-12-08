@@ -5,10 +5,12 @@ import use_case.create_new_project.NewProjectInputBoundary;
 import use_case.create_new_project.NewProjectInteractor;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class NewProjectForm {
+public class NewProjectForm extends JDialog {
     private JButton submitAndCreateProjectButton;
-    private JPanel mainPanel;
+    public JPanel mainPanel;
     private JTextField PMidTextField;
     private JTextField ProjNametextField;
     private JTextField descriptextField;
@@ -23,8 +25,9 @@ public class NewProjectForm {
     public final NewProjectInputBoundary projectInput = new NewProjectInteractor();
     public final NewProjectController controller = new NewProjectController(projectInput);
 
-    public NewProjectForm() {
+    public NewProjectForm(JFrame frame) {
 
+        super(frame, "Create Project");
         submitAndCreateProjectButton.addActionListener(e -> {
             int PMid = Integer.parseInt(PMidTextField.getText());
             int funds = Integer.parseInt(FundtextField.getText());
@@ -37,7 +40,7 @@ public class NewProjectForm {
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Project");
-        frame.setContentPane(new NewProjectForm().mainPanel);
+        frame.setContentPane(new NewProjectForm(frame).mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
