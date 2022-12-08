@@ -24,6 +24,10 @@ public class NewEmployeeScreen {
         frame2.setContentPane(newEmployeeScreen.panel1);
     }
 
+    /**
+     * put all the generated information into the screen.
+     */
+
     public void setInfo() {
         nameField1.setText(enrollResponseModel.getName());
         idField.setText(enrollResponseModel.getId()+"");
