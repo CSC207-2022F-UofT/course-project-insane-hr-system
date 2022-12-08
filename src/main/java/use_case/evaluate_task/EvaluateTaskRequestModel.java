@@ -1,5 +1,5 @@
 package use_case.evaluate_task;
-import entity.task.Task;
+import entity.task.CommonTask;
 import entity.user.User;
 
 public class EvaluateTaskRequestModel {

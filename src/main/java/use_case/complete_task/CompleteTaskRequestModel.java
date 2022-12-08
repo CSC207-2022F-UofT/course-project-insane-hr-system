@@ -3,6 +3,8 @@ package use_case.complete_task;
 import entity.task.Task;
 import entity.user.User;
 
+import java.util.UUID;
+
 public class CompleteTaskRequestModel {
     private final UUID taskId;
     private User user;
@@ -11,6 +13,7 @@ public class CompleteTaskRequestModel {
         this.taskId = taskId;
         this.user = user;
     }
+
 
     public UUID getTaskId() {
         return taskId;

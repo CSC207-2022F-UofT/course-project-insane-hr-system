@@ -7,8 +7,8 @@ import java.awt.event.ActionListener;
 public class EvaluateTaskScreen {
     private JPanel panelMain;
     private JButton button_evaluate;
-    private JTextField textField1;
-    private JTextField textField2;
+    private JTextField starField;
+    private JTextField messageField;
 
     public EvaluateTaskScreen() {
         button_evaluate.addActionListener(new ActionListener() {

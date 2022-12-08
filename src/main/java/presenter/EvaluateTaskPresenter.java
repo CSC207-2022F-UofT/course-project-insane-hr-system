@@ -1,8 +1,9 @@
 package presenter;
-import evaluate_task.EvaluateTaskOutputBoundary;
-import evaluate_task.EvaluateTaskResponseModel;
+import use_case.evaluate_task.EvaluateTaskOutputBoundary;
+import use_case.evaluate_task.EvaluateTaskResponseModel;
 
-public class EvaluateTaskPresenter implements EvaluateTaskOutputBoundary{
+
+public class EvaluateTaskPresenter implements EvaluateTaskOutputBoundary {
 
     @Override
     public EvaluateTaskResponseModel prepareSuccessView(EvaluateTaskResponseModel response) {
@@ -10,7 +11,6 @@ public class EvaluateTaskPresenter implements EvaluateTaskOutputBoundary{
     }
 
     @Override
-    public EvaluateTaskResponseModel prepareFailureView(String error) {
-        return null;
+    public EvaluateTaskResponseModel prepareFailureView(String error) {throw new RuntimeException(error);
     }
 }

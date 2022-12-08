@@ -1,8 +1,11 @@
 package controller;
 import entity.*;
-import evaluate_task.EvaluateTaskInputBoundary;
-import evaluate_task.EvaluateTaskRequestModel;
-import evaluate_task.EvaluateTaskResponseModel;
+import entity.task.CommonTask;
+import entity.user.User;
+import use_case.evaluate_task.EvaluateTaskInputBoundary;
+import use_case.evaluate_task.EvaluateTaskRequestModel;
+import use_case.evaluate_task.EvaluateTaskResponseModel;
+
 
 public class EvaluateTaskController {
     final EvaluateTaskInputBoundary userInput;

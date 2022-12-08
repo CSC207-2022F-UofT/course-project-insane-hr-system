@@ -1,8 +1,8 @@
 package use_case.complete_task;
 
-import entity.*;
+import entity.task.Task;
+import entity.user.User;
 
-import java.util.Objects;
 import java.util.UUID;
 
 public class CompleteTaskInteractor implements CompleteTaskInputBoundary{

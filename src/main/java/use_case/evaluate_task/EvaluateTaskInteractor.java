@@ -1,6 +1,7 @@
 package use_case.evaluate_task;
 
-import entity.*;
+import entity.task.CommonTask;
+import entity.user.User;
 
 
 public class EvaluateTaskInteractor implements EvaluateTaskInputBoundary{

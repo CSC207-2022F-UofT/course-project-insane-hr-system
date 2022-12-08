@@ -1,6 +1,6 @@
 package use_case.evaluate_task;
-package evaluate_task;
-import entity.Task;
+
+import entity.task.Task;
 
 public class EvaluateTaskDsRequestModel {
     private Task task;

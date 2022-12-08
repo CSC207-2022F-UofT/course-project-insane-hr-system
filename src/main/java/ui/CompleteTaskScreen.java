@@ -23,6 +23,7 @@ public class CompleteTaskScreen {
         button_submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(panelMain, "Submitted successfully!");
             }
         });
     }
