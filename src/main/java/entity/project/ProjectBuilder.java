@@ -1,7 +1,5 @@
 package entity.project;
 
-import entity.LeaveType;
-
 import java.util.Set;
 
 public interface ProjectBuilder {

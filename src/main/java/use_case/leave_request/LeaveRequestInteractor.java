@@ -1,6 +1,6 @@
 package use_case.leave_request;
 
-import entity.*;
+import entity.project.LeaveType;
 import entity.project.Project;
 import entity.project.ProjectBuilder;
 import entity.role.RoleAllowed;

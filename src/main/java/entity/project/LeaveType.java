@@ -1,4 +1,4 @@
-package entity;
+package entity.project;
 
 public enum LeaveType {
     SICK,

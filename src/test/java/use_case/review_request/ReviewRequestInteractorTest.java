@@ -3,6 +3,7 @@ package use_case.review_request;
 import data_access.IMReviewRequest;
 import entity.*;
 import entity.project.LeaveRequestProjectBuilder;
+import entity.project.LeaveType;
 import entity.project.Project;
 import entity.role.Position;
 import entity.role.Role;

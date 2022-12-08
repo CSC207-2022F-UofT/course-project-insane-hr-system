@@ -2,7 +2,6 @@ package entity.project;
 
 import entity.CommonOrganization;
 import entity.Department;
-import entity.LeaveType;
 import entity.task.Task;
 
 import java.time.LocalDateTime;

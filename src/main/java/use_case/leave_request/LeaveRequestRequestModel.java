@@ -1,6 +1,6 @@
 package use_case.leave_request;
 
-import entity.LeaveType;
+import entity.project.LeaveType;
 import entity.user.User;
 
 import java.time.LocalDate;

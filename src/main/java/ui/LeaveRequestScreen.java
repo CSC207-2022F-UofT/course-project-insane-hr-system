@@ -3,7 +3,7 @@ package ui;
 import com.github.lgooddatepicker.components.DatePicker;
 import controller.LeaveRequestController;
 import data_access.LeaveRequestDataAccess;
-import entity.LeaveType;
+import entity.project.LeaveType;
 import entity.project.ProjectBuilder;
 import entity.project.LeaveRequestProjectBuilder;
 import presenter.LeaveRequestPresenter;

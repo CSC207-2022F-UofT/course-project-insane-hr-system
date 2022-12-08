@@ -3,6 +3,7 @@ package use_case.leave_request;
 import data_access.IMLeaveRequest;
 import entity.*;
 import entity.project.LeaveRequestProjectBuilder;
+import entity.project.LeaveType;
 import entity.project.Project;
 import entity.project.ProjectBuilder;
 import entity.role.Position;

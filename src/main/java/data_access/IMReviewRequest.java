@@ -1,7 +1,7 @@
 package data_access;
 
-import entity.*;
 import entity.project.LeaveRequestProject;
+import entity.project.LeaveType;
 import entity.task.Task;
 import entity.user.User;
 import use_case.review_request.ReviewRequestDsGateway;

@@ -3,6 +3,7 @@ package DAO;
 import entity.*;
 import entity.project.CommonProject;
 import entity.project.LeaveRequestProject;
+import entity.project.LeaveType;
 import entity.project.Project;
 import entity.task.Task;
 

@@ -3,7 +3,7 @@ package entity.leave_request;
 import entity.Department;
 import entity.project.LeaveRequestProject;
 import entity.task.LeaveRequestTask;
-import entity.LeaveType;
+import entity.project.LeaveType;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
