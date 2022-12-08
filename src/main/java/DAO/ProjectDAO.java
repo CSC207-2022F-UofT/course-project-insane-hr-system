@@ -189,7 +189,6 @@ public class ProjectDAO implements ProjectDAOInterface {
             statement = connection.prepareStatement(SQL);
             statement.setString(1, id.toString());
             statement.executeUpdate();
-            connection.commit();
 
 
         } catch (SQLException e) {

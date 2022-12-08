@@ -175,7 +175,6 @@ public class TaskDAO implements TaskDAOInterface {
             statement.setString(1, taskID.toString());
             statement.executeUpdate();
 
-            connection.commit();
 
         } catch (SQLException e) {
             e.printStackTrace();
