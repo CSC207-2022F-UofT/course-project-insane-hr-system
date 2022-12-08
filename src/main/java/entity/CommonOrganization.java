@@ -59,6 +59,9 @@ public class CommonOrganization implements Organization {
         this.members.add(head);
     }
 
+    public CommonOrganization(UUID oid, String name, Set<Integer> memberIDs, String description) {
+    }
+
     //opening and closing the Organization
     @Override
     public void close() {

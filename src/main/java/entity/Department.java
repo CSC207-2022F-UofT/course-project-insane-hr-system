@@ -1,12 +1,10 @@
 package entity;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 public class Department extends CommonOrganization {
+    private LocalDateTime createTime;
     private List<UUID> projects = new ArrayList<>();
     public Department(UUID oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime createTime, LocalDateTime closeTime) {
         super(oid, name, head, members, description, createTime, closeTime);
@@ -14,6 +12,12 @@ public class Department extends CommonOrganization {
 
     public Department(UUID oid, String name, Integer head, Set<Integer> members, String description, LocalDateTime createTime) {
         super(oid, name, head, members, description, createTime);
+    }
+
+    public Department(UUID oid, String name, String description, LocalDateTime createTime) {
+        super(oid, name, new HashSet<>(), description);
+        this.createTime = createTime;
+
     }
 
     public boolean addProject(Project project) {

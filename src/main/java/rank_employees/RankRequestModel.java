@@ -1,19 +1,20 @@
 package rank_employees;
 
 import entity.CommonUser;
+import entity.Department;
 
 public class RankRequestModel {
-    private CommonUser currentUser;
+    private Department currentDepartment;
 
-    public RankRequestModel(CommonUser user){
-        this.currentUser = user;
+    public RankRequestModel(Department dept){
+        this.currentDepartment = dept;
     }
 
-    public CommonUser getCurrentUser(){
-        return this.currentUser;
+    public Department getCurrentDepartment(){
+        return this.currentDepartment;
     }
 
-    public void setCurrentUser(CommonUser user){this.currentUser = user;}
+    public void setCurrentDepartment(Department dept){this.currentDepartment = dept;}
 
 
 }

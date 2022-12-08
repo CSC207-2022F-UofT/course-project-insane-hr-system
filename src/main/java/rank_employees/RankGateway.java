@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface RankGateway {
 
-    public List<CommonUser> getSubordinates(RankRequestModel requestModel);
+    public List<CommonUser> getDepartmentMembers(RankRequestModel requestModel);
 
     public List<CommonTask> getCompletedTasks(CommonUser user);
 
