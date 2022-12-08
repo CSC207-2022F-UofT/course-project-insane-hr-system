@@ -1,7 +1,6 @@
 package entity;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CommonUser extends CommonUserFace implements User {
@@ -17,6 +16,7 @@ public class CommonUser extends CommonUserFace implements User {
     // construct without UserFile
     public CommonUser(int uid, Department dpt, String bio, String name) {
         super(uid, dpt, bio, name);
+        this.userFile = new UserFile(uid);
     }
 
     //construct with UserFile

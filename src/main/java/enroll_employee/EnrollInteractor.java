@@ -3,9 +3,7 @@ package enroll_employee;
 import entity.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class EnrollInteractor implements EnrollInputBoundary{
     final EnrollDsGateway enrolldsGateway;
@@ -15,6 +13,8 @@ public class EnrollInteractor implements EnrollInputBoundary{
 
     public EnrollInteractor(EnrollDsGateway enrolldsGateway, EnrollOutputBoundary enrollOutputBoundary, UserFactory userFactory) {
         this.enrolldsGateway = enrolldsGateway;
+
+        //this.enrolldsGateway = new IMEnrollEmployee();
         this.enrollOutputBoundary = enrollOutputBoundary;
         this.userFactory = userFactory;
     }
@@ -27,19 +27,29 @@ public class EnrollInteractor implements EnrollInputBoundary{
         }
         Department dpt = enrolldsGateway.findDptByName(requestModel.getDpt());
         String username = enrolldsGateway.generateUsername(name);
-        String password = username; //By default, the password is the same as username
-        List<Role> roles = new ArrayList<Role>();
-        List<Project> projects = new ArrayList<Project>();
-        List<Task> tasks = new ArrayList<Task>();
+        String password; //By default, the password is the same as username
+        password = username;
+        List<Role> roles = new ArrayList<>();
+        List<Project> projects = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
         Position position = Position.valueOf(requestModel.getPosition());
+
         LocalDate onboardDate = LocalDate.now();
 
         User user = userFactory.create(id,dpt,"",username,password,roles,projects,tasks, position,onboardDate);
+        user.setName(requestModel.getName());
+
+        if (position.equals(Position.MEMBER)){
+            dpt.addMember(user.getId());
+        }
+        if (position.equals(Position.HEAD)){
+            dpt.setHead(user.getId());
+        }
         EnrollDsRequestModel dsRequestModel = new EnrollDsRequestModel(user);
         enrolldsGateway.save(dsRequestModel);
         enrolldsGateway.updateDepartment(dpt);
 
-        EnrollResponseModel responseModel = new EnrollResponseModel(user.getName(), user.getId(), user.getUsername(), user.getPassword(), user.getOnboardDate());
+        EnrollResponseModel responseModel = new EnrollResponseModel(user.getName(),user.getId(), user.getUsername(), user.getPassword(), user.getOnboardDate());
         return enrollOutputBoundary.prepareSuccessView(responseModel);
 
     }

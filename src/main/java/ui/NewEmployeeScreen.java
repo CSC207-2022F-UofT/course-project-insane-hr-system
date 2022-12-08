@@ -8,11 +8,11 @@ import java.time.LocalDate;
 
 public class NewEmployeeScreen {
     private JPanel panel1;
-    private JTextField nameField;
     private JTextField idField;
     private JTextField userNameField;
     private JTextField passwordField;
     private JTextField timeField;
+    private JTextField nameField1;
 
     private EnrollResponseModel enrollResponseModel;
 
@@ -25,7 +25,7 @@ public class NewEmployeeScreen {
     }
 
     public void setInfo() {
-        nameField.setText(enrollResponseModel.getName());
+        nameField1.setText(enrollResponseModel.getName());
         idField.setText(enrollResponseModel.getId()+"");
         userNameField.setText(enrollResponseModel.getUsername());
         passwordField.setText(enrollResponseModel.getPassword());
@@ -33,7 +33,7 @@ public class NewEmployeeScreen {
     }
 
     public static void main(String[] args) {
-        EnrollResponseModel enrollResponseModel = new EnrollResponseModel("zeyu zhang", 10001, "zhan0001", "=user2022", LocalDate.now());
+        EnrollResponseModel enrollResponseModel = new EnrollResponseModel("Kelly Zhang", 10001, "zhan0001", "=user2022", LocalDate.now());
         JFrame frame2 = new JFrame("New Employee");
         frame2.setMinimumSize(new Dimension(450, 300));
         NewEmployeeScreen newEmployeeScreen = new NewEmployeeScreen();
@@ -43,7 +43,7 @@ public class NewEmployeeScreen {
 
         newEmployeeScreen.showScreen(newEmployeeScreen,frame2);
 
-        frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame2.pack();
         frame2.setVisible(true);
     }

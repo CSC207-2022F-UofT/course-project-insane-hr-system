@@ -145,7 +145,7 @@ public class CheckProfilePresenter implements CheckProfileOutputBoundary {
 
     @Override
     public void update() {
-//TODO
+
     }
 
     public IViewModel getViewModel() {
