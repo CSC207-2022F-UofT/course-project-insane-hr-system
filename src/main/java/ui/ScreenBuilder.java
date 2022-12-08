@@ -114,7 +114,7 @@ public class ScreenBuilder implements IView {
     @Override
     public void customizeLeftButton(){
         CheckProfileOutputBoundary presenter = new CheckProfilePresenter();
-        CheckProfileIGateway gateway = new CheckProfileIMDataAccess();
+        CheckProfileIGateway gateway = new CheckProfileDataAccess();
         CheckProfileController controller = new CheckProfileController(presenter, gateway);
         for (int i : view.getLeftTable().getSelectedRows()){
             Object reference = dataModel.getLeftTable().getReference()[i];
@@ -144,7 +144,7 @@ public class ScreenBuilder implements IView {
 //            dataModel.updateIntro(dataModel.getIntro() + name + reference + " have been selected\n");
 //        }
         CheckProfileOutputBoundary presenter = new CheckProfilePresenter();
-        CheckProfileIGateway gateway = new CheckProfileIMDataAccess();
+        CheckProfileIGateway gateway = new CheckProfileDataAccess();
         CheckProfileController controller = new CheckProfileController(presenter, gateway);
         for (int i : view.getRightTable().getSelectedRows()){
             Object reference = dataModel.getRightTable().getReference()[i];
@@ -194,15 +194,12 @@ public class ScreenBuilder implements IView {
         JPanel jPanel = new JPanel(new GridBagLayout());
         JButton dptButton = new JButton("Go to Department");
         jPanel.add(dptButton);
-        dptButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                CheckProfileOutputBoundary presenter = new CheckProfilePresenter();
-                CheckProfileIGateway gateway = new CheckProfileIMDataAccess();
-                CheckProfileController controller = new CheckProfileController(presenter, gateway);
-                controller.create(dataModel.getRequesterID(), dataModel.getDpt());
-                presenter.showFrame();
-            }
+        dptButton.addActionListener(e -> {
+            CheckProfileOutputBoundary presenter = new CheckProfilePresenter();
+            CheckProfileIGateway gateway = new CheckProfileDataAccess();
+            CheckProfileController controller = new CheckProfileController(presenter, gateway);
+            controller.create(dataModel.getRequesterID(), dataModel.getDpt());
+            presenter.showFrame();
         });
         return jPanel;
     }
@@ -377,7 +374,7 @@ public class ScreenBuilder implements IView {
             if (ref instanceof Integer){
                 c1 = ((Integer) ref).toString();
             }else if (ref instanceof UUID){
-                c1 = ((UUID) ref).toString();
+                c1 = ref.toString();
             }
             if (dat  instanceof String){
                 c2 = (String) dat;
