@@ -8,4 +8,8 @@ public class EnrollDsRequestModel {
     public EnrollDsRequestModel(User user) {
         this.user = user;
     }
+
+    public User getUser() {
+        return user;
+    }
 }
