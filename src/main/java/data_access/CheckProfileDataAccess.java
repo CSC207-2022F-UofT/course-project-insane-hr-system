@@ -1,6 +1,10 @@
 package data_access;
 
 
+import DAO.DepartmentDAO;
+import DAO.ProjectDAO;
+import DAO.TaskDAO;
+import DAO.UserDAO;
 import DAOInterfaces.DepartmentDAOInterface;
 import DAOInterfaces.ProjectDAOInterface;
 import DAOInterfaces.TaskDAOInterface;
@@ -23,10 +27,10 @@ import java.util.UUID;
 public class CheckProfileDataAccess implements CheckProfileIGateway {
 //TODO: implement this gateway.
 
-    private final DepartmentDAOInterface departmentDAO = new dptDao();
-    private final UserDAOInterface userDAOInterface = new userDao();
-    private final TaskDAOInterface taskDAOInterface = new taskDao();
-    private final ProjectDAOInterface projectDAOInterface = new projectDao();
+    private final DepartmentDAOInterface departmentDAO = new DepartmentDAO();
+    private final UserDAOInterface userDAOInterface = new UserDAO();
+    private final TaskDAOInterface taskDAOInterface = new TaskDAO();
+    private final ProjectDAOInterface projectDAOInterface = new ProjectDAO();
 
     private final PropertyChangeSupport observable;
 

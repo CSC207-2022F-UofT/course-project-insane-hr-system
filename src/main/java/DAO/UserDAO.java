@@ -47,9 +47,9 @@ public class UserDAO implements UserDAOInterface {
     @Override
     public User getUser(Integer uid) {
         User user = new CommonUser(uid);  // initialize user class
-        String userQuery = "SELECT * FROM employees WHERE employee_id=" + uid;
-        String taskQuery = "SELECT * FROM task_map WHERE memberID=" + uid;
-        String projectQuery = "SELECT * FROM projectMemberMap WHERE memberID=" + uid;
+        String userQuery = "SELECT * FROM employees WHERE employee_id='" + uid + "'";
+        String taskQuery = "SELECT * FROM task_map WHERE memberID='" + uid + "'";
+        String projectQuery = "SELECT * FROM projectMemberMap WHERE memberID='" + uid + "'";
 
         Statement statement;
         ResultSet resultSet;
@@ -167,8 +167,6 @@ public class UserDAO implements UserDAOInterface {
                 statement.setInt(2, user.getId());
                 statement.executeUpdate();
             }
-
-            connection.commit();
 
         } catch (SQLException e) {
             e.printStackTrace();

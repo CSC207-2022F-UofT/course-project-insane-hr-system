@@ -30,7 +30,7 @@ public class DepartmentDAO implements DepartmentDAOInterface {
         if (department.getState().equals("CLOSED")){
 
             // if a department is closed it has an end date.
-            insertDepartmentSQL = "INSERT INTO department (ID, name, head, description, 'create', status, end) VALUES (?,?,?,?,?,?,?)";
+            insertDepartmentSQL = "INSERT INTO department (ID, name, head, description, 'create', status, 'end') VALUES (?,?,?,?,?,?,?)";
         } else {
 
             // if a department is open it has no end date. the end date is an optional key in the table.
@@ -68,8 +68,6 @@ public class DepartmentDAO implements DepartmentDAOInterface {
                 statement.executeUpdate();
             }
 
-            // commit all changes then close the connection.
-            connection.commit();
 
         } catch (SQLException e){
             e.printStackTrace();
@@ -116,7 +114,7 @@ public class DepartmentDAO implements DepartmentDAOInterface {
     public List<Department> getAllDepartments(){
 
         String departmentSQL = "SELECT * FROM department";
-        String departmentMapSQL = "SELECT * FROM department_map WHERE departmentID=";
+
 
         List<Department> departments = new ArrayList<>();
         Statement statement;
@@ -129,7 +127,8 @@ public class DepartmentDAO implements DepartmentDAOInterface {
             while (departmentResult.next()){
                 Set<Integer> memberIds = new TreeSet<>();
                 String departmentID = departmentResult.getString("ID");
-                ResultSet departmentMapResult = statement.executeQuery(departmentMapSQL+departmentID);
+                Statement statement2 = connection.createStatement();
+                ResultSet departmentMapResult = statement2.executeQuery("SELECT * FROM department_map WHERE departmentID='"+departmentID+"'");
 
                 while (departmentMapResult.next()){
                     memberIds.add(departmentMapResult.getInt("employeeID"));
