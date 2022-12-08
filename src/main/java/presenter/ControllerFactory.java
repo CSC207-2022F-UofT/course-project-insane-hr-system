@@ -33,7 +33,7 @@ public class ControllerFactory {
             case CREATE_TASK: return relation == RelativeRelation.IS_HEAD_OF && responseModel.getFileType()== FileType.PROJECT_FILE;
             case LEAVE_REQUEST: return relation == RelativeRelation.IS_EMPLOYEE_SELF;
             case CREATE_PROJECT:return relation == RelativeRelation.IS_DPT_HEAD_SELF || (responseModel.getFileType() == FileType.DEPARTMENT_FILE && relation == RelativeRelation.IS_HEAD_OF);
-            case ENROLL_EMPLOYEE: return relation == RelativeRelation.IS_DPT_HEAD_SELF;
+            case ENROLL_EMPLOYEE: return relation == RelativeRelation.IS_DPT_HEAD_SELF || relation == RelativeRelation.IS_CEO_OF;
             case SALARY_CALCULATOR: return relation == RelativeRelation.IS_EMPLOYEE_SELF || relation == RelativeRelation.IS_PM_SELF;
             case COMPLETE_PROJECT: return relation == RelativeRelation.IS_HEAD_OF && responseModel.getFileType() != FileType.LEAVE_REQUEST_PROJECT_FILE;
             case COMPLETE_TASK: return relation == RelativeRelation.IS_MEMBER_OF;
