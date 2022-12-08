@@ -1,6 +1,6 @@
 package use_case.check_profile_validation;
 
-import entity.RelativeRelation;
+import entity.role.RelativeRelation;
 
 import java.util.ArrayList;
 import java.util.Arrays;

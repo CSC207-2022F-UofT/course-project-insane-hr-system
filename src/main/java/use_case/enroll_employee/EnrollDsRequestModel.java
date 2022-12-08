@@ -1,6 +1,6 @@
 package use_case.enroll_employee;
 
-import entity.User;
+import entity.user.User;
 
 public class EnrollDsRequestModel {
     private final User user;

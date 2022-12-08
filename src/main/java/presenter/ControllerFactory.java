@@ -2,7 +2,7 @@ package presenter;
 
 import use_case.check_profile_validation.CheckProfileResponseModel;
 import use_case.check_profile_validation.FileType;
-import entity.RelativeRelation;
+import entity.role.RelativeRelation;
 
 import java.util.LinkedList;
 import java.util.List;

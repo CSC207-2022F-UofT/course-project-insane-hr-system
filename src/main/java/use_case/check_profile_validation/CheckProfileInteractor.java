@@ -1,6 +1,15 @@
 package use_case.check_profile_validation;
 
 import entity.*;
+import entity.project.CommonProject;
+import entity.project.LeaveRequestProject;
+import entity.project.Project;
+import entity.role.*;
+import entity.task.CommonTask;
+import entity.task.LeaveRequestTask;
+import entity.task.StarEvaluationTask;
+import entity.task.Task;
+import entity.user.User;
 import presenter.CheckProfilePresenter;
 
 import java.util.ArrayList;

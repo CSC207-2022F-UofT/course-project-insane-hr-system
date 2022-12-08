@@ -1,7 +1,5 @@
 package use_case.evaluate_task;
 
-import entity.Task;
-
 public class EvaluateTaskResponseModel {
     private String response;
 

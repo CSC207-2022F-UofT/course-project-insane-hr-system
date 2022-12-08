@@ -1,7 +1,7 @@
 package use_case.create_new_project;
 
 import data_access.NewProjectDataAccess;
-import entity.Project;
+import entity.project.Project;
 import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

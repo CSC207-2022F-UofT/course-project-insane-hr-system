@@ -1,7 +1,7 @@
 package use_case.unused_delete_employee;
 
 import entity.Curr;
-import entity.User;
+import entity.user.User;
 
 import java.util.List;
 

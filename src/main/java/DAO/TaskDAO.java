@@ -1,6 +1,12 @@
 package DAO;
 
-import entity.*;
+import entity.project.CommonProject;
+import entity.project.LeaveRequestProject;
+import entity.project.Project;
+import entity.task.CommonTask;
+import entity.task.LeaveRequestTask;
+import entity.task.StarEvaluationTask;
+import entity.task.Task;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

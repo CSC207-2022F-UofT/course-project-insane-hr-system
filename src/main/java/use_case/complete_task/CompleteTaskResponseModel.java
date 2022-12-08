@@ -1,6 +1,6 @@
 package use_case.complete_task;
 
-import entity.Task;
+import entity.task.Task;
 
 public class CompleteTaskResponseModel {
     private Task task;

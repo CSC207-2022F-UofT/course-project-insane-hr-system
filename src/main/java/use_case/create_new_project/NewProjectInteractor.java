@@ -2,6 +2,9 @@ package use_case.create_new_project;
 
 import data_access.NewProjectDataAccess;
 import entity.*;
+import entity.project.CommonProject;
+import entity.project.Project;
+import entity.task.Task;
 
 import java.time.LocalDateTime;
 import java.util.List;

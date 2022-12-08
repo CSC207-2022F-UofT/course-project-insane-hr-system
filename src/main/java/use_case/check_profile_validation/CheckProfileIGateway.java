@@ -1,13 +1,9 @@
 package use_case.check_profile_validation;
 
 import entity.Organization;
-import entity.Project;
-import entity.Role;
-import entity.User;
+import entity.user.User;
 
 import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import java.util.List;
 import java.util.UUID;
 
 public interface CheckProfileIGateway {

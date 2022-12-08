@@ -7,6 +7,9 @@ import DAO.UserDAOInterface;
 import DAO.ProjectDAOInterface;
 import DAO.TaskDAOInterface;
 import entity.*;
+import entity.project.LeaveRequestProject;
+import entity.task.Task;
+import entity.user.User;
 import use_case.review_request.ReviewRequestDsGateway;
 import use_case.review_request.ReviewRequestDsRequestModel;
 

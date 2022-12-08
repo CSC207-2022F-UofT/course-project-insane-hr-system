@@ -1,8 +1,8 @@
 package entity.leave_request;
 
 import entity.Department;
-import entity.LeaveRequestProject;
-import entity.LeaveRequestTask;
+import entity.project.LeaveRequestProject;
+import entity.task.LeaveRequestTask;
 import entity.LeaveType;
 import org.junit.jupiter.api.Test;
 

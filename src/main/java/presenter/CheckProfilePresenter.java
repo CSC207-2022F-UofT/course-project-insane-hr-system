@@ -2,7 +2,7 @@ package presenter;
 
 import entity.Curr;
 import entity.Organization;
-import entity.User;
+import entity.user.User;
 import presenter.view_model.ScreenType;
 import presenter.view_model.Table;
 import presenter.view_model.ViewModel;

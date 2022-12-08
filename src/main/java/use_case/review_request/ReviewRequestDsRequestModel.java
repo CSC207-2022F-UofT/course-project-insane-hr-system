@@ -1,7 +1,7 @@
 package use_case.review_request;
 
-import entity.Project;
-import entity.Task;
+import entity.project.Project;
+import entity.task.Task;
 
 public class ReviewRequestDsRequestModel {
     private Task task;

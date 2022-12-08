@@ -1,7 +1,7 @@
 package use_case.complete_task;
 
-import entity.Task;
-import entity.User;
+import entity.task.Task;
+import entity.user.User;
 
 public class CompleteTaskRequestModel {
     private Task task;

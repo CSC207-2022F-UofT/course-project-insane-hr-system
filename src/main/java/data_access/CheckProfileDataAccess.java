@@ -11,7 +11,7 @@ import DAO.TaskDAOInterface;
 import DAO.UserDAOInterface;
 import use_case.check_profile_validation.CheckProfileIGateway;
 import entity.Organization;
-import entity.User;
+import entity.user.User;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

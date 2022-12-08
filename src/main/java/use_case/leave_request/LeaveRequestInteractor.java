@@ -1,6 +1,10 @@
 package use_case.leave_request;
 
 import entity.*;
+import entity.project.Project;
+import entity.project.ProjectBuilder;
+import entity.role.RoleAllowed;
+import entity.user.User;
 
 import java.util.HashSet;
 import java.util.Set;

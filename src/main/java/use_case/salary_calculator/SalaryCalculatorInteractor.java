@@ -2,6 +2,11 @@ package use_case.salary_calculator;
 
 import data_access.SalaryCalculatorDataAccess;
 import entity.*;
+import entity.role.Role;
+import entity.role.RoleAllowed;
+import entity.user.CommonUserFactory;
+import entity.user.User;
+import entity.user.UserFactory;
 import presenter.SalaryPresenter;
 import ui.SalaryView;
 

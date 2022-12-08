@@ -1,5 +1,6 @@
 package use_case.evaluate_task;
-import entity.*;
+import entity.task.Task;
+import entity.user.User;
 
 public class EvaluateTaskRequestModel {
     private Task task;

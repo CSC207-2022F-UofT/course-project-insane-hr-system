@@ -1,7 +1,7 @@
 package controller;
 
 import entity.LeaveType;
-import entity.User;
+import entity.user.User;
 import use_case.leave_request.LeaveRequestInputBoundary;
 import use_case.leave_request.LeaveRequestRequestModel;
 import use_case.leave_request.LeaveRequestResponseModel;
