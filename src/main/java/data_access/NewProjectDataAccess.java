@@ -7,8 +7,10 @@ import create_new_project.NewProjectResponseModel;
 import entity.Department;
 import DAOInterfaces.DepartmentDAOInterface;
 import DAOInterfaces.ProjectDAOInterface;
+import entity.Project;
 
 import java.util.List;
+import java.util.UUID;
 
 public class NewProjectDataAccess implements NewProjectGateway {
 
@@ -23,6 +25,11 @@ public class NewProjectDataAccess implements NewProjectGateway {
     @Override
     public List<Department> getDptList() {
         return departmentDAOInterface.getAllDepartments();
+    }
+
+    @Override
+    public Project getProject(UUID uid) {
+        return projectDAOInterface.getProject(uid);
     }
 
 }
