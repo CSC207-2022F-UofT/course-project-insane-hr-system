@@ -1,6 +1,7 @@
 package controller;
 
 import check_profile_validation.*;
+import data_access.CheckProfileDataAccess;
 import data_access.CheckProfileIMDataAccess;
 import presenter.CheckProfilePresenter;
 import view_model.ViewModel;
@@ -13,11 +14,9 @@ public class CheckProfileController implements PropertyChangeListener {
     private final CheckProfileInputBoundary interactor;
 
     public CheckProfileController() {
-        CheckProfileIGateway gateway = new CheckProfileIMDataAccess();
-        this.interactor = new CheckProfileInteractor(gateway);
-    }
-    public CheckProfileController(CheckProfileInputBoundary interactor) {
-        this.interactor = interactor;
+        CheckProfileOutputBoundary presenter = new CheckProfilePresenter(new ViewModel());
+        CheckProfileIGateway gateway = new CheckProfileDataAccess();
+        this.interactor = new CheckProfileInteractor(gateway, presenter);
     }
     public CheckProfileController(CheckProfileIGateway gateway) {
         CheckProfileOutputBoundary presenter = new CheckProfilePresenter(new ViewModel());
