@@ -27,6 +27,10 @@ public class CheckProfileController implements PropertyChangeListener {
         this.interactor = new CheckProfileInteractor(gateway, presenter);
     }
 
+    public CheckProfileController(CheckProfileInputBoundary interactor) {
+        this.interactor = interactor;
+    }
+
     public void create(Integer requester, Integer target){
         CheckUserFileRequestModel requestModel = new CheckUserFileRequestModel(requester, target);
         interactor.checkUserProfile(requestModel);
