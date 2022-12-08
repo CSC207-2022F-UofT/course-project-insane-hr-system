@@ -37,6 +37,7 @@ you will be presented to a screen allowing you to return to the login screen.
 -  Factory
 -  Observer
 -  Facade
+-  Strategy
 
 # Contribution
 
