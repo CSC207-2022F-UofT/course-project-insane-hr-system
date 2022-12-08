@@ -27,6 +27,11 @@ public class CompleteTaskInteractor implements CompleteTaskInputBoundary{
 
         task.setState("CLOSED");
 
+        // create in file saved information
+        CompleteTaskDsRequestModel completeTaskDsRequestModel = new CompleteTaskDsRequestModel(task);
+        completeGateway.save(completeTaskDsRequestModel);
+
+        // prepare response
         CompleteTaskResponseModel completeResponseModel = new CompleteTaskResponseModel(oid,
                 "Submitted successfully!");
         return completeOutputBoundary.prepareSuccessView(completeResponseModel);

@@ -23,7 +23,7 @@ public class UseCaseButtons {
             case ENROLL_EMPLOYEE: return getEnrollEmploye();
             case CREATE_PROJECT:;
             case LEAVE_REQUEST: return getLeaveRequest(screenBuilder);
-            case COMPLETE_TASK:;
+            case COMPLETE_TASK: return getCompleteTask();
             case CREATE_TASK:;
             case COMPLETE_PROJECT:;
             case EXAMPLE_USE_CASE: return getUseCase1(screenBuilder);
@@ -42,6 +42,17 @@ public class UseCaseButtons {
         enrollButton.addActionListener(e -> {
             enrollScreen.showScreen();
 
+        });
+        return panel;
+    }
+
+    private static JPanel getCompleteTask() {
+        JPanel panel = new JPanel();
+        JButton completeButton = new JButton("Complete Task");
+        panel.add(completeButton);
+        CompleteTaskScreen completeTaskScreen = new CompleteTaskScreen();
+        completeButton.addActionListener(e -> {
+            completeTaskScreen.getPanelMain();
         });
         return panel;
     }
