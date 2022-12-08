@@ -1,7 +1,7 @@
-package complete_task;
-import entity.Task;
-package use_case.complete_task;
 
+
+package use_case.complete_task;
+import entity.task.Task;
 public class CompleteTaskDsRequestModel {
     private Task task;
 

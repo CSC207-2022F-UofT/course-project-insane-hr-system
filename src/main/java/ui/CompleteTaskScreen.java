@@ -1,9 +1,13 @@
 package ui;
 
-import complete_task.*;
+
 import controller.CompleteTaskController;
 import data_access.CompleteTaskDataAccess;
 import presenter.CompleteTaskPresenter;
+import use_case.complete_task.CompleteTaskDsGateway;
+import use_case.complete_task.CompleteTaskInputBoundary;
+import use_case.complete_task.CompleteTaskInteractor;
+import use_case.complete_task.CompleteTaskOutputBoundary;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,7 +30,7 @@ public class CompleteTaskScreen {
 
     public void viewScreen () {
         // make connection with use case
-        CompleteTaskDsGateway gateway = new CompleteTaskDataAccess();
+        CompleteTaskDataAccess gateway = new CompleteTaskDataAccess();
         CompleteTaskOutputBoundary presenter = new CompleteTaskPresenter();
         CompleteTaskInputBoundary interactor = new CompleteTaskInteractor(gateway, presenter);
         CompleteTaskController controller = new CompleteTaskController(interactor);

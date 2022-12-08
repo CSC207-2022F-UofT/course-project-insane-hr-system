@@ -1,6 +1,6 @@
 package presenter;
-import complete_task.CompleteTaskOutputBoundary;
-import complete_task.CompleteTaskResponseModel;
+import use_case.complete_task.CompleteTaskOutputBoundary;
+import use_case.complete_task.CompleteTaskResponseModel;
 
 public class CompleteTaskPresenter implements CompleteTaskOutputBoundary{
     @Override

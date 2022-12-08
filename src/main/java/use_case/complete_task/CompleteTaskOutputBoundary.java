@@ -1,6 +1,4 @@
-package complete_task;
-
-import leave_request.LeaveRequestResponseModel;
+package use_case.complete_task;
 
 public interface CompleteTaskOutputBoundary {
     CompleteTaskResponseModel prepareSuccessView(CompleteTaskResponseModel response);

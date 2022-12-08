@@ -1,14 +1,11 @@
 package data_access;
 
-import DAO.ProjectDAO;
-import DAO.TaskDAO;
-import DAO.UserDAO;
-import DAOInterfaces.ProjectDAOInterface;
-import DAOInterfaces.TaskDAOInterface;
-import DAOInterfaces.UserDAOInterface;
-import complete_task.CompleteTaskDsGateway;
-import complete_task.CompleteTaskDsRequestModel;
-import entity.Task;
+
+import DAO.*;
+
+import entity.task.Task;
+import use_case.complete_task.CompleteTaskDsGateway;
+import use_case.complete_task.CompleteTaskDsRequestModel;
 
 import java.util.UUID;
 

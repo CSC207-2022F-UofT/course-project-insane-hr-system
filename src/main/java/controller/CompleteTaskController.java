@@ -1,8 +1,9 @@
 package controller;
-import entity.*;
-import complete_task.CompleteTaskInputBoundary;
-import complete_task.CompleteTaskRequestModel;
-import complete_task.CompleteTaskResponseModel;
+
+import entity.user.User;
+import use_case.complete_task.CompleteTaskInputBoundary;
+import use_case.complete_task.CompleteTaskRequestModel;
+import use_case.complete_task.CompleteTaskResponseModel;
 
 import java.util.UUID;
 
