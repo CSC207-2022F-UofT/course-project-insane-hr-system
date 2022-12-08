@@ -12,6 +12,7 @@ public class NewEmployeeScreen {
     private JTextField userNameField;
     private JTextField passwordField;
     private JTextField timeField;
+    private JTextField nameField1;
 
     private EnrollResponseModel enrollResponseModel;
 
@@ -24,7 +25,7 @@ public class NewEmployeeScreen {
     }
 
     public void setInfo() {
-        //nameField.setText(enrollResponseModel.getName());
+        nameField1.setText(enrollResponseModel.getName());
         idField.setText(enrollResponseModel.getId()+"");
         userNameField.setText(enrollResponseModel.getUsername());
         passwordField.setText(enrollResponseModel.getPassword());
@@ -32,7 +33,7 @@ public class NewEmployeeScreen {
     }
 
     public static void main(String[] args) {
-        EnrollResponseModel enrollResponseModel = new EnrollResponseModel(10001, "zhan0001", "=user2022", LocalDate.now());
+        EnrollResponseModel enrollResponseModel = new EnrollResponseModel("Kelly Zhang", 10001, "zhan0001", "=user2022", LocalDate.now());
         JFrame frame2 = new JFrame("New Employee");
         frame2.setMinimumSize(new Dimension(450, 300));
         NewEmployeeScreen newEmployeeScreen = new NewEmployeeScreen();

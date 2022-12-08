@@ -62,7 +62,7 @@ public class EnrollScreen extends JPanel{
         newEmployeeScreen.setEnrollResponseModel(enrollResponseModel);
         newEmployeeScreen.setInfo();
         newEmployeeScreen.showScreen(newEmployeeScreen,frame2);
-        frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame2.pack();
         frame2.setVisible(true);
     }
