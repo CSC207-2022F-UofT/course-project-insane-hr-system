@@ -123,6 +123,9 @@ public class ProjectDAO implements ProjectDAOInterface {
                 }
 
             }
+            else if (project.getState().equals(CLOSED)) {
+                statement.setString(12, project.getCloseTime().toString());
+            }
             else {
                 statement.setInt(9, ((LeaveRequestProject) project).getVacationDays());
                 statement.setString(10, ((LeaveRequestProject) project).getLeaveType().toString()) ;
