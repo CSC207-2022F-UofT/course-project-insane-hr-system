@@ -19,7 +19,6 @@ public class EnrollScreen extends JPanel{
     private JTextField nameField;
     private JComboBox<String> dptCom;
     private JButton Add;
-    private JButton Cancel;
     private JComboBox<String> positionCom;
     private JPanel BottomPanel;
 
