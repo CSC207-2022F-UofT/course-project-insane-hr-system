@@ -13,29 +13,21 @@ import view_model.ViewModel;
 import javax.swing.*;
 
 public class CheckProfileMain {
-//    public static void main(String[] args) {
-//        ViewModel viewModel = new ViewModel();
-//        CheckProfileIGateway gateway = new CheckProfileDataAccess();
-//
-//        ScreenBuilder screenBuilder = new ScreenBuilder(viewModel, gateway);
-//
-//        CheckProfileOutputBoundary presenter = new CheckProfilePresenter(viewModel);
-//
-//        CheckProfileInputBoundary interactor = new CheckProfileInteractor(gateway, presenter);
-//        CheckProfileController controller = new CheckProfileController(interactor);
-//        JFrame screen = screenBuilder.view();
-//        screen.pack();
-//        screen.setVisible(true);
-//    }
-
     public static void main(String[] args) {
         CheckProfileIGateway gateway = new CheckProfileIMDataAccess();
         CheckProfileOutputBoundary presenter = new CheckProfilePresenter(new ViewModel());
         CheckProfileController controller = new CheckProfileController(presenter, gateway);
-        Curr.setUser(gateway.getUserByUid(CheckProfileUserIDMap.headId));
-        controller.create(CheckProfileUserIDMap.headId, CheckProfileUserIDMap.headId);
+        Curr.setUser(gateway.getUserByUid(1));
+        controller.create(1, 1);
         presenter.showFrame();
-
-
     }
+
+//    public static void main(String[] args) {
+//        CheckProfileIGateway gateway = new CheckProfileIMDataAccess();
+//        CheckProfileOutputBoundary presenter = new CheckProfilePresenter(new ViewModel());
+//        CheckProfileController controller = new CheckProfileController(presenter, gateway);
+//        Curr.setUser(gateway.getUserByUid(CheckProfileUserIDMap.headId));
+//        controller.create(CheckProfileUserIDMap.headId, CheckProfileUserIDMap.headId);
+//        presenter.showFrame();
+//    }
 }

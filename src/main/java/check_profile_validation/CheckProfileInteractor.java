@@ -43,12 +43,12 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
             responseModel.setTargetUid(target.getId());
         }else if (visualLevel != VisualLevel.INVISIBLE) {
             List<Organization> orgs1 = new ArrayList<>(target.getTasks());
-            List<Object> results1= getVisibleOrganizations(requester, getOrgnizations(orgs1));
+            List<Object> results1= getVisibleOrganizations(requester, (orgs1));
             responseModel.setList1(results1);
             responseModel.setList1Name("Tasks");
             responseModel.setReference1(getOReference(target.getTasks().toArray(new Organization[0])));
             List<Organization> orgs2 = new ArrayList<>(target.getProjects());
-            List<Object> results2= getVisibleOrganizations(requester, getOrgnizations(orgs2));
+            List<Object> results2= getVisibleOrganizations(requester, (orgs2));
             responseModel.setList2(results2);
             responseModel.setList2Name("Projects");
             responseModel.setReference2(getOReference(target.getProjects().toArray(new Organization[0])));
@@ -81,7 +81,7 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
         responseModel.setDpt(requester.getDpt().getOid());
         responseModel.setFileType(getFileType(target));
         responseModel.setVisualLevel(visualLevel);
-        responseModel.setRelation(RelativeRelation.NO_RELATION);
+        responseModel.setRelation(RoleAllowed.getRelation(requester, target));
         responseModel.setTargetOid(target.getOid());
         setRelativeRelation(requester, responseModel, target.getOid(), target);
 
@@ -103,6 +103,8 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
             return FileType.DEPARTMENT_FILE;
         }else if (target instanceof CommonProject) {
             return FileType.PROJECT_FILE;
+        } else if (target instanceof LeaveRequestProject) {
+            return FileType.LEAVE_REQUEST_PROJECT_FILE;
         }else if (target instanceof LeaveRequestTask) {
             return FileType.LEAVE_REQUEST_TASK_FILE;
         }else if (target instanceof StarEvaluationTask) {
@@ -245,10 +247,10 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
         return VisualLevel.ONLY_FACE;
     }
     private VisualLevel getVisibility(User user, Project project) {
-        if (user.getProjects().contains(project) && project instanceof CommonProject){
+        if (user.getProjects().contains(project)){
             return VisualLevel.EDITABLE;
         }else if (project instanceof CommonProject){
-            if (user.getDpt().equals(((CommonProject) project).getDpt())){
+            if (user.getDpt().equals(project.getDpt())){
                 return VisualLevel.PROFILE;
             }
         }

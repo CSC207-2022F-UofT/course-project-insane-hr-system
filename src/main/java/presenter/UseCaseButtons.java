@@ -62,14 +62,15 @@ public class UseCaseButtons {
         JButton requestButton = new JButton("Leave Request");
         panel.add(requestButton);
         requestButton.addActionListener(e -> {
-            LeaveRequestScreen ui = new LeaveRequestScreen(screenBuilder.view());
+            LeaveRequestScreen ui = new LeaveRequestScreen(screenBuilder.getViewOnly());
             ui.setVisible(true);
         });
         return panel;
     }
 
     public static JPanel getApproveLeaveTask(ScreenBuilder screenBuilder) {
-        return new ReviewRequestScreen(screenBuilder.view(), screenBuilder.getDataModel().getOid());
+
+        return new ReviewRequestScreen(screenBuilder.getViewOnly(), screenBuilder.getDataModel().getOid());
     }
 
     public static JPanel getPMTaskInit() {

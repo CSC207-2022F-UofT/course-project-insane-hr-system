@@ -11,6 +11,7 @@ import presenter.IViewModel;
 import presenter.Controllers;
 import presenter.UseCaseButtons;
 import view_model.IView;
+import view_model.ScreenType;
 import view_model.Table;
 import view_model.ViewModel;
 
@@ -157,6 +158,9 @@ public class ScreenBuilder implements IView {
         presenter.showFrame();
     }
 
+    public Integration getViewOnly(){
+        return view;
+    }
 //    private void plugInController(Object reference) {
 //        if (reference instanceof Integer) {
 //            buttonController.create(dataModel.getRequesterID(), (Integer) reference);
@@ -268,6 +272,10 @@ public class ScreenBuilder implements IView {
         });
 
 
+        if (dataModel.getScreenType() == ScreenType.TASK_SCREEN){
+            removeDataPanels();
+        }
+
         return view;
     }
 
@@ -315,7 +323,7 @@ public class ScreenBuilder implements IView {
         view.getRightPanel().invalidate();
     }
     void removeDataPanels() {
-        view.getRootPanel().remove(view.getLeftPanel());
+//        view.getRootPanel().remove(view.getLeftPanel());
         view.getRootPanel().remove(view.getRightPanel());
         view.getRootPanel().invalidate();
     }

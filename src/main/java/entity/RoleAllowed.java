@@ -102,7 +102,7 @@ public class RoleAllowed {
     public static List<CommonRole> roleOfOrg(List<Role> roles, UUID oid) {
         List<CommonRole> results = new ArrayList<>();
         for (CommonRole role : getCommonRole(roles)) {
-            if (role.getOid() == oid) {
+            if (role.getOid().equals(oid)) {
                 results.add(role);
             }
         }
@@ -126,6 +126,7 @@ public class RoleAllowed {
     }
 
     public static RelativeRelation getRelation(User user, Organization org) {
+        int t = roleOfOrg(user.getRoles(), org.getOid()).size();
         if (roleOfOrg(user.getRoles(), org.getOid()).size() == 2) return RelativeRelation.IS_HEAD_OF;
         else if (roleOfOrg(user.getRoles(), org.getOid()).size() == 2) return RelativeRelation.IS_MEMBER_OF;
         return RelativeRelation.NO_RELATION;

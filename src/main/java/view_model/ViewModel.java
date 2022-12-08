@@ -68,6 +68,14 @@ public class ViewModel implements PropertyChangeListener, IViewModel {
 
 
     @Override
+    public ScreenType getScreenType() {
+        return screenType;
+    }
+    @Override
+    public void setScreenType(ScreenType screenType) {
+        this.screenType = screenType;
+    }
+    @Override
     public void setFunction(Controllers[] controllers) {
         this.controllers = controllers;
     }

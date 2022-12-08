@@ -52,8 +52,21 @@ public class CheckProfilePresenter implements CheckProfileOutputBoundary {
         viewModel.setVisualLevel(responseModel.getVisualLevel());
         viewModel.setFunction(new ControllerFactory().getUseCases(responseModel));
         viewModel.setDpt(responseModel.getDpt());
+        viewModel.setScreenType(getScreenType(responseModel));
     }
 
+    private ScreenType getScreenType(CheckProfileResponseModel responseModel) {
+        switch (responseModel.getFileType()){
+            case LEAVE_REQUEST_PROJECT_FILE:
+            case PROJECT_FILE:return ScreenType.PROJECT_SCREEN;
+            case LEAVE_REQUEST_TASK_FILE:
+            case EVALUATION_TASK_FILE:
+            case TASK_FILE: return ScreenType.TASK_SCREEN;
+            case USER_FILE:return ScreenType.USER_SCREEN;
+            case DEPARTMENT_FILE:return ScreenType.DEPARTMENT_SCREEN;
+        }
+        return null;
+    }
 
 
 //    public ScreenBuilder createScreenBuilder(CheckProfileResponseModel responseModel) {
@@ -122,9 +135,10 @@ public class CheckProfilePresenter implements CheckProfileOutputBoundary {
             itemName = ((Organization) item).getName();
         }else if(item instanceof User){
             itemName = ((User) item).getName();
-        } else {
-            itemName = "Not User, Not Organization";
         }
+//       else {
+//            itemName = "Not User, Not Organization";
+//        }
         list[i][0] = itemName;
     }
 

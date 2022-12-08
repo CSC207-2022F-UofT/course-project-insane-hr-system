@@ -181,7 +181,7 @@ public class CommonUser extends CommonUserFace implements User {
         return "CommonUser{" +'\n' +
                 "userFile=" + userFile.toString() +'\n' +
                 ", uid=" + uid +'\n' +
-                ", dpt=" + dpt +'\n' +
+                ", dpt=" + dpt.getName() +'\n' +
                 ", bio='" + bio + '\'' +'\n' +
                 ", name='" + name + '\'' +'\n' +
                 '}';

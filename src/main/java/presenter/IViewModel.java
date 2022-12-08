@@ -1,6 +1,7 @@
 package presenter;
 
 import check_profile_validation.VisualLevel;
+import view_model.ScreenType;
 import view_model.Table;
 import view_model.ViewModel;
 
@@ -12,6 +13,9 @@ import java.util.UUID;
 public interface IViewModel extends PropertyChangeListener{
 
 
+    ScreenType getScreenType();
+
+    void setScreenType(ScreenType screenType);
 
     void setFunction(Controllers[] controllers);
     /*

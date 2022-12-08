@@ -1,5 +1,6 @@
 package view_model;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Table {
@@ -35,5 +36,12 @@ public class Table {
 
     public void setReference(Object[] reference) {
         this.reference = reference;
+    }
+
+    @Override
+    public String toString() {
+        return "Table{" +
+                "data=" + Arrays.toString(data) +
+                '}';
     }
 }
