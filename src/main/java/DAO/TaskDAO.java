@@ -82,7 +82,7 @@ public class TaskDAO implements TaskDAOInterface {
         if (task.getType().equals("STAR")){
 
             if(task.getState().equals(CLOSED)){
-                query = "INSERT INTO tasks (id, projectID, name, head, description, status, start, type, evalTask, end, results) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+                query = "INSERT INTO tasks (id, projectID, name, head, description, status, start, type, evalTask, 'end', results) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             } else {
                 query = "INSERT INTO tasks (id, projectID, name, description, head, status, start, type, evalTask) VALUES (?,?,?,?,?,?,?,?,?)";
             }
@@ -90,7 +90,7 @@ public class TaskDAO implements TaskDAOInterface {
 
         } else{
             if (task.getState().equals(CLOSED)){
-                query = "INSERT INTO tasks (id, projectID, name, head, description, status, start, type, end, results) VALUES (?,?,?,?,?,?,?,?,?,?)";
+                query = "INSERT INTO tasks (id, projectID, name, head, description, status, start, type, 'end', results) VALUES (?,?,?,?,?,?,?,?,?,?)";
             }
             else{
                 query = "INSERT INTO tasks (id, projectID, name, head, description, status, start, type) VALUES (?,?,?,?,?,?,?,?)";

@@ -80,7 +80,7 @@ public class ProjectDAO implements ProjectDAOInterface {
         String query;
         if (project.getType().equals("COMMON")){
             if (project.getState().equals(CLOSED)){
-                query = "INSERT INTO project (id, name, head, description, start, type, status, department, funds, end) VALUES (?,?,?,?,?,?,?,?,?,?)";
+                query = "INSERT INTO project (id, name, head, description, start, type, status, department, funds, 'end') VALUES (?,?,?,?,?,?,?,?,?,?)";
             }
             else{
                 query = "INSERT INTO project (id, name, head, description, start, type, status, department, funds) VALUES (?,?,?,?,?,?,?,?,?)";
@@ -88,7 +88,7 @@ public class ProjectDAO implements ProjectDAOInterface {
         }
         else{
             if (project.getState().equals(CLOSED)){
-                query = "INSERT INTO project (id, name, head, description, start, type, status, vacation_days, leave_type, num_responses, end) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+                query = "INSERT INTO project (id, name, head, description, start, type, status, vacation_days, leave_type, num_responses, 'end') VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             }
             else{
                 query = "INSERT INTO project (id, name, head, description, start, type, status, vacation_days, leave_type, num_responses) VALUES (?,?,?,?,?,?,?,?,?,?)";
