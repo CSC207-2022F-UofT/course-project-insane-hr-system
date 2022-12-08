@@ -1,6 +1,8 @@
 package ui;
 
 import controller.NewProjectController;
+import create_new_project.NewProjectInputBoundary;
+import create_new_project.NewProjectInteractor;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -22,6 +24,9 @@ public class NewProjectForm {
     private JLabel descriptionLabel;
     private JLabel ddepartmentLabel;
 
+    public final NewProjectInputBoundary projectInput = new NewProjectInteractor();
+    public final NewProjectController controller = new NewProjectController(projectInput);
+
     public NewProjectForm() {
 
         submitAndCreateProjectButton.addActionListener(new ActionListener() {
@@ -32,7 +37,7 @@ public class NewProjectForm {
                 String name = ProjNametextField.getText();
                 String description = descriptextField.getText();
                 String dpt = descriptextField.getText();
-                NewProjectController.create(PMid, funds, name, description, dpt);
+                controller.create(PMid, funds, name, description, dpt);
             }
 
 
