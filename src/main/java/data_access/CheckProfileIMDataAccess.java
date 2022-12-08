@@ -215,4 +215,5 @@ public class CheckProfileIMDataAccess implements CheckProfileIGateway {
     public Project getProject2() {
         return project2;
     }
+
 }
