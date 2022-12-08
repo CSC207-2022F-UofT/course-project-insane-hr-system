@@ -3,9 +3,6 @@ package ui;
 import check_profile_validation.*;
 import controller.CheckProfileController;
 import data_access.CheckProfileDataAccess;
-import data_access.CheckProfileIMDataAccess;
-import entity.Organization;
-import entity.StarEvaluationTask;
 import presenter.CheckProfilePresenter;
 import presenter.IViewModel;
 import presenter.Controllers;
@@ -182,7 +179,7 @@ public class ScreenBuilder implements IView {
                 jPanel.add(UseCaseButtons.getPanel(controllers, this));
             }
         } catch (NullPointerException e) {
-            jPanel.add(UseCaseButtons.getUseCase1(this));
+            jPanel.add(UseCaseButtons.getUseCase1());
         }
 
 
