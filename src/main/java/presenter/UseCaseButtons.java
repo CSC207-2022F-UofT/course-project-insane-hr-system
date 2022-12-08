@@ -40,7 +40,7 @@ public class UseCaseButtons {
         panel.add(enrollButton);
         EnrollScreen enrollScreen = new EnrollScreen();
         enrollButton.addActionListener(e -> {
-            enrollScreen.showScreen();
+            enrollScreen.showScreenMain();
 
         });
         return panel;
