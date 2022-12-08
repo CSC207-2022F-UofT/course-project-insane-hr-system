@@ -2,7 +2,6 @@ package controller;
 
 import check_profile_validation.*;
 import data_access.CheckProfileDataAccess;
-import data_access.CheckProfileIMDataAccess;
 import presenter.CheckProfilePresenter;
 import view_model.ViewModel;
 
