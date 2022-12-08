@@ -17,17 +17,10 @@ public class CheckProfileMain {
         CheckProfileIGateway gateway = new CheckProfileIMDataAccess();
         CheckProfileOutputBoundary presenter = new CheckProfilePresenter(new ViewModel());
         CheckProfileController controller = new CheckProfileController(presenter, gateway);
-        Curr.setUser(gateway.getUserByUid(1));
-        controller.create(1, 1);
+        Curr.setUser(gateway.getUserByUid(CheckProfileUserIDMap.headId));
+        controller.create(CheckProfileUserIDMap.headId, CheckProfileUserIDMap.headId);
         presenter.showFrame();
-    }
 
-//    public static void main(String[] args) {
-//        CheckProfileIGateway gateway = new CheckProfileIMDataAccess();
-//        CheckProfileOutputBoundary presenter = new CheckProfilePresenter(new ViewModel());
-//        CheckProfileController controller = new CheckProfileController(presenter, gateway);
-//        Curr.setUser(gateway.getUserByUid(CheckProfileUserIDMap.headId));
-//        controller.create(CheckProfileUserIDMap.headId, CheckProfileUserIDMap.headId);
-//        presenter.showFrame();
-//    }
+
+    }
 }

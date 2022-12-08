@@ -5,7 +5,7 @@ import entity.Department;
 import java.util.List;
 
 public interface EnrollDsGateway {
-    List<String> getAllUsername();
+    List<String> getUserNameLastFour();
     List<Integer> getAllUID();
 
     String generateUsername(String name); //first four letter of last name + four numbers e.g. zhan0001,zhan0002

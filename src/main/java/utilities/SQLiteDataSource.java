@@ -10,7 +10,7 @@ public class SQLiteDataSource {
     static {
         try {
             Class.forName("org.sqlite.JDBC");
-            String dbURL = "src/main/database/HR_DB.sqlite";
+            String dbURL = "/Users/zhangzeyu/group15/course-project-insane-hr-system/src/main/database/HR_DB.sqlite";
             connection = DriverManager.getConnection("jdbc:sqlite:" + dbURL);
         } catch (ClassNotFoundException e) {
             System.out.println("connection fail");

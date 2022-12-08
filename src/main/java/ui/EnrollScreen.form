@@ -67,8 +67,8 @@
             <properties>
               <font name="JetBrains Mono" size="16" style="0"/>
               <model>
-                <item value="Head"/>
-                <item value="Member"/>
+                <item value="HEAD"/>
+                <item value="MEMBER"/>
               </model>
             </properties>
           </component>

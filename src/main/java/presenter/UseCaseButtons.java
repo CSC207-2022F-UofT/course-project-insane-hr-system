@@ -10,11 +10,7 @@ import salary_calculator.SalaryCalculatorInputBoundary;
 import salary_calculator.SalaryCalculatorOutputBoundary;
 import project_manager_task_init_use_case.PMTaskInitGateway;
 import project_manager_task_init_use_case.PMTaskInitInteractor;
-import ui.LeaveRequestScreen;
-import ui.PMTaskInitScreen;
-import ui.ReviewRequestScreen;
-import ui.SalaryView;
-import ui.ScreenBuilder;
+import ui.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -28,7 +24,7 @@ public class UseCaseButtons {
     public static JPanel getPanel(Controllers controllers, ScreenBuilder screenBuilder){
         switch (controllers){
             case SALARY_CALCULATOR: return getSalaryCalculator(screenBuilder);
-            case ENROLL_EMPLOYEE:;
+            case ENROLL_EMPLOYEE: return getEnrollEmployee();
             case CREATE_PROJECT:return getCreateProject(screenBuilder);
             case LEAVE_REQUEST: return getLeaveRequest(screenBuilder);
             case COMPLETE_TASK:;
@@ -99,5 +95,16 @@ public class UseCaseButtons {
         JPanel jPanel = new JPanel();
         jPanel.add(new JLabel("createProejct Not Implement"));
         return jPanel;
+    }
+
+    public static JPanel getEnrollEmployee(){
+        JPanel panel = new JPanel();
+        JButton enrollButton = new JButton("Enroll Employee");
+        panel.add(enrollButton);
+        enrollButton.addActionListener(e -> {
+            EnrollScreen ui = new EnrollScreen();
+            ui.showScreenMain();
+        });
+        return panel;
     }
 }
