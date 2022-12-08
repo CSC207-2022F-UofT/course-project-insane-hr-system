@@ -1,9 +1,9 @@
 package controller;
 
 import entity.CommonUser;
-import RankEmployeesUseCase.RankInputBoundary;
-import RankEmployeesUseCase.RankRequestModel;
-import RankEmployeesUseCase.RankResponseModel;
+import rank_employees.RankInputBoundary;
+import rank_employees.RankRequestModel;
+import rank_employees.RankResponseModel;
 
 import java.util.List;
 
@@ -14,8 +14,8 @@ public class RankController {
         this.userInput = userInput;
     }
 
-    RankResponseModel create(List<CommonUser> subordinates){
-        RankRequestModel requestModel = new RankRequestModel(subordinates);
+    RankResponseModel create(CommonUser user){
+        RankRequestModel requestModel = new RankRequestModel(user);
         return userInput.create(requestModel);
 
     }

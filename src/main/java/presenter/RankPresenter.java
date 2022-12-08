@@ -1,7 +1,7 @@
 package presenter;
 
-import rank_employees_use_case.RankOutputBoundary;
-import rank_employees_use_case.RankResponseModel;
+import rank_employees.RankOutputBoundary;
+import rank_employees.RankResponseModel;
 
 public class RankPresenter implements RankOutputBoundary {
 

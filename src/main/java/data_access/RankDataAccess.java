@@ -2,19 +2,14 @@ package data_access;
 
 import DAO.TaskDAO;
 import DAO.UserDAO;
-import DAOInterfaces.DepartmentDAOInterface;
-import DAOInterfaces.TaskDAOInterface;
 import entity.CommonTask;
 import entity.CommonUser;
 import entity.Task;
-import entity.TaskFactory;
-import rank_employees_use_case.RankGateway;
-import rank_employees_use_case.RankRequestModel;
+import rank_employees.RankGateway;
+import rank_employees.RankRequestModel;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import DAOInterfaces.UserDAOInterface;
 
 import static entity.Constants.CLOSED;
 import static entity.Constants.COMMON;
