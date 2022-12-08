@@ -8,16 +8,16 @@ import java.util.UUID;
 public interface DepartmentDAOInterface {
 
     // create a Department
-    public void createDepartment(Department department);
+    void createDepartment(Department department);
 
     // update a Department
-    public void updateDepartment(Department department);
+    void updateDepartment(Department department);
 
     // get all Departments
-    public List<Department> getAllDepartments();
+    List<Department> getAllDepartments();
 
     // get one Department
-    public Department getDepartment(UUID id);
+    Department getDepartment(UUID id);
 
 
 }

@@ -8,14 +8,14 @@ import java.util.UUID;
 public interface ProjectDAOInterface {
 
     // get all projects //
-    public List<Project> getAllProjects();
+    List<Project> getAllProjects();
 
     // get one project //
-    public Project getProject(UUID id);
+    Project getProject(UUID id);
 
     // create a project //
-    public void createProject(Project project);
+    void createProject(Project project);
 
     // update a project //
-    public void updateProject(Project project);
+    void updateProject(Project project);
 }
