@@ -11,23 +11,16 @@ Then change the BUILD AND RUN USING to ***IntelliJ IDEA***, and RUN TESTS USING 
 # How to Use
 
 Begin by logging into the system by entering a username and password and hitting the login button.
-If the entered username and password corresponds to a user in the system, 
-you will be presented with a screen showing
 
-- visual feature 1
-...
-- visual feature n
+In our database (main -> database -> HR_DB.sqlite -> employees), there are some test users. 
+You may log in as any of the existing users by the username and password. 
 
-with the following functionality
 
-- use case 1
-...
-- use case n
-
-if the username and password do not correspond to a user in the system, 
+If the username and password do not correspond to a user in the system, 
 you will be presented to a screen allowing you to return to the login screen.
 
-In our database (main -> database -> HR_DB.sqlite -> employees), there are some test users. You may log in as any of the existing users by the username and password. 
+If the entered username and password corresponds to a user in the system, 
+you will be presented with a screen displaying the appropriate system features.
 
 
 # Main Features
