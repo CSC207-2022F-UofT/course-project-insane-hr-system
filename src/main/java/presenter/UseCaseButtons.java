@@ -27,6 +27,7 @@ public class UseCaseButtons {
             case LEAVE_REQUEST: return getLeaveRequest(screenBuilder);
             case COMPLETE_TASK: return getCompleteTask(screenBuilder);
             case EVALUATE_TASK: return getEvaluateTask();
+            case RANK_EMPLOYEE: return getRankedEmployees(screenBuilder);
             case CREATE_TASK: return getPMTaskInit();
             case COMPLETE_PROJECT:return getCompleteProject();
             case EXAMPLE_USE_CASE: return getUseCase1();
@@ -56,6 +57,24 @@ public class UseCaseButtons {
         });
         return panel;
     }
+
+    private static JPanel getRankedEmployees(ScreenBuilder screenBuilder){
+        JPanel panel = new JPanel();
+        JButton button = new JButton("Rank Employees");
+        panel.add(button);
+        button.addActionListener(e -> {
+            RankEmployeesScreen ui = new RankEmployeesScreen(screenBuilder.getDataModel().getRequesterID());
+            JFrame frame = new JFrame("Employee Rankings");
+            frame.setContentPane(ui);
+            frame.pack();
+            frame.setVisible(true);
+        });
+        return panel;
+
+    }
+
+
+
     private static JPanel getCompleteProject() {
         JPanel panel = new JPanel();
         JButton createButton = new JButton("Complete Project");
