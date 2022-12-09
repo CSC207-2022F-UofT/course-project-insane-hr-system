@@ -12,11 +12,13 @@ import data_access.CheckProfileUserIDMap;
 import entity.*;
 import entity.project.CommonProject;
 import entity.project.Project;
+import entity.role.Position;
 import entity.task.CommonTask;
 import entity.task.Task;
 import entity.user.CommonUser;
 import entity.user.User;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -34,50 +36,69 @@ public class Initialization {
     private static  List<User> userPool = new ArrayList<>();
     private static  List<Organization> orgPool = new ArrayList<>();
     public static void initialize() {
+        Department dpt = new Department(dptUUID, "Physics Department", 0, new HashSet<>(), "We have quantum physics, classical physics and practical physics", LocalDateTime.now());
+        dptDB.createDepartment(dpt);
+
+
         User dptHead = new CommonUser(CheckProfileUserIDMap.headId);
-        User manager1 = new CommonUser(CheckProfileUserIDMap.manager1Id);
-        User manager2 = new CommonUser(CheckProfileUserIDMap.manager2Id);
-        User ee01 = new CommonUser(CheckProfileUserIDMap.employee01Id);
-        User ee11 = new CommonUser(CheckProfileUserIDMap.employee11Id);
-        User ee12 = new CommonUser(CheckProfileUserIDMap.employee12Id);
-        User ee21 = new CommonUser(CheckProfileUserIDMap.employee21Id);
-        User ee22 = new CommonUser(CheckProfileUserIDMap.employee22Id);
-        Department dpt = new Department(dptUUID, "CheckProfileTestDepartment", dptHead.getId(), new HashSet<>(), "This is the first dpt", LocalDateTime.now());
-        Project project1 = new CommonProject(project1UUID, "Project 1", manager1.getId(), new HashSet<>(), "This is the first Project", LocalDateTime.now(), dpt, new ArrayList<>(), 1000);
-        Project project2 = new CommonProject(project2UUID, "Project 2", manager2.getId(), new HashSet<>(), "This is the second Project", LocalDateTime.now(), dpt, new ArrayList<>(), 1000);
+        User user = dptHead;
+        dpt.addMember(user.getId());
+        user.setName("Kunlong Wu");
+        user.setStatus(Constants.OPEN);
+        user.setUsername("Wuuu0000");
+        user.setPassword("123");
+        user.setDpt(dpt);
+        user.setBio("hello everyone! I am " + user.getName() + ". I am in dpt " + user.getDpt().getName() + ".");
+        user.setOnboardDate(LocalDate.now());
+        user.setPosition(Position.HEAD);
+        dpt.addMember(user.getId());
+        userDB.createUser(user);
+        dptDB.updateDepartment(dpt);
 
+//        User manager1 = new CommonUser(CheckProfileUserIDMap.manager1Id);
+//        User manager2 = new CommonUser(CheckProfileUserIDMap.manager2Id);
+//        User ee01 = new CommonUser(CheckProfileUserIDMap.employee01Id);
+//        User ee11 = new CommonUser(CheckProfileUserIDMap.employee11Id);
+//        User ee12 = new CommonUser(CheckProfileUserIDMap.employee12Id);
+//        User ee21 = new CommonUser(CheckProfileUserIDMap.employee21Id);
+//        User ee22 = new CommonUser(CheckProfileUserIDMap.employee22Id);
 
+//        Project project1 = new CommonProject(project1UUID, "Project 1", manager1.getId(), new HashSet<>(), "This is the first Project", LocalDateTime.now(), dpt, new ArrayList<>(), 1000);
+//        Project project2 = new CommonProject(project2UUID, "Project 2", manager2.getId(), new HashSet<>(), "This is the second Project", LocalDateTime.now(), dpt, new ArrayList<>(), 1000);
 
-        userPool.add(dptHead);
-        userPool.add(manager1);
-        userPool.add(manager2);
-        userPool.add(ee01);
-        userPool.add(ee11);
-        userPool.add(ee12);
-        userPool.add(ee21);
-        userPool.add(ee22);
+//        userPool.add(dptHead);
+//        userPool.add(manager1);
+//        userPool.add(manager2);
+//        userPool.add(ee01);
+//        userPool.add(ee11);
+//        userPool.add(ee12);
+//        userPool.add(ee21);
+//        userPool.add(ee22);
 
-        for (User user : userPool){
-            dpt.addMember(user.getId());
-            user.setName("User " + user.getId());
-            user.setStatus(Constants.OPEN);
-            user.setUsername("username" + user.getId());
-            user.setPassword("psw");
-            user.setBio("hello everyone! I am " + user.getName() + ". I am in department " + user.getDpt().getName() + ".");
-            user.setDpt(dpt);
-        }
+//
+//        for (User user : userPool){
+//            dpt.addMember(user.getId());
+//            user.setName("User " + user.getId());
+//            user.setStatus(Constants.OPEN);
+//            user.setUsername("user" + user.getId());
+//            user.setPassword("123");
+//            user.setBio("hello everyone! I am " + user.getName() + ". I am in dpt " + user.getDpt().getName() + ".");
+//            user.setDpt(dpt);
+//            dpt.addMember(user.getId());
+//        }
 
-        for (User user: userPool){
-            userDB.createUser(user);
-        }
-
-        for (User user : userPool){
-            user.setDpt(dpt);
-        }
-
-        for (User user : userPool) {
-            userDB.updateUser(user);
-        }
+//
+//        for (User user: userPool){
+//            userDB.createUser(user);
+//        }
+//
+//        for (User user : userPool){
+//            user.setDpt(dpt);
+//        }
+//
+//        for (User user : userPool) {
+//            userDB.updateUser(user);
+//        }
 
 
 
@@ -156,4 +177,7 @@ public class Initialization {
 //        for (User user: userPool){
 //            roleFactory.addRoleToUserBasedOnOrg(user);
 //            PositionSetter.setPositionBasedOnGivenUser(user);
+public static void main(String[] args) {
+    initialize();
+}
 }

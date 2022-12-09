@@ -9,6 +9,8 @@ import DAO.DepartmentDAOInterface;
 import DAO.ProjectDAOInterface;
 import DAO.TaskDAOInterface;
 import DAO.UserDAOInterface;
+import entity.role.IRoleFactory;
+import entity.role.RoleFactory;
 import use_case.check_profile_validation.CheckProfileIGateway;
 import entity.Organization;
 import entity.user.User;
@@ -38,7 +40,10 @@ public class CheckProfileDataAccess implements CheckProfileIGateway {
 
     @Override
     public User getUserByUid(Integer target) {
-        return userDB.getUser(target);
+        User user = userDB.getUser(target);
+        IRoleFactory roleFactory = new RoleFactory();
+        roleFactory.addRoleToUserBasedOnOrg(user);
+        return user;
 
     }
 

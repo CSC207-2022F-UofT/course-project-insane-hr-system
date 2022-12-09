@@ -10,32 +10,15 @@ Then change the BUILD AND RUN USING to ***IntelliJ IDEA***, and RUN TESTS USING 
 
 # How to Use
 
-Begin by logging into the system by entering a username and password and hitting the login button.
-If the entered username and password corresponds to a user in the system, 
-you will be presented with a screen showing
-
-- visual feature 1
-...
-- visual feature n
-
-with the following functionality
-
-- use case 1
-...
-- use case n
-
-if the username and password do not correspond to a user in the system, 
-you will be presented to a screen allowing you to return to the login screen.
-
-In our database (main -> database -> HR_DB.sqlite -> employees), there are some test users. You may log in as any of the existing users by the username and password. 
-
+In our database (main -> database -> HR_DB.sqlite -> employees), there are some test users. 
+You may log in as any of the existing users by the username and password. (username: test, password: test)
 
 # Main Features
 
 ### LoginScreen / Login use-case
-  Presents a login screen with Insane-HR-System logo prompting the user to enter username and password.
-  If the corresponding user exists, builds the appropriate screen.
-  Otherwise, sends user to a login failure page, where they can return to the login screen.
+  - to login, simply enter the username and password of a user in the database and press login.
+  - if the username and password correspond to a user in the database, you will be presented with a screen displaying the appropriate features.
+  - otherwise, you will be brought to a login failure screen that will allow you to try again.
 
 ### Enroll Employee
   - To enroll an employee, you need to be the CEO. Please Log in as CEO (username: test, password: test)
@@ -54,12 +37,38 @@ In our database (main -> database -> HR_DB.sqlite -> employees), there are some 
 - The employee will be placed "On Leave" if all superiors approved the request.
 - The employee's number of vacation days remaining will be updated appropriately.
 
+### Rank Employees
+- For each user that belongs to a department they can see how all members except for the department head are ranked in the department. 
+- The highest ranked employees are at the top of the screen while the lowest ranked employees are at the bottom.
+
+### Complete Task
+- In employee's screen, user can select the finished task and go to the task page.
+<img width="348" alt="selected button" src="https://user-images.githubusercontent.com/98726309/206615126-ec191ff2-123f-435e-aaa5-fc1ac216371b.png">
+
+- In the task page, employee can use "complete task" button to submit their task.
+
+- After press complete button, the program will ask you to double check in order to avoid submitting other tasks by mistake.
+<img width="322" alt="submit button" src="https://user-images.githubusercontent.com/98726309/206615561-6ca2e178-b5b7-4f1c-9018-af10f47f0113.png">
+
+- Only task with "OPEN" status can be submitted.
+
+- After submittion, the status of task will become "CLOSED".
+
+### Create Task
+- In the Project screen, if the current user is the project manager of teh selected project, they will be able to create a new task under this projct, by clicking the button at teh bottom left of the screen.
+- To create the task, the user needs to type in the name of the task, the description of the task, and enter the ID of the employee to assign the newly created task to. After entering the required input, the user can click on the "create" button to create the task.
+
+### Check Profile Validation
+- 
 
 # Test Coverage
 
 -  LeaveRequestInteractor
 -  ReviewRequestInteractor
 -  Observer in LeaveRequest entities
+-  Check Profile Use Case
+-  Enroll Employee use case
+-  Project Manager Task Initialization use case
 
 
 # Design Patterns
@@ -72,7 +81,12 @@ In our database (main -> database -> HR_DB.sqlite -> employees), there are some 
 
 # Contribution
 
--  Kunlong Wu
--  Zeyu Zhang
+-  Kunlong Wu: Role package in entity to handle with Role of user, user/organization entity initialization. Check Profile Validation Use case with the View + ViewModel of all file screen. SalaryCalculator(Only Use case layer, haven't finished)
+
+-  Zeyu Zhang: Controller, presenter, data access, UI, use case and test for employee enrollment; Use case layer for add department, and delete employee. 
 -  Tim Lan
+-  Josh Lunger
+-  Hao Bao
+-  Gayatri (Tara) Chakkithara : Database, DAOs, Rank Employees Use Case, Rank Employees Interface Adapters, RankEmployeesScreen and RankEmployeesDataAccess. 
+-  Jian Wang
 

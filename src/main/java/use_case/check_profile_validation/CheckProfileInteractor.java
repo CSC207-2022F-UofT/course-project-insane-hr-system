@@ -14,6 +14,7 @@ import presenter.CheckProfilePresenter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 public class CheckProfileInteractor implements CheckProfileInputBoundary {
@@ -43,7 +44,7 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
         responseModel.setDpt(requester.getDpt().getOid());
         responseModel.setName(target.getName());
         responseModel.setRelation(RoleAllowed.getRelation(requester, target));
-        responseModel.setBio(target.getBio());
+        responseModel.setBio(target.getBio() +"\nPosition:" + target.getPosition() + "\nOnboarding at" + target.getOnboardDate() + "\nStatus: " + target.getStatus());
 
         VisualLevel visualLevel = getVisibility(requester, target);
         responseModel.setVisualLevel(visualLevel);
@@ -238,6 +239,9 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
 
 
     private VisualLevel getVisibility(User requester, Organization org) {
+        if (Objects.equals(org.getState(), Constants.CLOSED)){
+            return VisualLevel.INVISIBLE;
+        }
         if (org instanceof Department) {
             return getVisibility(requester, ((Department) org));
         } else if (org instanceof Project) {

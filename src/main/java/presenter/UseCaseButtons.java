@@ -1,12 +1,18 @@
 package presenter;
 
-import controller.SalaryCalculatorController;
-import presenter.Controllers;
+import controller.CompleteTaskController;
+import controller.PMTaskInitController;
+import data_access.CompleteTaskDataAccess;
+import data_access.PMTaskInitDataAccess;
 import ui.*;
+import use_case.complete_task.CompleteTaskInputBoundary;
+import use_case.complete_task.CompleteTaskInteractor;
+import use_case.complete_task.CompleteTaskOutputBoundary;
+import use_case.project_manager_task_init_use_case.PMTaskInitGateway;
+import use_case.project_manager_task_init_use_case.PMTaskInitInteractor;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.UUID;
 
 public class UseCaseButtons {
     //TODO: Please create everyone's button here!
@@ -21,25 +27,48 @@ public class UseCaseButtons {
             case LEAVE_REQUEST: return getLeaveRequest(screenBuilder);
             case COMPLETE_TASK: return getCompleteTask(screenBuilder);
             case EVALUATE_TASK: return getEvaluateTask();
-            case CREATE_TASK:;
-            case COMPLETE_PROJECT:;
+            case CREATE_TASK: return getPMTaskInit();
+            case COMPLETE_PROJECT:return getCompleteProject();
             case EXAMPLE_USE_CASE: return getUseCase1();
             case APPROVE_LEAVE_TASK: return getApproveLeaveTask(screenBuilder);
         }
-        JPanel jPanel = new JPanel();
-        jPanel.add(new JLabel("No Controller is allowed"));
-        return jPanel;
+//        JPanel jPanel = new JPanel();
+//        jPanel.add(new JLabel("No Controller is allowed"));
+//        return jPanel;
+        return null;
     }
 
-    private static JPanel getEnrollEmploye() {
+    public static JPanel getPMTaskInit() {
         JPanel panel = new JPanel();
-        JButton enrollButton = new JButton("Enroll Employee");
-        panel.add(enrollButton);
-        EnrollScreen enrollScreen = new EnrollScreen();
-        enrollButton.addActionListener(e -> {
-            enrollScreen.showScreenMain();
+        JButton button = new JButton("Create New Task");
+        panel.add(button);
+        button.addActionListener(e -> {
+            PMTaskInitGateway gateway = new PMTaskInitDataAccess();
+            PMTaskInitPresenter presenter = new PMTaskInitPresenter();
+            PMTaskInitInteractor interactor = new PMTaskInitInteractor(presenter, gateway);
+            PMTaskInitController controller = new PMTaskInitController(interactor);
 
+            PMTaskInitScreen taskInitScreen = new PMTaskInitScreen(controller);
+            JFrame frame = new JFrame("Task Initialization");
+            frame.setContentPane(taskInitScreen);
+            frame.pack();
+            frame.setVisible(true);
         });
+        return panel;
+    }
+    private static JPanel getCompleteProject() {
+        JPanel panel = new JPanel();
+        JButton createButton = new JButton("Complete Project");
+        panel.add(createButton);
+        createButton.addActionListener(e -> JOptionPane.showMessageDialog(panel, "This functionality will coming soon"));
+        return panel;
+    }
+
+    private static JPanel getCreateTask() {
+        JPanel panel = new JPanel();
+        JButton createButton = new JButton("Create Task");
+        panel.add(createButton);
+        createButton.addActionListener(e -> JOptionPane.showMessageDialog(panel, "This functionality will coming soon"));
         return panel;
     }
 
@@ -48,10 +77,7 @@ public class UseCaseButtons {
         JButton completeButton = new JButton("Complete Task");
         panel.add(completeButton);
         CompleteTaskScreen completeTaskScreen = new CompleteTaskScreen();
-        completeButton.addActionListener(e -> {
-            screenBuilder.getLeftSelectedRows();
-            completeTaskScreen.viewScreen();
-        });
+        completeButton.addActionListener(e -> completeTaskScreen.viewScreen(screenBuilder.getDataModel().getOid()));
         return panel;
     }
 
@@ -60,9 +86,7 @@ public class UseCaseButtons {
         JButton evaluateButton = new JButton("Evaluate Task");
         panel.add(evaluateButton);
         EvaluateTaskScreen evaluateTaskScreen = new EvaluateTaskScreen();
-        evaluateButton.addActionListener(e -> {
-            evaluateTaskScreen.viewScreen();
-        });
+        evaluateButton.addActionListener(e -> evaluateTaskScreen.viewScreen());
         return panel;
     }
 
@@ -70,12 +94,9 @@ public class UseCaseButtons {
         JPanel panel = new JPanel();
         JButton salaryButton = new JButton("Salary Calculator");
         panel.add(salaryButton);
-        salaryButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFrame frame = new JFrame("Dialog");
-                JOptionPane.showMessageDialog(frame, "This functionality has been cut");
-            }
+        salaryButton.addActionListener(e -> {
+            JFrame frame = new JFrame("Dialog");
+            JOptionPane.showMessageDialog(frame, "This functionality has been cut");
         });
         return panel;
     }
@@ -85,14 +106,14 @@ public class UseCaseButtons {
         JButton requestButton = new JButton("Leave Request");
         panel.add(requestButton);
         requestButton.addActionListener(e -> {
-            LeaveRequestScreen ui = new LeaveRequestScreen(screenBuilder.view());
+            LeaveRequestScreen ui = new LeaveRequestScreen(screenBuilder.getViewOnly());
             ui.setVisible(true);
         });
         return panel;
     }
 
     public static JPanel getApproveLeaveTask(ScreenBuilder screenBuilder) {
-        return new ReviewRequestScreen(screenBuilder.view(), screenBuilder.getDataModel().getOid());
+        return new ReviewRequestScreen(screenBuilder.getViewOnly(), screenBuilder.getDataModel().getOid());
     }
 
     public static JPanel getUseCase1(){
@@ -105,7 +126,7 @@ public class UseCaseButtons {
         JButton createButton = new JButton("Create Project");
         panel.add(createButton);
         createButton.addActionListener(e -> {
-            NewProjectForm ui = new NewProjectForm(screenBuilder.view());
+            NewProjectForm ui = new NewProjectForm(screenBuilder.getViewOnly());
             ui.setContentPane(ui.mainPanel);
             ui.pack();
             ui.setVisible(true);

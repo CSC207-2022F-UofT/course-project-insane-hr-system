@@ -143,6 +143,8 @@ public class TaskDAO implements TaskDAOInterface {
 
             // save all task members to the database as well
             saveTaskMembers(task);
+            new ProjectDAO().updateProject(task.getProject());
+
 
 
 
@@ -313,8 +315,10 @@ public class TaskDAO implements TaskDAOInterface {
 
             // connect to the database for each row.
             // insert each member.
+            Project project = task.getProject();
 
             for (int memberID: task.getMembers()) {
+                project.addMember(memberID);
                 statement = connection.prepareStatement(sql);
                 statement.setString(1, task.getOid().toString());
                 statement.setInt(2, memberID);

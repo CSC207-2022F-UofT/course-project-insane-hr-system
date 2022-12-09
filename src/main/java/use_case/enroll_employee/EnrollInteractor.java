@@ -12,10 +12,18 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class EnrollInteractor implements EnrollInputBoundary{
+
+
     final EnrollDsGateway enrolldsGateway;
     final EnrollOutputBoundary enrollOutputBoundary;
     final UserFactory userFactory;
 
+    /**
+     * Get information and save in the database, get and show the information in user interface.
+     * @param enrolldsGateway is the interface that connect the data access with the use case
+     * @param enrollOutputBoundary is the interface that connect the framework with the use case.
+     * @param userFactory is the interface that connect the entity with use case.
+     */
 
     public EnrollInteractor(EnrollDsGateway enrolldsGateway, EnrollOutputBoundary enrollOutputBoundary, UserFactory userFactory) {
         this.enrolldsGateway = enrolldsGateway;
@@ -25,6 +33,11 @@ public class EnrollInteractor implements EnrollInputBoundary{
         this.userFactory = userFactory;
     }
 
+    /**
+     * Based on the user input information to create a new user.
+     * @param requestModel contains all the user input information
+     * @return a reponse model that contains the generated user id, username and user password.
+     */
     public EnrollResponseModel create(EnrollRequestModel requestModel){
         int id = enrolldsGateway.generateId();
         String name = requestModel.getName();
@@ -60,6 +73,11 @@ public class EnrollInteractor implements EnrollInputBoundary{
 
     }
 
+
+    /**
+     * Get all the department names in our database
+     * @return a list string that contains the name of all the departments in our database.
+     */
     @Override
     public List<String> getAllDpts() {
         List<String> dptNames = new ArrayList<>();
