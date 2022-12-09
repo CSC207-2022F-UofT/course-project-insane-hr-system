@@ -64,6 +64,7 @@ You may log in as any of the existing users by the username and password. (usern
 -  Rank Employees Use Case
 -  Observer in LeaveRequest entities
 -  Check Profile Use Case
+-  Enroll Employee use case
 
 
 # Design Patterns
