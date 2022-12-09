@@ -270,7 +270,7 @@ public class ScreenBuilder implements IView {
 
 
         if (dataModel.getScreenType() == ScreenType.TASK_SCREEN){
-            removeDataPanels();
+            removeRightList();
         }
 
         return view;
@@ -283,7 +283,8 @@ public class ScreenBuilder implements IView {
         view.setNameLabel(setInfoTitle());
         view.getDetailLabel().setText(setIntro());
 
-        removeDataPanels();
+        removeRightList();
+        removeLeftList();
         removeButtons();
         removeControllerPanels();
 
@@ -319,9 +320,12 @@ public class ScreenBuilder implements IView {
         view.getLeftPanel().invalidate();
         view.getRightPanel().invalidate();
     }
-    void removeDataPanels() {
-//        view.getRootPanel().remove(view.getLeftPanel());
+    void removeRightList() {
         view.getRootPanel().remove(view.getRightPanel());
+        view.getRootPanel().invalidate();
+    }
+    void removeLeftList() {
+        view.getRootPanel().remove(view.getLeftPanel());
         view.getRootPanel().invalidate();
     }
     void removeControllerPanels() {

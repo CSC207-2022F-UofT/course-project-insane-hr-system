@@ -48,6 +48,9 @@ public class RoleFactory implements IRoleFactory{
         if (user.getDpt().getHead() == user.getId()) {
             user.addRole(createCommonRole(Position.HEAD, user.getDpt().getName(), user.getDpt().getOid()));
         }
+        if (user.getPosition()==Position.CEO){
+            user.addRole(new SuperRole(Position.CEO, "CEO_ROLE"));
+        }
 
     }
 }
