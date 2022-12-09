@@ -6,10 +6,15 @@ import entity.user.CommonUser;
 public class RankRequestModel {
     private int user;
 
+
+    /*
+    The RankRequestModel stores a current Users UID.
+     */
     public RankRequestModel(int user){
         this.user = user;
     }
 
+    /////// GETTERS AND SETTERS ////////
     public int getUserId(){
         return this.user;
     }

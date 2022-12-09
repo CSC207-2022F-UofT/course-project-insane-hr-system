@@ -19,6 +19,9 @@ import static utilities.SQLiteDataSource.connection;
 import static entity.Constants.CLOSED;
 
 public class UserDAO implements UserDAOInterface {
+    /*
+    Get all Users from the database.
+     */
     @Override
     public List<User> getAllUsers() {
         String query = "SELECT * FROM employees";
@@ -42,6 +45,10 @@ public class UserDAO implements UserDAOInterface {
 
         return users;
     }
+
+    /*
+    Get one User from the database.
+     */
 
     /**
      * get user by id
@@ -119,6 +126,10 @@ public class UserDAO implements UserDAOInterface {
         return user;
     }
 
+    /*
+    Create a User in the database.
+     */
+
     @Override
     public void createUser(User user) {
         String userQuery;
@@ -181,6 +192,9 @@ public class UserDAO implements UserDAOInterface {
         }
     }
 
+    /*
+    Update a user in the database.
+     */
     @Override
     public void updateUser(User user) {
         deleteUser(user.getId());
