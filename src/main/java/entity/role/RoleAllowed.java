@@ -11,7 +11,7 @@ public class RoleAllowed {
 
     public static boolean isHeadOf(List<Role> roles, List<Role> targetRoles) {
         for (Role role : roles) {
-            if (role.getPosition() == Position.HEADOF) {
+            if (role.getPosition() == Position.HEADOF || role.getPosition() == Position.CEO) {
                 return true;
             }
         }
