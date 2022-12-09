@@ -37,6 +37,10 @@ You may log in as any of the existing users by the username and password. (usern
 - The employee will be placed "On Leave" if all superiors approved the request.
 - The employee's number of vacation days remaining will be updated appropriately.
 
+### Rank Employees
+- For each user that belongs to a department they can see how all members except for the department head are ranked in the department. 
+- The highest ranked employees are at the top of the screen while the lowest ranked employees are at the bottom.
+
 ### Complete Task
 - 
 
@@ -45,6 +49,7 @@ You may log in as any of the existing users by the username and password. (usern
 
 -  LeaveRequestInteractor
 -  ReviewRequestInteractor
+-  Rank Employees Use Case
 -  Observer in LeaveRequest entities
 
 
@@ -63,4 +68,5 @@ You may log in as any of the existing users by the username and password. (usern
 -  Tim Lan
 -  Josh Lunger
 -  Hao Bao
+-  Gayatri (Tara) Chakkithara
 
