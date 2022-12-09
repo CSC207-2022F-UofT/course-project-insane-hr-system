@@ -16,7 +16,8 @@ public class EvaluateTaskDataAccess implements EvaluateTaskDsGateway {
 
     @Override
     public void save(EvaluateTaskRequestModel requestModel) {
-
+        taskDAO.updateTask(requestModel.getCommonTask());
+        userDAO.updateUser(requestModel.getUser());
     }
 
     @Override
