@@ -16,9 +16,9 @@ You may log in as any of the existing users by the username and password. (usern
 # Main Features
 
 ### LoginScreen / Login use-case
-  -to login, simply enter the username and password of a user in the database and press login.
-  -if the username and password correspond to a user in the database you will be presented with a screen displaying the appropriate features.
-  -otherwise, you will be brought to a login failure screen that will allow you to try again.
+  - to login, simply enter the username and password of a user in the database and press login.
+  - if the username and password correspond to a user in the database you will be presented with a screen displaying the appropriate features.
+  - otherwise, you will be brought to a login failure screen that will allow you to try again.
 
 ### Enroll Employee
   - To enroll an employee, you need to be the CEO. Please Log in as CEO (username: test, password: test)
