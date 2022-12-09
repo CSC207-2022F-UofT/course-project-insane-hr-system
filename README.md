@@ -42,7 +42,7 @@ You may log in as any of the existing users by the username and password. (usern
 - The highest ranked employees are at the top of the screen while the lowest ranked employees are at the bottom.
 
 ### Complete Task
-- 
+- In employee's screen, select the finished task and press "go to selected task" button.
 
 
 # Test Coverage
