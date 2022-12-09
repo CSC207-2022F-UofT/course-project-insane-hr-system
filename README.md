@@ -1,37 +1,61 @@
 # Insane HR system
 
-This project is aimed to give company a fantastic solution of project and task management. Employee and project manager could see there current tasks and project, and manage there tasks and projects. Department head could over look every member's work in his department. 
+This project is aimed to give companies a fantastic solution of employee, project and task management. Employee and project manager are able to see their current tasks and projects, and manage their tasks and projects. Department head can check every member's work in his department. 
+
+# System Setup
+
+In order to make sure our program and tests works, please go to ***preference -> Build, Execution, Deployment -> Build Tools -> Gradle***.
+Then change the BUILD AND RUN USING to ***IntelliJ IDEA***, and RUN TESTS USING to ***Gradle(Default)***.
 
 
-# How to use our software
+# How to Use
 
-Begin by logging into the system by entering a username and password and hitting the login button.
-If the entered username and password corresponds to a user in the system, 
-you will be presented with a screen showing
-
-- visual feature 1
-...
-- visual feature n
-
-with the following functionality
-
-- use case 1
-...
-- use case n
-
-if the username and password do not correspond to a user in the system, 
-you will be presented to a screen allowing you to return to the login screen.
-
+In our database (main -> database -> HR_DB.sqlite -> employees), there are some test users. 
+You may log in as any of the existing users by the username and password. (username: test, password: test)
 
 # Main Features
 
-1.  LoginScreen / Login use-case
-  Presents a login screen with Insane-HR-System logo prompting the user to enter username and password.
-  If the corresponding user exists, builds the appropriate screen.
-  Otherwise, sends user to a login failure page, where they can return to the login screen.
+### LoginScreen / Login use-case
+  - to login, simply enter the username and password of a user in the database and press login.
+  - if the username and password correspond to a user in the database, you will be presented with a screen displaying the appropriate features.
+  - otherwise, you will be brought to a login failure screen that will allow you to try again.
+
+### Enroll Employee
+  - To enroll an employee, you need to be the CEO. Please Log in as CEO (username: test, password: test)
+  - Press the ***Enroll Employee*** button
+  - In the new screen, enter the new employee's name. The name has to be fist name [space] last name. For example, Zeyu Zhang
+  - If the name field is blank, the error message will show up.
+  - Select the department that you want to put the employee in, and the position that you want to assign the employee.
+  - After press the enroll button, the new employee information will show up.
+  - Now, we can use the username and password to log in as the new employee.
+  - After login as the new employee and press the go to department button, we can see that this employee has been included in the department member list.
+  - note: by system default, the CEO is in the test Dpt, so CEO can only see the department member in the test Dpt. To see the members in Other department, you need to log in as a member of that department. 
+
+### Leave Request
+- Employees can request for different types of leave and specify the dates they are on leave.
+- Every one of the employee's superiors (e.g., project managers, department heads) will be asked to approve/deny the request.
+- The employee will be placed "On Leave" if all superiors approved the request.
+- The employee's number of vacation days remaining will be updated appropriately.
+
+### Rank Employees
+- For each user that belongs to a department they can see how all members except for the department head are ranked in the department. 
+- The highest ranked employees are at the top of the screen while the lowest ranked employees are at the bottom.
+
+### Complete Task
+- In employee's screen, user can select the finished task and go to the task page.
+- In the task page, employee can use "complete task" button to submit their task.
+- Only task with "OPEN" status can be submitted.
+- After submittion, the status of task will become "CLOSED".
+
+# Test Coverage
+
+-  LeaveRequestInteractor
+-  ReviewRequestInteractor
+-  Rank Employees Use Case
+-  Observer in LeaveRequest entities
 
 
-# Design Pattern
+# Design Patterns
 
 -  Builder
 -  Factory
@@ -42,6 +66,9 @@ you will be presented to a screen allowing you to return to the login screen.
 # Contribution
 
 -  Kunlong Wu
-- 
-
+-  Zeyu Zhang
+-  Tim Lan
+-  Josh Lunger
+-  Hao Bao
+-  Gayatri (Tara) Chakkithara
 

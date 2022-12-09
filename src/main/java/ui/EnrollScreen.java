@@ -14,6 +14,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class EnrollScreen extends JPanel{
+
+    // the screen that will be shown up when the CEO press the "enroll employee" button.
     private JPanel EnrollPanel;
     private JPanel TopPanel;
     private JTextField nameField;
@@ -54,6 +56,12 @@ public class EnrollScreen extends JPanel{
 //        });
 
     }
+
+
+    /**
+     * Generate the screen that will contain the information of the new employee.
+     * @param enrollResponseModel contains the generated userid, username, and user password.
+     */
     public void newEmployeeScreen(EnrollResponseModel enrollResponseModel){
         JFrame frame2 = new JFrame("New Employee");
         frame2.setMinimumSize(new Dimension(450, 300));
@@ -74,11 +82,20 @@ public class EnrollScreen extends JPanel{
         frame.setContentPane(enroll.EnrollPanel);
     }
 
+
+    /**
+     * put all the existing department names into the screen list.
+     */
     public void setDptCom() {
         String[] dpts = enrollController.enrollInput.getAllDpts().toArray(new String[0]);
         //this.dptCom = new JComboBox(dpts);
         this.dptCom.setModel(new DefaultComboBoxModel<>(dpts));
     }
+
+
+    /**
+     * put the position options into the screen list.
+     */
 
     public void setPositionCom() {
         this.positionCom.setModel(new DefaultComboBoxModel<>(new String[] { "HEAD", "MEMBER" }));

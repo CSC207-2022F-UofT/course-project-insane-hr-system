@@ -11,6 +11,8 @@ import java.util.*;
 
 public class IMEnrollEmployee implements EnrollDsGateway {
 
+    // a data access for the employee_enroll_interactor test.
+
     final List<CommonUser> users;
     final List<Department> departments;
 
