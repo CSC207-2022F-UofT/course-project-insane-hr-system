@@ -1,6 +1,9 @@
 package use_case.check_profile_validation;
 
 public enum FileType {
+    /*
+    different file type
+     */
      USER_FILE,
      TASK_FILE,
     EVALUATION_TASK_FILE,

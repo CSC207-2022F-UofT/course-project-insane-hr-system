@@ -32,6 +32,11 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
         this.outputBoundary = new CheckProfilePresenter();
     }
 
+    /**
+     * This is the interactor method for strategy 1, user wants to check user's file.
+     * @param requestModel contains requester UID and target UID, which are both integer
+     * @return responseModel that can form view model.
+     */
     @Override
     public CheckProfileResponseModel checkUserProfile(CheckUserFileRequestModel requestModel) {
         User requester = gateway.getUserByUid(requestModel.getRequester());
@@ -70,15 +75,11 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
         return responseModel;
     }
 
-    private Object[] getOReference(Organization[] orgs) {
-        Object[] results = new Object[orgs.length];
-        for (int i = 0; i < orgs.length; i ++) {
-            results[i] = orgs[i].getOid();
-        }
-        return results;
-    }
-
-
+    /**
+     * This is the interactor method for strategy 2, user wants to check organization's file.
+     * @param requestModel contains requester UID and target OID, first one is an integer, second one is a UUID
+     * @return responseModel that can form view model.
+     */
     @Override
     public CheckProfileResponseModel checkOrgProfile(CheckOrgFileRequestModel requestModel) {
         User requester = gateway.getUserByUid(requestModel.getRequester());
@@ -108,6 +109,26 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
         outputBoundary.prepareOrgFrame(responseModel);
         return responseModel;
     }
+
+    /**
+     * helper function to get the reference of organization that contained in Table, which is one field of response model.
+     * @param orgs a list of organization
+     * @return a list of UUID
+     */
+    private Object[] getOReference(Organization[] orgs) {
+        Object[] results = new Object[orgs.length];
+        for (int i = 0; i < orgs.length; i ++) {
+            results[i] = orgs[i].getOid();
+        }
+        return results;
+    }
+
+
+    /**
+     * get the file type
+     * @param target the User/Organization we want to see
+     * @return FileType
+     */
     FileType getFileType(Object target) {
         if (target instanceof Department){
             return FileType.DEPARTMENT_FILE;
@@ -126,6 +147,10 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
             }
         return null;
     }
+
+    /**
+     * helper function to create Table in response model.
+     */
     void setTables(User requester, Organization target, CheckProfileResponseModel responseModel){
         if (target instanceof Department){
             responseModel.setList1(getOrgVisibleMembers(requester, target));
@@ -142,6 +167,9 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
             responseModel.setReference1(target.getMembers().toArray(new Integer[0]));
         }
     }
+    /**
+     * helper function to create Table in response model.
+     */
     String getList1Name(FileType fileType) {
         switch (fileType) {
             case TASK_FILE:
@@ -154,24 +182,24 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
         }
         return null;
     }
+    /**
+     * helper function to create Table in response model.
+     */
     String getList2Name(FileType fileType) {
         switch (fileType) {
             case EVALUATION_TASK_FILE:
             case LEAVE_REQUEST_TASK_FILE:
             case TASK_FILE:return null;
-            case USER_FILE:return "Projects";
+            case USER_FILE:
+            case DEPARTMENT_FILE:
+                return "Projects";
             case PROJECT_FILE:return "Tasks";
-            case DEPARTMENT_FILE:return "Projects";
         }
         return null;
     }
 
-    /**
-     *
-     */
     @Override
     public void update() {
-
     }
 
     @Override
@@ -180,8 +208,9 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
     }
 
 
-    // Helper methods.
-
+    /**
+     * helper function to set the relative relation
+     */
     private void setRelativeRelation(User requester, CheckProfileResponseModel responseModel, UUID oid, Organization target) {
         List<CommonRole> roles = RoleAllowed.roleOfOrg(requester.getRoles(), oid);
         for (CommonRole role : roles) {
@@ -195,6 +224,8 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
         else if (roles.size() == 1) responseModel.setRelation(RelativeRelation.IS_MEMBER_OF);
         else if(roles.size() != 0) throw new RuntimeException("Role Loading Mistake");
     }
+
+    // Helper methods for get visible level. This five methods return the visible object in any of Table
 
     private List<Object> getDptVisibleTasks(User requester, Project target) {
         List<Organization> orgs2 = new ArrayList<>(target.getTasks());
@@ -217,7 +248,6 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
     }
 
 
-    // Helper methods for helper methods.
     private List<Object> getVisibleOrganizations(User requester, List<Organization> organizations) {
         List<Object> results = new ArrayList<>();
         for (Organization org : organizations) {
@@ -238,6 +268,7 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
     }
 
 
+    // Helper method of get visibility.
     private VisualLevel getVisibility(User requester, Organization org) {
         if (Objects.equals(org.getState(), Constants.CLOSED)){
             return VisualLevel.INVISIBLE;
@@ -291,24 +322,24 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
         return VisualLevel.INVISIBLE;
     }
 
-    List<Organization> getOrgnizations(List<Organization> organizations) {
-        List<Organization> results = new ArrayList<>();
-        for (Organization org : organizations) {
-            if (isCommon(org)) results.add(org);
-        }
-        return results;
-    }
-
-    List<Organization> getUncommonOrgnizations (List<Organization> organizations) {
-        List<Organization> results = new ArrayList<>();
-        for (Organization org : organizations) {
-            if (!isCommon(org)) results.add(org);
-        }
-        return results;
-    }
-    private boolean isCommon(Organization org) {
-        return org instanceof CommonProject || org instanceof CommonTask || org instanceof Department;
-    }
+//    List<Organization> getOrgnizations(List<Organization> organizations) {
+//        List<Organization> results = new ArrayList<>();
+//        for (Organization org : organizations) {
+//            if (isCommon(org)) results.add(org);
+//        }
+//        return results;
+//    }
+//
+//    List<Organization> getUncommonOrgnizations (List<Organization> organizations) {
+//        List<Organization> results = new ArrayList<>();
+//        for (Organization org : organizations) {
+//            if (!isCommon(org)) results.add(org);
+//        }
+//        return results;
+//    }
+//    private boolean isCommon(Organization org) {
+//        return org instanceof CommonProject || org instanceof CommonTask || org instanceof Department;
+//    }
 
 
 }
