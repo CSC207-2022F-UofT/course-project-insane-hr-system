@@ -30,6 +30,8 @@ you will be presented to a screen allowing you to return to the login screen.
 
 # Main Features
 
+In our database (main -> database -> HR_DB.sqlite -> employees), there are some test users. You may log in as any of the existing users by the username and password. 
+
 1.  LoginScreen / Login use-case
   Presents a login screen with Insane-HR-System logo prompting the user to enter username and password.
   If the corresponding user exists, builds the appropriate screen.
@@ -41,11 +43,10 @@ you will be presented to a screen allowing you to return to the login screen.
   - In the new screen, enter the new employee's name. The name has to be fist name [space] last name. For example, Zeyu Zhang
   - If the name field is blank, the error message will show up.
   - Select the department that you want to put the employee in, and the position that you want to assign the employee.
-  - After press the enroll button, the new employee button will show up.
+  - After press the enroll button, the new employee information will show up.
   - Now, we can use the username and password to log in as the new employee.
   - After login as the new employee and press the go to department button, we can see that this employee has been included in the department member list.
-  - note: by system default, the CEO is in the test Dpt, so CEO can only see the department member in the test Dpt. To see the members in Other department, 
-  - you need to log in as a member of that department. 
+  - note: by system default, the CEO is in the test Dpt, so CEO can only see the department member in the test Dpt. To see the members in Other department, you need to log in as a member of that department. 
 
 
 # Design Pattern
