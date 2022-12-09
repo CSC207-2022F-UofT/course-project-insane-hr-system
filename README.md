@@ -79,7 +79,7 @@ You may log in as any of the existing users by the username and password. (usern
 
 -  Kunlong Wu: Role package in entity to handle with Role of user, user/organization entity initialization. Check Profile Validation Use case with the View + ViewModel of all file screen. SalaryCalculator(Only Use case layer, haven't finished)
 
--  Zeyu Zhang
+-  Zeyu Zhang: Controller, presenter, data access, UI, use case and test for employee enrollment; Use case layer for add department, and delete employee. 
 -  Tim Lan
 -  Josh Lunger
 -  Hao Bao
