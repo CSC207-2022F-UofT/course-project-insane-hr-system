@@ -20,6 +20,9 @@ import java.util.UUID;
 
 public class RankEmployeesScreen extends JPanel {
 
+    /*
+    Create a screen of ranked users that's a scrollable list.
+     */
     public RankEmployeesScreen(int id){
 
         // get a response model.
