@@ -44,6 +44,7 @@ You may log in as any of the existing users by the username and password. (usern
 ### Complete Task
 - In employee's screen, user can select the finished task and go to the task page.
 - In the task page, employee can use "complete task" button to submit their task.
+- After press complete button, the program will ask you to double check in order to avoid submitting other tasks by mistake.
 - Only task with "OPEN" status can be submitted.
 - After submittion, the status of task will become "CLOSED".
 
