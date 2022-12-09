@@ -69,6 +69,7 @@ You may log in as any of the existing users by the username and password. (usern
 -  Observer in LeaveRequest entities
 -  Check Profile Use Case
 -  Enroll Employee use case
+-  Project Manager Task Initialization use case
 
 
 # Design Patterns
@@ -88,4 +89,5 @@ You may log in as any of the existing users by the username and password. (usern
 -  Josh Lunger
 -  Hao Bao
 -  Gayatri (Tara) Chakkithara
+-  Jian Wang
 
