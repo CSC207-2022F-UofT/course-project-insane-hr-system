@@ -62,6 +62,7 @@ public class UserDAO implements UserDAOInterface {
 
             // get basic user info
             resultSet = statement.executeQuery(userQuery);
+
             while (resultSet.next()) {
                 user.setUsername(resultSet.getString("username"));
                 user.setPassword(resultSet.getString("password"));
@@ -73,7 +74,8 @@ public class UserDAO implements UserDAOInterface {
                     user.setDepartureDate(LocalDate.parse(resultSet.getString("departure_date")));
                 }
 
-                UUID dptID = UUID.fromString(resultSet.getString("department_id"));
+
+                UUID dptID = UUID.fromString(resultSet.getString("department_id").trim());
                 user.setDpt(new DepartmentDAO().getDepartment(dptID));
 
                 user.setBio(resultSet.getString("bio"));

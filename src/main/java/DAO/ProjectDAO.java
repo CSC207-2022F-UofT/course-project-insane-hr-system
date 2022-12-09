@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static entity.Constants.CLOSED;
@@ -260,8 +261,9 @@ public class ProjectDAO implements ProjectDAOInterface {
                 String name = result.getString("name");
                 Integer head = result.getInt("head");
                 String description = result.getString("description");
-                LocalDateTime start = LocalDateTime.parse(result.getString("start"));
-                Department dept = new DepartmentDAO().getDepartment(UUID.fromString(result.getString("department")));
+                DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSS");
+                LocalDateTime start = LocalDateTime.parse(result.getString("start"),format);
+                Department dept = new DepartmentDAO().getDepartment(UUID.fromString(result.getString("department").trim()));
 
                 if(result.getString("type").equals("COMMON")){
                     int funds = result.getInt("funds");
