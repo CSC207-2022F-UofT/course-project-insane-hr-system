@@ -54,6 +54,10 @@ You may log in as any of the existing users by the username and password. (usern
 
 - After submittion, the status of task will become "CLOSED".
 
+### Create Task
+- In the Project screen, if the current user is the project manager of teh selected project, they will be able to create a new task under this projct, by clicking the button at teh bottom left of the screen.
+- To create the task, the user needs to type in the name of the task, the description of the task, and enter the ID of the employee to assign the newly created task to. After entering the required input, the user can click on the "create" button to create the task.
+
 ### Check Profile Validation
 - 
 
