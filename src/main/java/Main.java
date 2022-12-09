@@ -10,8 +10,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
+/**
+ *  main
+ */
 public class Main {
 
+    /**
+     * the main method
+     * builds login use-case and presents screen
+     */
     public static void main(String[] args) throws IOException {
 
 
@@ -25,18 +32,12 @@ public class Main {
         LoginInputBoundary interactor = new LoginInteractor(loginDataAccess, loginPresenter);
         LoginController loginController = new LoginController(interactor);
 
-        // TODO intialize data access
-
-        // TODO pass data access to login interactor
-
-        // TODO initialize feature interactors, controllers
-
-        // Build the GUI, plugging in the parts
         JPanel loginScreen = new LoginPromptScreen(loginController, screens, cardLayout);
         screens.add(loginScreen, "welcome");
         cardLayout.show(screens, "use_case/login");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.pack();
         mainFrame.setVisible(true);
+
     }
 }
