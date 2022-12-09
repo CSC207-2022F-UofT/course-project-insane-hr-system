@@ -1,6 +1,11 @@
 # Insane HR system
 
-This project is aimed to give company a fantastic solution of project and task management. Employee and project manager could see there current tasks and project, and manage there tasks and projects. Department head could over look every member's work in his department. 
+This project is aimed to give company a fantastic solution of employee, project and task management. Employee and project manager are able to see their current tasks and projects, and manage their tasks and projects. Department head can check every member's work in his department. 
+
+# System Setup
+
+In order to make sure our program and tests works, please go to preference -> Build, Execution, Deployment -> Build Tools -> Gradle
+Then change the BUILD AND RUN USING to ***IntelliJ IDEA***, and RUN TESTS USING to ***Gradle(Default)***.
 
 
 # How to use our software
