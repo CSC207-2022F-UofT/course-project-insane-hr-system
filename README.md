@@ -42,8 +42,10 @@ You may log in as any of the existing users by the username and password. (usern
 - The highest ranked employees are at the top of the screen while the lowest ranked employees are at the bottom.
 
 ### Complete Task
-- In employee's screen, select the finished task and press "go to selected task" button.
-
+- In employee's screen, user can select the finished task and go to the task page.
+- In the task page, employee can use "complete task" button to submit their task.
+- Only task with "OPEN" status can be submitted.
+- After submittion, the status of task will become "CLOSED".
 
 # Test Coverage
 
@@ -51,7 +53,7 @@ You may log in as any of the existing users by the username and password. (usern
 -  ReviewRequestInteractor
 -  Rank Employees Use Case
 -  Observer in LeaveRequest entities
--  EnrollEmployeeInteractor
+
 
 # Design Patterns
 
