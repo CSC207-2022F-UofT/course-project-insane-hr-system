@@ -51,7 +51,7 @@ You may log in as any of the existing users by the username and password. (usern
 -  ReviewRequestInteractor
 -  Rank Employees Use Case
 -  Observer in LeaveRequest entities
-
+-  EnrollEmployeeInteractor
 
 # Design Patterns
 
