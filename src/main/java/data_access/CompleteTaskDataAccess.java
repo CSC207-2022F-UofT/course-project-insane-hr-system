@@ -3,10 +3,13 @@ package data_access;
 
 import DAO.*;
 
+import entity.task.CommonTask;
 import entity.task.Task;
+import presenter.view_model.Table;
 import use_case.complete_task.CompleteTaskDsGateway;
 import use_case.complete_task.CompleteTaskDsRequestModel;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class CompleteTaskDataAccess implements CompleteTaskDsGateway {
@@ -18,7 +21,10 @@ public class CompleteTaskDataAccess implements CompleteTaskDsGateway {
 
     @Override
     public void save(CompleteTaskDsRequestModel requestModel) {
-        requestModel.getTask().setState("CLOSED");
+        Task task = requestModel.getTask();
+        task.setState("CLOSED");
+        task.setCloseTime(LocalDateTime.now());
+        taskDAO.updateTask(task);
     }
 
     @Override

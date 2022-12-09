@@ -36,7 +36,7 @@ public class ControllerFactory {
             case ENROLL_EMPLOYEE: return relation == RelativeRelation.IS_DPT_HEAD_SELF || relation == RelativeRelation.IS_CEO_OF;
             case SALARY_CALCULATOR: return relation == RelativeRelation.IS_EMPLOYEE_SELF || relation == RelativeRelation.IS_PM_SELF;
             case COMPLETE_PROJECT: return relation == RelativeRelation.IS_HEAD_OF && responseModel.getFileType() != FileType.LEAVE_REQUEST_PROJECT_FILE;
-            case COMPLETE_TASK: return relation == RelativeRelation.IS_MEMBER_OF;
+            case COMPLETE_TASK: return relation == RelativeRelation.IS_MEMBER_OF && responseModel.getFileType() == FileType.TASK_FILE;
             case EVALUATE_TASK: return relation == RelativeRelation.IS_HEAD_OF && responseModel.getFileType() == FileType.EVALUATION_TASK_FILE;
             case APPROVE_LEAVE_TASK: return relation == RelativeRelation.IS_MEMBER_OF && responseModel.getFileType() == FileType.LEAVE_REQUEST_TASK_FILE;
             case RANK_EMPLOYEE: return responseModel.getFileType() == FileType.DEPARTMENT_FILE && relation != RelativeRelation.NO_RELATION;

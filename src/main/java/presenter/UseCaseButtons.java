@@ -1,13 +1,15 @@
 package presenter;
 
+import controller.CompleteTaskController;
 import controller.PMTaskInitController;
-import controller.RankController;
+import data_access.CompleteTaskDataAccess;
 import data_access.PMTaskInitDataAccess;
-import entity.Department;
+import ui.*;
+import use_case.complete_task.CompleteTaskInputBoundary;
+import use_case.complete_task.CompleteTaskInteractor;
+import use_case.complete_task.CompleteTaskOutputBoundary;
 import use_case.project_manager_task_init_use_case.PMTaskInitGateway;
 import use_case.project_manager_task_init_use_case.PMTaskInitInteractor;
-import ui.*;
-import use_case.rank_employees.RankGateway;
 
 import javax.swing.*;
 import java.util.UUID;
@@ -21,60 +23,19 @@ public class UseCaseButtons {
         switch (controllers){
             case SALARY_CALCULATOR: return getSalaryCalculator();
             case ENROLL_EMPLOYEE: return getEnrollEmployee();
-            case CREATE_PROJECT:return getCreateProject();
+            case CREATE_PROJECT:return getCreateProject(screenBuilder);
             case LEAVE_REQUEST: return getLeaveRequest(screenBuilder);
-            case COMPLETE_TASK:
+            case COMPLETE_TASK: return getCompleteTask(screenBuilder);
+            case EVALUATE_TASK: return getEvaluateTask();
             case CREATE_TASK: return getPMTaskInit();
-            case COMPLETE_PROJECT:
+            case COMPLETE_PROJECT:return getCompleteProject();
             case EXAMPLE_USE_CASE: return getUseCase1();
             case APPROVE_LEAVE_TASK: return getApproveLeaveTask(screenBuilder);
-            case RANK_EMPLOYEE: return getRankedEmployees(screenBuilder);
         }
-        JPanel jPanel = new JPanel();
-        jPanel.add(new JLabel("No Controller is allowed"));
-        return jPanel;
-    }
-
-    private static JPanel getSalaryCalculator() {
-        JPanel panel = new JPanel();
-        JButton salaryButton = new JButton("Salary Calculator");
-        panel.add(salaryButton);
-        salaryButton.addActionListener(e -> {
-            JFrame frame = new JFrame("Dialog");
-            JOptionPane.showMessageDialog(frame, "This functionality has been cut");
-        });
-        return panel;
-    }
-    private static JPanel getRankedEmployees(ScreenBuilder screenBuilder){
-        JPanel panel = new JPanel();
-        JButton button = new JButton("Rank Employees");
-        panel.add(button);
-        button.addActionListener(e -> {
-            RankEmployeesScreen ui = new RankEmployeesScreen(screenBuilder.getDataModel().getRequesterID());
-            JFrame frame = new JFrame("Employee Rankings");
-            frame.setContentPane(ui);
-            frame.pack();
-            frame.setVisible(true);
-        });
-        return panel;
-
-    }
-
-
-    public static JPanel getLeaveRequest(ScreenBuilder screenBuilder) {
-        JPanel panel = new JPanel();
-        JButton requestButton = new JButton("Leave Request");
-        panel.add(requestButton);
-        requestButton.addActionListener(e -> {
-            LeaveRequestScreen ui = new LeaveRequestScreen(screenBuilder.getViewOnly());
-            ui.setVisible(true);
-        });
-        return panel;
-    }
-
-    public static JPanel getApproveLeaveTask(ScreenBuilder screenBuilder) {
-
-        return new ReviewRequestScreen(screenBuilder.getViewOnly(), screenBuilder.getDataModel().getOid());
+//        JPanel jPanel = new JPanel();
+//        jPanel.add(new JLabel("No Controller is allowed"));
+//        return jPanel;
+        return null;
     }
 
     public static JPanel getPMTaskInit() {
@@ -88,9 +49,71 @@ public class UseCaseButtons {
             PMTaskInitController controller = new PMTaskInitController(interactor);
 
             PMTaskInitScreen taskInitScreen = new PMTaskInitScreen(controller);
-            taskInitScreen.setVisible(true);
+            JFrame frame = new JFrame("Task Initialization");
+            frame.setContentPane(taskInitScreen);
+            frame.pack();
+            frame.setVisible(true);
         });
         return panel;
+    }
+    private static JPanel getCompleteProject() {
+        JPanel panel = new JPanel();
+        JButton createButton = new JButton("Complete Project");
+        panel.add(createButton);
+        createButton.addActionListener(e -> JOptionPane.showMessageDialog(panel, "This functionality will coming soon"));
+        return panel;
+    }
+
+    private static JPanel getCreateTask() {
+        JPanel panel = new JPanel();
+        JButton createButton = new JButton("Create Task");
+        panel.add(createButton);
+        createButton.addActionListener(e -> JOptionPane.showMessageDialog(panel, "This functionality will coming soon"));
+        return panel;
+    }
+
+    private static JPanel getCompleteTask(ScreenBuilder screenBuilder) {
+        JPanel panel = new JPanel();
+        JButton completeButton = new JButton("Complete Task");
+        panel.add(completeButton);
+        CompleteTaskScreen completeTaskScreen = new CompleteTaskScreen();
+        completeButton.addActionListener(e -> completeTaskScreen.viewScreen(screenBuilder.getDataModel().getOid()));
+        return panel;
+    }
+
+    private static JPanel getEvaluateTask() {
+        JPanel panel = new JPanel();
+        JButton evaluateButton = new JButton("Evaluate Task");
+        panel.add(evaluateButton);
+        EvaluateTaskScreen evaluateTaskScreen = new EvaluateTaskScreen();
+        evaluateButton.addActionListener(e -> evaluateTaskScreen.viewScreen());
+        return panel;
+    }
+
+    private static JPanel getSalaryCalculator() {
+        JPanel panel = new JPanel();
+        JButton salaryButton = new JButton("Salary Calculator");
+        panel.add(salaryButton);
+        salaryButton.addActionListener(e -> {
+            JFrame frame = new JFrame("Dialog");
+            JOptionPane.showMessageDialog(frame, "This functionality has been cut");
+        });
+        return panel;
+    }
+
+    public static JPanel getLeaveRequest(ScreenBuilder screenBuilder) {
+        JPanel panel = new JPanel();
+        JButton requestButton = new JButton("Leave Request");
+        panel.add(requestButton);
+        requestButton.addActionListener(e -> {
+            LeaveRequestScreen ui = new LeaveRequestScreen(screenBuilder.getViewOnly());
+            ui.setVisible(true);
+        });
+        return panel;
+    }
+
+    public static JPanel getApproveLeaveTask(ScreenBuilder screenBuilder) {
+        return new ReviewRequestScreen(screenBuilder.getViewOnly(), screenBuilder.getDataModel().getOid());
     }
 
     public static JPanel getUseCase1(){
@@ -98,21 +121,27 @@ public class UseCaseButtons {
         jPanel.add(new JLabel("No operator here"));
         return jPanel;
     }
-
-    public static JPanel getCreateProject(){
-        JPanel jPanel = new JPanel();
-        jPanel.add(new JLabel("createProejct Not Implement"));
-        return jPanel;
-    }
-
-    public static JPanel getEnrollEmployee(){
+    public static JPanel getCreateProject(ScreenBuilder screenBuilder) {
         JPanel panel = new JPanel();
-        JButton enrollButton = new JButton("Enroll Employee");
-        panel.add(enrollButton);
-        enrollButton.addActionListener(e -> {
-            EnrollScreen ui = new EnrollScreen();
-            ui.showScreenMain();
+        JButton createButton = new JButton("Create Project");
+        panel.add(createButton);
+        createButton.addActionListener(e -> {
+            NewProjectForm ui = new NewProjectForm(screenBuilder.getViewOnly());
+            ui.setContentPane(ui.mainPanel);
+            ui.pack();
+            ui.setVisible(true);
         });
         return panel;
     }
+    public static JPanel getEnrollEmployee() {
+            JPanel panel = new JPanel();
+            JButton enrollButton = new JButton("Enroll Employee");
+            panel.add(enrollButton);
+            enrollButton.addActionListener(e -> {
+                EnrollScreen ui = new EnrollScreen();
+                ui.showScreenMain();
+            });
+            return panel;
+    }
 }
+
