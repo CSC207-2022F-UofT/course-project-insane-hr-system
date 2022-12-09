@@ -32,12 +32,12 @@ you will be presented to a screen allowing you to return to the login screen.
 
 In our database (main -> database -> HR_DB.sqlite -> employees), there are some test users. You may log in as any of the existing users by the username and password. 
 
-1. LoginScreen / Login use-case
+## LoginScreen / Login use-case
   Presents a login screen with Insane-HR-System logo prompting the user to enter username and password.
   If the corresponding user exists, builds the appropriate screen.
   Otherwise, sends user to a login failure page, where they can return to the login screen.
 
-2. Enroll Employee
+## Enroll Employee
   - To enroll an employee, you need to be the CEO. Please Log in as CEO (username: test, password: test)
   - Press the ***Enroll Employee*** button
   - In the new screen, enter the new employee's name. The name has to be fist name [space] last name. For example, Zeyu Zhang
@@ -48,7 +48,7 @@ In our database (main -> database -> HR_DB.sqlite -> employees), there are some 
   - After login as the new employee and press the go to department button, we can see that this employee has been included in the department member list.
   - note: by system default, the CEO is in the test Dpt, so CEO can only see the department member in the test Dpt. To see the members in Other department, you need to log in as a member of that department. 
 
-3. Leave Request
+## Leave Request
 - Employees can request for different types of leave and specify the dates they are on leave.
 - Every one of the employee's superiors (e.g., project managers, department heads) will be asked to approve/deny the request.
 - The employee will be placed "On Leave" if all superiors approved the request.
