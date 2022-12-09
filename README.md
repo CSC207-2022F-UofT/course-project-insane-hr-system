@@ -27,10 +27,10 @@ with the following functionality
 if the username and password do not correspond to a user in the system, 
 you will be presented to a screen allowing you to return to the login screen.
 
+In our database (main -> database -> HR_DB.sqlite -> employees), there are some test users. You may log in as any of the existing users by the username and password. 
+
 
 # Main Features
-
-In our database (main -> database -> HR_DB.sqlite -> employees), there are some test users. You may log in as any of the existing users by the username and password. 
 
 ### LoginScreen / Login use-case
   Presents a login screen with Insane-HR-System logo prompting the user to enter username and password.
