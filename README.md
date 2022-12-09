@@ -10,25 +10,15 @@ Then change the BUILD AND RUN USING to ***IntelliJ IDEA***, and RUN TESTS USING 
 
 # How to Use
 
-Begin by logging into the system by entering a username and password and hitting the login button.
-
 In our database (main -> database -> HR_DB.sqlite -> employees), there are some test users. 
 You may log in as any of the existing users by the username and password. (username: test, password: test)
-
-
-If the username and password do not correspond to a user in the system, 
-you will be presented to a screen allowing you to return to the login screen.
-
-If the entered username and password corresponds to a user in the system, 
-you will be presented with a screen displaying the appropriate system features.
-
 
 # Main Features
 
 ### LoginScreen / Login use-case
-  Presents a login screen with Insane-HR-System logo prompting the user to enter username and password.
-  If the corresponding user exists, builds the appropriate screen.
-  Otherwise, sends user to a login failure page, where they can return to the login screen.
+  -to login, simply enter the username and password of a user in the database and press login.
+  -if the username and password correspond to a user in the database you will be presented with a screen displaying the appropriate features.
+  -otherwise, you will be brought to a login failure screen that will allow you to try again.
 
 ### Enroll Employee
   - To enroll an employee, you need to be the CEO. Please Log in as CEO (username: test, password: test)
