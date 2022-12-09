@@ -1,26 +1,26 @@
 package use_case.evaluate_task;
-import entity.task.Task;
+import entity.task.CommonTask;
 import entity.user.User;
 
 public class EvaluateTaskRequestModel {
-    private Task task;
+    private CommonTask commontask;
     private User user;
-    private int star;
+    private Integer star;
     private String message;
 
-    public EvaluateTaskRequestModel(Task task, User user, int star, String message) {
-        this.task = task;
+    public EvaluateTaskRequestModel(CommonTask commontask, User user, Integer star, String message) {
+        this.commontask = commontask;
         this.user = user;
         this.star = star;
         this.message = message;
     }
 
-    public Task getTask() {
-        return task;
+    public CommonTask getCommonTask() {
+        return commontask;
     }
 
-    public void setTask(Task task) {
-        this.task = task;
+    public void setCommontask(CommonTask commontask) {
+        this.commontask = commontask;
     }
 
     public User getUser() {
