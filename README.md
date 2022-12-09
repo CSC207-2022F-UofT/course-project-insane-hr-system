@@ -48,6 +48,7 @@ You may log in as any of the existing users by the username and password. (usern
 - In the task page, employee can use "complete task" button to submit their task.
 
 - After press complete button, the program will ask you to double check in order to avoid submitting other tasks by mistake.
+- <img width="322" alt="submit button" src="https://user-images.githubusercontent.com/98726309/206615561-6ca2e178-b5b7-4f1c-9018-af10f47f0113.png">
 
 - Only task with "OPEN" status can be submitted.
 
