@@ -88,6 +88,6 @@ You may log in as any of the existing users by the username and password. (usern
 -  Tim Lan
 -  Josh Lunger
 -  Hao Bao
--  Gayatri (Tara) Chakkithara
+-  Gayatri (Tara) Chakkithara : Database, DAOs, Rank Employees Use Case, Rank Employees Interface Adapters, RankEmployeesScreen and RankEmployeesDataAccess. 
 -  Jian Wang
 
