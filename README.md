@@ -13,7 +13,7 @@ Then change the BUILD AND RUN USING to ***IntelliJ IDEA***, and RUN TESTS USING 
 Begin by logging into the system by entering a username and password and hitting the login button.
 
 In our database (main -> database -> HR_DB.sqlite -> employees), there are some test users. 
-You may log in as any of the existing users by the username and password. 
+You may log in as any of the existing users by the username and password. (username: test, password: test)
 
 
 If the username and password do not correspond to a user in the system, 
@@ -68,4 +68,5 @@ you will be presented with a screen displaying the appropriate system features.
 -  Kunlong Wu
 -  Zeyu Zhang
 -  Tim Lan
+-  Josh Lunger
 
