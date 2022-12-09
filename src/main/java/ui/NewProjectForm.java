@@ -5,8 +5,6 @@ import use_case.create_new_project.NewProjectInputBoundary;
 import use_case.create_new_project.NewProjectInteractor;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class NewProjectForm extends JDialog {
     private JButton submitAndCreateProjectButton;
@@ -33,8 +31,14 @@ public class NewProjectForm extends JDialog {
             int funds = Integer.parseInt(FundtextField.getText());
             String name = ProjNametextField.getText();
             String description = descriptextField.getText();
-            String dpt = descriptextField.getText();
-            controller.create(PMid, funds, name, description, dpt);
+            String dpt = dpttextField.getText();
+            try {
+                controller.create(PMid, funds, name, description, dpt);
+                JOptionPane.showMessageDialog(frame, "Your project has been created!", "Project Created",
+                        JOptionPane.PLAIN_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(frame, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
+            }
         });
     }
 

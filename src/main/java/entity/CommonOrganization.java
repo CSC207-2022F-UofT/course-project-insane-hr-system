@@ -18,6 +18,14 @@ public class CommonOrganization implements Organization {
     private LocalDateTime closeTime;
     private String state;
 
+    public CommonOrganization(UUID oid, String name, String description, LocalDateTime createTime) {
+        this.oid = oid;
+        this.name = name;
+        this.description = description;
+        this.createTime = createTime;
+        this.state = OPEN;
+    }
+
     public CommonOrganization(UUID oid, String name, Integer head, String description, LocalDateTime createTime) {
         this.oid = oid;
         this.name = name;
