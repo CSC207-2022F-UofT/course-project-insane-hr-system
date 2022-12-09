@@ -53,12 +53,16 @@ You may log in as any of the existing users by the username and password. (usern
 
 - After submittion, the status of task will become "CLOSED".
 
+### Check Profile Validation
+- 
+
 # Test Coverage
 
 -  LeaveRequestInteractor
 -  ReviewRequestInteractor
 -  Rank Employees Use Case
 -  Observer in LeaveRequest entities
+-  Check Profile Use Case
 
 
 # Design Patterns
@@ -71,7 +75,8 @@ You may log in as any of the existing users by the username and password. (usern
 
 # Contribution
 
--  Kunlong Wu
+-  Kunlong Wu: Role package in entity to handle with Role of user, user/organization entity initialization. Check Profile Validation Use case with the View + ViewModel of all file screen. SalaryCalculator(Only Use case layer, haven't finished)
+
 -  Zeyu Zhang
 -  Tim Lan
 -  Josh Lunger
