@@ -37,6 +37,9 @@ You may log in as any of the existing users by the username and password. (usern
 - The employee will be placed "On Leave" if all superiors approved the request.
 - The employee's number of vacation days remaining will be updated appropriately.
 
+### Complete Task
+- 
+
 
 # Test Coverage
 
@@ -59,4 +62,5 @@ You may log in as any of the existing users by the username and password. (usern
 -  Zeyu Zhang
 -  Tim Lan
 -  Josh Lunger
+-  Hao Bao
 
