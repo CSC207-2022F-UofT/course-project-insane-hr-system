@@ -13,7 +13,10 @@ import static utilities.SQLiteDataSource.connection;
 
 public class DepartmentDAO implements DepartmentDAOInterface {
 
-    // create a Department.. //
+    /*
+    Store a Department in the Database.
+     */
+
     @Override
     public void createDepartment(Department department){
 
@@ -76,6 +79,9 @@ public class DepartmentDAO implements DepartmentDAOInterface {
     }
 
 
+    /*
+    Delete a Department in the Database.
+     */
     private void deleteDepartment(UUID oid){
 
         String deleteDepartmentMapSQL = "DELETE FROM department_map WHERE departmentID=?";
@@ -99,6 +105,9 @@ public class DepartmentDAO implements DepartmentDAOInterface {
 
     }
 
+    /*
+    Update a Department in the database.
+     */
     @Override
     public void updateDepartment(Department department){
         deleteDepartment(department.getOid());
@@ -108,6 +117,10 @@ public class DepartmentDAO implements DepartmentDAOInterface {
 
     }
 
+
+    /*
+    Get a list of all Departments stored in the Database.
+     */
     @Override
     public List<Department> getAllDepartments(){
 
@@ -133,7 +146,7 @@ public class DepartmentDAO implements DepartmentDAOInterface {
                 }
 
                 // create a department
-                UUID id = UUID.fromString(departmentResult.getString("ID"));
+                UUID id = UUID.fromString(departmentResult.getString("ID").trim());
                 String name = departmentResult.getString("name");
                 Integer head = departmentResult.getInt("head");
                 String description = departmentResult.getString("description");
@@ -164,6 +177,10 @@ public class DepartmentDAO implements DepartmentDAOInterface {
         }
         return departments;
     }
+
+    /*
+    Get one Department from the Database.
+     */
 
     @Override
     public Department getDepartment(UUID id){

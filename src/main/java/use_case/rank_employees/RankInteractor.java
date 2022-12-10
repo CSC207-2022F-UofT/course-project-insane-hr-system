@@ -10,11 +10,21 @@ public class RankInteractor implements RankInputBoundary {
     final RankGateway rankGateway;
     final RankOutputBoundary rankOutput;
 
+
+    /*
+    The RankInteractor uses a RankGateway to get data and create a RankResponseModel to pass it
+    to the RankOutputBoundary.
+     */
     public RankInteractor(RankGateway rankGateway, RankOutputBoundary outputBoundary){
         this.rankGateway = rankGateway;
         this.rankOutput = outputBoundary;
     }
 
+    /*
+    Using the RankRequestModel create a RankResponseModel. The RankRequestModel contains the current User's ID
+    and using this ID we create a RankResponseModel that contains a List of CommonUsers sorted by their average
+    CommonTask rating.
+     */
     @Override
     public RankResponseModel create(RankRequestModel requestModel) {
 
@@ -46,25 +56,41 @@ public class RankInteractor implements RankInputBoundary {
 
     ///////////////// HELPER METHODS ///////////////////
 
+    /*
+    Get the average Task rating for a list of CommonTasks
+     */
     public int getMemberRating(List<CommonTask> memberTasks){
         int totalRating = 0;
         for (CommonTask memberTask : memberTasks) {
             totalRating += memberTask.getStar();
         }
 
+        if(memberTasks.size() == 0){
+            return 0;
+        }
+
         return totalRating/memberTasks.size();
 
     }
 
-    public List<CommonUser> sortByRating(TreeMap<Integer, List<CommonUser>> memberRatingMap){
+    /*
+    Sort a List of CommonUsers by their average Task Rating.
+     */
+
+    public List<String> sortByRating(TreeMap<Integer, List<CommonUser>> memberRatingMap){
         List<Integer> ratingList = new ArrayList<> (memberRatingMap.keySet());
-        List<CommonUser> sortedUsers = new ArrayList<>();
+        List<String> sortedUsers = new ArrayList<>();
 
 
         for(int i = 1; i <= ratingList.size(); i++){
             Integer ratingKey = ratingList.get(ratingList.size() - i);
             List<CommonUser> ratingUsers = memberRatingMap.get(ratingKey);
-            sortedUsers.addAll(ratingUsers);
+            for (int c = 0; c < ratingUsers.size(); c++){
+                String name = ratingUsers.get(c).getName();
+                sortedUsers.add(name);
+
+            }
+
         }
         return sortedUsers;
 

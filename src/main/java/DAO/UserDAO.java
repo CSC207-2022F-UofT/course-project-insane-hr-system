@@ -19,6 +19,9 @@ import static utilities.SQLiteDataSource.connection;
 import static entity.Constants.CLOSED;
 
 public class UserDAO implements UserDAOInterface {
+    /*
+    Get all Users from the database.
+     */
     @Override
     public List<User> getAllUsers() {
         String query = "SELECT * FROM employees";
@@ -43,6 +46,10 @@ public class UserDAO implements UserDAOInterface {
         return users;
     }
 
+    /*
+    Get one User from the database.
+     */
+
     /**
      * get user by id
      * @param uid uid
@@ -62,6 +69,7 @@ public class UserDAO implements UserDAOInterface {
 
             // get basic user info
             resultSet = statement.executeQuery(userQuery);
+
             while (resultSet.next()) {
                 user.setUsername(resultSet.getString("username"));
                 user.setPassword(resultSet.getString("password"));
@@ -73,7 +81,8 @@ public class UserDAO implements UserDAOInterface {
                     user.setDepartureDate(LocalDate.parse(resultSet.getString("departure_date")));
                 }
 
-                UUID dptID = UUID.fromString(resultSet.getString("department_id"));
+
+                UUID dptID = UUID.fromString(resultSet.getString("department_id").trim());
                 user.setDpt(new DepartmentDAO().getDepartment(dptID));
 
                 user.setBio(resultSet.getString("bio"));
@@ -116,6 +125,10 @@ public class UserDAO implements UserDAOInterface {
 
         return user;
     }
+
+    /*
+    Create a User in the database.
+     */
 
     @Override
     public void createUser(User user) {
@@ -179,6 +192,9 @@ public class UserDAO implements UserDAOInterface {
         }
     }
 
+    /*
+    Update a user in the database.
+     */
     @Override
     public void updateUser(User user) {
         deleteUser(user.getId());

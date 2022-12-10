@@ -1,19 +1,25 @@
 package use_case.rank_employees;
 
+import entity.Department;
 import entity.user.CommonUser;
 
 public class RankRequestModel {
-    private CommonUser currentUser;
+    private int user;
 
-    public RankRequestModel(CommonUser user){
-        this.currentUser = user;
+
+    /*
+    The RankRequestModel stores a current Users UID.
+     */
+    public RankRequestModel(int user){
+        this.user = user;
     }
 
-    public CommonUser getCurrentUser(){
-        return this.currentUser;
+    /////// GETTERS AND SETTERS ////////
+    public int getUserId(){
+        return this.user;
     }
 
-    public void setCurrentUser(CommonUser user){this.currentUser = user;}
+    public void setUserId(int user){this.user = user;}
 
 
 }

@@ -15,20 +15,30 @@ import static entity.Constants.CLOSED;
 import static entity.Constants.COMMON;
 
 public class RankDataAccess implements RankGateway {
+
+    /*
+    Get a list of CommonUsers that are Department members of the Department the current User belong to except for the head
+    of the Department.
+     */
     @Override
     public List<CommonUser> getSubordinates(RankRequestModel requestModel) {
-        CommonUser currentUser = requestModel.getCurrentUser();
+        int userId = requestModel.getUserId();
+        CommonUser user = (CommonUser) new UserDAO().getUser(userId);
+
         List<CommonUser> subordinates = new ArrayList<>();
-        List<Integer> memberIDs = new ArrayList<>(currentUser.getDpt().getMembers());
+        List<Integer> memberIDs = new ArrayList<>(user.getDpt().getMembers());
         for (Integer memberID : memberIDs) {
-            CommonUser user = (CommonUser) new UserDAO().getUser(memberID);
-            subordinates.add(user);
+            CommonUser subordinate = (CommonUser) new UserDAO().getUser(memberID);
+            subordinates.add(subordinate);
 
         }
         return subordinates;
 
     }
 
+    /*
+    Get a list of completed Tasks for a CommonUser.
+     */
     @Override
     public List<CommonTask> getCompletedTasks(CommonUser user) {
         List<Task> tasks = new TaskDAO().getAllTasks();

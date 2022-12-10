@@ -5,18 +5,19 @@ import entity.user.CommonUser;
 import java.util.List;
 
 public class RankResponseModel {
-    List<CommonUser> rankedEmployees;
+    private List<String> rankedEmployees;
 
-    public RankResponseModel(List<CommonUser> rankedEmployees){
+    /*
+    The RankResponseModel contains a List of Strings that are user's names that are sorted by a user's
+    average task rating.
+     */
+    public RankResponseModel(List<String> rankedEmployees) {
         this.rankedEmployees = rankedEmployees;
     }
 
-    public List<CommonUser> getRankedEmployees(){
+    ///// GETTERS AND SETTERS /////
+    public List<String> getRankedEmployees() {
         return this.rankedEmployees;
-    }
-
-    public void setRankedEmployees(List<CommonUser> sortedSubordinates){
-        this.rankedEmployees = sortedSubordinates;
     }
 
 }

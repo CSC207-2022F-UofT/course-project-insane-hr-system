@@ -20,7 +20,9 @@ import static utilities.SQLiteDataSource.connection;
 
 public class TaskDAO implements TaskDAOInterface {
 
-    // get one task. //
+    /*
+    Get one Task
+     */
     @Override
     public Task getTask(UUID taskID){
         Task task = null;
@@ -55,7 +57,9 @@ public class TaskDAO implements TaskDAOInterface {
 
     }
 
-    // get all tasks //
+    /*
+    Get all tasks
+     */
     @Override
     public List<Task> getAllTasks(){
         String query = "SELECT * FROM tasks";
@@ -81,7 +85,9 @@ public class TaskDAO implements TaskDAOInterface {
 
     }
 
-    // create a task in the database //
+    /*
+    Create a task in the database.
+     */
     @Override
     public void createTask(Task task){
 
@@ -163,7 +169,9 @@ public class TaskDAO implements TaskDAOInterface {
     }
 
 
-    // delete a task from the database //
+    /*
+    Delete a task in the database.
+     */
 
     public void deleteTask(UUID taskID){
         String sql = "DELETE FROM tasks WHERE ID=?";
@@ -193,6 +201,10 @@ public class TaskDAO implements TaskDAOInterface {
 
     }
 
+    /*
+    Update a task in the database.
+     */
+
     @Override
     public void updateTask(Task task){
         deleteTask(task.getOid());
@@ -208,7 +220,9 @@ public class TaskDAO implements TaskDAOInterface {
 
 
 
-    // helper function : get a task with the given project //
+    /*
+     helper function : get a Task and assign it a given project.
+     */
     public Task getProjectTask(UUID taskID, Project project) {
         Task task = null;
         Set<Integer> members = getTaskMembers(taskID);
@@ -280,7 +294,9 @@ public class TaskDAO implements TaskDAOInterface {
     }
 
 
-    // helper function : get task members //
+    /*
+     helper function : get all members of a Task from the taskID.
+     */
     public Set<Integer> getTaskMembers(UUID taskID){
 
         String querySQL = "SELECT * FROM task_map where ID='" + taskID.toString() + "'";
@@ -306,7 +322,9 @@ public class TaskDAO implements TaskDAOInterface {
     }
 
 
-    // the following method will be used as a helper method in createTask().
+    /*
+    Save Task members of a Task in the task_map table.
+     */
     private void saveTaskMembers(Task task){
         String sql = "INSERT INTO task_map (ID, memberID) VALUES (?,?)";
         PreparedStatement statement;

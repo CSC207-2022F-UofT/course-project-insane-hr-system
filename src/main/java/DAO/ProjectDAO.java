@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static entity.Constants.CLOSED;
@@ -19,7 +20,9 @@ import static utilities.SQLiteDataSource.connection;
 
 public class ProjectDAO implements ProjectDAOInterface {
 
-    // get a project. //
+    /*
+    Get a project from the database.
+     */
     @Override
     public Project getProject(UUID projectID){
         Project project = getEmptyProject(projectID);
@@ -45,7 +48,9 @@ public class ProjectDAO implements ProjectDAOInterface {
         return project;
     }
 
-    // get all projects //
+    /*
+    Get all projects in the database.
+     */
     @Override
     public List<Project> getAllProjects(){
         String query = "SELECT * FROM project";
@@ -73,7 +78,9 @@ public class ProjectDAO implements ProjectDAOInterface {
 
     }
 
-    // create a project //
+    /*
+    Store a project in the database.
+     */
     @Override
     public void createProject(Project project){
 
@@ -177,7 +184,9 @@ public class ProjectDAO implements ProjectDAOInterface {
     }
 
 
-    // delete a project //
+    /*
+    Delete a project from the database.
+     */
     private void deleteProject(UUID id) {
         String taskSQL = "DELETE FROM projectTaskMap WHERE projectID=?";
         String memberSQL = "DELETE FROM projectMemberMap WHERE projectID=?";
@@ -205,7 +214,9 @@ public class ProjectDAO implements ProjectDAOInterface {
     }
 
 
-    // update a project //
+    /*
+    Update a project in the database.
+     */
     @Override
     public void updateProject(Project project){
         deleteProject(project.getOid());
@@ -216,7 +227,9 @@ public class ProjectDAO implements ProjectDAOInterface {
 /////////////////// HELPERS BELOW /////////////////////////////////
 
 
-    // helper function : get all project members //
+    /*
+     helper function : get all members of a Project using it's projectID.
+     */
     public Set<Integer> getProjectMembers(UUID projectID){
         String querySQL = "SELECT * FROM projectMemberMap where projectID = '" + projectID.toString() + "'";
         Set<Integer> memberIds = new TreeSet<>();
@@ -240,7 +253,9 @@ public class ProjectDAO implements ProjectDAOInterface {
         return memberIds;
     }
 
-    // helper function : get an empty project //
+    /*
+     helper function : create an empty Project with no Tasks from the projectID..
+     */
     public Project getEmptyProject(UUID projectID){
 
         Set<Integer> members = getProjectMembers(projectID);
@@ -260,8 +275,9 @@ public class ProjectDAO implements ProjectDAOInterface {
                 String name = result.getString("name");
                 Integer head = result.getInt("head");
                 String description = result.getString("description");
-                LocalDateTime start = LocalDateTime.parse(result.getString("start"));
-                Department dept = new DepartmentDAO().getDepartment(UUID.fromString(result.getString("department")));
+                DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS");
+                LocalDateTime start = LocalDateTime.parse(result.getString("start"),format);
+                Department dept = new DepartmentDAO().getDepartment(UUID.fromString(result.getString("department").trim()));
 
                 if(result.getString("type").equals("COMMON")){
                     int funds = result.getInt("funds");
