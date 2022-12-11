@@ -115,7 +115,7 @@ public class RoleAllowed {
     public static RelativeRelation getRelation(User user1, User user2) {
         if (user1.equals(user2)) {
             switch (user1.getPosition()){
-                case CEO: return RelativeRelation.IS_CEO_OF;
+                case CEO: return RelativeRelation.IS_SUPER;
                 case HEAD: if (isDptHeadOf(user1, user2)) return RelativeRelation.IS_DPT_HEAD_SELF;else return RelativeRelation.IS_PM_SELF;
                 case MEMBER: return RelativeRelation.IS_EMPLOYEE_SELF;
             }

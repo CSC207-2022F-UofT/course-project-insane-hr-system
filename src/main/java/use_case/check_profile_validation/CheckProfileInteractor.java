@@ -49,7 +49,7 @@ public class CheckProfileInteractor implements CheckProfileInputBoundary {
         responseModel.setDpt(requester.getDpt().getOid());
         responseModel.setName(target.getName());
         responseModel.setRelation(RoleAllowed.getRelation(requester, target));
-        responseModel.setBio(target.getBio() +"\nPosition:" + target.getPosition() + "\nOnboarding at" + target.getOnboardDate() + "\nStatus: " + target.getStatus());
+        responseModel.setBio("User ID:" + target.getId() + '\n' +target.getBio() +"\nPosition:" + target.getPosition() + "\nOnboarding at" + target.getOnboardDate() + "\nStatus: " + target.getStatus());
 
         VisualLevel visualLevel = getVisibility(requester, target);
         responseModel.setVisualLevel(visualLevel);
