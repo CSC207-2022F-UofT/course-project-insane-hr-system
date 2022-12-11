@@ -12,6 +12,22 @@ Then change the BUILD AND RUN USING to ***IntelliJ IDEA***, and RUN TESTS USING 
 
 In our database (main -> database -> HR_DB.sqlite -> employees), there are some test users. 
 You may log in as any of the existing users by the username and password. (username: test, password: test)
+Some login user that can try:
+username  passward
+User in Test Department
+test  test
+employee  pass1
+
+User in Physics Department
+Wuuu0000  123
+LLLL0000  LLLL0000
+Newt0000  Newt0000
+SSSS0000  SSSS0000
+
+Moreover, you can create any employee by CEO.
+and create any project 
+
+
 
 # Main Features
 
@@ -59,7 +75,15 @@ You may log in as any of the existing users by the username and password. (usern
 - To create the task, the user needs to type in the name of the task, the description of the task, and enter the ID of the employee to assign the newly created task to. After entering the required input, the user can click on the "create" button to create the task.
 
 ### Check Profile Validation
-- 
+- This use case let users can see their own screen that contain all current task and project and their information after login. And will provide corresponding functionality that we allow that user can use. For instance, when employee login, he will see a screen with his name, and his basic information, and his current task, current project and a button that can go to any of the task and project that is exhibit, and at the bottom of the screen, there will be a button named "Leave Request" and a button named "Go to Department" so employee can require a leave or check the department profile. 
+
+Based on different login user, screen will have different appearance and will provide different functionality. 
+
+This use case also dealling with the organization profile screen, i.e., the screen of Department file, Project file, and Task file. After user click the botton provided in their use profile screen named "go to selected task/project" they can go the organization file they selected in the list. The organization file contain the member of the organization. For department file, it also contain a table of projects that is in that department. For project file, it also contain a table of task that is in that project. Moreover, the task/project/member that shown in the organization profile is related to the user who are watching. If the user that has no relation with organization or the member, he will no see them, unless the watcher is the superviser of the memeber or organization. 
+
+Through organization file, users can check other user file. This is a natural and useful functionality for company cooperation. Employees and project manager can check what projects and tasks that other employees are doing. In addition, members can only see CEO's basic information, and can only see task and project of prject manager that is related to them. There are still other authorization is considered to fitting the real situation. 
+
+The screen in this use case has enable the observer design pattern, but since we still not connect it to the database, the changes of database still can not immitiately reflect in the screen. However, as long as we implement database observer design pattern part, we can have the auto refresh screen immidiately. 
 
 # Test Coverage
 
@@ -74,10 +98,14 @@ You may log in as any of the existing users by the username and password. (usern
 # Design Patterns
 
 -  Builder
+we have screen builder in check profile use case. Although the class screenBuilder is not a pure builder, it still contain the design pattern of builder.
 -  Factory
+User Factory, Role Factory, Project Factory,... in the entity. 
 -  Observer
+The UI of check profile use case use observer to connect view model and the view place in presenter\viewModel.
 -  Facade
 -  Strategy
+The Request model of Check profile use case uses strategy to dealling with different input type place in use_case\check_profile_validation.
 
 # Contribution
 
